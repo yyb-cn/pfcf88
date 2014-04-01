@@ -1,0 +1,50 @@
+{include file="inc/header.html"}
+<style type="text/css">
+	.faq .b {
+		color: #57A40E;
+		font-weight: 600;
+		padding: 10px 0 0;
+	}
+</style>
+<div class="blank"></div>
+<div class="wrap clearfix wb">
+	<div class="short_uc f_l">
+		<dl id="uc_cate">
+			{foreach from=$article_cate item="cate" key=key}
+			{if $cate.pid neq 0}
+				<div class="c_hd">
+				    {$cate.title}
+				</div>
+				<div class="c_body">
+					<ul>
+					{foreach from=$cate.article.list item=aitem}
+					<li>
+					    <a href="#q{$aitem.id}">{$aitem.title}</a>
+					</li>
+					{/foreach}
+					</ul>	
+				</div>
+			{/if}
+			{/foreach}
+		</dl>
+	</div>
+	<div class="long_uc f_r faq" style="overflow:inherit;">
+			{foreach from=$article_cate item="cate"}
+				{if $cate.pid neq 0}
+				{foreach from=$cate.article.list item=aitem}
+				<div class="clearfix bddf">
+					<div class="gray_title f14" id="q{$aitem.id}" name="q{$aitem.id}">
+						{$aitem.title}
+                  	</div>
+					<div class="clearfix f_dgray" style="padding:3px 20px">
+					{$aitem.content}
+					</div>
+				</div>
+				<div class="blank5"></div>
+				{/foreach}
+				{/if}
+			{/foreach}
+	</div>
+</div>
+<div class="blank"></div>
+{include file="inc/footer.html"}

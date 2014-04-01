@@ -1,0 +1,33 @@
+{include file="inc/header.html"}
+<div class="blank"></div>
+<div class="wrap clearfix">
+	<div class="toptitle">申请贷款</div>
+	<div class="line950"></div>
+	<div class="clearfix">
+    	{include file="inc/borrow/borrow_step_left.html"}
+		<div class="rightlendstep">
+			{if $step eq 1 && $user_statics.success_deal_count eq 0}
+			<div id="dashboard" class="dashboard ddbg clearfix">
+				<ul>
+					<li {if $status eq 1}class="current"{/if}>
+						<a href="{url x="index" r="borrow#stepone" p="status=1"}">个人详细信息</a>
+					</li>
+					{if $user_info.real_name neq ""&&$user_info.idno neq ""&&$user_info.mobile neq ""&&$user_info.marriage neq ""&&$user_info.address neq ""}		
+					<li {if $status eq 2}class="current"{/if}>
+						<a href="{url x="index" r="borrow#stepone" p="status=2"}">工作认证信息</a>
+					</li>
+					{if $work_count gt 0}
+					<li {if $status eq 3}class="current"{/if}>
+						<a href="{url x="index" r="borrow#stepone" p="status=3"}">贷款申请</a>
+					</li>
+					{/if}	
+					{/if}									
+				</ul>
+			</div>
+			{/if}
+			{include file="$inc_file"}
+		</div>
+    </div>
+</div>
+<div class="blank"></div>
+{include file="inc/footer.html"}

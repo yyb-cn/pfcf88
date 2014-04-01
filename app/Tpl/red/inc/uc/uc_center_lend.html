@@ -1,0 +1,71 @@
+{if $lend_list}
+<div class="demo" style="width:531px;height:20px">
+    <div class="f_l b f_dgray" style="width:150px;text-align:right">
+        图片说明：
+    </div>
+    <div class="f_l f_dgray" style="width:100px;text-align:center">
+        <img src="{$TMPL}/images/wait.png">= 正在进行中
+    </div>
+    <div class="f_l f_dgray" style="width:100px;text-align:center">
+        <img src="{$TMPL}/images/check_ok.png">= 成功
+    </div>
+    <div class="f_l f_dgray" style="width:100px;text-align:center">
+        <img src="{$TMPL}/images/check_error.png">= 流标
+    </div>
+</div>
+<div class="f_dgray b tc lh30 mt10" style="height:30px;">
+	<div class="f_l tl" style="width:180px">
+		 投标标题
+	</div>
+	<div class="f_l" style="width:100px">
+		 年利率
+	</div>
+	<div class="f_l tr" style="width:80px">
+		投标金额
+	</div>
+	<div class="f_l" style="width:120px">
+		借款期限
+	</div>
+	<div class="f_l" style="width:75px">
+		 状态
+	</div>
+	<div class="f_l" style="width:170px">
+		投标时间
+	</div>
+</div>
+<div class="btds pt5 pb5"></div>
+{foreach from=$lend_list item="lend"}
+<div class="clearfix tc">
+    <div class="f_l tl" style="width:180px">
+        <a href="{url x="index" r="deal" p="id=$lend.deal_id"}">{$lend.name}</a>
+    </div>
+    <div class="f_l f_red" style="width:100px">
+        {function name="round" v=$lend.rate f="2"}%
+    </div>
+    <div class="f_l tr f_red" style="width:80px">
+       {function name="format_price" v=$lend.money}
+    </div>
+    <div class="f_l f_red" style="width:120px">
+        {$lend.repay_time}{if $lend.repay_time_type eq 0}天{else}个月{/if}
+    </div>
+    <div class="f_l" style="width:75px">
+    	{if $lend.deal_status eq 2 || $lend.deal_status eq 4 || $lend.deal_status eq 5}
+		<img src="{$TMPL}/images/check_ok.png">
+		{elseif  $lend.deal_status eq 3}
+        <img src="{$TMPL}/images/check_error.png">
+		{else}
+		<img src="{$TMPL}/images/wait.png">
+		{/if}
+    </div>
+    <div class="f_l" style="width:170px">
+       {function name="to_date" v=$lend.create_time f="Y-m-d"}
+	   {function name="to_date" v=$lend.create_time f="H:i"}
+    </div>
+</div>
+<div style="border-bottom:1px dotted #9D9D9D;margin:5px 0"></div>
+{/foreach}
+<div class="blank"></div>
+<div class="pages">{$pages}</div>
+{else}
+<div class="tc p15">暂无记录</div>
+{/if}

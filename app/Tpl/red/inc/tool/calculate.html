@@ -1,0 +1,97 @@
+<div id="dashboard" class="dashboard clearfix">
+	<ul>
+		<li class="current">
+			<a href="###">{$LANG.CALCULATE}</a>
+		</li>											
+	</ul>
+</div>
+<div class="bddf p10 clearfix" style="border-top:0">
+	<div class="bdd p10" >
+        <div class="f16 b pt5 pb5 f_blue" >
+		{$LANG.CALCULATE}
+        </div>
+        <div class="f_dgray">
+        	“等额本息”，即借款人每月以相等的金额偿还贷款本息，也是银行房贷等采用的方法。因计算中存在四舍五入，最后一期还款金额与之前略有不同。<br>
+			“每月付息，到期还本”，即借款人每月偿还固定利息，最后一期偿还全部本金。<br>
+			使用收益计算器，能帮您计算每月的收益情况；同时，一份完整的本息偿还时间表，让您能更直观地了解还款本息详情。 <br>
+        </div>
+    </div>
+	<div class="blank10"></div>
+	<div class="bdd">
+		<div class="gray_title clearfix">
+			<div class="f_l f_dgray b">借款设置</div>
+		</div>
+		<div class="clearfix pt5 pb5 pl5 pr5">
+			<form action="./" method="post" name="J_calculate_form" id="J_calculate_form">
+			<div class="p5">
+                <div class="clearfix">
+                    <div class="f_l" style="width:170px">
+                    	借款金额：<input type="text" id="borrowAmount" name="borrowamount" class="f-input w90">
+                    </div>
+                    <div class="f_l" style="width:145px">
+                    	 年利率：<input type="text" id="apr" name="apr" class="f-input" style="width:60px"> %
+                    </div>
+                    <div class="f_l" style="width:170px">
+                    	  借款期限：<input type="text" id="repayTime" name="repaytime" class="f-input" style="width:60px"> 个月
+                    </div>
+                    <div class="f_l" style="width:210px">
+                    	还款方式：
+                        <select class="f-select" style="font-size:12px" name="borrowpay" id="borrowpay">
+                            <option value="0">等额本息</option>
+							<option value="1">每月付息，到期还本</option>
+							<option value="2">到期还本息</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="f_l" style="margin:20px 0 0 0; width:200px">
+                        <input type="checkbox" name="isshow" value="1" id="isShow">&nbsp;&nbsp;显示还款时间表&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div style="padding:10px 0 0 120px">
+                        <button class="saveSettingBnt" id="J_saveSettingBnt" type="button">
+                        	开始计算
+                        </button>
+						<span style="color: red" id="T_error"></span>
+                    </div>
+                </div>
+            </div>
+			</form>
+		</div>
+	</div>
+	<div class="blank10"></div>
+	<div id="J_calculate_Result"></div>
+</div>
+<script type="text/javascript">
+	jQuery(function(){
+		$("#J_saveSettingBnt").click(function(){
+			$("#T_error").html("");
+			if($.trim($("#borrowAmount").val())=="" || $("#borrowAmount").val()%1 !=0){
+				$("#T_error").html("借款金额必须为正整数!");
+				return false;
+			}
+			if($.trim($("#apr").val())=="" || isNaN($.trim($("#apr").val()))){
+				$("#T_error").html("年利率必须为数字类型!");
+				return false;
+			}
+			if($.trim($("#repayTime").val())=="" || isNaN($.trim($("#repayTime").val()))){
+				$("#T_error").html("月份格必须为数字类型!");
+				return false;
+			}
+			if($.trim($("#repayTime").val())>120){
+				$("#T_error").html("月份必须在120以内!");
+				return false;
+			}
+			var query = $("#J_calculate_form").serialize();
+			$.ajax({
+				url:APP_ROOT + "/index.php?ctl=tool&act=ajax_calculate",
+				data:query,
+				type:"post",
+				success:function(result){
+					$("#J_calculate_Result").html(result);
+					return false;
+				}
+			});
+			return false;
+		});
+	});
+</script>

@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="Generator" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{if $page_title}{$page_title} - {/if}{$site_info.SHOP_TITLE}</title>
+<link rel="icon" href="favicon.ico" type="/image/x-icon" />
+<link rel="shortcut icon" href="favicon.ico" type="/image/x-icon" />
+<meta name="keywords" content="{if $page_keyword}{$page_keyword}{/if}{$site_info.SHOP_KEYWORD}" />
+<meta name="description" content="{if $page_description}{$page_description}{/if}{$site_info.SHOP_DESCRIPTION}" />
+<?php
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/style.css";
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/weebox.css";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.bgiframe.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.weebox.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/jquery.pngfix.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/lazyload.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/script.js";
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/op.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/script.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/op.js";
+if(app_conf("APP_MSG_SENDER_OPEN")==1)
+{
+$this->_var['pagejs'][] = $this->_var['TMPL_REAL']."/js/msg_sender.js";
+$this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/msg_sender.js";
+}
+$this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/main.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$pagecss"}" />
+
+<script type="text/javascript">
+var APP_ROOT = '{$APP_ROOT}';;
+var LOADER_IMG = '{$TMPL}/images/lazy_loading.gif';
+var ERROR_IMG = '{$TMPL}/images/image_err.gif';
+{if app_conf("APP_MSG_SENDER_OPEN") eq 1}
+var send_span = {function name="app_conf" v="SEND_SPAN"}000;
+{/if}
+</script>
+<script type="text/javascript" src="{$APP_ROOT}/public/runtime/app/lang.js"></script>
+<script type="text/javascript" src="{function name="parse_script" v="$pagejs" c="$cpagejs"}"></script>
+
+</head>
+
+<body>
+{if $vote}
+<a id="vote" href="{url x="index" r="vote"}" target="_blank"></a>
+{/if}
+<div class="header" id="header">
+	<div class="wrap constr">
+		<div class="wrap clearfix">
+			<div class="logo f_l pt15">
+			<a class="link f_l" href="{$APP_ROOT}/">
+				<?php
+					$this->_var['logo_image'] = app_conf("SHOP_LOGO");
+				?>
+				{function name="load_page_png" v=$logo_image}
+			</a>
+			</div>
+			<div class="f_r">
+				<span id="user_head_tip" class="pr">
+				{insert name="load_user_tip"}
+				<span class="li"><a href="{url x="index" r="helpcenter"}">帮助</a></span>
+				</span>
+			</div>		
+		</div><!--end wrap-->
+		<div class="hd-tel">客服电话：{function name="app_conf" v="SHOP_TEL"}</div>
+	</div>
+	<div class="main_bar wrap">			
+		<ul class="main_nav">
+			{foreach from=$nav_list item=nav_item}
+				<li class="n_{$nav_item.id} {if $nav_item.current eq 1}current{/if}" rel='{$nav_item.id}'>
+					<a href="{$nav_item.url}"  target="{if $nav_item.blank eq 1}_blank{/if}">{$nav_item.name}</a>
+				</li>
+			{/foreach}
+		</ul>
+	</div>
+	<div class="main_snav clearifx">
+		{foreach from=$nav_list item=nav_item key=key}
+			{if $nav_item.sub_nav}
+			<ul class="f_l n_{$nav_item.id}" rel="{$nav_item.id}" style="display:none;{if $key >1}padding-left:<?php echo $this->_var['key']*85;?>px{/if}">
+			{foreach from=$nav_item.sub_nav item=sub_item}
+				<a href="{$sub_item.url}" {if $sub_item.current eq 1}class="current"{/if} target="{if $sub_item.blank eq 1}_blank{/if}">{$sub_item.name}</a>
+				<div class="line"></div>
+			{/foreach}
+			</ul>
+			{/if}
+		{/foreach}
+    </div>
+</div>
+	
+<div class="wrap">

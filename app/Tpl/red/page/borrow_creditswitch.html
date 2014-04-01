@@ -1,0 +1,383 @@
+{include file="inc/header.html"}
+<style type="text/css">
+	.box750 {
+		margin: 10px auto;
+		border: 1px solid #CCC;
+		padding: 15px;
+		border-radius: 5px;
+	}
+	.box750 .blueTable {
+		background:#8DB9FF;
+		text-align: center;
+	}
+	.box750 .blueTable th {
+		background: #D4E5FF;
+		line-height: 26px;
+		text-align: center;
+		font-weight: bold;
+	}
+	.box750 .blueTable td{ background:#fff; line-height:24px}
+	.box750 .blueTable .grayBg {
+		background: #CCC;
+		padding: 2px 10px;
+		color: white;
+	}
+	.box750 .blueTable .blueBg {
+		background: #5896DF;
+		padding: 2px 10px;
+		color: white;
+	}
+	.box750 .blueTable .greenBg { background:#77c22f; padding:2px 10px; color:#fff; }
+	.box750 .blueTable .redBg { background:#ff0000; padding:2px 10px; color:#fff; }
+	.credit_upload .field{ width:98%}
+</style>
+<div class="blank"></div>
+<div class="wrap clearfix wb">
+	<div class="toptitle">{$info.title}</div>
+	<div class="line950"></div>
+	<div class="clearfix" style="padding:5px 110px;">
+		<div class="box750">
+	        <table width="100%">
+	          <tbody>
+	          	<tr>
+		            <td>我的信用等级：<img src="{$TMPL}/images/{$user_point_level}.png" align="absmiddle"> <span>({$user_info.point})</span></td>
+		            <td rowspan="2" align="right"><a href="{url x="index" r="borrow#stepone"}"><img src="{$TMPL}/images/sqdk123.jpg"></a>
+		            <a style="margin:0 20px;" href="{url x="index" r="borrow#applyamount"}"><img src="{$TMPL}/images/sqedu123.jpg"></a>
+		            </td>
+		          </tr>
+		          <tr>
+		            <td>我的信用额度：{$user_info.quota} (可用额度：{$can_use_quota})</td>
+		          </tr>
+		        </tbody>
+			</table>
+      	</div>
+		
+		<div class="box750">
+    		<table class="blueTable" width="100%" align="center" border="0" cellspacing="1">
+                <tbody>
+                    <tr class="title">
+                        <th width="100px">&nbsp;</th>
+                        <th width="">项目</th>
+                        <th width="75px">状态</th>
+						<th width="75px">信用分数</th>
+                    </tr>
+                    <tr>
+                        <td>基本信息</td>
+                        <td class="item">个人详细信息，工作信息</td>
+                        <td ></td>
+                        <td>
+                            <span class="f_red">{function name="app_conf" v="USER_REGISTER_POINT"}</span>分
+                        </td>
+                    </tr> 
+                    <tr>
+						<td rowspan="4">必要信用认证</td>
+						<td class="white_bg item">
+							身份证认证
+						</td>
+	                    <td class="white_bg f_gray">
+	                    	{if $user_info.idcardpassed eq 1}
+							<span class="greenBg">已通过</span>
+							{elseif $user_info.idcardpassed eq 2}
+							<span class="redBg">未通过</span>
+                        	{elseif $user_info.idcardpassed eq 0}
+								{if $credit.credit_identificationscanning.file_list}
+								<span class="grayBg">审核中</span>
+								{else}
+								<span class="blueBg">待完成</span>
+								{/if}
+							{/if}
+	                    </td>
+                        <td rowspan="10">
+                            <span class="f_red">{$level_point.need_other_point}</span>分
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td class=" item">工作认证</td>
+                        <td >
+							{if $user_info.workpassed eq 1}
+								{if $expire.workpassed_expire}
+								<span class="redBg">已过期</span>
+								{else}
+								<span class="greenBg">已通过</span>
+								{/if}
+							{elseif $user_info.workpassed eq 2}
+							<span class="redBg">未通过</span>
+                        	{elseif $user_info.workpassed eq 0}
+								{if $credit.credit_contact.file_list}
+								<span class="grayBg">审核中</span>
+								{else}
+								<span class="blueBg">待完成</span>
+								{/if}
+							{/if}
+						</td>
+                    </tr>
+                    <tr>
+                        <td class="item">
+                        	收入认证
+                        </td>
+                        <td >
+                            {if $user_info.incomepassed eq 1}
+								{if $expire.incomepassed_expire}
+								<span class="redBg">已过期</span>
+								{else}
+								<span class="greenBg">已通过</span>
+								{/if}
+							{elseif $user_info.incomepassed eq 2}
+							<span class="redBg">未通过</span>
+                        	{elseif $user_info.incomepassed eq 0}
+								{if $credit.credit_incomeduty.file_list}
+								<span class="grayBg">审核中</span>
+								{else}
+								<span class="blueBg">待完成</span>
+								{/if}
+							{/if}
+						</td>
+                    </tr>
+                    <tr>
+                        <td class="item">央行信用报告认证</td>
+                        <td >
+                        	{if $user_info.creditpassed eq 1}
+								{if $expire.creditpassed_expire}
+								<span class="redBg">已过期</span>
+								{else}
+								<span class="greenBg">已通过</span>
+								{/if}
+							{elseif $user_info.creditpassed eq 2}
+							<span class="redBg">未通过</span>
+                        	{elseif $user_info.creditpassed eq 0}
+								{if $credit.credit_credit.file_list}
+								<span class="grayBg">审核中</span>
+								{else}
+								<span class="blueBg">待完成</span>
+								{/if}
+							{/if}
+						</td>
+                    </tr>
+                    <tr>
+						<td rowspan="8" class="item">
+							可选信用认证
+						</td>
+                        <td class="white_bg item">
+                        	房产认证
+                        </td>
+                        <td class="white_bg f_gray">
+                        	{if $user_info.housepassed eq 1}
+							<span class="greenBg">已通过</span>
+							{elseif $user_info.housepassed eq 2}
+							<span class="redBg">未通过</span>
+                        	{elseif $user_info.housepassed eq 0}
+								{if $credit.credit_house.file_list}
+								<span class="grayBg">审核中</span>
+								{else}
+								<span class="blueBg">待完成</span>
+								{/if}
+							{/if}
+						</td>
+                    </tr>
+                    <tr>
+                        <td class="item">
+                        	 技术职称认证
+                        </td>
+                        <td >
+							{if $user_info.skillpassed eq 1}
+							<span class="greenBg">已通过</span>
+							{elseif $user_info.skillpassed eq 2}
+							<span class="redBg">未通过</span>
+                        	{elseif $user_info.skillpassed eq 0}
+								{if $credit.credit_titles.file_list}
+								<span class="grayBg">审核中</span>
+								{else}
+								<span class="blueBg">待完成</span>
+								{/if}
+							{/if}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="white_bg item">
+                        	购车证明
+                        </td>
+                        <td class="white_bg f_gray">
+							{if $user_info.carpassed eq 1}
+							<span class="greenBg">已通过</span>
+							{elseif $user_info.carpassed eq 2}
+							<span class="redBg">未通过</span>
+                        	{elseif $user_info.carpassed eq 0}
+								{if $credit.credit_car.file_list}
+								<span class="grayBg">审核中</span>
+								{else}
+								<span class="blueBg">待完成</span>
+								{/if}
+							{/if}
+						</td>
+                    </tr>
+                    <tr>
+                        <td class="item">
+                        	结婚认证
+                        </td>
+                        <td >
+							{if $user_info.marrypassed eq 1}
+							<span class="greenBg">已通过</span>
+							{elseif $user_info.marrypassed eq 2}
+							<span class="redBg">未通过</span>
+                        	{elseif $user_info.marrypassed eq 0}
+								{if $credit.credit_marriage.file_list}
+								<span class="grayBg">审核中</span>
+								{else}
+								<span class="blueBg">待完成</span>
+								{/if}
+							{/if}
+                        </td>
+                    </tr>
+                   <tr>
+                        <td class="white_bg item">
+                        	居住地证明
+                        </td>
+                        <td class="white_bg f_gray">
+                        	{if $user_info.residencepassed eq 1}
+								{if $expire.residencepassed_expire}
+								<span class="redBg">已过期</span>
+								{else}
+								<span class="greenBg">已通过</span>
+								{/if}
+							{elseif $user_info.residencepassed eq 2}
+							<span class="redBg">未通过</span>
+                        	{elseif $user_info.residencepassed eq 0}
+								{if $credit.credit_residence.file_list}
+								<span class="grayBg">审核中</span>
+								{else}
+								<span class="blueBg">待完成</span>
+								{/if}
+							{/if}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="white_bg item">
+                        	 视频认证
+                        </td>
+                        <td class="white_bg f_gray">
+							{if $user_info.videopassed eq 1}
+							<span class="greenBg">已通过</span>
+							{elseif $user_info.videopassed eq 2}
+							<span class="redBg">未通过</span>
+                        	{elseif $user_info.videopassed eq 0}
+								{if $user_info.has_send_video eq 1}
+								<span class="grayBg">审核中</span>
+								{else}
+								<span class="blueBg">待完成</span>
+								{/if}
+							{/if}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="white_bg item">
+                        	学历认证（{function name="app_conf" v="EDUPASSED_POINT"}分）
+                        </td>
+                        <td class="white_bg f_gray">
+                        	{if $user_info.edupassed eq 1}
+							<span class="greenBg">已通过</span>
+							{elseif $user_info.edupassed eq 2}
+							<span class="redBg">未通过</span>
+                        	{elseif $user_info.edupassed eq 0}
+								{if $user_info.edu_validcode neq ''}
+								<span class="grayBg">审核中</span>
+								{else}
+								<span class="blueBg">待完成</span>
+								{/if}
+							{/if}
+                        </td>
+                        <td class="white_bg f_gray">
+                            <span class="f_red">{if $user_info.edupassed eq 1}{function name="app_conf" v="EDUPASSED_POINT"}{else}0{/if}</span>分
+						</td>
+                    </tr>
+                    <tr>
+                        <td class=" item">
+                        	手机实名认证（{function name="app_conf" v="MOBILETRUEPASSED_POINT"}分）
+                        </td>
+                        <td class=" f_gray">
+							{if $user_info.mobiletruepassed eq 1}
+							<span class="greenBg">已通过</span>
+							{elseif $user_info.mobiletruepassed eq 2}
+							<span class="redBg">未通过</span>
+                        	{elseif $user_info.mobiletruepassed eq 0}
+								{if $credit.credit_mobilereceipt.file_list}
+								<span class="grayBg">审核中</span>
+								{else}
+								<span class="blueBg">待完成</span>
+								{/if}
+							{/if}
+                        </td>
+                        <td class=" f_gray">
+                            <span class="f_red">{if $user_info.mobiletruepassed eq 1}{function name="app_conf" v="MOBILETRUEPASSED_POINT"}{else}0{/if}</span>分
+                        </td>
+                    </tr>
+                   
+                    <tr>
+                      <td rowspan="3">
+                            {function name="app_conf" v="SHOP_TITLE"}记录
+                        </td>
+                        <td class="item">
+                        	还清笔数（+{function name="app_conf" v="REPAY_SUCCESS_POINT"}分/笔，加分间隔{function name="app_conf" v="REPAY_SUCCESS_DAY"}天，总分上限{function name="app_conf" v="REPAY_SUCCESS_LIMIT"}分）
+                        </td>
+                        <td >
+                             {$level_point.repay_success.total_count} 笔
+                        </td>
+                        <td>
+                            <span class="f_red">{if $level_point.repay_success.total_point}{$level_point.repay_success.total_point}{else}0{/if}</span>分
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="item">
+                        	逾期次数（{function name="app_conf" v="IMPOSE_POINT"}分/次）
+                        </td>
+                        <td >
+                            {$level_point.impose_repay.total_count} 次
+                        </td>
+                        <td>
+                            <span class="f_red">{if $level_point.impose_repay.total_point}{$level_point.impose_repay.total_point}{else}0{/if}</span>分
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="item">
+                        	严重逾期次数（{function name="app_conf" v="YZ_IMPOSE_POINT"}分/次）
+                        </td>
+                        <td >
+                            {$level_point.yz_impose_repay.total_count} 次
+                        </td>
+                        <td>
+                            <span class="f_red">{if $level_point.yz_impose_repay.total_point}{$level_point.yz_impose_repay.total_point}{else}0{/if}</span>分
+                        </td>
+                    </tr>
+                </tbody>
+			</table>
+		</div>
+		<div class="box750">
+	        <table class="blueTable" width="100%" align="center" border="0" cellspacing="1px">
+                <tr class="title">
+                    <th colspan="8">信用等级及对应的分数 </th>
+                  </tr>
+                 <tr height="30px">
+                    <td width="100">信用等级</td>
+                   {foreach from=$list item=item}
+					<td><img alt="{$item.name}" src="{$TMPL}/images/{$item.name}.png"></td>
+					{/foreach}
+                </tr> 
+                <tr>
+                    <td>信用分数</td>
+                        {foreach from=$list item=item key=key name="level"}
+					<td>
+						{if $smarty.foreach.level.first}
+							{$item.point}及以上
+						{else}
+							<?php echo $this->_var['list'][$this->_var['key']-1]['point']-1;?>-{$item.point}
+						{/if}
+					</td>
+					{/foreach}
+                </tr>  
+	         </table>
+		 </div>
+		 <div class="box750">注：每笔还清+{function name="app_conf" v="REPAY_SUCCESS_POINT"}分，加分间隔{function name="app_conf" v="REPAY_SUCCESS_DAY"}天</div>
+    </div>
+</div>
+<div class="blank"></div>
+
+{include file="inc/footer.html"}

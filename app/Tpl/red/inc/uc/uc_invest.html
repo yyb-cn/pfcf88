@@ -1,0 +1,66 @@
+<div class="inc wb">
+	<div id="dashboard" class="dashboard">
+		<ul>
+			<li {if $ACTION_NAME eq 'index'}class="current"{/if}><a href="{url x="index" r="uc_invest"}">{$page_title}</a></li>
+			<li {if $ACTION_NAME eq 'invite'}class="current"{/if}><a href="{url x="index" r="uc_invest#invite"}">招标中借款</a></li>
+			<li {if $ACTION_NAME eq 'ing'}class="current"{/if}><a href="{url x="index" r="uc_invest#ing"}">回收中借款</a></li>
+			<li {if $ACTION_NAME eq 'over'}class="current"{/if}><a href="{url x="index" r="uc_invest#over"}">已回收借款</a></li>
+			<li {if $ACTION_NAME eq 'bad'}class="current"{/if}><a href="{url x="index" r="uc_invest#bad"}">我的坏账</a></li>
+		</ul>
+	</div>
+</div>
+<div class="inc_main uc_r_bl_box clearfix">
+	<div class="silverBg">
+	    <div class="f_dgray b tc lh30 pr15 pl15" style="height:30px;">
+	        <div class="f_l" style="width:80px">图片</div>
+	        <div class="f_l" style="width:195px">标题/借款人/所在地</div>
+	        <div class="f_l" style="width:100px">我的投标金额</div>
+	        <div class="f_l" style="width:135px">期限/利率</div>
+	        <div class="f_l" style="width:90px">信用等级</div>
+	        <div class="f_l" style="width:120px">进度/剩余时间</div>
+	    </div>
+	</div>
+	{if $list}
+	<div class="clearfix pt10 pl15 pr15" id="my_favoriteLoan_list">
+			{foreach from=$list item="item"}
+			<div class="item">
+				<div class="clearfix pt5 tc">
+	                <div class="f_l" style="width:80px">
+	                    <a href="{url x="index" r="deal" p="id=$item.id"}">
+	                       <img src="{$item.icon}" width="64px" height="64px" class="img_b" alt="{$item.name}" title="{$item.name}">
+	                    </a>
+	                </div>
+	                <div class="f_l tl" style="width:195px">
+	                    <p style="font-weight: bold"><a href="{url x="index" r="deal" p="id=$item.id"}">{$item.name}</a></p>
+	                    <p><a href="{url x="index" r="space" p="id=$item.user_id"}">{$item.user_name}</a> / {$item.user_location}</p>
+	                </div>
+	                <div class="f_l f_red" style="width:100px">
+	                	{function name="format_price" v="$item.u_load_money"}
+	                </div>
+	                <div class="f_l f_red" style="width:135px">
+	                    <div>
+	                        {$item.repay_time}{if $item.repay_time_type eq 0}天{else}个月{/if},
+	                        {function name="number_format" v="$item.rate" f="2"}%
+	                    </div>
+	                </div>
+	                <div class="f_l f_red" style="width:90px">
+	                    <img src="{$TMPL}/images/{$item.point_level}.png" align="absmiddle" alt="{$item.point_level}" title="{$item.point_level}">
+	                </div>
+	                <div class="f_l f_red" style="width:120px">
+	                    <div class="greenProcessBar progressBar w100" style="border:1px solid #FDECC7; background:#FFF6E5">
+	                        <div class="p"><div class="c" style="width:{$item.progress_point}%;background:url('{$TMPL}/images/progressBarBg2.png') repeat-x"></div></div>
+	                    </div>
+	                    <div class="f_dgray" style="font-size:12px">
+	                         <p>{function name="round" v="$item.progress_point"}% 已完成</p>
+	                    </div>
+	                </div>
+	            </div>
+				<div style="border-bottom:1px dotted #9D9D9D;margin:5px 0 "></div>
+			</div>
+			{/foreach}
+		</div>
+		<div class="pages">{$pages}</div>
+	{else}	
+		<div align="center" style="padding:20px 0">暂无记录</div>
+	{/if}
+</div>

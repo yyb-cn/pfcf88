@@ -1,0 +1,80 @@
+<div class="uc_user_info">
+	<div class="cont homeBg">
+	    <div class="blank5"></div>
+	    <div class="clearfix lh22" style="height: 22px;vertical-align: middle">
+	        <div class="f_r">
+				<input type="button" value="修改我的个人信息" onclick="window.location.href='{url x="index" r="uc_account"}'" class="modify_ac_btn">
+			</div>
+	        <div class="f_blue f14 b tc">
+	            <span>{$user_data.user_name} 的个人信息</span>
+	        </div>
+	    </div>
+	    <div class="pt5 pb5" style="border-bottom:1px solid #D8DFEA;"></div>
+	
+	    <div class="clearfix pt10 mt10 mb15 ml20">
+	        <div class="f_l pr30" style="width:132px;">
+	            <div>
+	            	<img class="img_b" src="{function name="get_user_avatar" uid="$user_data.id" type="big"}" width="128px" height="128px" alt="{$user_data.name}" title="{$user_data.name}">
+	            </div>
+	        </div>
+	        <div class="f_l f_dgray" style="width:250px">
+	            <div class="lh24" style="height:24px;">
+	                <div class="f_l" style="width:70px;">
+					用户名：
+	                </div>
+	                <div class="f_l">
+	                	{$user_data.user_name}
+	                </div>
+	            </div>
+	            <div style="height:24px; line-height:24px">
+	                <div class="f_l" style="width:70px;">
+					注册时间：
+	                </div>
+	                <div class="f_l">
+	                    {function name="to_date" v=$user_data.create_time f="Y-m-d"}
+	                </div>
+	            </div>
+	            <div style="height:24px; line-height:24px">
+	                <div class="f_l" style="width:70px;">
+					所在地：
+	                </div>
+	                <div class="f_l">{$user_data.user_location}</div>
+	            </div>
+	            <div style="height:24px; line-height:24px">
+	                <div class="f_l" style="width:70px;">
+					角色：
+	                </div>
+	                <div class="f_l">
+	                	{$user_data.group_name}{if $user_data.deal_count gt 0} 借入者{/if} {if $user_data.load_count gt 0} 借出者{/if}  
+					</div>
+	            </div>
+	            <div style="height:24px; line-height:24px">
+	                <div class="f_l" style="width:70px;">
+					个人统计：
+	                </div>
+	                <div class="f_l">
+	                    {$user_statics.deal_count} 条借款记录， {$user_statics.load_count}条投标记录
+	                </div>
+	            </div>
+	            <div style="height:24px; line-height:24px">
+	            </div>
+	        </div>
+	        <div class="r" style="display:none;width:260px;">
+	            <div class="layout-box">
+	                <div class="top">
+	                    <b class="cor-l"></b>
+	                    <b class="cor-r"></b>
+	                </div>
+	                <div class="cont" style="height:145px; ">
+	                    <h3>个人描述</h3>
+	                    <p>
+	                        
+	                    </p>
+	                </div>
+	                <div class="bt">
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</div>

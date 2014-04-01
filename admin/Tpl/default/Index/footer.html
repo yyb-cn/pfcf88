@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{:conf("APP_NAME")}{:l("ADMIN_PLATFORM")}</title>
+<load href='__TMPL__Common/js/jquery.js' />
+<load href='__TMPL__Common/style/style.css' />
+<load href='__TMPL__Common/style/footer.css' />
+<script type="text/javascript">
+	var VAR_MODULE = "{:conf("VAR_MODULE")}";
+	var VAR_ACTION = "{:conf("VAR_ACTION")}";
+	var ROOT = '__APP__';
+</script>
+</head>
+
+<body>
+	<div class="footer"><span class="main_title"> P2P贷款管理系统开发版 V2.7 </div>
+	<div class="ct_footer_tip" style="display:none;">
+		<div class="box"></div>
+		<a href="#" class="close">×</a>
+	</div>
+	<script type="text/javascript">
+		var  setTimeoutAct = null;
+		jQuery(function(){
+			setTimeoutAct = setTimeout(checkSupplierBooking,10000);;
+			$(".ct_footer_tip .close").click(function(){
+				$(".ct_footer_tip").hide();
+				return false;
+			});
+		});
+		/*
+		 * 每一分钟检测一次
+		 */
+		function checkSupplierBooking(){
+			clearTimeout(setTimeoutAct);
+			$.ajax({
+				url : ROOT+"?"+VAR_MODULE+"=Public&"+VAR_ACTION+"=checkSupplierBooking",
+				dataType:"html",
+				success:function(result){
+					if(result!=""){
+						$(".ct_footer_tip .box").html(result);
+						$(".ct_footer_tip").fadeIn(500,function(){
+							setTimeout(function(){
+								$(".ct_footer_tip").css({"background":"red"});
+								setTimeout(function(){
+									$(".ct_footer_tip").css({"background":"#fff"});
+									setTimeout(function(){
+										$(".ct_footer_tip").css({"background":"red"});
+										setTimeout(function(){
+											$(".ct_footer_tip").css({"background":"#fff"});
+										},500);
+									},500);
+								},500);
+							},500);
+							
+						});
+						
+						
+					}
+					else{
+						$(".ct_footer_tip").hide();
+					}
+				}
+			});
+			setTimeoutAct = setTimeout(checkSupplierBooking,60000);
+		}
+	</script>
+</body>
+</html>
+

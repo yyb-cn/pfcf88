@@ -1,0 +1,54 @@
+.index_left{
+	width:665px;
+	border:1px solid #CFCFCF;
+	border-top:none
+}
+.index_right{ width:284px;}
+.r-block{border:1px solid #CFCFCF; border-top:none}
+.r-block .gray_title{padding-right:6px}
+.r-block a{ color:#535353}
+.i_deal_list .item{ border-bottom:1px dashed #E5E5E5;  padding:14px 0}
+.i_deal_list .item .tit{ height:28px; line-height:28px; font-size:14px}
+.i_deal_list .item .tit .cate_tip{ background:url(../images/cate_tip.gif) no-repeat 0 0; height:23px; line-height:23px; padding-left:13px; width:75px; font-weight:normal; font-size:12px; color:#FD6000}
+.i_deal_list .item .tit .cate_tip_1{background:url(../images/cate_tip_1.gif) no-repeat 0 0;color:#FD6000}
+.i_deal_list .item .tit .cate_tip_2{background:url(../images/cate_tip_2.gif) no-repeat 0 0;color:#000}
+.i_deal_list .item .tit .cate_tip_3{background:url(../images/cate_tip_3.gif) no-repeat 0 0;color:red}
+.i_deal_list .item .tit .cate_tip_4{background:url(../images/cate_tip_4.gif) no-repeat 0 0;color:#567BB2}
+.i_deal_list .item_1{ background:#FAFCFB}
+.i_deal_list .item .detail{ width:530px}
+.i_deal_list .item .detail .f_red{ color:#C20000; font-family:Arial; font-weight:bolder;}
+.i_deal_list .item .detail .info{ font-size:12px; 
+padding: 3px 0 5px 0;
+width: 175px;
+color: #3c3c3c;}
+.i_deal_list .item .detail .info2{width: 205px;}
+.i_deal_list .item .detail .info3{width: 140px;}
+.i_deal_list .item .detail .progressBar{width:126px; margin-top:2px}
+
+.notice-list{
+	padding: 5px 12px;
+}
+.notice-list ul{
+list-style: url(../images/li1.gif) inside;
+
+}
+
+.borrow_out,.borrow_in{z-index:10;display:block; width:124px;height:50px; left:13px; top:90px; overflow:hidden; background:#fff;
+filter:alpha(opacity=0);opacity:0.0}
+.borrow_in{left:145px}
+
+#examIndex{
+	height: 245px;
+	width: 258px;
+	overflow: hidden;
+}
+#examIndex ul li {
+	border-bottom: 1px dotted #DFE6EA;
+	overflow: hidden;
+	color: #1D366B;
+	height: 48px;
+	font: 12px/162% Arial, Tahoma, Helvetica;
+	_font-family: 宋体;
+}
+
+#examIndex ul li a{ color:#414141}

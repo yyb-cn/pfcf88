@@ -1,0 +1,114 @@
+{include file="inc/header.html"}
+<?php
+$this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dealcss"}" />
+<div class="blank"></div>
+<div class="clearfix bddf">
+	<form action="./" method="post" name="BidForm" id="BidForm">
+		<div class="bid-title f_blue tc b f14 pt10 pb10 bb1">
+			确认投标金额
+		</div>
+		<div class="blank"></div>
+		<div class="clearfix" style="width:790px">
+			<div class="b pt10 pb10 f14">确认借款信息</div>
+			<table width="100%" cellpadding="0" cellspacing="0" class="bid-table">
+				<tr>
+					<td class="tit tr w100">借款标题：</td>
+					<td>{$deal.name}</td>
+				</tr>
+				<tr>
+					<td class="tit tr w100">借款金额：</td>
+					<td class="f_red bg">{$deal.borrow_amount_format}</td>
+				</tr>
+				<tr>
+					<td class="tit tr w100">借款年利率：</td>
+					<td class="f_red">{function name="number_format" v=$deal.rate f=2} %</td>
+				</tr>
+				<tr>
+					<td class="tit tr w100">借款期限：</td>
+					<td class="f_red bg">{$deal.repay_time}个月</td>
+				</tr>
+				<tr>
+					<td class="tit tr w100">还款方式：</td>
+					<td>每月还款</td>
+				</tr>
+				<tr>
+					<td class="tit tr w100">还款方式：</td>
+					<td>等额本息</td>
+				</tr>
+				<tr>
+					<td class="tit tr w100">已完成：</td>
+					<td class="bg">
+						<div class="blueProgressBar progressBar f_l" style="margin-top:4px">
+	                        <div class="p">
+	                        	<div class="c" style="width:{function name='round' val=$deal.progress_point f=3}%;"></div>
+	                       	</div>
+	                    </div>
+						<div class="f_l pl5">{function name='round' val=$deal.progress_point}%</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="tit tr btm w100">剩余投标金额：</td>
+					<td class="f_red btm">{$deal.need_money}</td>
+				</tr>
+			</table>
+			<div class="blank"></div>
+			<table width="100%" cellpadding="0" cellspacing="0" class="bid-table">
+				<tr>
+					<td class="tit tr w100">我的可用余额：</td>
+					<td class="f_red">
+						{function name="format_price" v=$user_info.money}
+						&nbsp;&nbsp;
+						<a href="{url x="index" r="uc_money#incharge"}" target="_blank">我要充值</a>
+					</td>
+				</tr>
+				<tr>
+					<td class="tit tr w100 btm">投标金额：</td>
+					<td class="f_red bg btm">
+						<input class="f-input w70" name="bid_money" id="J_BIDMONEY" /> 元&nbsp;&nbsp;<span class="f_dgray">(最低投标金额为{function name="round" v=$deal.min_loan_money f=2}元{if (int)app_conf('DEAL_BID_MULTIPLE') gt 0},并且是{function name='app_conf' v='DEAL_BID_MULTIPLE'}的倍数{/if})</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="blank20"></div>
+		<div class="blank20"></div>
+		<div class="clearfix bbd bid_act_box">
+			<input type="hidden" name="id" value="{$deal.id}" />
+			<input  type="submit" class="bid_submit_button mt20" id="J_bid_submit" value="确认投标" />
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	jQuery(function(){
+		$("#BidForm").submit(function(){
+			if($.trim($("#J_BIDMONEY").val())=="" || !$.checkNumber($("#J_BIDMONEY").val()){if (int)app_conf('DEAL_BID_MULTIPLE') gt 0} || parseFloat($("#J_BIDMONEY").val())%{function name='app_conf' v='DEAL_BID_MULTIPLE'}!=0{/if} || parseFloat($("#J_BIDMONEY").val())<=0 || parseFloat($("#J_BIDMONEY").val())<{$deal.min_loan_money}){
+				$.showErr(LANG.BID_MONEY_NOT_TRUE,function(){
+					$("#J_BIDMONEY").focus();
+				});
+			}
+			var query = $(this).serialize();
+			$.ajax({
+				url:APP_ROOT + "/index.php?ctl=deal&act=dobid&ajax=1",
+				data:query,
+				dataType:"json",
+				success:function(result){
+					if(result.status==1){
+						alert(result.info);
+						window.location.href=result.jump;
+					}
+					else{
+						$.showErr(result.info);
+					}
+				},
+				error:function(ajaxobj)
+				{
+		//			if(ajaxobj.responseText!='')
+		//			alert(ajaxobj.responseText);
+				}
+			});
+			return false;
+		});
+	});
+</script>
+{include file="inc/footer.html"}

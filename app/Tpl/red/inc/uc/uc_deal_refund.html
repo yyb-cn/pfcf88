@@ -1,0 +1,162 @@
+<div id="dashboard" class="dashboard">
+	<ul>
+		<li {if $status eq 0}class="current"{/if}><a href="{url x="index"r="uc_deal#refund" p="status=0"}">还款列表</a></li>
+		<li {if $status eq 1}class="current"{/if}><a href="{url x="index"r="uc_deal#refund" p="status=1"}">已还清借款</a></li>
+	</ul>
+</div>
+<div class="uc_r_bl_box clearfix pl10 pr10 pt5 pb5">
+	{if $deal_list}
+	{if $status eq 1}
+	<div class="silverBg tc pl10" style="height:30px;line-height:30px; font-weight:bold; color:#8E8E8E">
+	    <div class="f_l" style="width:90px">
+	            图片
+	    </div>
+	    <div class="f_l tl" style="width:170px;text-indent:3em">
+	            借款标题
+	    </div>
+	    <div class="f_l" style="width:80px">
+	            金额
+	    </div>
+	    <div class="f_l" style="width:50px">
+	            年利率
+	    </div>
+	    <div class="f_l" style="width:50px">
+	            期限
+	    </div>
+	    <div class="f_l" style="width:90px">
+	            完成度
+	    </div>
+	    <div class="f_l" style="width:100px">
+	            发布日期
+	    </div>
+	    <div class="f_l tc" style="width:80px">
+	            状态
+	    </div>
+	</div>
+	<div class="clearfix pt5 pb5 pl10 pr10">
+		{foreach from="$deal_list" item="deal"}
+		<div class="clearfix pb10">
+	        <div class="f_l" style="width:90px;height: 64px;">
+	            <img src="{$deal.icon}" width="64px" height="64px" class="img_b" alt="{$deal.name}" title="{$deal.name}">
+	        </div>
+	        <div class="f_l tl" style="width:170px">
+	            <a href="{$deal.url}">{$deal.name}</a>
+	        </div>
+	        <div class="f_l f_red" style="width:80px">
+	        	{$deal.borrow_amount_format}
+	        </div>
+	        <div class="f_l f_red" style="width:50px">
+	            {function name="number_format" v="$deal.rate" f="2"}%
+	        </div>
+	        <div class="f_l f_red" style="width:50px">
+	            {$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}
+	        </div>
+	        <div class="f_l" style="width:90px">
+	            <div class="blueProgressBar progressBar w90">
+	                <div class="p"><div class="c" style="width: {$deal.progress_point}%;"> </div></div>
+	               
+	            </div>
+	            <div>
+	                <p class="f_l" style="width:100%">{$deal.progress_point} % 已完成</p>
+	            </div>
+	        </div>
+	        <div class="f_l" style="width:100px">
+	        	{if $deal.publis_wait eq 1 || $deal.publis_wait eq 0}
+				<div class="tc">
+	                {function name="to_date" v="$deal.create_time" f="Y-m-d"}
+	            </div>
+	            <div class="tc">
+	                 {function name="to_date" v="$deal.create_time" f="H:i"}
+	            </div>
+				{else}
+	            <div class="tc">
+	                {function name="to_date" v="$deal.start_time" f="Y-m-d"}
+	            </div>
+	            <div class="tc">
+	                 {function name="to_date" v="$deal.start_time" f="H:i"}
+	            </div>
+	            {/if}
+	        </div>
+			<div class="f_l tc" style="width:80px">
+				{if $deal.publis_wait eq 1}
+				等待审核
+				{else}
+					{if $deal.deal_status eq 5}
+						已还清
+					{elseif $deal.deal_status eq 0}
+						等待材料
+					{elseif $deal.deal_status eq 1 && $deal.remain_time gt 0}
+						进行中
+					{elseif $deal.deal_status eq 2}
+						已满标
+					{elseif $deal.deal_status eq 3 || $deal.remain_time lte 0}
+						流标
+					{elseif $deal.deal_status eq 4}
+						还款中
+					{/if}
+				{/if}
+			</div>
+	    </div>
+	    <div style="border-bottom:1px dotted #9D9D9D;margin:5px 0 ">
+		</div>
+		{/foreach}
+	</div>
+	{else}
+	{foreach from="$deal_list" item="deal"}
+	<div class="bid_item clearfix">
+        <div class="bid_title">
+        	{$deal.name}
+            <span class="r_c"><a href="javascript:void(0);" onclick="javascript:window.showModalDialog('{url x="index" r="uc_deal#contract" p="id=$deal.id"}','','dialogWidth=1024px;dialogHeight=768px,status=0,toolbar=no,menubar=no,location=no,scrollbars=yes,top=20,left=20,resizable=no')">查看电子协议</a></span>
+        </div>
+        <div class="bid_detail">
+            <div class="info">
+            	 借款金额：
+                <span class="f_red">{$deal.borrow_amount_format}</span>
+            </div>
+            <div class="info">
+            	年利率：
+                <span class="f_red">{function name="number_format" v=$deal.rate f=2}%</span>
+            </div>
+            <div class="info">
+            	期限：
+                <span class="f_red">{$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}</span>
+            </div>
+            <div class="info">
+            	{if $deal.loantype eq 2 || $deal.repay_time_type eq 0}还款日{else}下一还款日{/if}：
+                <span class="f_red">
+                	{if $deal.repay_time_type eq 0}
+						{function name="to_date" v=$deal.type_next_repay_time f="Y-m-d"}
+					{else}
+						{if $deal.loantype eq 2}
+						{function name="to_date" v=$deal.end_repay_time f="Y-m-d"}
+						{else}
+						{function name="to_date" v=$deal.next_repay_time f="Y-m-d"}
+						{/if}
+					{/if}
+				</span>
+            </div>
+            <div class="info">
+            	月还款额：
+                <span class="f_red">{function name="app_conf" v="CURRENCY_UNIT"}{function name="number_format" v=$deal.true_month_repay_money f=2}</span>
+            </div>
+            <div class="info">
+            	罚息：
+                <span class="f_red">{function name="app_conf" v="CURRENCY_UNIT"}{function name="number_format" v=$deal.impose_money f=2}</span>
+            </div>
+            <div class="info" style="width: 115px; text-align: right;">
+                <input class="refundBnt" type="button" onclick="window.location.href='{url x="index" r="uc_deal#quick_refund" p="id=$deal.id"}';">
+                {if !$deal.exceed_the_time}
+				<input class="inrepayBtn" type="button" onclick="window.location.href='{url x="index" r="uc_deal#inrepay_refund" p="id=$deal.id"}';">
+            	{/if}
+			</div>
+        </div>
+    </div>
+	{/foreach}
+	{/if}
+	{else}
+	<div class="tc p10">暂无记录</div>
+	{/if}
+	<div class="blank"></div>
+	<div class="pages">{$pages}</div>
+	<div class="blank"></div>
+</div>

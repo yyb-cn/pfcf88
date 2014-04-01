@@ -1,0 +1,129 @@
+{include file="inc/header.html"} 
+<?php
+$this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
+?>
+<link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$indexcss"}" />
+<div class="blank"></div>
+<div id="main_adv_box" class="main_adv_box f_l">
+		<div id="main_adv_img" class="main_adv_img">
+			<span rel="1"><adv adv_id="首页广告位1" /></span>
+			<span rel="2"><adv adv_id="首页广告位2" /></span>
+			<span rel="3"><adv adv_id="首页广告位3" /></span>
+			<span rel="4"><adv adv_id="首页广告位4" /></span>	
+			<span rel="5"><adv adv_id="首页广告位5" /></span>					
+		</div>
+		<div id="main_adv_ctl" class="main_adv_ctl">
+			<ul>
+				<li rel="1">1</li>
+				<li rel="2">2</li>
+				<li rel="3">3</li>
+				<li rel="4">4</li>
+				<li rel="5">5</li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="{$TMPL}/js/index_adv.js"></script>
+</div>
+<div class="blank10"></div>
+<div class="index_left f_l">
+	<div class="gray_title clearfix">
+		<div class="f_l f_dgray b">最新借款列表</div>
+		<div class="f_r">
+			<span style="font-size: 12px; font-weight: normal;"><a href="{url x="index" r="deals"}" title="{$LANG.MORE}">更多借款列表...</a></span>
+		</div>
+	</div>
+	<div class="i_deal_list clearfix pr15 pl15">
+		{foreach from=$deal_list item="deal" key=key name="deal"}
+		<div class="item {if $key mod 2 eq 1}item_1{/if} clearfix" {if $smarty.foreach.deal.last}style="border-bottom:0"{/if}>
+			<div class="icon f_l">
+				<a href="{$deal.url}"><img src="{$deal.icon}" class="img_b" height="80" width="80"></a>
+			</div>
+			<div class="detail f_r">
+				<div class="tit b lh24 clearfix">
+					<a href="{$deal.url}" class="f_l">{$deal.color_name}</a>
+					<div class="cate_tip cate_tip_{$deal.cate_id} ml5 f_l">{$deal.cate_info.name}！</div>
+				</div>
+				<div class="clearfix">
+					<div class="info f_l">借款金额：<span class="f_red">{$deal.borrow_amount_format}</span></div>
+					<div class="info info2 f_l">年利率：<span class="f_red">{$deal.rate} %</span></div>
+					<div class="info info3 f_l">借款期限：<span class="f_red">{$deal.repay_time}</span>{if $deal.repay_time_type eq 0}天{else}个月{/if}</div>
+				</div>
+				<div class="clearfix">
+					<div class="info f_l">
+						信用等级：<img src="{$TMPL}/images/{$deal.user.point_level}.png" align="absmiddle" title="{$deal.user.point_level}" alt="{$deal.user.point_level}" height="16" />
+					</div>
+					<div class="info info2 f_l clearfix">
+						<div class="f_l">借款进度：</div>
+						<div class="greenProcessBar progressBar f_l indexbar">						
+							<p>{function name="round" v=$deal.progress_point f=0}%</p>
+							<div class="p">
+								<div class="c" style="width: {function name="round" v=$deal.progress_point f="2"}%;"></div>
+							</div>
+						</div>
+					</div>
+					<div class="info info3 f_l">{if $deal.deal_status eq 2}<span class="f_red">满标</font>{elseif $deal.deal_status eq 4}<span class="f_red">还款中</font>{elseif $deal.deal_status eq 5}还款完毕{else}还需：<span class="f_red">{$deal.need_money}</span>{/if}</div>
+				</div>
+			</div>
+		</div>
+		{/foreach}
+	</div>
+</div>
+<div class="index_right f_r">
+	<adv adv_id="首页右侧顶部广告" />
+	<div class="r-block">
+		<div class="gray_title clearfix">
+			<div class="f_l f_dgray b">网站公告</div>
+			<div class="f_r">
+            	<div style="vertical-align: middle;_padding: 8px 0;">
+	                <span style="font-weight: normal;">
+	                    <a href="{url x="index" r="notice#list_notice"}"> 更多</a>
+	                </span>
+	                <span><img src="{$TMPL}/images/more.gif" align="absmiddle" alt="{$LANG.MORE}" style="" title="{$LANG.MORE}"></span>
+	            </div>
+        	</div>
+		</div>
+		<div class="notice-list clearfix">
+			<ul>
+				{foreach from=$notice_list item="notice"}
+                <li style="padding:2px 0;">
+                    <span>
+					<a href="{$notice.url}">{$notice.title}</a>
+					</span>
+                </li>
+				{/foreach}
+	        </ul>
+		</div>
+	</div>
+	<div class="blank10"></div>
+	<div class="clearfix pr">
+		<img src="{$TMPL}/images/dosomthing.jpg" />
+		<a class="borrow_out ps" href="{url x="index" r="deals"}">我要借出</a>
+		<a class="borrow_in ps" href="{url x="index" r="borrow"}">我要借款</a>
+	</div>
+	<div class="blank10"></div>
+	{insert name="success_deal_list"}
+	
+	<div class="blank10"></div>
+	<div class="r-block">
+		<div class="gray_title clearfix">
+			<div class="f_l f_dgray b">使用技巧</div>
+			<div class="f_r">
+	        	<div style="vertical-align: middle;_padding: 8px 0;">
+	                <span style="font-weight: normal;">
+	                    <a href="{url x="index" r="usagetip"}"> {$LANG.MORE}</a>
+	                </span>
+	                <span><img src="{$TMPL}/images/more.gif" align="absmiddle" alt="{$LANG.MORE}" style="" title="{$LANG.MORE}"></span>
+	            </div>
+	    	</div>
+		</div>
+		<div class="clearfix" style="padding:5px 15px; height:144px">
+			<ul>
+			{foreach from="$use_tech_list.list" item="use"}
+            	<li class="f_l" style="width: 120px; padding: 2px;">
+				 · <a href="{url x="index" r="usagetip" p="id=$use.id"}">{$use.title}</a>
+				</li>
+			{/foreach}
+       		</ul>
+		</div>
+	</div>
+</div>
+{include file="inc/footer.html"}

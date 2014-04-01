@@ -1,0 +1,23 @@
+{if $user_info}
+	<span class="li li_no"><a href="{url x="shop" r="uc_center"}">{$user_info.user_name}</a></span>
+	<span class="li"><span class="pm {if $msg_count>0 || $user_info.videopassed neq 1 || $user_info.idcardpassed neq 1 || $user_info.creditpassed neq 1 || $user_info.workpassed neq 1 || $user_info.incomepassed neq 1}new_pm {/if}"></span><a href="{url x="shop" r="uc_msg"}" class="msg_count">{$LANG.MSG_COUNT}{if $msg_count>0}({$msg_count}){/if}</a></span>
+	<span class="li"><a href="{url x="shop" r="user#loginout" }">{$LANG.LOGINOUT}</a></span>
+	{if $user_info.videopassed neq 1 || $user_info.idcardpassed neq 1 || $user_info.creditpassed neq 1 || $user_info.workpassed neq 1 || $user_info.incomepassed neq 1}
+	<div class="tip_box f_l ps clearfix" style="display:none;">
+		<div class="cl ps"><a href="#" class="close">×</a></div>
+		<div class="content pl10 pr20 pb5 pt10">
+			{if $user_info.videopassed neq 1}
+			<div>视频认证  <a href="{url x="index" r="borrow#applyamount"}">进入上传</a></div>
+			{/if}
+			{if $user_info.idcardpassed neq 1 || $user_info.creditpassed neq 1 || $user_info.workpassed neq 1 || $user_info.incomepassed neq 1}
+			<div>补齐必要认证  <a href="{url x="index" r="borrow#applyamount"}">进入上传</a></div>
+			{/if}
+		</div>
+		<div class="blank1"></div>
+	</div>
+	{/if}
+	{else}
+	<span class="li li_no">{$LANG.TOURIST}</span>
+	<span class="li"><a href="{url x="shop" u="user#register" }">{$LANG.FREE_REGISTER}</a></span>
+	<span class="li"><a href="{url x="shop" u="user#login" }">{$LANG.LOGIN}</a></span>
+{/if}

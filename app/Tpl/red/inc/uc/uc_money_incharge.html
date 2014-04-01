@@ -1,0 +1,91 @@
+<div class="inc wb">
+	<div class="inc_main">
+		<div id="dashboard" class="dashboard">
+			<ul>
+				<li {if $ACTION_NAME eq 'index'}class="current"{/if}><a href="{url x="index" r="uc_money#index"}">{$LANG.UC_LOGS}</a></li>
+				<li {if $ACTION_NAME eq 'incharge'}class="current"{/if}><a href="{url x="index" r="uc_money#incharge"}">{$LANG.UC_MONEY_INCHARGE}</a></li>
+				<li {if $ACTION_NAME eq 'incharge_log'}class="current"{/if}><a href="{url x="index" r="uc_money#incharge_log"}">{$LANG.UC_MONEY_INCHARGE_LOG}</a></li>
+				<li {if $ACTION_NAME eq 'carry'}class="current"{/if}><a href="{url x="index" value="uc_money#carry"}">{$LANG.UC_CARRY}</a></li>
+				{if $allow_exchange}
+				<li {if $ACTION_NAME eq 'exchange'}class="current"{/if}><a href="{url x="index" value="uc_money#exchange"}">{$LANG.UC_EXCHANGE}</a></li>
+				{/if}
+			</ul>
+		</div>
+		<div class="uc_r_bl_box clearfix pt10">
+			<div style="background: #F2F2F2; width: 696px; border: 1px solid #D4D4D4; padding: 10px 0 10px 40px; margin: 0 auto;">
+				1、所有投标保证金将由第三方平台托管。 <br> 2、即时充值所产生的转账费用，以100元为上限，按转账金额0.5%，由第三方平台收取。 <br>
+				3、请注意您的银行卡充值限制，以免造成不便。 <br> 4、如果充值金额没有及时到账，请和客服联系。
+			</div>
+			<div class="blank1"></div>
+			<div  class="uc-table">
+				<form name="incharge_form" id="incharge_form" action="{url x="index" r="uc_money#incharge_done"}" method="post" />			
+					<div class="sect cf">			
+						<div class="bdl p10 clearfix">
+							{if $below_payment}
+							<div class="clearfix">
+								<div  class="f_l w80">充值方式：</div>
+								<label class="f_l"><input type="radio" class="f-check" checked="checked" onclick="SelectPayType(0);" name="check_ol_bl_pay" />线上支付</label>
+								<label class="f_l"><input type="radio" class="f-check" onclick="SelectPayType(1);" name="check_ol_bl_pay" />线下支付</label>
+							</div>
+							{/if}		
+							<div class="clearfix" style="margin-top:10px;border-top:1px solid #eaeaea;padding: 10px 10px 0 10px">				        	        	
+					        	<div class="f_l w70">充值{$LANG.PRICE_AMOUNT}：</div>
+								<input type="text" class="f-input f_l" id="money" name="money"> 
+							</div>
+							<div style="margin-top:10px;border-top:1px solid #eaeaea; padding: 10px 10px 0 0px">
+							<div  id="J_online_pay" class="clearfix" style="text-align: right; padding-left:81px ">																	
+							{foreach from=$payment_list item=payment_item}									
+								{$payment_item.display_code}	
+								<div class="blank"></div>										
+							{/foreach}
+							</div>
+							{if $below_payment}
+							<div  id="J_below_pay" class="clearfix" style="text-align: left; display:none;">
+								{$below_payment.display_code}	
+								<div class="blank"></div>		
+							</div>
+							{/if}	
+							<div style="margin-top:10px;border-top:1px solid #eaeaea;padding: 10px 10px 0 10px">
+								<div  class="f_l w70">&nbsp;</div>
+								<input type="submit" id="incharge_done" value="确定{$LANG.DO_INCHARGE}" class="formbutton">
+							</div>
+						</div>		
+					</div><!--end sect-->
+				</form>
+			</div>				
+		</div>
+	</div>
+	<div class="inc_foot"></div>
+</div>
+<script type="text/javascript">
+	{if $below_payment}
+	function SelectPayType(i){
+		switch(i){
+			case 0:
+				$("#J_online_pay").show();
+				$("#J_below_pay").hide();
+				break;
+			case 1:
+				$("#J_online_pay").hide();
+				$("#J_below_pay").show();
+				break;
+		}
+	}
+	{/if}
+	$(document).ready(function(){
+		$("#incharge_done").click(function(){
+			if(!($("input[name='money']").val()!=''&&!isNaN($("input[name='money']").val())&&$("input[name='money']").val()>0))			
+			{
+				$.showErr("{$LANG.PLEASE_INPUT_CORRECT_INCHARGE}",function(){
+					$("input[name='money']").focus();
+				});
+				return false;
+			}
+			else if(!$("input[name='payment']:checked").val())
+			{
+				$.showErr("{$LANG.PLEASE_SELECT_PAYMENT}");
+				return false;
+			}
+		});
+	});
+</script>
