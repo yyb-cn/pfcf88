@@ -1,4 +1,4 @@
-{include file="inc/header.html"} 
+﻿{include file="inc/header.html"} 
 <?php
 $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 ?>
@@ -92,12 +92,6 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 				{/foreach}
 	        </ul>
 		</div>
-	</div>
-	<div class="blank10"></div>
-	<div class="clearfix pr">
-		<img src="{$TMPL}/images/dosomthing.jpg" />
-		<a class="borrow_out ps" href="{url x="index" r="deals"}">我要借出</a>
-		<a class="borrow_in ps" href="{url x="index" r="borrow"}">我要借款</a>
 	</div>
 	<div class="blank10"></div>
 	{insert name="success_deal_list"}
