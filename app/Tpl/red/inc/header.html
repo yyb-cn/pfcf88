@@ -9,6 +9,9 @@
 <link rel="shortcut icon" href="favicon.ico" type="/image/x-icon" />
 <meta name="keywords" content="{if $page_keyword}{$page_keyword}{/if}{$site_info.SHOP_KEYWORD}" />
 <meta name="description" content="{if $page_description}{$page_description}{/if}{$site_info.SHOP_DESCRIPTION}" />
+<link rel="stylesheet" type="text/css" href="{$TMPL}/css/comm.css" />
+<script type="text/javascript" src="{$TMPL}/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="{$TMPL}/js/index_.js"></script>
 <?php
 $this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/style.css";
 $this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/weebox.css";
@@ -61,33 +64,38 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 			<div class="f_r">
 				<span id="user_head_tip" class="pr">
 				{insert name="load_user_tip"}
-				<span class="li"><a href="{url x="index" r="helpcenter"}">帮助</a></span>
+				<span class="li"><a href="{url x="index" r="helpcenter"}">帮助</a>客服电话：{function name="app_conf" v="SHOP_TEL"}</span>
 				</span>
-			</div>		
+
+			</div>
+            <div class="hd-tel"></div>		
 		</div><!--end wrap-->
-		<div class="hd-tel">客服电话：{function name="app_conf" v="SHOP_TEL"}</div>
+		
 	</div>
-	<div class="main_bar wrap">			
-		<ul class="main_nav">
-			{foreach from=$nav_list item=nav_item}
-				<li class="n_{$nav_item.id} {if $nav_item.current eq 1}current{/if}" rel='{$nav_item.id}'>
-					<a href="{$nav_item.url}"  target="{if $nav_item.blank eq 1}_blank{/if}">{$nav_item.name}</a>
-				</li>
-			{/foreach}
+
+
+
+
+
+</div>
+	<div  class="headf">
+	<div  class="head_main">
+		<a  href="{$APP_ROOT}"  title=""> <img  src="{$TMPL}/images/logo.jpg"  alt=""></a>
+		<ul>
+            <li><a href="{$APP_ROOT}">首页</a></li>
+            {foreach from=$nav_list item=nav_item key=key}
+			<li  class="onn"><a  title=""  style="padding: 10px 0; cursor: pointer;"  href="{$nav_item.url}" target="{if $nav_item.blank eq 1}_blank{/if}">{$nav_item.name}</a>
+            {if $nav_item.sub_nav}
+				<ul  style="display: none;">
+                    {foreach from=$nav_item.sub_nav item=sub_item}
+					<li  style="width: 90px;"><a  href="{$sub_item.url}"  title="" target="{if $sub_item.blank eq 1}_blank{/if}">{$sub_item.name}</a></li>
+                    {/foreach}
+				</ul>
+            {/if}
+            </li>
+            
+           {/foreach}
 		</ul>
 	</div>
-	<div class="main_snav clearifx">
-		{foreach from=$nav_list item=nav_item key=key}
-			{if $nav_item.sub_nav}
-			<ul class="f_l n_{$nav_item.id}" rel="{$nav_item.id}" style="display:none;{if $key >1}padding-left:<?php echo $this->_var['key']*85;?>px{/if}">
-			{foreach from=$nav_item.sub_nav item=sub_item}
-				<a href="{$sub_item.url}" {if $sub_item.current eq 1}class="current"{/if} target="{if $sub_item.blank eq 1}_blank{/if}">{$sub_item.name}</a>
-				<div class="line"></div>
-			{/foreach}
-			</ul>
-			{/if}
-		{/foreach}
-    </div>
 </div>
-	
 <div class="wrap">
