@@ -232,7 +232,7 @@ class AlipayBank_payment implements payment {
 				{
 					//开始更新相应的outer_notice_sn					
 					$GLOBALS['db']->query("update ".DB_PREFIX."payment_notice set outer_notice_sn = '".$outer_notice_sn."' where id = ".$payment_notice['id']);
-					$this->auto_do_send_goods($payment_notice,$order_info);					
+					//$this->auto_do_send_goods($payment_notice,$order_info);					
 					if($order_info['type']==0)
 					app_redirect(url("index","payment#done",array("id"=>$payment_notice['order_id']))); //支付成功
 					else
@@ -242,7 +242,7 @@ class AlipayBank_payment implements payment {
 				{
 					if($order_info['pay_status'] == 2)
 					{				
-						$this->auto_do_send_goods($payment_notice,$order_info);		
+						//$this->auto_do_send_goods($payment_notice,$order_info);		
 						if($order_info['type']==0)
 						app_redirect(url("index","payment#done",array("id"=>$payment_notice['order_id']))); //支付成功
 						else
@@ -254,7 +254,7 @@ class AlipayBank_payment implements payment {
 			}
 			else
 			{
-				$this->auto_do_send_goods($payment_notice,$order_info);
+				//$this->auto_do_send_goods($payment_notice,$order_info);
 				app_redirect(url("index","payment#pay",array("id"=>$payment_notice['id']))); 
 			}
 		}else{
@@ -305,12 +305,12 @@ class AlipayBank_payment implements payment {
 			{			
 				$GLOBALS['db']->query("update ".DB_PREFIX."payment_notice set outer_notice_sn = '".$outer_notice_sn."' where id = ".$payment_notice['id']);				
 				order_paid($payment_notice['order_id']);	
-				$this->auto_do_send_goods($payment_notice,$order_info);				
+				//$this->auto_do_send_goods($payment_notice,$order_info);				
 				echo '1';
 			}
 			else
 			{
-				$this->auto_do_send_goods($payment_notice,$order_info);	
+				//$this->auto_do_send_goods($payment_notice,$order_info);	
 				echo '0';
 			}
 			
