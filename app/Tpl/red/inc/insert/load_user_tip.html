@@ -5,14 +5,7 @@
 	{if $user_info.videopassed neq 1 || $user_info.idcardpassed neq 1 || $user_info.creditpassed neq 1 || $user_info.workpassed neq 1 || $user_info.incomepassed neq 1}
 	<div class="tip_box f_l ps clearfix" style="display:none;">
 		<div class="cl ps"><a href="#" class="close">×</a></div>
-		<div class="content pl10 pr20 pb5 pt10">
-			{if $user_info.videopassed neq 1}
-			<div>视频认证  <a href="{url x="index" r="borrow#applyamount"}">进入上传</a></div>
-			{/if}
-			{if $user_info.idcardpassed neq 1 || $user_info.creditpassed neq 1 || $user_info.workpassed neq 1 || $user_info.incomepassed neq 1}
-			<div>补齐必要认证  <a href="{url x="index" r="borrow#applyamount"}">进入上传</a></div>
-			{/if}
-		</div>
+
 		<div class="blank1"></div>
 	</div>
 	{/if}
