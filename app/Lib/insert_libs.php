@@ -27,6 +27,15 @@ function insert_load_user_tip()
 	$GLOBALS['tmpl']->assign("msg_count",intval($msg_count));
 	return $GLOBALS['tmpl']->fetch("inc/insert/load_user_tip.html");
 }
+//动态加载首页banner用户登陆框
+function insert_index_login_box()
+{
+		
+	//输出未读的消息数2
+	$msg_count = $GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."msg_box where to_user_id = ".intval($GLOBALS['user_info']['id'])." and is_read = 0 and is_delete = 0 and type = 0");
+	$GLOBALS['tmpl']->assign("msg_count",intval($msg_count));
+	return $GLOBALS['tmpl']->fetch("page/index_login_box.html");
+}
 
 //动态加载商品分类页的产品列表
 function insert_load_filter_goods_list()
