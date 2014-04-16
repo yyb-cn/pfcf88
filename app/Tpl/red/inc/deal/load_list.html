@@ -1,11 +1,11 @@
-<div class="f_l" style="width: 230px;">
-		目前投标总额：<span class="f_red">{function name="format_price" v="$deal.load_money"}</span>
+<div class="f_l" style="width: 230px; padding-top:10px;">
+		目前投资总额：<span class="f_red">{function name="format_price" v="$deal.load_money"}</span>
 </div>
-<div class="f_l" style="width: 230px">
-	剩余投标金额：<span class="f_red">{$deal.need_money}</span>
+<div class="f_l" style="width: 230px; padding-top:10px;">
+	剩余投资金额：<span class="f_red">{$deal.need_money}</span>
  </div>
- <div class="f_l" style="width: 230px">
- 	剩余投标时间：
+ <div class="f_l" style="width: 230px; padding-top:10px;">
+ 	剩余投资时间：
         <span class="f_red">
             {if $deal.deal_status neq 1}
 			0天0时0分
@@ -36,13 +36,13 @@
     <tbody>
         <tr style="height: 30px;">
             <td width="20%" style="background: #F6F6F6;">
-                <div align="center">投标人</div>
+                <div align="center">投资人</div>
             </td>
             <td width="20%" style="background: #F6F6F6;">
-                <div align="center">投标金额 </div>
+                <div align="center">投资金额 </div>
             </td>
             <td width="20%" style="background: #F6F6F6;">
-                <div align="center">投标时间</div>
+                <div align="center">投资时间</div>
             </td>
         </tr>
 		{foreach from="$load_list" item="load"}

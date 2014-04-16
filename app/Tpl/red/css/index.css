@@ -1,8 +1,4 @@
-.index_left{
-	width:665px;
-	border:1px solid #CFCFCF;
-	border-top:none
-}
+.index_left{width:655px;border:1px solid #CFCFCF;border-top:none; margin-right:10px; }
 .index_right{ width:284px;}
 .r-block{border:1px solid #CFCFCF; border-top:none}
 .r-block .gray_title{padding-right:6px}
@@ -15,7 +11,7 @@
 .i_deal_list .item .tit .cate_tip_3{background:url(../images/cate_tip_3.gif) no-repeat 0 0;color:red}
 .i_deal_list .item .tit .cate_tip_4{background:url(../images/cate_tip_4.gif) no-repeat 0 0;color:#567BB2}
 .i_deal_list .item_1{ background:#FAFCFB}
-.i_deal_list .item .detail{ width:530px}
+.i_deal_list .item .detail{ width:525px}
 .i_deal_list .item .detail .f_red{ color:#C20000; font-family:Arial; font-weight:bolder;}
 .i_deal_list .item .detail .info{ font-size:12px; 
 padding: 3px 0 5px 0;

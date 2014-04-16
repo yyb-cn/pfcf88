@@ -53,14 +53,14 @@ color: #3a3a3a;
 font-size: 12px;
 font-weight:bolder;}
 
-#deal-default .title .return{color:#565656;background: url("../images/yellow_title.png") repeat-x; width:137px; padding-right:10px}
+#deal-default .title .return{color:#565656;background: url("../images/yellow_title.png") repeat-x; width:137px; margin-left:10px; display:inline; text-align:center;}
 #deal-default .title .return a{color:#565656; font-weight:normal;}
 #deal-intro{}
 
 #deal-intro .pic-box{width:233px}
 #deal-intro .pic-box .pic{ border:1px solid #ccc; padding:15px}
 #deal-intro .detail{ width:546px; padding:0 6px;
-border: 1px solid #ccc;}
+border: 1px solid #ccc; margin:0px;}
 
 .detail .detail_title_bg {
 height: 39px;

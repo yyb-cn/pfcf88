@@ -14,12 +14,33 @@ hr{ border:none; border-top:1px solid #eaeaea; }
 .pr{ position:relative!important;}
 .ps{ position:absolute!important;}
 .f_l{float:left;}
-.f_r{float:right;}
+.f_r{float:left;}
 .tl{ text-align:left;}
 .tc{ text-align:center;}
 .tr{ text-align:right;}
 .fs{ font-family:"宋体"}
 .w100{ width:100px;}
+
+.anniu{ width:96px; height:36px; float:left; margin-top:20px;}
+.btn-orange {
+border-radius: 5px;
+cursor: pointer;
+text-align: center;
+font-size: 14px;
+padding: 3px 11px;
+color: #fff;
+vertical-align: middle;
+display: inline-block;
+}
+.btn-orange:hover{opacity:0.9;color:#fff;text-decoration:none;}
+.btn-orange {
+background: #f08012;
+border: 1px solid #f08012;
+font-size: 16px;
+padding: 5px 15px;
+}
+
+
 .cg {
 color: #1C8A1C;
 }
@@ -285,7 +306,7 @@ color: #800;
 }
 
 .short{ width:211px; overflow:hidden;}
-.long{ width:742px; overflow:hidden;}
+.long{ width:732px; overflow:hidden; margin-right:10px; display:inline;}
 .short_uc{ width: 195px; overflow:hidden; display:inline-block;}
 .big_left_uc{ width:760px; overflow:hidden; display:inline-block;}
 .right_uc{ width:195px; overflow:hidden; display:inline-block;}
@@ -1360,7 +1381,7 @@ background-color:#FBFBFB
 background-color:#F9F6D2}
 .wh660{width: 660px; }
 .deals-search-box{ position:relative;}
-.dashboard{position::relative;height:29px; left: 0;background:url(../images/dashboard.jpg) repeat-x 0 27px;}
+.dashboard{position::relative;height:29px; left: 0;background:url(../images/dashboard.jpg) repeat-x 0 27px; margin-right:8px; display:inline;}
 .dashboard li{ float:left;}
 .dashboard li a,.dashboard li a:hover{ display:block; float:left;margin-right: 3px; font-weight:bold;font-size: 12px; height:29px; line-height:29px; width:120px;  text-align:center; background:url(../images/dashboard.jpg) no-repeat 0 -31px; color: #912020;font-family: 'Microsoft Yahei','黑体'; text-decoration:none;}
 .dashboard li.current a,.dashboard li.current a:hover{background:url(../images/dashboard.jpg) no-repeat 0 -2px;}
@@ -1602,8 +1623,8 @@ margin: 0 auto;
 .biao-list .item {
 	border-bottom: 1px dotted #E5E5E5;
 	height: 75px;
-	padding-bottom: 3px;
-	padding-top: 7px;
+	float:left;
+	padding:7px 30px 3px 0;
 }
 .biao-list .item .f_red{ color:#C20000; font-weight:bolder; font-family:Arial;}
 .biao-list .item_1{background: #F7FCFF;}

@@ -16,7 +16,7 @@ return array(
 	'TIME_LEFT'	=>	'剩余时间',
 	'DEAL_NOT_BEGIN'	=>	'团购即将开始，敬请期待',
 	'DEAL_BEGIN_FORMAT'	=>	'将在%s开始',
-	'DEAL_BID_COUNT'	=>	'笔投标',
+	'DEAL_BID_COUNT'	=>	'笔投资',
 	'MUST_NEED_BID' =>'还需',
 	'DEAL_BID_SUCCESS' =>'投标成功！',
 	'CANT_BID_BY_YOURSELF' =>'不能投自己发布的标！',
