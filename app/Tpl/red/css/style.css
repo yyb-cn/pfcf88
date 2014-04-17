@@ -1382,7 +1382,7 @@ background-color:#FBFBFB
 background-color:#F9F6D2}
 .wh660{width: 660px; }
 .deals-search-box{ position:relative;}
-.dashboard{position::relative;height:29px; left: 0;background:url(../images/dashboard.jpg) repeat-x 0 27px; margin-right:8px; display:inline;}
+.dashboard{position::relative;height:29px; left: 0;background:url(../images/dashboard.jpg) repeat-x 0 27px;}
 .dashboard li{ float:left;}
 .dashboard li a,.dashboard li a:hover{ display:block; float:left;margin-right: 3px; font-weight:bold;font-size: 12px; height:29px; line-height:29px; width:120px;  text-align:center; background:url(../images/dashboard.jpg) no-repeat 0 -31px; color: #912020;font-family: 'Microsoft Yahei','黑体'; text-decoration:none;}
 .dashboard li.current a,.dashboard li.current a:hover{background:url(../images/dashboard.jpg) no-repeat 0 -2px;}

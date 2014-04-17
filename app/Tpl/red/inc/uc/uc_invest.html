@@ -12,7 +12,6 @@
 <div class="inc_main uc_r_bl_box clearfix">
 	<div class="silverBg">
 	    <div class="f_dgray b tc lh30 pr15 pl15" style="height:30px;">
-	        <div class="f_l" style="width:80px">图片</div>
 	        <div class="f_l" style="width:195px">标题/借款人/所在地</div>
 	        <div class="f_l" style="width:100px">我的投标金额</div>
 	        <div class="f_l" style="width:135px">期限/利率</div>
@@ -25,11 +24,7 @@
 			{foreach from=$list item="item"}
 			<div class="item">
 				<div class="clearfix pt5 tc">
-	                <div class="f_l" style="width:80px">
-	                    <a href="{url x="index" r="deal" p="id=$item.id"}">
-	                       <img src="{$item.icon}" width="64px" height="64px" class="img_b" alt="{$item.name}" title="{$item.name}">
-	                    </a>
-	                </div>
+	                
 	                <div class="f_l tl" style="width:195px">
 	                    <p style="font-weight: bold"><a href="{url x="index" r="deal" p="id=$item.id"}">{$item.name}</a></p>
 	                    <p><a href="{url x="index" r="space" p="id=$item.user_id"}">{$item.user_name}</a> / {$item.user_location}</p>

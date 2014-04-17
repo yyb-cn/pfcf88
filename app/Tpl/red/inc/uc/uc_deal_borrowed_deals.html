@@ -1,21 +1,19 @@
 {if $deal_list}
 <div class="silverBg tc pl10 " style="height:30px;line-height:30px; font-weight:bold; color:#8E8E8E">
-     <div class="f_l" style="width:90px">
-            图片
-    </div>
-    <div class="f_l tl" style="width:170px;text-indent:3em">
+
+    <div class="f_l tl" style="width:170px; text-align:center;">
             借款标题
     </div>
-    <div class="f_l" style="width:80px">
+    <div class="f_l" style="width:120px">
             金额
     </div>
     <div class="f_l" style="width:50px">
             年利率
     </div>
-    <div class="f_l" style="width:50px">
+    <div class="f_l" style="width:70px">
             期限
     </div>
-    <div class="f_l" style="width:110px">
+    <div class="f_l" style="width:130px">
             完成度
     </div>
     <div class="f_l" style="width:100px">
@@ -25,26 +23,24 @@
             状态
     </div>
 </div>
-<div class="clearfix pt5 pb5 pl10 ">
+<div class="clearfix pt5 pb5 pl10 " >
 	 <div id="borrowed" class="tc">
 	{foreach from=$deal_list item='deal'}
-            <div class="clearfix pb10">
-                <div class="f_l" style="width:90px;height: 64px;">
-                    <img src="{$deal.icon}" width="64px" height="64px" class="img_b" alt="{$deal.name}" title="{$deal.name}">
-                </div>
-                <div class="f_l tl" style="width:170px">
+            <div class="clearfix pb10" style="padding-top:20px;">
+
+                <div class="f_l tl" style="width:170px; text-align:center;">
                     <a href="{$deal.url}">{$deal.name}</a>
                 </div>
-                <div class="f_l f_red" style="width:80px">
+                <div class="f_l f_red" style="width:120px">
                 	{$deal.borrow_amount_format}
                 </div>
                 <div class="f_l f_red" style="width:50px">
                     {function name="number_format" v="$deal.rate" f="2"}%
                 </div>
-                <div class="f_l f_red" style="width:50px">
+                <div class="f_l f_red" style="width:70px">
                     {$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}
                 </div>
-                <div class="f_l" style="width:110px">
+                <div class="f_l" style="width:130px">
                     <div class="blueProgressBar progressBar" style="width:110px">
                         <div class="p"><div class="c" style="width: {$deal.progress_point}%;"> </div></div>
                        
