@@ -14,7 +14,8 @@ hr{ border:none; border-top:1px solid #eaeaea; }
 .pr{ position:relative!important;}
 .ps{ position:absolute!important;}
 .f_l{float:left;}
-.f_r{float:left;}
+.f_r{float:right;}
+
 .tl{ text-align:left;}
 .tc{ text-align:center;}
 .tr{ text-align:right;}
