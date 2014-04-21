@@ -607,11 +607,11 @@ float:left;
 
 
 #ft .copyright {
-	color: #999;
+	color: #fff;
 	text-align: center;
 	font-size: 12px;
 	padding: 10px 0 0 0;
-	border-top: 1px dashed #B2CAF3;
+	float:left;
 }
 
 #ft .copyright a {
@@ -632,7 +632,7 @@ float:left;
 }
 
 #ft h3 {
-	color: #4A4A4A;
+	color: #fff;
 	font-family:"微软雅黑";
 	font-size:14px;
 	height:34px; line-height:34px;
@@ -647,11 +647,10 @@ float:left;
 
 #ft .sub-list li {
 	line-height: 20px;
-	background: url("../images/foot_dot.gif") no-repeat left center;
 	padding-left: 10px;
 }
 
-#ft .sub-list li a{ color:#787878}
+#ft .sub-list li a{ color:#fff;}
 
 #ft .logo-footer {
 	padding-top: 25px
@@ -1077,7 +1076,7 @@ white-space: nowrap; color:#00C}
 
 .origin_delete {border:#ccc dotted 1px; padding:5px; text-decoration:line-through; margin-top:10px; }
 
-#ftw{ background:url(../images/footer_line.gif) repeat-x 0px 0px #F7F7F7; padding-top:15px;}
+#ftw{ background:#2c2c2c; repeat-x 0px 0px #F7F7F7; padding-top:15px; height:280px;}
 .rec_sp{ margin:5px 0px; text-align:center;}
 .sp_logo img{ width:180px; height:50px;}
 .rec_sp_title{ line-height:22px;}
@@ -1085,18 +1084,6 @@ white-space: nowrap; color:#00C}
 
 .store_count_bg{ background:url(../images/store_count_bg.gif) no-repeat; width:17px; height:18px; display:inline-block; line-height:15px; text-align:center; color:#fff;}
 
-#ft .hp1 h3{
-	background:url(../images/hp1.gif) no-repeat 0px center;
-}
-#ft .hp2 h3{
-	background:url(../images/hp2.gif) no-repeat 0px center;
-}
-#ft .hp3 h3{
-	background:url(../images/hp3.gif) no-repeat 0px center;
-}
-#ft .hp4 h3{
-	background:url(../images/hp4.gif) no-repeat 0px center;
-}
 
 .uc_topic_nav{ display:inline-block; width:100%; heigth:22px; background:#f2f2f2; border-bottom:#FE7000 2px solid;}
 .uc_topic_nav li{ display:inline-block; width:20%; height:22px; float:left;}
@@ -1967,3 +1954,7 @@ margin: 0 auto;
 	color: white;
 	vertical-align: middle;
 }
+
+
+/**页脚添加代码**/
+
