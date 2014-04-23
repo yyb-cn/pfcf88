@@ -36,6 +36,16 @@ function insert_index_login_box()
 	$GLOBALS['tmpl']->assign("msg_count",intval($msg_count));
 	return $GLOBALS['tmpl']->fetch("page/index_login_box.html");
 }
+//显示特殊用户
+function insert_uc_center_special(){
+	
+	$s_user_info = es_session::get("user_info");
+	
+	$user_special=$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."user_special where user_special = '".$s_user_info['user_name']."'");
+	if($user_special>=1){
+		return $GLOBALS['tmpl']->fetch("page/user_special.html");
+		}
+	}
 
 //动态加载商品分类页的产品列表
 function insert_load_filter_goods_list()
