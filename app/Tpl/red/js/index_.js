@@ -167,7 +167,7 @@ $(document).ready(function(){
 	// nav
 	$(".head_main>ul>li>a").each(function(){
 		var n=$(this).width();
-		$(this).siblings().find("li").css("width",n);
+		$(this).siblings().find("li").css("width",n+25);
 	});
 	$(".head_main ul li ul li").hover(function(){
 		$(this).css("background","#f9f6f7");

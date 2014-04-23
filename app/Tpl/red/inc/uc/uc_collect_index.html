@@ -8,12 +8,12 @@
 	<div class="inc_main uc_r_bl_box clearfix">
 		<div class="silverBg">
 		    <div class="f_dgray b tc lh30 pr15 pl15" style="height:30px;">
-		        <div class="f_l" style="width:180px">标题/借款人/所在地</div>
-		        <div class="f_l" style="width:80px">借款用途</div>
-		        <div class="f_l" style="width:110px">金额/期限/利率</div>
-		        <div class="f_l" style="width:100px">信用等级</div>
-		        <div class="f_l" style="width:120px">进度/剩余时间</div>
-		        <div class="f_l" style="width:50px">操作</div>
+		        <div class="f_l" style="width:100px; padding-right:50px;">标题</div>
+		        <div class="f_l" style="width:80px;padding-right:50px;">借款用途</div>
+		        <div class="f_l" style="width:110px;padding-right:50px;">金额/期限/利率</div>
+
+		        <div class="f_l" style="width:120px;padding-right:50px;">进度/剩余时间</div>
+		        <div class="f_l" style="width:50px;">操作</div>
 		    </div>
 		</div>
 		<div class="clearfix pt10 pl15 pr15" id="my_favoriteLoan_list">
@@ -21,14 +21,13 @@
 			<div class="item">
 				<div class="clearfix pt5 tc">
 	                
-	                <div class="f_l tl" style="width:180px">
+	                <div class="f_l tl" style="width:100px; padding-right:50px;">
 	                    <p style="font-weight: bold"><a href="{url x="index" r="deal" p="id=$item.id"}">{$item.name}</a></p>
-	                    <p><a href="{url x="index" r="space" p="id=$item.user_id"}">{$item.user_name}</a> / {$item.user_location}</p>
 	                </div>
-	                <div class="f_l" style="width:80px">
+	                <div class="f_l" style="width:80px;padding-right:50px;">
 	                	{$item.type_match_row}
 	                </div>
-	                <div class="f_l f_red" style="width:110px">
+	                <div class="f_l f_red" style="width:110px;padding-right:50px;">
 	                    <div>
 	                        {$item.borrow_amount_format}
 	                    </div>
@@ -37,10 +36,7 @@
 	                        {function name="number_format" v="$item.rate" f="2"}%
 	                    </div>
 	                </div>
-	                <div class="f_l f_red" style="width:100px">
-	                    <img src="{$TMPL}/images/{$item.point_level}.png" align="absmiddle" alt="{$item.point_level}" title="{$item.point_level}">
-	                </div>
-	                <div class="f_l f_red" style="width:120px">
+	                <div class="f_l f_red" style="width:120px;padding-right:50px;">
 	                    <div class="greenProcessBar progressBar">
 	                        <div class="p"><div class="c" style="width:{$item.progress_point}%;"></div></div>
 	                        

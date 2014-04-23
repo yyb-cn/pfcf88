@@ -65,7 +65,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 			<div class="f_r">
 				<span id="user_head_tip" class="pr">
 				{insert name="load_user_tip"}
-				<span class="li"><a href="{url x="index" r="helpcenter"}">帮助</a>客服电话：{function name="app_conf" v="SHOP_TEL"}</span>
+				<span class="li"><a href="{url x="index" r="helpcenter"}">帮助</a></span><span class="li">客服电话：{function name="app_conf" v="SHOP_TEL"}</span>
 				</span>
 
 			</div>
@@ -81,7 +81,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 </div>
 	<div  class="headf">
 	<div  class="head_main">
-		<a  href="{$APP_ROOT}"  title=""> <img  src="{$TMPL}/images/logo.jpg"  alt=""></a>
+		<a  href="{$APP_ROOT}"  title=""> <img  src="{$TMPL}/images/logo.jpg" width="365" height="70"  alt=""></a>
 		<ul>
             <!-- <li><a href="{$APP_ROOT}">首页</a></li> -->
             {foreach from=$nav_list item=nav_item key=key}
@@ -89,7 +89,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
             {if $nav_item.sub_nav}
 				<ul  style="display: none;">
                     {foreach from=$nav_item.sub_nav item=sub_item}
-					<li  style="width: 90px;"><a  href="{$sub_item.url}"  title="" target="{if $sub_item.blank eq 1}_blank{/if}">{$sub_item.name}</a></li>
+					<li><a  href="{$sub_item.url}"  title="" target="{if $sub_item.blank eq 1}_blank{/if}">{$sub_item.name}</a></li>
                     {/foreach}
 				</ul>
             {/if}
