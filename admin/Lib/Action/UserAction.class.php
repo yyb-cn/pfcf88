@@ -891,7 +891,17 @@ class UserAction extends CommonAction{
 		
 		$this->display();
 	}
-	
+	//在后台直接登录前台用户 tagged by lu
+	function login_site(){
+		$user_id = intval($_REQUEST['id']);
+		$user_info = M("User")->getById($user_id);
+		
+		require_once APP_ROOT_PATH."system/utils/es_session.php";
+		$s_user_info = es_session::set("user_info",$user_info);
+		app_redirect(url("index"));	
+		
+       
+	}
 	function modify_info_down(){
 		if(intval($_REQUEST['id'])==0){
 			$this->error("会员不存在！");

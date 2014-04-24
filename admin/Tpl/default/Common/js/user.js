@@ -22,4 +22,8 @@ function eidt_lock_money(user_id){
 function info_down(user_id){
 	$.weeboxs.open(ROOT+'?m=User&a=info_down&id='+user_id, {contentType:'ajax',showButton:false,title:"资料",width:600,height:400});
 }
-
+//在后台直接登录前台用户 tagged by lu
+function login_site(user_id)
+{
+	window.open(ROOT+'?m=User&a=login_site&id='+user_id);
+}
