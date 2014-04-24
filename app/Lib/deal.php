@@ -72,7 +72,16 @@ function get_deal($id=0,$cate_id=0)
 			$deal['borrow_amount_format'] = format_price($deal['borrow_amount']);
 			
 			$deal['rate_foramt'] = number_format($deal['rate'],2);
-			
+
+/*
+    计算金额
+*/     
+    
+            //按天算收益
+            if($deal['repay_time_type'] == 0){
+                $deal['month_repay_money'] = $deal['borrow_amount'] * $deal['rate']/365/100 * $deal['repay_time'];
+            }    
+
 			//本息还款金额
 			if($deal['loantype'] == 0){
 				$deal['month_repay_money'] = pl_it_formula($deal['borrow_amount'],$deal['rate']/12/100,$true_repay_time);
