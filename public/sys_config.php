@@ -39,8 +39,8 @@ return array(
 'PAGE_SIZE'=>'10',
 'HELP_CATE_LIMIT'=>'4',
 'HELP_ITEM_LIMIT'=>'4',
-'SHOP_FOOTER'=>'<div style=\"text-align:center;\">联系我们：info@fanwe.com &nbsp; 福州方维</div>
-<div style=\"text-align:center;\">© 2013 p2p信贷 All rights reserved</div>',
+'SHOP_FOOTER'=>'<div style=\"text-align:right;\">联系我们：info@fanwe.com &nbsp; 福州方维</div>
+<div style=\"text-align:right;\">© 2013 p2p信贷 All rights reserved</div>',
 'CUSTOM_SERVICE'=>'44,48,',
 'SMS_SEND_REPAY'=>'1',
 'USER_MESSAGE_AUTO_EFFECT'=>'1',

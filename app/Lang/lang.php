@@ -213,7 +213,7 @@ return array(
 	'UC_VOUCER'	=>	'我的代金券',
 	'UC_CONSIGNEE'	=>	'配送地址',
 	'UC_CARRY'	=>	'会员提现',
-	'UC_COLLECT'	=>	'我关注的标',
+	'UC_COLLECT'	=>	'我关注的投资',
 	'UC_INVEST'  =>  '我的投资',
 	'UC_EARNINGS'	=>	'理财统计',
 	'UC_AUTO_BID' =>'自动投标',
