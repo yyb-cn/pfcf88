@@ -12,10 +12,10 @@
                             <li class="dq">您正在使用的账号:</li>
 							<li  class="dqzh">用户名：<span class="yhm">{$user_info.user_name}</span></li>
 							<li  class="dqzh">用户余额：<span class="yhm"><?php echo format_price($this->_var['user_info']['money'] + $this->_var['user_info']['lock_money']); ?></span></li>
-							<li><a id="haerder_out"  href="{url x="shop" r="uc_center"}"><input  type="txt"  value="用户中心"  class="denglu"></a></li>
+							<li><div class="denglut"><a id="haerder_out"  href="{url x="shop" r="uc_center"}">用户中心</a></div></li>
 						</ul>
 						<p>
-						<div class="dldb"><a href="">投资</a></div><div class="dldb"><a href="">充值</a></div><div class="dldb" style=" border:none;"><a href="">提现</a></div>
+						<div class="dldb"><a href="index.php?ctl=deals">投资</a></div><div class="dldb"><a href="index.php?ctl=borrow">充值</a></div><div class="dldb" style=" border:none;"><a href="">提现</a></div>
 						</p>	
 				</div>
 			</form>

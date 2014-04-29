@@ -7,13 +7,13 @@
 				<li {if $cate_id eq '0'}class="current"{/if}>
 					<a href="{url x="index" r="deals"}">{$LANG.ALL_DEALS}</a>
 				</li>
-				{foreach from=$deal_cate_list item=cate key=key}
+<!--				{foreach from=$deal_cate_list item=cate key=key}
 				{if $key < 8}
 				<li {if $cate.current eq 1}class="current"{/if}>
 					<a href="{url x="index" r="deals" p="cid=$cate.id"}">{$cate.name}</a>
 				</li>
 				{/if}
-				{/foreach}
+				{/foreach}-->
 				<li {if $cate_id eq '-1'}class="current"{/if}>
 					<a href="{url x="index" r="deals" p="cid=last"}" style="margin-right:0">{$LANG.LAST_SUCCESS_DEALS}</a>
 				</li>												
@@ -28,6 +28,140 @@
 		</div>
 	</div>
 	<div class="blank10"></div>
+
+<!--条件搜索开始-->  
+<!--    
+<link  rel="stylesheet"  href="{$TMPL}/css/deals.css">
+<script  type="text/javascript"  src="{$TMPL}/js/deals.js"></script>
+
+    <div class="deals_ss">
+<div  class="list-left-navigation m-border fn-bb kf-mb20">
+<div  class="main-title kf-mt10 fn-clear">
+
+</div>
+<div  class="navigation-item kf-mb10 kf-mt10">
+<div  class="navigation-title fn-left">
+<span  class="kf-ml15" style="margin:0 0 0 15px; text-align:right;">投资利率：</span>
+</div>
+<ul  class="navigation-pro fn-clear"  id="pro-money-select">
+<li><a  href="javascript:;"  data-max=""  class="mcur">全部</a></li>
+<li><a  href="javascript:;"  data-max="5"  class="" >6%以上</a></li>
+<li><a  href="javascript:;"  data-min="5">9%以上</a></li>
+<li><a  href="javascript:;"  data-min="5">12%以上</a></li>
+
+</ul>
+</div>
+<div  class="navigation-item kf-mb10"><div  class="navigation-title fn-left">
+<span  class="kf-ml15">投资期限：</span>
+</div>
+<ul  class="navigation-pro fn-clear"  id="pro-time-select">
+<li><a  href="javascript:;"  data-max=""  class="tcur">全部</a></li>
+<li><a  href="javascript:;"  data-max="12">3个月</a></li>
+<li><a  href="javascript:;"  data-min="12">6个月</a></li>
+<li><a  href="javascript:;"  data-min="12">9个月</a></li>
+<li><a  href="javascript:;"  data-min="12">12个月</a></li>
+</ul>
+</div>
+
+</div>
+
+<script  type="text/javascript">
+    $(function(){
+        getlist(1);
+        $(".isnor").live('click',function(){
+            if($(this).hasClass('asc')){
+                $(this).removeClass('asc');
+            }else{
+                $(".asc").removeClass('asc');
+                $(this).addClass('asc');
+            }
+            getlist(1,$(this).attr('data-type'));
+        })
+        $("#pro-money-select a").click(function(){
+            $(".mcur").removeClass('mcur');
+            $(this).addClass("mcur");
+            getlist(1);
+        })
+        $("#pro-time-select a").click(function(){
+            $(".tcur").removeClass('tcur');
+            $(this).addClass("tcur");
+            getlist(1);
+        })
+        $("#pro-productid-select a").click(function(){
+            $(".pcur").removeClass('pcur');
+            $(this).addClass("pcur");
+            getlist(1);
+        })
+
+
+        function getlist(p,cl){
+
+            var data = {page:p}
+            if(typeof(cl)!='undefined'){
+                data.order_name =cl;
+                if($('[data-type="'+cl+'"]').hasClass('asc')){
+                    data.order_by = 'asc'
+                }else{
+                    data.order_by = 'desc'
+                }
+            }
+
+
+
+            $("#loading").show();
+            if(typeof($(".mcur").attr('data-min'))!=='undefined'){
+                data.min_amount = $(".mcur").attr('data-min')
+            }
+            if(typeof($(".mcur").attr('data-max'))!=='undefined'){
+                data.max_amount = $(".mcur").attr('data-max')
+            }
+            if(typeof($(".tcur").attr('data-min'))!=='undefined'){
+                data.min_instalments = $(".tcur").attr('data-min')
+            }
+            if(typeof($(".tcur").attr('data-max'))!=='undefined'){
+                data.max_instalments = $(".tcur").attr('data-max')
+            }
+            if(typeof($(".pcur").attr('data-pid'))!=='undefined'){
+                data.product_id = $(".pcur").attr('data-pid')
+            }
+
+
+            $.post('/product',data,function(r){
+                $("#loading").show();
+                  $(".kf-page").html(r.page);
+                  if(r.items.length>=1){
+                      var tpl = document.getElementById('tpl').innerHTML;
+                      var html = juicer(tpl, r);
+                      $("tbody").html(html);
+                  }else{
+                      $("tbody").html('<tr><td colspan="6">' +
+                              '<div style="padding:20px">没有数据</div>' +
+                              '</td></tr>');
+                  }
+                  $("#loading").hide();
+            },'json');
+        }
+        $(".kf-page a").live('click',function(){
+             var pid =$(this).attr("data-page") ;
+            if(pid>0){
+                getlist(pid,$(".asc").attr('data-type'));
+            }
+        })
+
+
+    })
+    seajs.use(["$", "arale/sticky/1.2.1/sticky"], function($, sticky) {
+        // sticky
+        sticky(".sticky", 20);
+
+    });
+</script>
+    </div>-->
+<!--条件搜索结束-->
+  
+  
+  
+    
 	<div id="content" class="clearfix">
 		<div class="long f_l">
 			<div class="clearfix bddf">
@@ -42,7 +176,6 @@
 				{if $deal_list}
 				{if $cate_id eq "-1"}
 				<div class="f_dgray b tc" style="height:40px;line-height:40px;">
-			          <div class="f_l w90">图片</div>
 			          <div class="f_l tl w170"> 标题  / 借款人 </div>
 			          <div class="f_l w90">金额</div> 
 			          <div class="f_l w80">利率</div>
@@ -52,7 +185,7 @@
 				{else}
 				<div class="f_dgray b tc" style="height:40px;line-height:40px; padding-left:20px;">
 			          <div class="f_l tl w170"> 标题  / 借款人 </div>
-			          <div class="f_l w70" style="display:none">借款用途</div>
+
 			          <div class="f_l w90">
 			             <a href="#" onclick="set_sort('borrow_amount');">金额</a>
 			          </div> 
@@ -120,7 +253,7 @@
 			                  </div>
 			                 </div> 
 			              </div>
-			        </div><div class="anniu">
+			        </div><div style="float:right; width:96px; height:36px;">
 				<a href="{$deal.url}" class="btn-orange">马上投资</a>
 			</div>
 					{/foreach}
@@ -136,7 +269,7 @@
 			</div>
 		</div>
 		<div class="short f_r">
-			<adv adv_id="我要理财列表页右侧顶部广告" />
+<!--			<adv adv_id="我要理财列表页右侧顶部广告" />
 			<div class="bddf clearfix" style="border-top:0">
 				<div class="gray_title clearfix">
 		            <div class="f_l f_dgray b">按条件搜索</div>
@@ -193,7 +326,7 @@
 		                </div>
 		            </form>
 		        </div>
-			</div>
+			</div>-->
 			<div class="blank"></div>
 			<div class="bddf clearfix" style="border-top:0">
 				<div class="gray_title clearfix">
@@ -340,3 +473,4 @@
     }
 </script>
 {include file="inc/footer.html"}
+

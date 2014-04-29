@@ -16,7 +16,7 @@ hr{ border:none; border-top:1px solid #eaeaea; }
 .f_l{float:left;}
 .f_r{float:right;}
 
-.tl{ text-align:left;}
+.tl{ text-align:center;}
 .tc{ text-align:center;}
 .tr{ text-align:right;}
 .fs{ font-family:"宋体"}
@@ -1195,7 +1195,7 @@ a.switch_city,a.switch_city:hover{background:url(../images/down_arrow.gif) no-re
 .hot_sale_cnt{ width:110px; margin-left:10px;}
 .pd20{ padding:20px}
 .blank10{ height:10px; overflow:hidden; overflow:visible; clear:both;}
-.user_inc_top{ margin:0 15px; padding:25px 0 15px 45px; border-bottom:1px solid #E7E7E7; font-size:24px; color:#666; font-family:"\5FAE\8F6F\96C5\9ED1","\9ED1\4F53"}
+.user_inc_top{ margin:0 15px; padding:25px 0 15px 0; border-bottom:1px solid #E7E7E7; font-size:24px; color:#666; font-family:"\5FAE\8F6F\96C5\9ED1","\9ED1\4F53"}
 .user_inc_top span{ font-size:18px; position:relative; top:2px;}
 .user-lr-box-left{ width:555px; padding:20px 0 20px 20px; }
 .user-lr-box-left .field{ text-align:left; overflow:hidden; display:block; clear:both; float:none;}
@@ -1603,7 +1603,7 @@ margin: 0 auto;
 .w125{width:125px}
 .w140{width:140px}
 .w160{width:160px}
-.w170{width:170px}
+.w170{width:140px}
 
 .biao-list {
 	border-top: 1px dotted #E5E5E5;
@@ -1612,11 +1612,10 @@ margin: 0 auto;
 	border-bottom: 1px dotted #E5E5E5;
 	height: 75px;
 	float:left;
-	padding:7px 30px 3px 0;
+	padding:7px 20px 3px 0;
 }
 .biao-list .item .f_red{ color:#C20000; font-weight:bolder; font-family:Arial;}
-.biao-list .item_1{background: #F7FCFF;}
-.biao-list .item_cur{ background:#f7f7f7}
+
 .searchinput {
 	height: 24px;
 	line-height: 24px;
@@ -1956,5 +1955,12 @@ margin: 0 auto;
 }
 
 
-/**页脚添加代码**/
+/**deals添加头部搜索代码**/
+.deals_ss{ width:960px;}
 
+/****首页登陆后用户中心按钮***********/
+.denglut {
+background: url("../images/denglu.png") no-repeat -1px 0;width: 239px;height: 40px;line-height: 40px;
+margin-left: 0;color: #fff;font-size: 18px;font-weight: bold;cursor: pointer;text-align: center;}
+.denglut a{ color:#FFF;}
+.denglut a:hover{ text-decoration:none;}

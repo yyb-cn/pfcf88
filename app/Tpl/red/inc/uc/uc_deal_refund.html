@@ -8,9 +8,7 @@
 	{if $deal_list}
 	{if $status eq 1}
 	<div class="silverBg tc pl10" style="height:30px;line-height:30px; font-weight:bold; color:#8E8E8E">
-	    <div class="f_l" style="width:90px">
-	            图片
-	    </div>
+
 	    <div class="f_l tl" style="width:170px;text-indent:3em">
 	            借款标题
 	    </div>
@@ -36,9 +34,7 @@
 	<div class="clearfix pt5 pb5 pl10 pr10">
 		{foreach from="$deal_list" item="deal"}
 		<div class="clearfix pb10">
-	        <div class="f_l" style="width:90px;height: 64px;">
-	            <img src="{$deal.icon}" width="64px" height="64px" class="img_b" alt="{$deal.name}" title="{$deal.name}">
-	        </div>
+
 	        <div class="f_l tl" style="width:170px">
 	            <a href="{$deal.url}">{$deal.name}</a>
 	        </div>
