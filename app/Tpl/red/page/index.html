@@ -124,8 +124,8 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 	</div>
 	<div class="blank10"></div>
 	{insert name="success_deal_list"}
-	
-	<div class="blank10"></div>
+	<!--使用技巧-->
+	<!--<div class="blank10"></div>
 	<div class="r-block">
 		<div class="gray_title clearfix">
 			<div class="f_l f_dgray b">使用技巧</div>
@@ -138,11 +138,36 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 	            </div>
 	    	</div>
 		</div>
-		<div class="clearfix" style="padding:5px 15px; height:144px">
+		<div class="clearfix" style="padding:5px 15px; height:auto">
 			<ul>
 			{foreach from="$use_tech_list.list" item="use"}
-            	<li class="f_l" style="width: 120px; padding: 2px;">
-				 · <a href="{url x="index" r="usagetip" p="id=$use.id"}">{$use.title}</a>
+            <li class="f_l" style="width: 220px; padding: 2px; overflow:hidden;white-space:nowrap;text-overflow:ellipsis; -o-text-overflow:ellipsis;" >
+				 · <a href="{url x="index" r="usagetip" p="id=$use.id"}"  title="{$use.title}">{$use.title}</a>
+				</li>
+			{/foreach}
+       		</ul>
+		</div>
+	</div>-->
+    
+    <!--行业新闻-->
+    <div class="blank10"></div>
+    <div class="r-block">
+		<div class="gray_title clearfix">
+			<div class="f_l f_dgray b">行业新闻</div>
+			<div class="f_r">
+	        	<div style="vertical-align: middle;_padding: 8px 0;">
+	                <span style="font-weight: normal;">
+	                    <a href="{url x="index" r="news"}"> {$LANG.MORE}</a>
+	                </span>
+	                <span><img src="{$TMPL}/images/more.gif" align="absmiddle" alt="{$LANG.MORE}" style="" title="{$LANG.MORE}"></span>
+	            </div>
+	    	</div>
+		</div>
+		<div class="clearfix" style="padding:5px 15px; height:auto">
+			<ul>
+			{foreach from="$news_list.list" item="news"}
+            <li class="f_l" style="width: 230px; padding: 2px; overflow:hidden;white-space:nowrap;text-overflow:ellipsis; -o-text-overflow:ellipsis;" >
+				 · <a href="{url x="index" r="news" p="id=$news.id"}"  title="{$news.title}">{$news.title}</a>
 				</li>
 			{/foreach}
        		</ul>
