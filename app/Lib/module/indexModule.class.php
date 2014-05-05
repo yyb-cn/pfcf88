@@ -49,8 +49,12 @@ class indexModule extends SiteBaseModule
 			$GLOBALS['tmpl']->assign("notice_list",$notice_list);	
 			
 			//使用技巧
-			$use_tech_list  = get_article_list(12,6);
-			$GLOBALS['tmpl']->assign("use_tech_list",$use_tech_list);	
+			/*$use_tech_list  = get_article_list(12,6);
+			$GLOBALS['tmpl']->assign("use_tech_list",$use_tech_list);*/	
+			
+			//行业新闻
+			$news_list  = get_article_list(12,21);
+			$GLOBALS['tmpl']->assign("news_list",$news_list);	
 			
 			$now = get_gmtime();
 			$vote = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."vote where is_effect = 1 and begin_time < ".$now." and (end_time = 0 or end_time > ".$now.") order by sort desc limit 1");
