@@ -77,7 +77,7 @@ class dealsModule extends SiteBaseModule
 		}
 		elseif ($cate_id == 0){
 			$n_cate_id = 0;
-			$condition .= "AND deal_status in(0,1,2)";
+			$condition .= "AND deal_status in(0,1,2,4,5)";
 			$field = es_cookie::get("shop_sort_field"); 
 			$field_sort = es_cookie::get("shop_sort_type"); 
 			if($field && $field_sort)
