@@ -41,7 +41,7 @@ class indexModule extends SiteBaseModule
 				unset($f_link_group[$k]);
 			}
 			//最新借款列表
-			$deal_list =  get_deal_list(18,0,"publish_wait =0 AND deal_status in(1,2,4,5) "," id DESC");
+			$deal_list =  get_deal_list(6,0,"publish_wait =0 AND deal_status in(1,2,4,5) "," id DESC");
 			$GLOBALS['tmpl']->assign("deal_list",$deal_list['list']);
 						
 			//输出公告

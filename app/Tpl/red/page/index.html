@@ -121,16 +121,23 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
             -->
 			<div class="detail f_r" style="float:left;">
 				<div class="tit b lh24 clearfix">
-					<a href="{$deal.url}" class="f_l">{$deal.color_name}</a>
+					<a href="{$deal.url}" class="f_l" {if $deal.deal_status eq 1}style="color:#428dcb
+" {elseif $deal.deal_status eq 2}style="color:#c35977" {elseif $deal.deal_status eq 4}style="color:#749e54" {elseif $deal.deal_status eq 5}style="color:#ba052f" {/if} >
+					{$deal.color_name}</a>
 				</div>
-				<div class="clearfix">
-					<div class="info f_l">投资金额：<span class="f_red">{$deal.borrow_amount_format}</span></div>
-					<div class="info info2 f_l">年利率：<span class="f_red">{$deal.rate} %</span></div>
-					<div class="info info3 f_l">投资期限：<span class="f_red">{$deal.repay_time}</span>{if $deal.repay_time_type eq 0}天{else}个月{/if}</div>
+				<div class="clearfix" style=" padding-top:10px;">
+					<div class="info f_l" style="width:225px;">投资金额：</div>
+					<div class="info info2 f_l" style="width:180px;">年利率：</div>
+					<div class="info info3 f_l" style="width:100px;">投资期限：</div>
+				</div>
+                <div class="clearfix">
+					<div class="info f_l" style="width:225px;"><span class="f_red" style=" font-size:20px;">{$deal.borrow_amount_format}</span></div>
+					<div class="info info2 f_l" style="width:180px;"><span class="f_red" style=" font-size:20px;">{$deal.rate} %</span></div>
+					<div class="info info3 f_l" style="width:100px;"><span class="f_red" style=" font-size:20px;">{$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}</span></div>
 				</div>
 				<div class="clearfix">
 
-					<div class="info info2 f_l clearfix">
+					<div class="info info2 f_l clearfix" style="width:225px;">
 						<div class="f_l">投资进度：</div>
 						<div class="greenProcessBar progressBar f_l indexbar">						
 							<p>{function name="round" v=$deal.progress_point f=0}%</p>
@@ -139,7 +146,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 							</div>
 						</div>
 					</div>
-					<div class="info info3 f_l">{if $deal.deal_status eq 2}<span class="f_red">满标</font>{elseif $deal.deal_status eq 4}<span class="f_red">还款中</font>{elseif $deal.deal_status eq 5}还款完毕{else}还需：<span class="f_red">{$deal.need_money}</span>{/if}</div>
+					<div class="info info3 f_l" style="width:180px;">{if $deal.deal_status eq 2}<span class="f_red">满标</font>{elseif $deal.deal_status eq 4}<span class="f_red">还款中</font>{elseif $deal.deal_status eq 5}还款完毕{else}还需：<span class="f_red">{$deal.need_money}</span>{/if}</div>
 				</div>
                 
                 
