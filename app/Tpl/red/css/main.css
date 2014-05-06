@@ -33,3 +33,26 @@ span.grid_enable{ background:url("../images/list_type.gif") no-repeat 0px 0px;}
 span.grid_disable{ background:url("../images/list_type.gif") no-repeat -18px 0px;}
 span.line_enable{ background:url("../images/list_type.gif") no-repeat 0px -15px;}
 span.line_disable{ background:url("../images/list_type.gif") no-repeat -18px -15px;}
+/*lu*/
+.main_top{height:351px;background:url("../images/main_top.png") repeat;border-top:2px solid #fff;border-bottom:1px dotted #d6dce1;}
+.mt{width:1000px;margin:auto;padding-top:30px;overflow:hidden;}
+.mt_left{width:690px;float:left;}
+.mt_first{float:left;width:195px;text-align:center;font-size:16px;color:#737980;}
+.mt_first img{width:122px;margin:auto;display:block;}
+.mt_first h2{  font-weight: bold;text-align:center;font-size:18px;color:#242b33;padding-top:30px;padding-bottom:10px;height:24px;}
+.mt_first p{line-height:40px;color:#737980;height:86px;font-size:14px;}
+.mt_first span{ font-size:22px;color:#d90000;}
+.mt_two{width:260px;}
+.mt_two p{width:208px; margin:auto;text-align:left;_margin-top:1px;*margin-top:1px;}
+.mt_three{width:220px;}
+.mt_right{float:right;width:281px;height:290px;background:#fff;position:relative;}
+.shuju_left{background:url("../images/chengjiao.png") no-repeat;width:60px; height:60px;position:absolute;left:0;top:0;}
+.shuju_right{background:url("../images/xiachengjiao.png") no-repeat;right:1px;bottom:4px;height:10px;width:10px;position:absolute;_bottom:0;}
+.shuju_top{background:url("../images/shuju_top.png") no-repeat;height:3px;width:281px;overflow:hidden;}
+.shuju_mid{height:281px;overflow:hidden;}
+.shuju_mid{padding:0 10px 0 25px;}
+.shuju_mid h2{font-size:24px;color:#242b33;font-weight:normal;text-align:right;padding:12px 0 12px 0;border-bottom:1px dotted #d90000;margin-bottom:10px;}
+.shuju_mid span em{font-family:Tahoma;font-style:normal;color:#d90000;font-weight:bold;font-size:36px;}
+.shuju_mid span i{font-family:"Arial Rounded MT Bold";font-style:normal;font-size:24px;color:#d90000;}
+.shuju_mid span{display:block;font-size:16px;color:#242b33;line-height:32px;}
+.shuju_bottom{background:url("../images/shuju_bottom.png") no-repeat;height:6px;width:281px;overflow:hidden;}

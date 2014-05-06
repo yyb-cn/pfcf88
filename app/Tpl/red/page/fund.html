@@ -1,40 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html  xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>{if $page_title}{$page_title} - {/if}{$site_info.SHOP_TITLE}</title>
-<meta  name="keywords"  content="{if $page_keyword}{$page_keyword}{/if}{$site_info.SHOP_KEYWORD}">
-<meta  name="description"  content="{if $page_description}{$page_description}{/if}{$site_info.SHOP_DESCRIPTION}">
-<meta  property="wb:webmaster"  content="7362998718c4cdaf">
-<meta  property="qc:admins"  content="213127277676622176375">
-
-<link rel="stylesheet" type="text/css" href="{$TMPL}/css/comm.css" />
-<link rel="stylesheet" type="text/css" href="{$TMPL}/css/main.css" />
-<link rel="stylesheet" type="text/css" href="{$TMPL}/css/jquery.hiAlerts.csss" />
-<link rel="stylesheet" type="text/css" href="{$TMPL}/css/WdatePicker.css" />
-<link rel="stylesheet" type="text/css" href="{$TMPL}/css/body.css" />
-
-<script type="text/javascript" src="{$TMPL}/js/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="{$TMPL}/js/jquery.hiAlerts-min.js"></script>
-<script type="text/javascript" src="{$TMPL}/js/flash_.js"></script>
-<script type="text/javascript" src="{$TMPL}/js/index_.js"></script>
-<script type="text/javascript" src="{$TMPL}/js/common.js"></script>
-<script type="text/javascript" src="{$TMPL}/js/onlyInputNumber.js"></script>
-<script type="text/javascript" src="{$TMPL}/js/lood.js"></script>
-<script type="text/javascript" src="{$TMPL}/js/investApply.js"></script>
-<script type="text/javascript" src="{$TMPL}/js/newwin.js"></script>
-<script type="text/javascript" src="{$TMPL}/js/showWin.js"></script>
-<script type="text/javascript" src="{$TMPL}/js/WdatePicker.js"></script>
-<script type="text/javascript" src="{$TMPL}/js/jquery-1.8.3.min.js"></script>
-<script  type="text/javascript">
-	var ctx = "";
-</script>
-
-
-
-</head>
-
-<body>
 {include file="inc/header.html"}
-
 <div style="width:928px; height:38px; line-height:38px; background:#f5f5f5; padding-left:30px;  border:solid 1px #dedede; font-size:16px;">共为您找到  <a style="color:#F00; font-weight:bold;" href="#">{$fund_nums}</a>  款正在销售的基金理财产品</div><br />
 <!--基金理财产品-->
  {foreach from=$fund_array item=fund key=key}

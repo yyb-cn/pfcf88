@@ -3,6 +3,7 @@
 $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 ?>
 <link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$indexcss"}" />
+<link rel="stylesheet" type="text/css" href="{$TMPL}/css/main.css" />
 </div>
 <script  type="text/javascript"  src="{$TMPL}/js/flash_.js"></script>
 
@@ -44,7 +45,62 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 		</div>
 	</div>
  <!--图片切换结束-->   
-    
+ <div  class="main_top">
+		<div  class="mt">
+			<div  class="mt_left">
+				<div  class="mt_first wx1">
+					<img  src="{$TMPL}/images/gao1.gif"  alt=""  style="cursor: pointer;" >
+					<h2>高收益</h2>
+					<p>
+						<span>30倍</span>银行存款利息<br> 高达<span>15%</span>年化收益
+					</p>
+				</div>
+				<div  class="mt_first mt_two wx2">
+					<img  src="{$TMPL}/images/an1.gif"  alt=""  style="cursor: pointer;" >
+					<h2>安全保障</h2>
+					<p>
+						多重担保，<span>100%</span>本息安全<br> 多重监管，<span>100%</span>资金安全
+					</p>
+				</div>
+				<div  class="mt_first mt_three wx3">
+					<img  src="{$TMPL}/images/liu1.gif"  alt=""  style="cursor: pointer;" >
+					<h2>流动快</h2>
+					<p>
+                    90天内选定期限，<span>100元</span>起投<br>
+年化收益<span>（8+N）%</span>
+					</p>
+				</div>
+			</div>
+			<script  type="text/javascript">
+				$(".wx1 img").hover(function() {
+					$(this).attr("src", "{$TMPL}/images/gao1.gif");
+				}, function() {
+
+				});
+				$(".wx2 img").hover(function() {
+					$(this).attr("src", "{$TMPL}/images/an1.gif");
+				}, function() {
+
+				});
+				$(".wx3 img").hover(function() {
+					$(this).attr("src", "{$TMPL}/images/liu1.gif");
+				}, function() {
+
+				});
+			</script>
+			<div  class="mt_right">
+				<div  class="shuju_left"></div>
+				<div  class="shuju_right"></div>
+				<div  class="shuju_top"></div>
+				<div  class="shuju_mid">
+					<h2>成交数据</h2>
+					<span>累计总交易金额</span> <span><em>159,879,958</em>元</span> <span>已按期还本金额</span>
+					<span><i>21,793,022</i>元</span> <span>为用户带来的收益 </span> <span><i>4,832,689</i>元</span>
+				</div>
+				<div  class="shuju_bottom"></div>
+			</div>
+		</div>
+	</div>   
 <div class="wrap">      
 <div class="blank10"></div>
 <div class="index_left f_l">
