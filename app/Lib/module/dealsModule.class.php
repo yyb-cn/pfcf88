@@ -129,8 +129,13 @@ class dealsModule extends SiteBaseModule
 		$page_args['interest'] =  $interest;
 		$page_args['months'] =  $months;
 		$page_args['lefttime'] =  $lefttime;
-		
-		$page = new Page($result['count'],app_conf("PAGE_SIZE"),$page_args);   //初始化分页对象 		
+		//lu 产品分页错误修改
+		foreach($page_args as $k=>$v){
+			if($v!=0){
+				$page_string.='&'.$k.'='.$v;
+				}
+			}
+		$page = new Page($result['count'],app_conf("PAGE_SIZE"),$page_string);   //初始化分页对象 		
 		$p  =  $page->show();
 		$GLOBALS['tmpl']->assign('pages',$p);
 		

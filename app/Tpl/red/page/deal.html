@@ -47,22 +47,23 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 							<p class="pt10">
 								产品年利率：<span class="f_red">{$deal.rate_foramt}%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投资期限：{$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}
 							</p>
+                            <div class="f_gray tc" style="float:left; padding-top:10px; color:#F00;">最低投资金额{$deal.min_loan_money}元</div>
 						</div>
 						<div class="f_r">
-                        <div class="f_gray tc" style="float:left; padding-top:30px; padding-left:150px; color:#F00;">最低投资金额{$deal.min_loan_money}元</div>
+                        
 							<div class="mt5 tc" style="float:left; padding:15px 50px 0 50px; ">
                             {if $deal.is_delete eq 2}
-								<img src="{$TMPL}/imagest_publish.png" alt="" width="111px" height="34px">
+								<img style=" width:100px; height:100px;" src="{$TMPL}/imagest_publish.png" alt="" width="111px" height="34px">
 							{elseif $deal.deal_status eq 5}
-								<img src="{$TMPL}/images/load_done.png" alt="" width="111px" height="34px">
+								<img style=" width:100px; height:100px;" src="{$TMPL}/images/load_done.png" alt="" width="111px" height="34px">
 							{elseif $deal.deal_status eq 4}
-								<img src="{$TMPL}/images/load_in_progress.png" alt="" width="111px" height="34px">
+								<img style=" width:100px; height:100px;" src="{$TMPL}/images/load_in_progress.png" alt="" width="111px" height="34px">
 							{elseif $deal.deal_status eq 0}
 								<img src="{$TMPL}/images/loan_writeM.png" alt="" width="111px" height="34px">
 							{elseif $deal.deal_status eq 1 && $deal.remain_time gt 0}
-								<img src="{$TMPL}/images/load.png" alt="" style="cursor: pointer" onclick="javascript:window.location.href='{url x="index" r="deal#bid" p="id=$deal.id"}'" width="111px" height="34px">
+								<img style="width:100px; height:100px;" src="{$TMPL}/images/load.png" alt="" style="cursor: pointer" onclick="javascript:window.location.href='{url x="index" r="deal#bid" p="id=$deal.id"}'" width="111px" height="34px">
 							{elseif $deal.deal_status eq 2}
-								<img src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px">
+								<img style=" width:100px; height:100px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px">
 							{elseif $deal.deal_status eq 3 || $deal.remain_time lte 0}
 								<img src="{$TMPL}/images/load_fail.png" alt="" width="111px" height="34px">
 							{/if}

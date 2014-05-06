@@ -254,7 +254,11 @@
 			                 </div> 
 			              </div>
 			        </div><div style="float:right; width:96px; height:36px;">
-				<a href="{$deal.url}" class="btn-orange">马上投资</a>
+				 {if $deal.deal_status eq 1}
+            <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px; height:80px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>
+            {elseif $deal.deal_status eq 2}<!--满标-->
+			<a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px"></a>
+             {/if}
 			</div>
 					{/foreach}
                     
