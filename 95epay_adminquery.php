@@ -1,4 +1,4 @@
-
+﻿
 <?php
 // +----------------------------------------------------------------------
 // | Fanwe 方维p2p借贷系统
@@ -31,12 +31,12 @@ if(file_exists(APP_ROOT_PATH.'system/payment/Sqepay_payment.php'))
 header("Content-Type: text/html; charset=UTF-8");
 require './system/common.php';
 require './app/Lib/app_init.php';
-$payment_notice_id = intval($_REQUEST['id']);
+$payment_notice_id = intval($_REQUEST['id']);//转为整数
 
     	$payment_notice = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."payment_notice where id = ".$payment_notice_id);
-		$order = $GLOBALS['db']->getRow("select order_sn,bank_id from ".DB_PREFIX."deal_order where id = ".$payment_notice['order_id']);
+		$order = $GLOBALS['db']->getRow("select order_sn,bank_id from ".DB_PREFIX."deal_order where id = ".$payment_notice['order_id']);//查询订单
 		
-		$_TransID = $order['order_sn'];
+		$_TransID = $order['order_sn'];//
 		
 		$payment_info = $GLOBALS['db']->getRow("select config from ".DB_PREFIX."payment where id=".intval($payment_notice['payment_id']));
 		$payment_info['config'] = unserialize($payment_info['config']);
@@ -97,5 +97,6 @@ function curl_post($url, $post) {
   
 $data = curl_post("http://www.95epay.cn/ReconciliationPort", $post_data);  
   
-var_dump($data);  
+var_dump($data);
+
 ?>
