@@ -94,8 +94,9 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 				<div  class="shuju_top"></div>
 				<div  class="shuju_mid">
 					<h2>成交数据</h2>
-					<span>累计总交易金额</span> <span><em>159,879,958</em>元</span> <span>已按期还本金额</span>
-					<span><i>21,793,022</i>元</span> <span>为用户带来的收益 </span> <span><i>4,832,689</i>元</span>
+                    
+					<span>累计总交易金额</span> <span><em>{$success_deal.tatal_money}</em>元</span> <span>已按期还本金额</span>
+					<span><i>{$success_deal.done_money}</i>元</span> <span>为用户带来的收益 </span> <span><i>{$success_deal.income}</i>元</span>
 				</div>
 				<div  class="shuju_bottom"></div>
 			</div>
