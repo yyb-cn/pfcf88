@@ -49,6 +49,12 @@ class dealModule extends SiteBaseModule
 			$user_statics = sys_user_status($deal['user_id'],true);
 			$GLOBALS['tmpl']->assign("user_statics",$user_statics);
 		}
+		//lu 用户名中间部分用星号代替 echo   cut_str($str, 1, 0).'**'.cut_str($str, 1, -1);
+		foreach($load_list as $k_n=>$v_n){
+			$load_list[$k_n]['user_name']=$this->cut_str($load_list[$k_n]['user_name'], 1, 0).'****'.$this->cut_str($load_list[$k_n]['user_name'], 1, -1);
+			
+			}
+		
 		
 		$GLOBALS['tmpl']->assign("load_list",$load_list);	
 		$GLOBALS['tmpl']->assign("credit_file",$credit_file);
@@ -134,7 +140,7 @@ class dealModule extends SiteBaseModule
 		{
 			$GLOBALS['tmpl']->assign("message_login_tip",sprintf($GLOBALS['lang']['MESSAGE_LOGIN_TIP'],url("shop","user#login"),url("shop","user#register")));
 		}
-		
+		$deal['create_time']=date("Y-m-d H:i",$deal['create_time']);
 		$GLOBALS['tmpl']->assign("deal",$deal);
 		$GLOBALS['tmpl']->display("page/deal.html");
 	}
@@ -360,5 +366,123 @@ class dealModule extends SiteBaseModule
 			showErr($GLOBALS['lang']['ERROR_TITLE'],$ajax);
 		}
 	}
+	
+	
+	//lu 设置批量投资金额
+	function bid_more(){
+        //  获取最大 最小 id
+		$user_id = $GLOBALS['db']->getAll("select MAX(id) as d_id,MIN(id) as x_id from ".DB_PREFIX."user ");
+		$d_id=$user_id[0]['d_id']-12;
+		$x_id=$user_id[0]['x_id'];
+		$get_id=mt_rand($x_id,$d_id);
+		// 随机 获取10 个有效用户
+		$user_a=$GLOBALS['db']->getAll("select user_name,id from ".DB_PREFIX."user where is_delete=0 and id>= ".$get_id." limit 10 ");
+		foreach($user_a as $kg=>$vg){
+			$user_arr[$kg]['user_name']=$vg['user_name'];
+			$user_arr[$kg]['id']=$vg['id'];
+			}
+		// 获取 正在投资中借款列表    publish_wait =0 AND deal_status=1    load_money
+		$deal_arr = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal where publish_wait =0 AND deal_status=1 AND  load_money=0 ");
+
+		//print_r($user_arr);exit;
+		
+		$GLOBALS['tmpl']->assign("user_arr",$user_arr);
+		$GLOBALS['tmpl']->assign("deal_arr",$deal_arr);
+		$GLOBALS['tmpl']->display("page/deal_bid_more.html");
+		} 
+		
+	//LU 批量投资
+	function dobid_more(){
+		
+		
+		$id = intval($_REQUEST['deal_id']); // fabiao_time
+		$deal_all = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal where id=".$id." ");
+		//判断是否为 0% 的投资产品
+		if($deal_all[0]['load_money']!=0){
+			
+			showErr(sprintf($GLOBALS['lang']['DEAL_LOAN_NOT_ENOUGHT'],format_price($deal['borrow_amount'] - $deal['load_money'])));
+			return false;
+			}
+		//重组数组  去掉value=0 的提交	
+		$jj=0;
+		for($i=0;$i<=9;$i++){
+			if(trim($_REQUEST['bid_money'.$i])>0){
+					$data_a[$jj]['bid_money']=$_REQUEST['bid_money'.$i];
+					$data_a[$jj]['user_id']=$_REQUEST['user_id'.$i];
+					$data_a[$jj]['user_name']=$_REQUEST['user_name'.$i];
+					$jj++;
+				}
+			
+			} //print_r($data_a);exit;
+		for($i=0;$i<=$jj-1;$i++){
+		$deal = get_deal($_REQUEST['deal_id']);
+		
+		$data['user_id'] = $data_a[$i]['user_id'];
+		$data['user_name'] = $data_a[$i]['user_name'];
+		$data['deal_id'] = $id;
+		$data['money'] = trim($data_a[$i]['bid_money']);
+		//$data['create_time'] = get_gmtime();
+		// 更改投资时间成 发标时间
+		$n_time=rand(15,60);
+	
+		$_REQUEST['fabiao_time']=$_REQUEST['fabiao_time']+60*$n_time; 
+		$data['create_time'] = $_REQUEST['fabiao_time'];//
+
+		$GLOBALS['db']->autoExecute(DB_PREFIX."deal_load",$data,"INSERT");
+		$load_id = $GLOBALS['db']->insert_id();
+		//更改资金记录
+			if($load_id > 0){
+				
+			require_once APP_ROOT_PATH."system/libs/user.php";	
+			modify_account(array('money'=>-trim($data_a[$i]['bid_money']),'score'=>0),$data_a[$i]['user_id']);
+			$deal = get_deal($id);
+			sys_user_status($$data_a[$i]['user_id']);
+			}
+			
+			
+		//print_r($id);exit;
+		}	
+		app_redirect(url("index.php?ctl=deal"));
+		
+	}
+	
+	//lu 实现部分用户名用星号代替功能
+function cut_str($string, $sublen, $start = 0, $code = 'UTF-8')
+{
+    if($code == 'UTF-8')
+    {
+        $pa = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|\xe0[\xa0-\xbf][\x80-\xbf]|[\xe1-\xef][\x80-\xbf][\x80-\xbf]|\xf0[\x90-\xbf][\x80-\xbf][\x80-\xbf]|[\xf1-\xf7][\x80-\xbf][\x80-\xbf][\x80-\xbf]/";
+        preg_match_all($pa, $string, $t_string);
+
+        if(count($t_string[0]) - $start > $sublen) return join('', array_slice($t_string[0], $start, $sublen));
+        return join('', array_slice($t_string[0], $start, $sublen));
+    }
+    else
+    {
+        $start = $start*2;
+        $sublen = $sublen*2;
+        $strlen = strlen($string);
+        $tmpstr = '';
+
+        for($i=0; $i< $strlen; $i++)
+        {
+            if($i>=$start && $i< ($start+$sublen))
+            {
+                if(ord(substr($string, $i, 1))>129)
+                {
+                    $tmpstr.= substr($string, $i, 2);
+                }
+                else
+                {
+                    $tmpstr.= substr($string, $i, 1);
+                }
+            }
+            if(ord(substr($string, $i, 1))>129) $i++;
+        }
+        //if(strlen($tmpstr)< $strlen ) $tmpstr.= "...";
+        return $tmpstr;
+    }
 }
+}
+
 ?>

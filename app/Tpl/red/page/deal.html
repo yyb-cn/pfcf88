@@ -36,16 +36,15 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 				<div class="cont">
 					<div class="clearfix">
 						<div class="f_l">
-							<p class="pt10 pb5">
-								投资金额：<span class="f_red">
+							<p class="pt10 pb5" >
+								投资金额：<span class="f_red"  >
 										{$deal.borrow_amount_format}
-										{if $deal.cate_info.icon}
-										<img src="{$deal.cate_info.icon}" alt="{$deal.cate_info.name}" align="absmiddle" style="margin: 0 0 0 10px; height:25px">
-									 	{/if}
 									 </span>
+                                     <span style=" width:365px; height:25px; padding-left:215px; ">发标时间：{$deal.create_time}</span>
+                                    
 							</p>
-							<p class="pt10">
-								产品年利率：<span class="f_red">{$deal.rate_foramt}%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投资期限：{$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}
+							<p class="pt10" style="width:650px;">
+								产品年利率：<span class="f_red" style="padding-right:220px;">{$deal.rate_foramt}%</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;投资期限：{$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}
 							</p>
                             <div class="f_gray tc" style="float:left; padding-top:10px; color:#F00;">最低投资金额{$deal.min_loan_money}元</div>
 						</div>
@@ -116,7 +115,7 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 							投资周期：按月投资
 						</div>
 						{/if}
-						<div class="item f_l">
+						<div class="item f_l" >
 							投资方式：{if $deal.loantype eq 0}等额本息{elseif $deal.loantype eq 1}付息还本{elseif $deal.loantype eq 2}到期还本息{/if}
 						</div>
 					</div>
@@ -130,11 +129,11 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 							{/if}
 						</div>
 						{if $deal.loantype neq 2}
-						<div class="item f_l">
+						<div class="item f_l" style="padding-left:200px;">
 							提前还款费率：<span class="f_red">{function name="app_conf" v="COMPENSATE_FEE"}%</span>
 						</div>
 						{/if}
-						<div class="item f_l">
+						<div class="item f_l" style="padding-left:100px;">
 							担保范围： {if $deal.warrant eq 1}本金{elseif $deal.warrant eq 2}本金及利息{else}无{/if}</div>
 					</div>
 					<div class="items clearfix  pt5 pb5">
