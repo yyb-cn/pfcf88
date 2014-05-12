@@ -9,7 +9,7 @@ $pay_req['act'] = $_REQUEST['act'];
 $pay_req['class_name'] = "Sqepay";
 
 if ($_REQUEST['act'] == "query") {
-	print_r($_REQUEST);
+	//print_r($_REQUEST);
 	switch($_REQUEST['order'] )
 	{
 		case "0";

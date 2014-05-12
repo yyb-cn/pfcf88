@@ -46,9 +46,12 @@ class paymentModule extends SiteBaseModule
 				$GLOBALS['tmpl']->assign("payment_notice",$payment_notice);
 				if(intval($_REQUEST['check'])==1)
 				{
-					showErr($GLOBALS['lang']['PAYMENT_NOT_PAID_RENOTICE']);
+					if ($payment_info['class_name']=="Sqepay") {
+						app_redirect(url("95epay_query","",array("id"=>intval($_REQUEST['id'])))); //如果是双乾接口，去到查询订单入口,added by nix
+					}else {
+						showErr($GLOBALS['lang']['PAYMENT_NOT_PAID_RENOTICE']);
+					}
 				}
-				
 				
 				$GLOBALS['tmpl']->display("page/payment_pay.html");
 			}

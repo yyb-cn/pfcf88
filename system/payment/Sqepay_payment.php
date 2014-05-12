@@ -167,21 +167,6 @@ class Sqepay_payment implements payment {
         /*比对连接加密字符串*/
 		$md5sign = $this->getSignature_return($MerNo,$BillNo,$Amount,$Succeed,$MD5key);
 		
-		echo $md5sign;
-		echo "<br>";
-		echo $BillNo;
-				echo "<br>";
-		echo $Amount;
-				echo "<br>";
-		echo $Succeed;
-				echo "<br>";
-		echo $MD5info;
-				echo "<br>";
-		echo $Result;
-				echo "<br>";
-		
-		
-		
        if($MD5info == $md5sign && $Succeed=="88"){
 
 	        $payment_notice = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."payment_notice where id = '".$payment_notice_sn."'");
