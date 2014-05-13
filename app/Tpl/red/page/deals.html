@@ -257,11 +257,11 @@
 				{if $deal.deal_status eq 1}
             <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px; height:80px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>
             {elseif $deal.deal_status eq 2}<!--满标-->
-			<a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px"></a>
+			<a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px"></a>
             {elseif $deal.deal_status eq 4}<!--还款中-->
-            <a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_in_progress.png" alt="" width="111px" height="34px"></a>
+            <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_in_progress.png" alt="" width="111px" height="34px"></a>
             {elseif $deal.deal_status eq 5}<!--已还清-->
-            <a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_done.png" alt="" width="111px" height="34px"></a>
+            <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_done.png" alt="" width="111px" height="34px"></a>
              {/if}
 			</div>
 					{/foreach}
