@@ -567,6 +567,15 @@ class DealAction extends CommonAction{
 		}
 		
 		$data['update_time'] = get_gmtime();
+		
+		// lu 修改发标时间
+		if($_POST['c_id']){
+			$c_time=$_POST['c_year'].'-'.$_POST['c_month'].'-'.$_POST['c_day'].' '.$_POST['c_hour'].':'.$_POST['c_minute'];
+			$c_time=strtotime($c_time);
+			$data['create_time']=$c_time;
+			}
+			
+	
 		$data['publish_wait'] = 0;
 		
 		$data['start_time'] = trim($data['start_time'])==''?0:to_timespan($data['start_time']);

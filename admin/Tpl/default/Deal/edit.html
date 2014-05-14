@@ -59,15 +59,37 @@
 			}
 		});
 	});
+	$(document).ready(function(){
+  $("#DEAL_BASE_INFO").click(function(){
+	  document.getElementById("create_div").style.display="none";
+	  })
+	  $("#SEO_CONFIG").click(function(){
+	  document.getElementById("create_div").style.display="none";
+	  })
+	  $("#create_time").click(function(){
+	  document.getElementById("create_div").style.display="block";
+	  })
+});
 </script>
 <div class="main">
 <div class="main_title">{$vo.name}{%EDIT} <a href="{:u("Deal/index")}" class="back_list">{%BACK_LIST}</a></div>
 <div class="blank5"></div>
 <form name="edit" action="__APP__" method="post" enctype="multipart/form-data">
 <div class="button_row">
-	<input type="button" class="button conf_btn" rel="1" value="{%DEAL_BASE_INFO}" />&nbsp;
-	<input type="button" class="button conf_btn" rel="2" value="{%SEO_CONFIG}" />&nbsp;	
+	<input type="button" class="button conf_btn" rel="1" value="{%DEAL_BASE_INFO}" id="DEAL_BASE_INFO" />&nbsp;
+	<input type="button" class="button conf_btn" rel="2" value="{%SEO_CONFIG}" id="SEO_CONFIG" />&nbsp;	
+   <!-- lu 修改发标时间-->
+    <input type="button" class="button conf_btn" rel="3" value="修改发标时间" id="create_time" />&nbsp;	
 
+</div>
+<!--lu 修改发标时间 -->
+<div style="display:none;" id="create_div">
+<input type="hidden" name="c_id"   value="{$vo.id}"  />
+<input type="text" name="c_year"  size="8" value=""  />年
+<input type="text" name="c_month" size="4" value=""  />月
+<input type="text" name="c_day" size="4" value=""  />日
+<input type="text" name="c_hour" size="4" value=""  />时
+<input type="text" name="c_minute" size="4" value=""  />分
 </div>
 <div class="blank5"></div>
 <table class="form conf_tab" cellpadding=0 cellspacing=0 rel="1">
