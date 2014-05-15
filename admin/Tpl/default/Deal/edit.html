@@ -66,7 +66,7 @@
 	  $("#SEO_CONFIG").click(function(){
 	  document.getElementById("create_div").style.display="none";
 	  })
-	  $("#create_time").click(function(){
+	  $("#c_create_time").click(function(){
 	  document.getElementById("create_div").style.display="block";
 	  })
 });
@@ -79,17 +79,25 @@
 	<input type="button" class="button conf_btn" rel="1" value="{%DEAL_BASE_INFO}" id="DEAL_BASE_INFO" />&nbsp;
 	<input type="button" class="button conf_btn" rel="2" value="{%SEO_CONFIG}" id="SEO_CONFIG" />&nbsp;	
    <!-- lu 修改发标时间-->
-    <input type="button" class="button conf_btn" rel="3" value="修改发标时间" id="create_time" />&nbsp;	
+    <input type="button" class="button conf_btn" rel="3" value="修改发标时间" id="c_create_time" />&nbsp;	
 
 </div>
 <!--lu 修改发标时间 -->
 <div style="display:none;" id="create_div">
-<input type="hidden" name="c_id"   value="{$vo.id}"  />
+<!--<input type="hidden" name="c_id"   value="{$vo.id}"  />
 <input type="text" name="c_year"  size="8" value=""  />年
 <input type="text" name="c_month" size="4" value=""  />月
 <input type="text" name="c_day" size="4" value=""  />日
 <input type="text" name="c_hour" size="4" value=""  />时
-<input type="text" name="c_minute" size="4" value=""  />分
+<input type="text" name="c_minute" size="4" value=""  />分-->
+<tr id="start_time_box" <if condition="$vo['deal_status'] neq 1">style="display:none"</if>>
+		<td class="item_title">修改发标时间:</td>
+		<td class="item_input">
+			<input type="text" class="textbox <if condition="$vo['deal_status'] eq 1">require</if>" name="create_time" value="{$vo.create_time}" id="create_time"  onfocus="this.blur(); return showCalendar('create_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_create_time');" />
+			<input type="button" class="button" id="btn_create_time" value="{%SELECT_TIME}" onclick="return showCalendar('create_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_create_time');" />
+			<input type="button" class="button" value="{%CLEAR_TIME}" onclick="$('#create_time').val('');" />		
+		</td>
+	</tr>
 </div>
 <div class="blank5"></div>
 <table class="form conf_tab" cellpadding=0 cellspacing=0 rel="1">

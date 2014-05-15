@@ -512,6 +512,9 @@ class DealAction extends CommonAction{
 		$condition['id'] = $id;		
 		$vo = M(MODULE_NAME)->where($condition)->find();
 		
+		//lu  显示发标时间
+		$vo['create_time'] = date("Y-m-d H:i:s",$vo['create_time']);
+		
 		$vo['start_time'] = $vo['start_time']!=0?to_date($vo['start_time']):'';
 		$vo['bad_time'] = $vo['bad_time']!=0?to_date($vo['bad_time']):'';
 		
@@ -568,13 +571,11 @@ class DealAction extends CommonAction{
 		
 		$data['update_time'] = get_gmtime();
 		
-		// lu 修改发标时间
-		if($_POST['c_id']){
-			$c_time=$_POST['c_year'].'-'.$_POST['c_month'].'-'.$_POST['c_day'].' '.$_POST['c_hour'].':'.$_POST['c_minute'];
-			$c_time=strtotime($c_time);
-			$data['create_time']=$c_time;
-			}
-			
+		//lu 修改发标时间
+		if($_POST['create_time']){
+			$create_time=date("Y-m-d",strtotime($_POST['create_time'])).' '.'09:00:00';
+			$data['create_time']=strtotime($create_time);
+			}	
 	
 		$data['publish_wait'] = 0;
 		

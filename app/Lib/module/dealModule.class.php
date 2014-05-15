@@ -370,23 +370,42 @@ class dealModule extends SiteBaseModule
 	
 	//lu 设置批量投资金额
 	function bid_more(){
-        //  获取最大 最小 id
-		$user_id = $GLOBALS['db']->getAll("select MAX(id) as d_id,MIN(id) as x_id from ".DB_PREFIX."user ");
-		$d_id=$user_id[0]['d_id']-12;
-		$x_id=$user_id[0]['x_id'];
-		$get_id=mt_rand($x_id,$d_id);
-		// 随机 获取10 个有效用户
-		$user_a=$GLOBALS['db']->getAll("select user_name,id from ".DB_PREFIX."user where is_delete=0 and id>= ".$get_id." limit 10 ");
-		foreach($user_a as $kg=>$vg){
-			$user_arr[$kg]['user_name']=$vg['user_name'];
-			$user_arr[$kg]['id']=$vg['id'];
-			}
+		
 		// 获取 正在投资中借款列表    publish_wait =0 AND deal_status=1    load_money
 		$deal_arr = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal where publish_wait =0 AND deal_status=1 AND  load_money=0 ");
-
-		//print_r($user_arr);exit;
+        foreach($deal_arr as $kdeal=>$vdeal){
+			 $user_id[]=$vdeal['user_id'];
+			}
 		
-		$GLOBALS['tmpl']->assign("user_arr",$user_arr);
+		//print_r($user_id);exit;
+		
+        //  获取最大 最小 id
+		/*$user_id = $GLOBALS['db']->getAll("select MAX(id) as d_id,MIN(id) as x_id from ".DB_PREFIX."user ");
+		$d_id=$user_id[0]['d_id']-14;
+		$x_id=$user_id[0]['x_id'];
+		$random_id=mt_rand($x_id,$d_id);*/
+		
+		// 随机 获取10 个有效用户   shuffle()
+		//$user_a=$GLOBALS['db']->getAll("select user_name,id from ".DB_PREFIX."user where is_delete=0 and id>= ".$random_id." and id!=45   limit 10 ");
+		
+		$user_a=$GLOBALS['db']->getAll("select user_name,id from ".DB_PREFIX."user where is_delete=0 order by id asc   limit 100 ");
+		// 过滤发标用户 
+		foreach($user_a as $kg=>$vg){
+			if(!in_array($vg['id'],$user_id)){
+				$user_arr[$kg]['user_name']=$vg['user_name'];
+			    $user_arr[$kg]['id']=$vg['id'];
+				}
+			}
+			// 数组元素随机排序	
+		 	shuffle($user_arr);
+			// 获取数组10个 元素
+			for($i=0;$i<=9;$i++){
+				 $user_array[]=$user_arr[$i];
+				}
+	 		
+
+		
+		$GLOBALS['tmpl']->assign("user_arr",$user_array);
 		$GLOBALS['tmpl']->assign("deal_arr",$deal_arr);
 		$GLOBALS['tmpl']->display("page/deal_bid_more.html");
 		} 
