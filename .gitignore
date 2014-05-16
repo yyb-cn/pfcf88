@@ -1,3 +1,4 @@
 public/runtime
 public/attachment
 public/db_config.php
+public/sys_config.php

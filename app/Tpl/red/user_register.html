@@ -117,6 +117,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 									<div class="field mobile pr">
 										<label for="signup-mobile">{$LANG.REFERRALS_NAME}</label>
 										<input type="text" value="" class="f-input ipttxt" id="referral" name="referral" size="30">
+                                        <input type="hidden" value=""  id="referral_status" >
 										<span class="f-input-tip"></span> 
 										<span class="hint">已存在的用户才可以成为推荐人</span>
 									</div>			
@@ -176,7 +177,8 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 
 $(document).ready(function(){
 
-	$("#signup-submit").click(function(){
+	$("#signup-submit").click(function(){			
+		
 		if($.trim($("#signup-email-address").val()).length == 0)
 		{
 			$("#signup-email-address").focus();
@@ -248,8 +250,12 @@ $(document).ready(function(){
 			}
 			{/if}
 		{/foreach}
+		if($("#referral_status").val()==1)
+		{
+			$.showErr("推荐人不存在");
+			return false;
+			}
 
-		
 	});
 	
 	
@@ -391,6 +397,36 @@ $(document).ready(function(){
 		});	
 	}); //手机验证
 	
+	//lu 判断推荐人
+	
+	$("#referral").bind("blur",function(){
+		
+		var ajaxurl = APP_ROOT+"/index.php?ctl=ajax&act=check_field";
+		var query = new Object();
+		query.field_name = "user_name";
+		query.field_data = $.trim($(this).val());
+		$.ajax({ 
+			url: ajaxurl,
+			data:query,
+			type: "POST",
+			dataType: "json",
+			success: function(data){
+				//status==1 没有该推荐人
+				if(data.status==0)
+				{
+					formSuccess($("#referral"),"可用推荐人");
+					$("#referral_status").val(data.status);
+					return false;
+				}
+				else
+				{					
+					formError($("#referral"),"推荐人不存在");
+					$("#referral_status").val(data.status);
+					return false;
+				}
+			}
+		});	
+	});
 	
 	
 	{foreach from=$field_list item=field_item}

@@ -61,16 +61,21 @@ class userModule extends SiteBaseModule
 			showErr($GLOBALS['lang']['USER_PWD_ERROR']);
 		}
 
-		//lu 推荐人
-		if($_POST['referral']){
-			$user_pid=$GLOBALS['db']->getOne("select `id` from ".DB_PREFIX."user where `user_name` = '".$_POST['referral']."' ");
-			if($user_pid>0&&!empty($user_pid)){
-				$user_data['pid']=$user_pid;
-				}
-				else{
-					showErr("推荐人不存在");
+		//lu 推荐人验证与赋值
+		// 判断是否ajax 提交
+	
+			if($_POST['referral']){
+				$user_pid=$GLOBALS['db']->getOne("select `id` from ".DB_PREFIX."user where `user_name` = '".$_POST['referral']."' ");
+				if($user_pid>0&&!empty($user_pid)){
+					$user_data['pid']=$user_pid;
 					}
-			}
+					else{
+						showErr("推荐人不存在");
+						
+						}
+				}
+		
+			
 		
 		$res = save_user($user_data);
 	
