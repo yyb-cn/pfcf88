@@ -5,7 +5,7 @@ return array(
 'AUTH_KEY'=>'fanwe',
 'TIME_ZONE'=>'8',
 'ADMIN_LOG'=>'1',
-'DB_VERSION'=>'2.51',
+'DB_VERSION'=>'2.7',
 'DB_VOL_MAXSIZE'=>'8000000',
 'WATER_MARK'=>'',
 'CURRENCY_UNIT'=>'￥',
@@ -26,10 +26,10 @@ return array(
 'USER_VERIFY'=>'1',
 'SHOP_LOGO'=>'',
 'SHOP_LANG'=>'zh-cn',
-'SHOP_TITLE'=>'方维p2p信贷',
-'SHOP_KEYWORD'=>'方维p2p信贷',
-'SHOP_DESCRIPTION'=>'p2p信贷—最大、最安全的网络借贷平台',
-'SHOP_TEL'=>'88888888',
+'SHOP_TITLE'=>'完美财富理财团购平台',
+'SHOP_KEYWORD'=>'完美财富、理财团购、理财产品拼单',
+'SHOP_DESCRIPTION'=>'完美财富、理财团购、理财产品拼单',
+'SHOP_TEL'=>'400-853-8880',
 'INVITE_REFERRALS'=>'0',
 'INVITE_REFERRALS_TYPE'=>'0',
 'ONLINE_MSN'=>'',
@@ -39,15 +39,14 @@ return array(
 'PAGE_SIZE'=>'10',
 'HELP_CATE_LIMIT'=>'4',
 'HELP_ITEM_LIMIT'=>'4',
-'SHOP_FOOTER'=>'<div style=\"text-align:right;\">联系我们：info@fanwe.com &nbsp; 福州方维</div>
-<div style=\"text-align:right;\">© 2013 p2p信贷 All rights reserved</div>',
-'CUSTOM_SERVICE'=>'44,48,',
-'SMS_SEND_REPAY'=>'1',
+'SHOP_FOOTER'=>'深圳浦发财富管理有限公司',
+'CUSTOM_SERVICE'=>'',
+'SMS_SEND_REPAY'=>'0',
 'USER_MESSAGE_AUTO_EFFECT'=>'1',
 'MAIL_SEND_PAYMENT'=>'1',
 'SMS_SEND_PAYMENT'=>'0',
-'REPLY_ADDRESS'=>'info@fanwe.com',
-'MAIL_ON'=>'0',
+'REPLY_ADDRESS'=>'kefu@pfcf.cn',
+'MAIL_ON'=>'1',
 'SMS_ON'=>'1',
 'BATCH_PAGE_SIZE'=>'500',
 'PUBLIC_DOMAIN_ROOT'=>'',
@@ -61,7 +60,7 @@ return array(
 'GZIP_ON'=>'0',
 'INTEGRATE_CODE'=>'',
 'INTEGRATE_CFG'=>'',
-'SHOP_SEO_TITLE'=>'方维p2p信贷',
+'SHOP_SEO_TITLE'=>'完美财富理财团购平台_深圳浦发财富管理有限公司',
 'IDCARDPASSED_POINT'=>'10',
 'CACHE_ON'=>'1',
 'EXPIRED_TIME'=>'0',
@@ -73,22 +72,22 @@ return array(
 'MEMCACHE_HOST'=>'127.0.0.1:11211',
 'IMAGE_USERNAME'=>'',
 'IMAGE_PASSWORD'=>'',
-'MOBILE_MUST'=>'1',
+'MOBILE_MUST'=>'0',
 'ATTR_SELECT'=>'0',
-'ICP_LICENSE'=>'',
-'COUNT_CODE'=>'',
+'ICP_LICENSE'=>'粤ICP备14022713号-1',
+'COUNT_CODE'=>'<script type=\"text/javascript\">var cnzz_protocol = ((\"https:\" == document.location.protocol) ? \" https://\" : \" http://\");document.write(unescape(\"%3Cspan id=\'cnzz_stat_icon_1000382957\'%3E%3C/span%3E%3Cscript src=\'\" + cnzz_protocol + \"v1.cnzz.com/z_stat.php%3Fid%3D1000382957%26show%3Dpic1\' type=\'text/javascript\'%3E%3C/script%3E\"));</script>',
 'DEAL_MSG_LOCK'=>'0',
-'PROMOTE_MSG_LOCK'=>'1',
+'PROMOTE_MSG_LOCK'=>'0',
 'SEND_SPAN'=>'2',
-'EDM_ON'=>'1',
+'EDM_ON'=>'0',
 'EDM_USERNAME'=>'',
 'EDM_PASSWORD'=>'',
-'SHOP_SEARCH_KEYWORD'=>'贷款,借贷，网贷',
+'SHOP_SEARCH_KEYWORD'=>'完美财富、理财团购、理财产品拼单',
 'INDEX_NOTICE_COUNT'=>'5',
 'TMPL_CACHE_ON'=>'1',
 'INCOMEPASSED_POINT'=>'10',
 'WORKPASSED_POINT'=>'10',
-'DOMAIN_ROOT'=>'',
+'DOMAIN_ROOT'=>'pfcf88.com',
 'MAIN_APP'=>'shop',
 'VERIFY_IMAGE'=>'0',
 'APNS_MSG_LOCK'=>'1',
@@ -104,14 +103,14 @@ return array(
 'MOBILETRUEPASSED_POINT'=>'10',
 'RESIDENCEPASSED_POINT'=>'2',
 'COOKIE_PATH'=>'/',
-'COMPANY'=>'福建p2p信贷金融信息服务有限公司',
-'COMPANY_ADDRESS'=>'福州台江区',
-'COMPANY_REG_ADDRESS'=>'福州市',
-'MANAGE_FEE'=>'0.3',
-'MANAGE_IMPOSE_FEE_DAY1'=>'0.1',
-'MANAGE_IMPOSE_FEE_DAY2'=>'0.5',
-'IMPOSE_FEE_DAY1'=>'0.05',
-'IMPOSE_FEE_DAY2'=>'0.1',
+'COMPANY'=>'深圳浦发财富管理有限公司',
+'COMPANY_ADDRESS'=>'',
+'COMPANY_REG_ADDRESS'=>'',
+'MANAGE_FEE'=>'0',
+'MANAGE_IMPOSE_FEE_DAY1'=>'0',
+'MANAGE_IMPOSE_FEE_DAY2'=>'0',
+'IMPOSE_FEE_DAY1'=>'0',
+'IMPOSE_FEE_DAY2'=>'0',
 'COMPENSATE_FEE'=>'1.0',
 'IMPOSE_POINT'=>'-1',
 'YZ_IMPOSE_POINT'=>'-30',
@@ -191,7 +190,7 @@ return array(
 <table border=\"1\" style=\"margin: 0px auto; border-collapse: collapse; border: 1px solid rgb(0, 0, 0); width: 70%; \">
 	<tr>
 		<td width=\"20%\" style=\"padding-left:10px\"> 借款详细用途</td>
-		<td style=\"padding-left:10px\"> 短期周转</td>
+		<td style=\"padding-left:10px\"> {$deal.type_info.name}</td>
 	</tr>
 	<tr>
 		<td style=\"padding-left:10px\">借款本金数额</td>
@@ -517,7 +516,7 @@ return array(
 <table border=\"1\" style=\"margin: 0px auto; border-collapse: collapse; border: 1px solid rgb(0, 0, 0); width: 70%; \">
 	<tr>
 		<td width=\"20%\" style=\"padding-left:10px\"> 借款详细用途</td>
-		<td style=\"padding-left:10px\"> 短期周转</td>
+		<td style=\"padding-left:10px\"> {$deal.type_info.name}</td>
 	</tr>
 	<tr>
 		<td style=\"padding-left:10px\">借款本金数额</td>
@@ -784,7 +783,7 @@ return array(
 		{function name=\"to_date\" v=\"$deal.repay_start_time\" f=\"Y年m月d日\"}
 	</p>
 </div>',
-'MAIL_SEND_CONTRACT_ON'=>'1',
+'MAIL_SEND_CONTRACT_ON'=>'0',
 'DEAL_BID_MULTIPLE'=>'0',
 );
  ?>

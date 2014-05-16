@@ -1,2 +1,0 @@
-<?php if (!defined('THINK_PATH')) exit();?><?php if($list): ?>有未处理的用户预订等待处理,<a href="<?php echo u("SupplierLocationOrder/index",array("status"=>0));?>" target="main">去处理</a>!
-	<embed src="__TMPL__Common/images/system.mp3" width=0 height=0 type=audio/mpeg loop="1" autostart="true"><?php endif; ?>
