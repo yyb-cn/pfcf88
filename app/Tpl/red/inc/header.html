@@ -33,7 +33,6 @@ $this->_var['cpagejs'][] = $this->_var['TMPL_REAL']."/js/msg_sender.js";
 $this->_var['pagecss'][] = $this->_var['TMPL_REAL']."/css/main.css";
 ?>
 <link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$pagecss"}" />
-
 <script type="text/javascript">
 var APP_ROOT = '{$APP_ROOT}';;
 var LOADER_IMG = '{$TMPL}/images/lazy_loading.gif';
@@ -44,9 +43,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 </script>
 <script type="text/javascript" src="{$APP_ROOT}/public/runtime/app/lang.js"></script>
 <script type="text/javascript" src="{function name="parse_script" v="$pagejs" c="$cpagejs"}"></script>
-
 </head>
-
 <body>
 {if $vote}
 <a id="vote" href="{url x="index" r="vote"}" target="_blank"></a>
@@ -71,13 +68,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 			</div>
             <div class="hd-tel"></div>		
 		</div><!--end wrap-->
-		
 	</div>
-
-
-
-
-
 </div>
 	<div  class="headf">
 	<div  class="head_main">
@@ -94,10 +85,8 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 				</ul>
             {/if}
             </li>
-            
            {/foreach}
 		</ul>
 	</div>
 </div>
-
 <div class="wrap">
