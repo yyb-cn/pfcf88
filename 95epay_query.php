@@ -67,7 +67,7 @@ if ($_REQUEST['order']=="1" && $_REQUEST['succeed']=="success") {
 		//$MerUrl 			= "http://www.pfcf88.com/95epay_callback.php?act=userquery";
 		$MerUrl 			= "http://www.pfcf88.com/95epay_query.php";
 		$MD5Info 			= getSignature($MerNo, $BillNo, $MerUrl, $MD5key);
-		print $MD5Info;
+		//print $MD5Info;
 		
 		$post_data = array();  
 		$post_data['MerNo']  = $MerNo;  
