@@ -98,7 +98,7 @@ function getSignature($MerNo, $BillNo, $MerUrl, $MD5key){
        $sign_str .= sprintf("%s=%s&", $key, $val);                
                 
    }
-   print $sign_str;print '<br/><br/><br/>';
+   //print $sign_str;print '<br/><br/><br/>';
    return strtoupper(md5($sign_str.strtoupper(md5($MD5key))));   
 
 	
