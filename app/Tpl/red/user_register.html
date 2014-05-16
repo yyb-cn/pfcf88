@@ -112,9 +112,18 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 										<span class="hint"> {$LANG.USER_TITLE_MOBILE_TIP}</span>
 									</div>			
 									<div class="blank1"></div>
+                                    <!--推荐人-->
+                                    <div class="blank1"></div>
+									<div class="field mobile pr">
+										<label for="signup-mobile">{$LANG.REFERRALS_NAME}</label>
+										<input type="text" value="" class="f-input ipttxt" id="referral" name="referral" size="30">
+										<span class="f-input-tip"></span> 
+										<span class="hint">已存在的用户才可以成为推荐人</span>
+									</div>			
+									<div class="blank1"></div>
 									
 									
-									{foreach from=$field_list item=field_item}
+									<!--{foreach from=$field_list item=field_item}
 									<div class="field">
 										<label id="{$field_item.field_name}_label">{$field_item.field_show_name}</label>
 										{if $field_item.input_type eq 0}
@@ -131,7 +140,8 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 										<span class="f-input-tip"></span> 
 									</div>
 									<div class="blank1"></div>
-									{/foreach}
+									{/foreach}-->
+                                    
 									{if app_conf("VERIFY_IMAGE") eq 1}
 									<div class="field autologin">
 										<div class="verify_row">								

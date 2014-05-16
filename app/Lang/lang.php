@@ -1103,5 +1103,7 @@ return array(
 	'APPLY_BORROW' =>'申请贷款', 
 	'APPLY_AMOUNT'=>'申请额度',
 	'UPLOAD_DATA'=>'上传资料',
+	
+	'REFERRALS_NAME'=>'推荐人',//lu
 );
 ?>
