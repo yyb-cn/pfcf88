@@ -2,70 +2,291 @@
 	<div class="blank"></div>
 	<div class="deals-search-box clearfix">
 		{if $deal_cate_list}
-		<div id="dashboard" class="dashboard clearfix f_l">
+		<!--<div id="dashboard" class="dashboard clearfix f_l">
 			<ul>
 				<li {if $cate_id eq '0'}class="current"{/if}>
 					<a href="{url x="index" r="deals"}">{$LANG.ALL_DEALS}</a>
 				</li>
-<!--				{foreach from=$deal_cate_list item=cate key=key}
+				{foreach from=$deal_cate_list item=cate key=key}
 				{if $key < 8}
 				<li {if $cate.current eq 1}class="current"{/if}>
 					<a href="{url x="index" r="deals" p="cid=$cate.id"}">{$cate.name}</a>
 				</li>
 				{/if}
-				{/foreach}-->
+				{/foreach}
 				<li {if $cate_id eq '-1'}class="current"{/if}>
-					<a href="{url x="index" r="deals" p="cid=last"}" style="margin-right:0">{$LANG.LAST_SUCCESS_DEALS}</a>
+					<a href="{url x="index" r="deals" p="cid=last"}" style="margin-right:0" id="lastdeal">{$LANG.LAST_SUCCESS_DEALS}</a>
 				</li>												
 			</ul>
-		</div>
+		</div>-->
 		{/if}
-		<div class="search f_r">
+		<!--<div class="search f_r" style="float:right;" >
 			<form action="{url x="index" r="deals" p="cid=$cate_id"}" method="post" id="searchByKeyForm">
 				<input type="text" name="keywords" class="f-input f_l f_dgray searchinput" id="search" value="{if $keywords}{$keywords}{else}请输入您的搜索条件{/if}" x-webkit-speech="" x-webkit-grammar="builtin:translate">
 				<input type="button" value="查询" onclick="searchLoans()" class="mr5 f_r searchbtnew">
 			</form>
-		</div>
+		</div>-->
 	</div>
 	<div class="blank10"></div>
 
 <!--条件搜索开始-->  
-<!--    
+
 <link  rel="stylesheet"  href="{$TMPL}/css/deals.css">
 <script  type="text/javascript"  src="{$TMPL}/js/deals.js"></script>
 
-    <div class="deals_ss">
-<div  class="list-left-navigation m-border fn-bb kf-mb20">
-<div  class="main-title kf-mt10 fn-clear">
+<div class="deals_css">
+			<div >
+					
+					<ul  class="condition" >
+                    <li class="li_f">投资利率：</li>
+					<li><a  href="javascript:;" class="li_current"     name="rate" value=0 type=1>全部</a></li>
+					<li><a  href="javascript:;"    name="rate" value=7.5 type=1>7.5%以上</a></li>
+					<li><a  href="javascript:;"    name="rate" value=9 type=1>9%以上</a></li>
+					<li><a  href="javascript:;"   name="rate" value=12 type=1>12%以上</a></li>
 
-</div>
-<div  class="navigation-item kf-mb10 kf-mt10">
-<div  class="navigation-title fn-left">
-<span  class="kf-ml15" style="margin:0 0 0 15px; text-align:right;">投资利率：</span>
-</div>
-<ul  class="navigation-pro fn-clear"  id="pro-money-select">
-<li><a  href="javascript:;"  data-max=""  class="mcur">全部</a></li>
-<li><a  href="javascript:;"  data-max="5"  class="" >6%以上</a></li>
-<li><a  href="javascript:;"  data-min="5">9%以上</a></li>
-<li><a  href="javascript:;"  data-min="5">12%以上</a></li>
+					</ul>
+					
+					<ul  class="condition">
+                    <li   class="li_f">投资期限：</li>
+					<li><a  href="javascript:;"  class="li_current"  class="tcur"  value="2147483647"  name="repay_time" type=1>全部</a></li>
+					<li><a  href="javascript:;"  data-max="12" value=3  name="repay_time" type=1>3个月以下</a></li>
+					<li><a  href="javascript:;"  data-min="12" value=6  name="repay_time" type=1>6个月以下</a></li>
+					<li><a  href="javascript:;"  data-min="12" value=9 name="repay_time" type=1>9个月以下</a></li>
+					<li><a  href="javascript:;"  data-min="12" value=12  name="repay_time" type=1>12个月以下</a></li>
+					</ul>
+			</div>
+		
+		<script type="text/javascript">
+		
+				//把数字转换成千分位
+			function commafy(num) {   
+		//1.先去除空格,判断是否空值和非数   
+		num = num + "";   
+		num = num.replace(/[ ]/g, ""); //去除空格  
+			if (num == "") {   
+			return;   
+			}   
+			if (isNaN(num)){  
+			return;   
+			}   
+			//2.针对是否有小数点，分情况处理   
+			var index = num.indexOf(".");   
+			if (index==-1) {//无小数点   
+			  var reg = /(-?\d+)(\d{3})/;   
+				while (reg.test(num)) {   
+				num = num.replace(reg, "$1,$2")   
+				}   
+				
+			} else {   
+				var intPart = num.substring(0, index);   
+				var pointPart = num.substring(index + 1, num.length);   
+				var reg = /(-?\d+)(\d{3})/;   
+				while (reg.test(intPart)) {   
+				intPart = intPart.replace(reg, "$1,$2");   
+				}   
+			   num = intPart +"."+ pointPart;   
+			}   
+		return '￥'+num;   
+		} 
+		//字符串拼接
+	function get_l(data)
+	{
+		var length=data.length
+			var	l=''
+				 for(var i=0; i<length; i++)  
+							  {  
+								l+='<div class="item'  
+								if(i!=0)
+								{
+									l+='  item_1'
+									}
+								l+='  tc"><div class="clearfix" style="padding-top:8px;"><div class="pt10"><div class="f_l tl w170">'
+						l+='<div class="b">';
+						l+='<a href="'+data[i].url+'" '
+						l+='target="_blank" id="deal_my_name">';
+						l+=data[i].name +'</a></div>'
+						l+='<div class="f_gray" style="display:none">单位类别：'+data[i].type_match_row+'</div>'
+						l+=' </div>'
+						l+='<div class="f_l w70" style="display:none">'+ data[i].type_match_row+'</div>'
+			            l+= '<div class="f_l f_red w90">'
+			            l+=' <div>'+  commafy(data[i].borrow_amount)+' </div> </div>  '  //注意使用了函数
+			            l+='<div class="f_l w80"><div>'+data[i].rate+'% </div> </div>'      //注意使用了函数//利率        
+			            l+=' <div class="f_l w80"> <div> <span class="f_red">'+data[i].repay_time+'</span>';
+							if(data[i].repay_time_type==0){l+='天'}
+							else{l+='个月'}
+						l+='</div>'
+						l+='</div>'
+						l+= '<div class="f_l w125">'
+			                if(data[i].deal_status== 4)
+							  	{
+								 l+='<span class="f_red">还款中</span>'}
+								else if (data[i].deal_status==1 && data[i].remain_time<=0)
+								 	{l+='<span class="f_red"> 流标</span>'}
+							else{
+			                      l+='<div class="greenProcessBar progressBar prmar">'
+			                      l+='<p>'
+								  if (data[i].deal_status==0){l+='等待材料'}
+								  else{l+=Math.round(data[i].progress_point)+'%'}//用了函数
+								  l+='</p>'
+			                      l+='<div class="p"><div class="c f_l clearfix" style="width:'
+								  l+=data[i].progress_point+'%;">'  //注意使用了函数
+								  
+								  l+='</div></div>'
+			                      l+='</div>'
+			                     l+=' <div class="f_dgray f12"><div>'+data[i].remain_time_format+'</div> </div>'
+								}
+			                  l+='</div>'  
+							  l+='</div> '
+			              l+='</div>'
+			        l+='</div>'
+					l+='<div style="float:right; width:96px; height:36px;">'
+						if(data[i].deal_status==1){
+						l+='<a style="background:none; border:none; padding:0px" href="'+data[i].url+'" class="btn-orange"><img style=" width:80px; height:80px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>'	//满标
+							}
+						
+					 else if(data[i].deal_status==2){
+						l+='<a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px"></a>'//还款中
+						}
+						
+					else if(data[i].deal_status==4){
+						
+						l+='<a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_in_progress.png" alt="" width="111px" height="34px"></a>'
+						}	
+				else if(data[i].deal_status==5){
+						l+=' <a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_done.png" alt="" width="111px" height="34px"></a>'
+						}
+						l+='</div>'
+				 } // 循环结束
+		return l;
+		}	
+		
 
-</ul>
-</div>
-<div  class="navigation-item kf-mb10"><div  class="navigation-title fn-left">
-<span  class="kf-ml15">投资期限：</span>
-</div>
-<ul  class="navigation-pro fn-clear"  id="pro-time-select">
-<li><a  href="javascript:;"  data-max=""  class="tcur">全部</a></li>
-<li><a  href="javascript:;"  data-max="12">3个月</a></li>
-<li><a  href="javascript:;"  data-min="12">6个月</a></li>
-<li><a  href="javascript:;"  data-min="12">9个月</a></li>
-<li><a  href="javascript:;"  data-min="12">12个月</a></li>
-</ul>
-</div>
-
-</div>
-
-<script  type="text/javascript">
+		$(document).ready(function(){ 
+		
+		//无刷新多条件筛选
+				$(".condition li a").live('click',function(){
+					
+					$(this).parent().siblings().children().removeClass("li_current")
+					$(this).addClass("li_current")
+					
+					$.ajax({
+					type:"POST",
+					url: "index.php?ctl=deals",
+					dataType:'json',//从php返回的值以 JSON方式 解释
+					data:{
+						value:$(this).attr("value"),
+						name:$(this).attr("name"),
+						type:$(this).attr("type")
+						},
+					success: function(data){
+						
+						//alert(data)
+						var l=get_l(data['result'])
+		
+					
+					 $("#J_biao_list").html(l);
+					 $("#pages").html(data['page']);
+						}
+				});
+				return false;
+			})
+	//无刷新排序	
+		$(".myselect").click(function(){
+					//alert($(this).attr("check"))
+					if($(this).attr("check")=="asc")
+					{
+						$(this).attr("check","desc")
+						}
+					else($(this).attr("check","asc"))
+						//alert($(this).attr("check"))
+					$.ajax({
+					type:"POST",
+					url: "index.php?ctl=deals",
+					dataType:'json',//从php返回的值以 JSON方式 解释
+					data:{
+						name:$(this).attr("name"),
+						type:$(this).attr("type"),
+						check:$(this).attr("check")
+						},
+					success: function(data){
+					
+					//alert(data['page'])
+					var l=get_l(data['result']);
+					 $("#J_biao_list").html(l);
+					
+						}
+				});
+				return false;
+					
+			})	
+			
+			
+	//无刷新分页		
+		$("#pages a").live('click',function(){
+			
+			//alert($(this).attr('href'))
+			$.ajax({
+					type:"GET",
+					url: $(this).attr('href'),
+					dataType:'json',//从php返回的值以 JSON方式 解释
+					//data:{a:"1"},
+					/*beforeSend:function(){
+					    $("#J_biao_list").text("请稍等!");
+	           		 },*/
+					success: function(data){
+					
+					var l=get_l(data['result'])
+		
+					 $("#J_biao_list").html(l);
+					 $("#pages").html(data['page']);
+					
+						}
+			
+				})
+			return false;
+			
+			
+			})	
+	//最近理财产品
+		$("#lastdeal").live('click',function(){
+			
+			//$this
+			 //隐藏掉筛选条件()
+			 
+			 //选中样式
+			 $(this).parent().siblings().attr("class","")
+			 $(this).parent().attr("class","current")
+			$.ajax({
+					type:"GET",
+					url: $(this).attr('href'),
+					dataType:'json',//从php返回的值以 JSON方式 解释
+					//data:{a:"1"},
+					/*beforeSend:function(){
+					    $("#J_biao_list").text("请稍等!");
+	           		 },*/
+					success: function(data){
+					
+					var l=get_l(data['result'])
+		
+					 $("#J_biao_list").html(l);
+					 $("#pages").html(data['page']);
+					
+						}
+			
+				})
+			
+			return false
+			
+			
+			
+			
+			})	
+			
+			
+			
+			})
+		</script>
+<!-- <script  type="text/javascript">
     $(function(){
         getlist(1);
         $(".isnor").live('click',function(){
@@ -155,9 +376,9 @@
         sticky(".sticky", 20);
 
     });
-</script>
-    </div>-->
-<!--条件搜索结束-->
+</script>-->
+
+   </div>
   
   
   
@@ -185,20 +406,20 @@
 				{else}
 				<div class="f_dgray b tc" style="height:40px;line-height:40px; padding-left:20px;">
 			          <div class="f_l tl w170"> 标题  / 借款人 </div>
-
+					
 			          <div class="f_l w90">
-			             <a href="#" onclick="set_sort('borrow_amount');">金额</a>
+			             <a  href="javascript:;"  class="myselect" name="borrow_amount" type=2 check="asc" >金额</a>
 			          </div> 
 			          <div class="f_l w80">
-			          	<a href="#" onclick="set_sort('rate');">利率</a>
+			          	<a href="javascript:;"  class="myselect" name="rate" type=2 check="asc">利率</a>
 			          </div>
 			          <div class="f_l w80">
-			             <a href="#" onclick="set_sort('repay_time');">期限</a>
+			             <a href="javascript:;"  class="myselect" name="repay_time" type=2 check="asc">期限</a>
 			          </div>
 			          <div class="f_l w125">
-			              <a href="#" onclick="set_sort('progress_point');">进度</a>
+			              <a  href="javascript:;"  class="myselect" name="progress_point" type=2 check="asc">进度</a>
 			              /
-			              <a href="#" onclick="set_sort('remain_time');">剩余时间</a>
+			              <a href="javascript:;" class="myselect" name="remain_time" type=2 check="asc">剩余时间</a>
 			          </div>
 			     </div>
                  
@@ -211,7 +432,7 @@
 			                  <div class="pt10">
 			                  <div class="f_l tl w170">
 									<div class="b">
-									<a href="{$deal.url}" target="_blank">{$deal.color_name}</a>
+									<a href="{$deal.url}" target="_blank" id="deal_my_name">{$deal.color_name}</a>
 									</div>
 									<div class="f_gray" style="display:none">单位类别：{$deal.type_match_row}</div>
 			                      	
@@ -251,17 +472,18 @@
 			                      </div>
 								  {/if}
 			                  </div>
+                              
 			                 </div> 
 			              </div>
 			        </div><div style="float:right; width:96px; height:36px;">
 				{if $deal.deal_status eq 1}
             <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px; height:80px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>
             {elseif $deal.deal_status eq 2}<!--满标-->
-			<a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px"></a>
+			<a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px"></a>
             {elseif $deal.deal_status eq 4}<!--还款中-->
-            <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_in_progress.png" alt="" width="111px" height="34px"></a>
+            <a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_in_progress.png" alt="" width="111px" height="34px"></a>
             {elseif $deal.deal_status eq 5}<!--已还清-->
-            <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_done.png" alt="" width="111px" height="34px"></a>
+            <a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_done.png" alt="" width="111px" height="34px"></a>
              {/if}
 			</div>
 					{/foreach}
@@ -272,13 +494,13 @@
                 
                 
 				<div class="blank"></div>
-				<div class="pages">{$pages}</div>
+				<div class="pages" id="pages">{$pages}</div>
 				{/if}
 			</div>
 		</div>
-		<div class="short f_r">
-<!--			<adv adv_id="我要理财列表页右侧顶部广告" />
-			<div class="bddf clearfix" style="border-top:0">
+		<div class="short">
+		<adv adv_id="我要理财列表页右侧顶部广告" />
+			<!-- <div class="bddf clearfix" style="border-top:0">
 				<div class="gray_title clearfix">
 		            <div class="f_l f_dgray b">按条件搜索</div>
 		        </div>
@@ -334,8 +556,8 @@
 		                </div>
 		            </form>
 		        </div>
-			</div>-->
-			<div class="blank"></div>
+			</div> -->
+			
 			<div class="bddf clearfix" style="border-top:0">
 				<div class="gray_title clearfix">
 		            <div class="f_l f_dgray b">理财计算器</div>
