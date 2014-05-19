@@ -247,6 +247,8 @@ class userModule extends SiteBaseModule
 		{
 			$verify = md5(trim($_REQUEST['verify']));
 			$session_verify = es_session::get('verify');
+			//echo md5($_SESSION['verify']).'<br>';
+			//echo $session_verify;exit;
 			if($verify!=$session_verify)
 			{				
 				showErr($GLOBALS['lang']['VERIFY_CODE_ERROR'],$ajax,url("shop","user#login"));
