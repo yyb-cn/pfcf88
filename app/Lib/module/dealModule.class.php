@@ -401,9 +401,13 @@ class dealModule extends SiteBaseModule
 		
 	//LU 批量投资
 	function dobid_more(){
-		
-		
+
 		$id = intval($_REQUEST['deal_id']); // fabiao_time
+		
+		if($id==0||$id==''){
+			showErr("未选择投资产品");
+			
+			}
 		$deal_all = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal where id=".$id." ");
 		//判断是否为 0% 的投资产品
 		if($deal_all[0]['load_money']!=0){
