@@ -372,7 +372,7 @@ class dealModule extends SiteBaseModule
 	function bid_more(){
 		
 		// 获取 正在投资中借款列表    publish_wait =0 AND deal_status=1    load_money
-		$deal_arr = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal where publish_wait =0 AND deal_status=1 AND  load_money=0 ");
+		$deal_arr = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal where publish_wait =0 AND deal_status=1 AND is_delete=0 AND  load_money=0 ");
         foreach($deal_arr as $kdeal=>$vdeal){
 			 $user_id[]=$vdeal['user_id'];
 			}
@@ -415,10 +415,13 @@ class dealModule extends SiteBaseModule
 			showErr(sprintf($GLOBALS['lang']['DEAL_LOAN_NOT_ENOUGHT'],format_price($deal['borrow_amount'] - $deal['load_money'])));
 			return false;
 			}
-		//重组数组  去掉value=0 的提交	
+		//重组数组  去掉value=0  user_id=0 的提交	
 		$jj=0;
 		for($i=0;$i<=9;$i++){
-			if(trim($_REQUEST['bid_money'.$i])>0){
+			if($_REQUEST['user_id'.$i]==0){
+				showErr("用户id不能为0");
+				}
+			if(trim($_REQUEST['bid_money'.$i])>0&&$_REQUEST['user_id'.$i]>0){
 					$data_a[$jj]['bid_money']=$_REQUEST['bid_money'.$i];
 					$data_a[$jj]['user_id']=$_REQUEST['user_id'.$i];
 					$data_a[$jj]['user_name']=$_REQUEST['user_name'.$i];

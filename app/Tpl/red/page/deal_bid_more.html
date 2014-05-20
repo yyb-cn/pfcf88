@@ -2,9 +2,9 @@
 <div class="blank"></div>
 <form action="index.php?ctl=deal&act=dobid_more" method="post" name="BidForm_more" id="BidForm_more"> 
 	<select name="lefttime" style="width: 120px;" id="lefttime">
-		                            <option  value="0">选择投资产品</option>
+		                            <option selected="selected"  value="0">选择投资产品</option>
                                     {foreach from=$deal_arr item="item" key=key}
-		                            <option value="{$item.borrow_amount}" id="{$item.id}" fabiao_time="{$item.create_time}" >{$item.name}</option>
+		                            <option selected="" value="{$item.borrow_amount}" id="{$item.id}" fabiao_time="{$item.create_time}" >{$item.name}</option>
                                     
                                     {/foreach}
 		                        </select>
@@ -37,14 +37,19 @@
 		</div>
         <script type='text/javascript'>
 $(document).ready(function() {
+	$("#lefttime option").each(function(){
+		$(this).attr("selected","");
+		$("#borrow_amount").val(0);
+		});
 
 // 选择投资产品
 $("#lefttime").change(function(){
 	// 先清除用户投资金额
 	$("#input_text input[type='text']").val(0);
+	var val=$("#lefttime").find("option:selected").attr('value');
+	var id=$("#lefttime").find("option:selected").attr('id');// fabiao_time
 	
-	var val=$(this).val();// fabiao_time
-	var id=$("#lefttime option[value="+val+"]").attr('id');
+	//var id=$("#lefttime option[value="+val+"]").attr('id');alert(val);
 	var fabiao_time=$("#lefttime option[value="+val+"]").attr('fabiao_time');
 	$("#borrow_amount").val(val);
 	$("#deal_id").val(id);
@@ -77,7 +82,7 @@ $("#lefttime").change(function(){
 					num=num+m;
 					}
 				}
-				alert(ni);
+				
 				if(allmoney-num>1000){
 					if(ni>=10){
 						ni=9;
@@ -102,6 +107,11 @@ $("#lefttime").change(function(){
 	})
 	//确认批量投标 判断投标资金是否大于0   
 	$("#bid_more").click(function(){	
+	var v=$("#borrow_amount").val();
+	if(v<=0){
+		alert('投资金额不能为0');return false;
+		}
+	
 	var val_arr=new Array();
 		for(i=0;i<=9;i++){
 		val_arr[i]=$("#J_BIDMONEY"+i).val();
