@@ -118,7 +118,7 @@ class dealsModule extends SiteBaseModule
 						$orderby = "$field $field_sort ,sort DESC,id DESC";
 
 					else
-						$orderby = "update_time DESC , sort DESC , id DESC";
+						$orderby = "create_time DESC , sort DESC , id DESC";
 					$total_money = $GLOBALS['db']->getOne("SELECT sum(borrow_amount) FROM ".DB_PREFIX."deal WHERE deal_status in(2,4) ");
 				}
 				elseif ($cate_id == "-1"){//最近产品
