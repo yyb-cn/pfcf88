@@ -116,6 +116,7 @@ class dealsModule extends SiteBaseModule
 					$field_sort = es_cookie::get("shop_sort_type"); 
 					if($field && $field_sort)
 						$orderby = "$field $field_sort ,sort DESC,id DESC";
+
 					else
 						$orderby = "update_time DESC , sort DESC , id DESC";
 					$total_money = $GLOBALS['db']->getOne("SELECT sum(borrow_amount) FROM ".DB_PREFIX."deal WHERE deal_status in(2,4) ");
@@ -283,7 +284,7 @@ class dealsModule extends SiteBaseModule
 			if($field && $field_sort)
 				$orderby = "$field $field_sort ,sort DESC,id DESC";
 			else
-				$orderby = "update_time DESC , sort DESC , id DESC";
+				$orderby = "create_time DESC,sort DESC,id DESC";
 			$total_money = $GLOBALS['db']->getOne("SELECT sum(borrow_amount) FROM ".DB_PREFIX."deal WHERE deal_status in(2,4) ");
 		}
 		elseif ($cate_id == "-1"){
@@ -319,10 +320,12 @@ class dealsModule extends SiteBaseModule
 		
 		 if(isset( $_SESSION['condition']))
 		{
-			$condition .=  $_SESSION['condition']['repay_time'];
-			$condition.=$_SESSION['condition']['rate'];
+			unset($_SESSION['condition']);
 		} 
-		
+		if(isset($_SESSION['order']))
+		{
+			unset($_SESSION['order']);
+		}
 		$result = get_deal_list($limit,$n_cate_id,$condition,$orderby);
 		//print_r($result);exit;
 		
