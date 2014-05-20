@@ -91,11 +91,13 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 				<div  class="shuju_left"></div>
 				<div  class="shuju_right"></div>
 				<div  class="shuju_top"></div>
-				<div  class="shuju_mid">
+				<div  class="shuju_mid" style="position:relative;">
 					<h2>成交数据</h2>
                     
 					<span>累计总交易金额</span> <span><em>{$success_deal.tatal_money}</em>元</span> <span>已按期还本金额</span>
 					<span><i>{$success_deal.done_money}</i>元</span> <span>为用户带来的收益 </span> <span><i>{$success_deal.income}</i>元</span>
+                    <img src="{$TMPL}/images/jiao_03.gif" style="position:absolute;left:0;top:0;">
+                    <img src="{$TMPL}/images/jiao_07.png" style="position:absolute;right:0;bottom:0;">
 				</div>
 				<div  class="shuju_bottom"></div>
 			</div>
