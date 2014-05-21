@@ -105,68 +105,77 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 	</div>   
 <div class="wrap">      
 <div class="blank10"></div>
-<div class="index_left f_l">
-	<div class="gray_title clearfix">
-		<div class="f_l f_dgray b">最新产品列表</div>
-		<div class="f_r">
-			<span style="font-size: 12px; font-weight: normal;"><a href="{url x="index" r="deals"}" title="{$LANG.MORE}">更多产品列表...</a></span>
-		</div>
-	</div>
-	<div class="i_deal_list clearfix pr15 pl15">
-		{foreach from=$deal_list item="deal" key=key name="deal"}
-		<div class="item {if $key mod 2 eq 1}item_1{/if} clearfix" {if $smarty.foreach.deal.last}style="border-bottom:0"{/if}>
-        
-        <!--
-			<div class="icon f_l">
-				<a href="{$deal.url}"><img src="{$deal.icon}" class="img_b" height="80" width="80"></a>
-			</div>
-            -->
-			<div class="detail f_r" style="float:left;">
-				<div class="tit b lh24 clearfix">
-					<a href="{$deal.url}" class="f_l" {if $deal.deal_status eq 1}style="color:#428dcb
-" {elseif $deal.deal_status eq 2}style="color:#c35977" {elseif $deal.deal_status eq 4}style="color:#749e54" {elseif $deal.deal_status eq 5}style="color:#ba052f" {/if} >
-					{$deal.color_name}</a>
-				</div>
-				<div class="clearfix" style=" padding-top:10px;">
-					<div class="info f_l" style="width:225px;">投资金额：</div>
-					<div class="info info2 f_l" style="width:180px;">年利率：</div>
-					<div class="info info3 f_l" style="width:100px;">投资期限：</div>
-				</div>
-                <div class="clearfix">
-					<div class="info f_l" style="width:225px;"><span class="f_red" style=" font-size:20px;">{$deal.borrow_amount_format}</span></div>
-					<div class="info info2 f_l" style="width:180px;"><span class="f_red" style=" font-size:20px;">{$deal.rate} %</span></div>
-					<div class="info info3 f_l" style="width:100px;"><span class="f_red" style=" font-size:20px;">{$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}</span></div>
-				</div>
-				<div class="clearfix">
 
-					<div class="info info2 f_l clearfix" style="width:225px;">
-						<div class="f_l">投资进度：</div>
-						<div class="greenProcessBar progressBar f_l indexbar">						
-							<p>{function name="round" v=$deal.progress_point f=0}%</p>
-							<div class="p">
-								<div class="c" style="width: {function name="round" v=$deal.progress_point f="2"}%;"></div>
-							</div>
-						</div>
-					</div>
-					<div class="info info3 f_l" style="width:180px;">{if $deal.deal_status eq 2}<span class="f_red">满标</font>{elseif $deal.deal_status eq 4}<span class="f_red">还款中</font>{elseif $deal.deal_status eq 5}还款完毕{else}还需：<span class="f_red">{$deal.need_money}</span>{/if}</div>
-				</div>
-                
-                
-                
-			</div>
-				{if $deal.deal_status eq 1}
-            <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:100px; height:100px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>
-            {elseif $deal.deal_status eq 2}<!--满标-->
-			<a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:100px;height:100px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px"></a>
-            {elseif $deal.deal_status eq 4}<!--还款中-->
-            <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:100px;height:100px;" src="{$TMPL}/images/load_in_progress.png" alt="" width="111px" height="34px"></a>
-            {elseif $deal.deal_status eq 5}<!--已还清-->
-            <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:100px;height:100px;" src="{$TMPL}/images/load_done.png" alt="" width="111px" height="34px"></a>
-             {/if}
-		</div>
-		{/foreach}
-	</div>
+<div class="f_l">
+	<div class="index_left_baynow" style="width:655px; height:463px; background:url({$TMPL}/images/xindai_03.png) no-repeat; margin-left:0px;">
+        <div class="bay_now1" style=" float:left; padding-left:90px; padding-top:360px;"><a href="{if $credit.name}{$credit.share_url}{else}javascript:;{/if}"><img id="baybaybay" src="{$TMPL}/images/xinan_06.png" onmousemove='this.src="{$TMPL}/images/xinan.png"' onMouseOut='this.src="{$TMPL}/images/xinan_06.png"' /></a></div>
+        <div class="bay_now2" style=" float:left; padding-left:190px; padding-top:360px;"><a href="{if $chengjian.name}{$chengjian.share_url}{else}javascript:;{/if}"><img id="baybaybay" src="{$TMPL}/images/xinan_06.png" onmousemove='this.src="{$TMPL}/images/xinan.png"' onMouseOut='this.src="{$TMPL}/images/xinan_06.png"' /></a></div>
+    </div>
+    
+    <div class="index_left">
+        <div class="gray_title clearfix">
+            <div class="f_l f_dgray b">最新产品列表</div>
+            <div class="f_r">
+                <span style="font-size: 12px; font-weight: normal;"><a href="{url x="index" r="deals"}" title="{$LANG.MORE}">更多产品列表...</a></span>
+            </div>
+        </div>
+        <div class="i_deal_list clearfix pr15 pl15">
+            {foreach from=$deal_list item="deal" key=key name="deal"}
+            <div class="item {if $key mod 2 eq 1}item_1{/if} clearfix" {if $smarty.foreach.deal.last}style="border-bottom:0"{/if}>
+            
+            <!--
+                <div class="icon f_l">
+                    <a href="{$deal.url}"><img src="{$deal.icon}" class="img_b" height="80" width="80"></a>
+                </div>
+                -->
+                <div class="detail f_r" style="float:left;">
+                    <div class="tit b lh24 clearfix">
+                        <a href="{$deal.url}" class="f_l" {if $deal.deal_status eq 1}style="color:#428dcb
+    " {elseif $deal.deal_status eq 2}style="color:#c35977" {elseif $deal.deal_status eq 4}style="color:#749e54" {elseif $deal.deal_status eq 5}style="color:#ba052f" {/if} >
+                        {$deal.color_name}</a>
+                    </div>
+                    <div class="clearfix" style=" padding-top:10px;">
+                        <div class="info f_l" style="width:225px;">投资金额：</div>
+                        <div class="info info2 f_l" style="width:180px;">年利率：</div>
+                        <div class="info info3 f_l" style="width:100px;">投资期限：</div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="info f_l" style="width:225px;"><span class="f_red" style=" font-size:20px;">{$deal.borrow_amount_format}</span></div>
+                        <div class="info info2 f_l" style="width:180px;"><span class="f_red" style=" font-size:20px;">{$deal.rate} %</span></div>
+                        <div class="info info3 f_l" style="width:100px;"><span class="f_red" style=" font-size:20px;">{$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}</span></div>
+                    </div>
+                    <div class="clearfix">
+    
+                        <div class="info info2 f_l clearfix" style="width:225px;">
+                            <div class="f_l">投资进度：</div>
+                            <div class="greenProcessBar progressBar f_l indexbar">						
+                                <p>{function name="round" v=$deal.progress_point f=0}%</p>
+                                <div class="p">
+                                    <div class="c" style="width: {function name="round" v=$deal.progress_point f="2"}%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info info3 f_l" style="width:180px;">{if $deal.deal_status eq 2}<span class="f_red">满标</font>{elseif $deal.deal_status eq 4}<span class="f_red">还款中</font>{elseif $deal.deal_status eq 5}还款完毕{else}还需：<span class="f_red">{$deal.need_money}</span>{/if}</div>
+                    </div>
+                    
+                    
+                    
+                </div>
+                    {if $deal.deal_status eq 1}
+                <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:100px; height:100px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>
+                {elseif $deal.deal_status eq 2}<!--满标-->
+                <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:100px;height:100px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px"></a>
+                {elseif $deal.deal_status eq 4}<!--还款中-->
+                <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:100px;height:100px;" src="{$TMPL}/images/load_in_progress.png" alt="" width="111px" height="34px"></a>
+                {elseif $deal.deal_status eq 5}<!--已还清-->
+                <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:100px;height:100px;" src="{$TMPL}/images/load_done.png" alt="" width="111px" height="34px"></a>
+                 {/if}
+            </div>
+            {/foreach}
+        </div>
+    </div>
 </div>
+
 <div class="index_right f_r">
 	<adv adv_id="首页右侧顶部广告" />
 	<div class="r-block">
@@ -247,14 +256,14 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 </div>
 
 <!-- 新手教程开始(第一次打开页面会有灰色的教学浮动层) -->
-<?php if (empty($_COOKIE['teached']) && empty($_COOKIE['user_name'])): ?>
+<?php if (empty($_COOKIE['p2p_teached']) && empty($_COOKIE['user_name'])): ?>
 	<div class="face-teach">
 		<div class="body-light">
 	    	<a class="face-close1" href="javascript:scroll(0,0)"></a>
 	        <a class="face-close2" href="javascript:scroll(0,0)"></a>
 	    </div>
 	</div>
-	<?php setcookie('teached','teached',time()+86400) //当没有用户COOKIE和该效果赋予的COOKIE时,弹出教学窗口层,并设置一个1天的有效_COOKIE['p2p_teached']值防止反复弹出 ?>
+	<?php setcookie('p2p_teached','teached',time()+86400) //当没有用户COOKIE和该效果赋予的COOKIE时,弹出教学窗口层,并设置一个1天的有效_COOKIE['p2p_teached']值防止反复弹出 ?>
 <?php endif ?>
 
 <script type="text/javascript">
