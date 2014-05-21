@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta name="Generator" />
@@ -46,11 +46,13 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 <script type="text/javascript" src="{$APP_ROOT}/public/runtime/app/lang.js"></script>
 <script type="text/javascript" src="{function name="parse_script" v="$pagejs" c="$cpagejs"}"></script>
 </head>
+
 <body>
 {if $vote}
 <a id="vote" href="{url x="index" r="vote"}" target="_blank"></a>
 {/if}
-<div class="header" id="header">
+
+<div class="header" id="header" style="position:fixed; z-index:1000; top:0; left:0; right:0 ; margin:auto;"> 
 	<div class="wrap constr">
 		<div class="wrap clearfix">
 			<div class="logo f_l pt15">
@@ -72,6 +74,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 		</div><!--end wrap-->
 	</div>
 </div>
+<div class="hidden-layer" style="height:40px;"></div>
 	<div  class="headf">
 	<div  class="head_main">
 		<a  href="{$APP_ROOT}/index.php"  title=""> <img  src="{$TMPL}/images/logo.jpg" width="365" height="70"  alt=""></a>

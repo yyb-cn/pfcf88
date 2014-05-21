@@ -5,7 +5,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 <link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$indexcss"}" />
 <link rel="stylesheet" type="text/css" href="{$TMPL}/css/main.css" />
 </div>
-<script  type="text/javascript"  src="{$TMPL}/js/flash_.js"></script>
+<script type="text/javascript" src="{$TMPL}/js/flash_.js"></script>
 <!--图片切换开始-->
 	<div  class="banner">
 
@@ -96,8 +96,8 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                     
 					<span>累计总交易金额</span> <span><em>{$success_deal.tatal_money}</em>元</span> <span>已按期还本金额</span>
 					<span><i>{$success_deal.done_money}</i>元</span> <span>为用户带来的收益 </span> <span><i>{$success_deal.income}</i>元</span>
-                    <img src="{$TMPL}/images/jiao_03.gif" style="position:absolute;left:0;top:0;">
-                    <img src="{$TMPL}/images/jiao_07.png" style="position:absolute;right:0;bottom:0;">
+					<img src="{$TMPL}/images/jiao_03.gif" style="position:absolute;left:0;top:0;">
+					<img src="{$TMPL}/images/jiao_07.png" style="position:absolute;right:0;bottom:0;">
 				</div>
 				<div  class="shuju_bottom"></div>
 			</div>
@@ -245,4 +245,27 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 		</div>
 	</div>
 </div>
+
+<!-- 新手教程开始(第一次打开页面会有灰色的教学浮动层) -->
+<?php if (empty($_COOKIE['p2p_teached']) && empty($_COOKIE['user_name'])): ?>
+	<div class="face-teach">
+		<div class="body-light">
+	    	<a class="face-close1" href="javascript:scroll(0,0)"></a>
+	        <a class="face-close2" href="javascript:scroll(0,0)"></a>
+	    </div>
+	</div>
+	<?php setcookie('p2p_teached','teached',time()+86400) //当没有用户COOKIE和该效果赋予的COOKIE时,弹出教学窗口层,并设置一个1天的有效_COOKIE['p2p_teached']值防止反复弹出 ?>
+<?php endif ?>
+
+<script type="text/javascript">
+$(document).ready(function(e) {
+	$(".body-light a").click(function(){
+		//alert(1111);
+		$(".face-teach").hide();
+	})
+})
+</script>
+<!-- end class="face-teach" -->
+<!-- 新手教程结束 -->
+
 {include file="inc/footer.html"}
