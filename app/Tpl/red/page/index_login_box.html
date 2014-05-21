@@ -1,7 +1,7 @@
 {if $user_info}
 
 	<div  class="denglu">
-			<div  class="denglu_maintwo"></div>
+		<div  class="denglu_maintwo"></div>
 			<form  name="loginForm"  action=""  method="post" >
 				<input  type="hidden"  name="failNum"  value=""> <input  type="hidden"  id="username"  name="j_username">
 				<div  class="denglu_main1">
@@ -22,7 +22,7 @@
 		</div>	 
    {else}
 	<div  class="denglu">
-			<div  class="denglu_main"  style="height: 279px;"></div>
+		<div  class="denglu_main"></div>
 			<form method="post" action="{url x="shop" r="user#dologin"}" name="ajax_login_form" >
 				<input  type="hidden"  name="failNum"  value=""> <input  type="hidden"  id="username"  name="j_username">
 				<div  class="denglu_main1">
@@ -31,31 +31,31 @@
 							登录浦发财富<span  id="errorTip"></span>
 						</h2>
 						<ul>
-							<li  class="name"><input type="text" value=""  name="email"
- id="j_username"></li>
-							<li  class="mima"><input type="password" value=""  name="user_pwd"
-                                id="j_password"  ></li>
+							<li  class="name"><input type="text" value=""  name="email" id="j_username"></li>
+							<li  class="mima"><input type="password" value=""  name="user_pwd" id="j_password"  ></li>
 							
 							<li  class="wj">  {if app_conf("VERIFY_IMAGE") eq 1}<a style="float:left">验证码:</a>{/if}<a  href="{url x="index" r="user#getpassword"}"  title="">{$LANG.FORGET_PASSWORD}</a></li>
                          
-                            {if app_conf("VERIFY_IMAGE") eq 1}
-                           
-								
-								<div class="field verify">
-                                <div class="verify_row">				
-                                			
-									<input type="text" value="" class="f-input ipttxt" name="verify" />	
-									<img class="ml10" style="margin-top:0" src="{$APP_ROOT}/verify.php?w=89&h=29rand={function name="rand"}" onclick="this.src='{$APP_ROOT}/verify.php?w=89&h=39rand='+ Math.random();" title="看不清楚？换一张" />			
+                            
+                            <li  class="ver">
+                            	{if app_conf("VERIFY_IMAGE") eq 1}
+	                            	<div class="field verify">
+	                                	<div class="verify_row">
+										<input type="text" value="" class="f-input ipttxt" name="verify" />	
+										<img class="ml10" style="margin-top:0" src="{$APP_ROOT}/verify.php?w=89&h=29rand={function name="rand"}" onclick="this.src='{$APP_ROOT}/verify.php?w=89&h=29rand='+ Math.random();" title="看不清楚？换一张" />			
+										</div>
 									</div>
-								</div>
 								{/if}
-							<li><input  type="submit" id="ajax-login-submit" name="commit" value="{$LANG.LOGIN}"   class="denglu"></li>
+                            </li>
+								
+
+							<li><input  type="submit" id="ajax-login-submit" name="commit" value="{$LANG.LOGIN}" class="denglu"></li>
 							<!--<li><a  href=""  title=""  class="w">微博登录</a><a  href=""  title="QQ登陆"  class="q">QQ登录</a></li>-->
 						</ul>
 						
 				</div>
 			</form>
-		</div>	
+		</div>
     {/if}
 
-      
+    <!-- 两段if里均少一个div结束标签,在banner层结束,无需添加 -->
