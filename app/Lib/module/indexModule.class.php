@@ -87,6 +87,50 @@ class indexModule extends SiteBaseModule
 		$credit= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=3  "," id DESC");
 			$GLOBALS['tmpl']->assign("chengjian",$chengjian['list'][0]);
 			$GLOBALS['tmpl']->assign("credit",$credit['list'][0]);
+		
+		//lu 投资收益排行榜 charts
+		$user_arr=$GLOBALS['db']->getAll("select id,user_name from ".DB_PREFIX."user where is_delete = 0  ");
+		foreach($user_arr as $ku=>$vu){	
+			 $user_invest[]=$GLOBALS['db']->getAll("select money,user_name from ".DB_PREFIX."deal_load where user_id = '".$vu['id']."'"); 
+			 if(!empty($user_invest)){
+				foreach($user_invest as $km=>$vm){
+					foreach($vm as $km2=>$vm2){
+						$charts[$vm2['user_name']]=$charts[$vm2['user_name']]+$vm2['money'];
+						}
+					}
+				 }
+			} 
+			//lu 投标资金大到小排序
+			foreach($charts as $kc=>$vc){ 
+			$a[]=$vc;
+				$num = count($a);
+				for($i=0;$i<$num;$i++){
+					for($j=0;$j<$num;$j++){
+						if($a[$i]>$a[$j]){
+							$temp = $a[$i];
+							$a[$i]=$a[$j];
+							$a[$j]=$temp;	
+						}
+					}	
+				}
+			}
+			//lu  根据投标资金大到小 	 排序  用户
+			$numk = count($a);
+			foreach($charts as $kc=>$vc){ 
+				for($ki=0;$ki<$numk;$ki++){
+					if($vc==$a[$ki]){
+					$charts_arr[$ki][]=$vc;
+					$charts_arr[$ki][]=$kc;
+					}
+				}
+			}
+			//lu 重构数组  只要5个
+			$numka = count($charts_arr);
+			for($ka=0;$ka<5;$ka++){
+				$charts_user[$ka+1]['money']=$charts_arr[$ka][0];
+				$charts_user[$ka+1]['user_name']=cut_str($charts_arr[$ka+1][1], 1, 0).'***'.cut_str($charts_arr[$ka+1][1], 1, -1);
+			}
+			$GLOBALS['tmpl']->assign("charts_user",$charts_user);
 
 		
 		$GLOBALS['tmpl']->display("page/index.html",$cache_id);

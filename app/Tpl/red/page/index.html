@@ -203,6 +203,22 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 		</div>
 	</div>
 	<div class="blank10"></div>
+            <link rel="stylesheet" type="text/css" href="{$TMPL}/css/paihang.css" />
+    <ul class="paibox">
+    	<li class="pai">投资收益排行榜</li>
+        <li class="paili_1"><p class="pai1">排序</p><p class="pai1">收益金额（元）</p><p class="pai1">用户名</p></li>
+        <for start="1" end="5">{$i}</for>
+        {foreach from=$charts_user key=key item="arr"}
+       
+        <li class="paili"><div class="pai_{$key}">{$key}</div><p class="paip">{$arr.money}</p><p class="paim">{$arr.user_name}</p><div class="pai_6"></div></li>
+         
+        {/foreach}
+        
+        <!--<li class="paili"><div class="pai_2">2</div><p class="paip">191748.64</p><p>me***n</p><div class="pai_5"></div></li>
+        <li class="paili"><div class="pai_3">3</div><p class="paip">191748.64</p><p>me***n</p><div class="pai_5"></div></li>
+        <li class="paili"><div class="pai_4">4</div><p class="paip">191748.64</p><p>me***n</p><div class="pai_5"></div></li>
+        <li class="paili"><div class="pai_4">5</div><p class="paip">191748.64</p><p>me***n</p><div class="pai_5"></div></li>-->
+    </ul>
 	{insert name="success_deal_list"}
 	<!--使用技巧-->
 	<!--<div class="blank10"></div>
