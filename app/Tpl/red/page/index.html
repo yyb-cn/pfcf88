@@ -44,7 +44,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 		</div>
 	</div>
  <!--图片切换结束-->   
- <div  class="main_top">
+ <div  class="main_top" style="border-bottom:none;">
 		<div  class="mt">
 			<div  class="mt_left">
 				<div  class="mt_first wx1">
@@ -101,17 +101,72 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 				</div>
 				<div  class="shuju_bottom"></div>
 			</div>
-		</div>
+		</div>    
 	</div>   
+    
+    <!-- 14年5月22日添加"收益对比" -->
+	<div class="blank10"></div>
+    <div class="benefit_comparison" style="width:100%; border-bottom:1px dotted #D6DCE1; overflow:hidden;">
+    	<div style="width:1000px; height:150px; background:url({$TMPL}/images/benefit-comparison-header.gif) no-repeat;">
+            <p style=" display:none; padding-top:100px; padding-left:100px; font-size:18px; color:#F5536A; font-weight:bold; font-family:'微软雅黑', '黑体', '仿宋'" id="benefit1">￥385元人民币</p>
+            <p style=" display:none; padding-top:100px; padding-left:100px; font-size:18px; color:#81D285; font-weight:bold; font-family:'微软雅黑', '黑体', '仿宋'" id="benefit2">￥5925元人民币</p>
+            <p style=" display:none; padding-top:100px; padding-left:100px; font-size:18px; color:#08486B; font-weight:bold; font-family:'微软雅黑', '黑体', '仿宋'" id="benefit3">￥12000元人民币</p>
+            <p style=" display:none; padding-top:100px; padding-left:100px; font-size:18px; color:#F5B53A; font-weight:bold; font-family:'微软雅黑', '黑体', '仿宋'" id="benefit4">￥5800元人民币</p>
+            <p style=" display:none; padding-top:100px; padding-left:100px; font-size:18px; color:#EBBAE9; font-weight:bold; font-family:'微软雅黑', '黑体', '仿宋'" id="benefit5">￥5000元人民币</p>
+        </div>
+        <div class="blank10"></div>
+    	<div id="benefit_comparison_img" style="width:1000px; height:320px; background:url({$TMPL}/images/benefit-comparison.png) no-repeat;">
+        	<div class="benefit1" style="float:left; padding-top:166px; padding-left:135px;">
+            	<img benefit="benefit1" src="{$TMPL}/images/grey-1.gif" onmousemove='this.src="{$TMPL}/images/current-1.gif"' onMouseOut='this.src="{$TMPL}/images/grey-1.gif"' />
+            </div>
+            <div class="benefit2" style="float:left; padding-top:100px; padding-left:45px;">
+            	<img benefit="benefit2" src="{$TMPL}/images/grey-2.gif" onmousemove='this.src="{$TMPL}/images/current-2.gif"' onMouseOut='this.src="{$TMPL}/images/grey-2.gif"' />
+            </div>
+            <div class="benefit3" style="float:left; padding-top:30px; padding-left:60px;">
+            	<img benefit="benefit3" src="{$TMPL}/images/grey-3.gif" onmousemove='this.src="{$TMPL}/images/current-3.gif"' onMouseOut='this.src="{$TMPL}/images/grey-3.gif"' />
+            </div>
+            <div class="benefit4" style="float:left; padding-top:100px; padding-left:60px;">
+            	<img benefit="benefit4" src="{$TMPL}/images/grey-4.gif" onmousemove='this.src="{$TMPL}/images/current-4.gif"' onMouseOut='this.src="{$TMPL}/images/grey-4.gif"' />
+            </div>
+            <div class="benefit5" style="float:left; padding-top:166px; padding-left:45px;">
+            	<img benefit="benefit5" src="{$TMPL}/images/grey-5.gif" onmousemove='this.src="{$TMPL}/images/current-5.gif"' onMouseOut='this.src="{$TMPL}/images/grey-5.gif"' />
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+	$(document).ready(function(e) {
+		$("#benefit_comparison_img img").mousemove(function(){
+			//alert(1111);
+			var thisP = $(this).attr("benefit");
+			//alert(thisP);
+			$(".benefit_comparison p").css("display","none");
+			$('#'+thisP+'').css("display","block");
+		})
+	})
+	</script>
+    <!-- end class="benefit_comparison" -->
+    <!-- 14年5月22日添加"收益对比"结束 -->
+    
 <div class="wrap">      
 <div class="blank10"></div>
 
-<div class="f_l">
-	<div class="index_left_baynow" style="width:655px; height:463px; background:url({$TMPL}/images/xindai_03.png) no-repeat; margin-left:0px;">
-        <div class="bay_now1" style=" float:left; padding-left:90px; padding-top:360px;"><a href="{if $credit.name}{$credit.share_url}{else}javascript:;{/if}"><img id="baybaybay" src="{$TMPL}/images/xinan_06.png" onmousemove='this.src="{$TMPL}/images/xinan.png"' onMouseOut='this.src="{$TMPL}/images/xinan_06.png"' /></a></div>
-        <div class="bay_now2" style=" float:left; padding-left:190px; padding-top:360px;"><a href="{if $chengjian.name}{$chengjian.share_url}{else}javascript:;{/if}"><img id="baybaybay" src="{$TMPL}/images/xinan_06.png" onmousemove='this.src="{$TMPL}/images/xinan.png"' onMouseOut='this.src="{$TMPL}/images/xinan_06.png"' /></a></div>
+<div class="f_l" style="width:655px; width:656px\9;">
+	<!-- 14年5月21日新增购买项目链接 -->
+	<div class="index_left_baynow" style=" width:655px; height:463px; background:url({$TMPL}/images/xindai_03.png) no-repeat; margin-left:0px;">
+        <div class="bay_now1" style=" float:left; padding-left:90px; padding-top:360px;">
+        	<a href="{if $credit.name}{$credit.share_url}{else}javascript:;{/if}">
+        		<img id="baybaybay" src="{$TMPL}/images/xinan_06.png" onmousemove='this.src="{$TMPL}/images/xinan.png"' onMouseOut='this.src="{$TMPL}/images/xinan_06.png"' />
+        	</a>
+        </div>
+        <div class="bay_now2" style=" float:left; padding-left:190px; padding-top:360px;">
+        	<a href="{if $chengjian.name}{$chengjian.share_url}{else}javascript:;{/if}">
+        		<img id="baybaybay" src="{$TMPL}/images/xinan_06.png" onmousemove='this.src="{$TMPL}/images/xinan.png"' onMouseOut='this.src="{$TMPL}/images/xinan_06.png"' />
+        	</a>
+        </div>
     </div>
-    
+    <!--  14年5月21日新增购买项目链接 结束-->
+
+    <div class="blank10"></div>
     <div class="index_left">
         <div class="gray_title clearfix">
             <div class="f_l f_dgray b">最新产品列表</div>
@@ -161,7 +216,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                     
                     
                 </div>
-                    {if $deal.deal_status eq 1}
+                {if $deal.deal_status eq 1}
                 <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:100px; height:100px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>
                 {elseif $deal.deal_status eq 2}<!--满标-->
                 <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:100px;height:100px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px"></a>
@@ -203,7 +258,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 		</div>
 	</div>
 	<div class="blank10"></div>
-            <link rel="stylesheet" type="text/css" href="{$TMPL}/css/paihang.css" />
+    <link rel="stylesheet" type="text/css" href="{$TMPL}/css/paihang.css" />
     <ul class="paibox">
     	<li class="pai">投资收益排行榜</li>
         <li class="paili_1"><p class="pai1">排序</p><p class="pai1">收益金额（元）</p><p class="pai1">用户名</p></li>
@@ -213,11 +268,6 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
         <li class="paili"><div class="pai_{$key}">{$key}</div><p class="paip">{$arr.money}</p><p class="paim">{$arr.user_name}</p><div class="pai_6"></div></li>
          
         {/foreach}
-        
-        <!--<li class="paili"><div class="pai_2">2</div><p class="paip">191748.64</p><p>me***n</p><div class="pai_5"></div></li>
-        <li class="paili"><div class="pai_3">3</div><p class="paip">191748.64</p><p>me***n</p><div class="pai_5"></div></li>
-        <li class="paili"><div class="pai_4">4</div><p class="paip">191748.64</p><p>me***n</p><div class="pai_5"></div></li>
-        <li class="paili"><div class="pai_4">5</div><p class="paip">191748.64</p><p>me***n</p><div class="pai_5"></div></li>-->
     </ul>
 	{insert name="success_deal_list"}
 	<!--使用技巧-->
@@ -279,7 +329,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 	        <a class="face-close2" href="javascript:scroll(0,0)"></a>
 	    </div>
 	</div>
-	<?php setcookie('p2p_teached','teached',time()+86400) //当没有用户COOKIE和该效果赋予的COOKIE时,弹出教学窗口层,并设置一个1天的有效_COOKIE['p2p_teached']值防止反复弹出 ?>
+	<?php setcookie('p2p_teached','teached',time()+86400) //当没有用户COOKIE和该效果赋予的COOKIE时,弹出教学窗口层,并设置一个1天的有效_COOKIE['teached']值防止反复弹出 ?>
 <?php endif ?>
 
 <script type="text/javascript">
