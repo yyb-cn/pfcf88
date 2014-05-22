@@ -126,7 +126,7 @@ class indexModule extends SiteBaseModule
 			}
 			//lu 重构数组  只要5个
 			$numka = count($charts_arr);
-			for($ka=0;$ka<5;$ka++){
+			for($ka=0;$ka<10;$ka++){
 				$charts_user[$ka+1]['money']=$charts_arr[$ka][0];
 				$charts_user[$ka+1]['user_name']=cut_str($charts_arr[$ka+1][1], 1, 0).'***'.cut_str($charts_arr[$ka+1][1], 1, -1);
 			}

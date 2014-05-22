@@ -2,17 +2,17 @@
 /* CSS Document */
 
 
-.paibox{width:282px;height:230px;border:#CFCFCF 1px solid;margin-bottom:10px; color:#666\9;}
+.paibox{width:285px;border:#ebeff2 1px solid;margin-bottom:10px; color:#666\9;}
 .pai{line-height:38px; font-weight:bold;padding-left:10px;}
 .paili{ overflow:hidden;}
 .paili_1{ overflow:hidden;line-height:35px;width:245px;background-color:#f5f5f5;margin-left:10px;padding-left:10px;}
-.pai1,.pai_1,.pai_2,.pai_3,.pai_4,.pai_5,.paip{float:left;}
+.pai1,.pai_1,.pai_2,.pai_3,.pai_4,.pai_5,.pai_6,.pai_7,.pai_8,.pai_9,.pai_10,.paip{float:left;}
 .pai1{margin-right:30px;}
 .pai_1{margin-top:6px;background-color:#d90000;width:16px;line-height:16px;text-align:center;color:#FFF;margin-left:20px;margin-right:38px;}
 .paip{margin-right:42px;width:65px;}
 .paim{text-align:left;}
 .pai_2{margin-top:6px;background-color:#ff7e00;width:16px;line-height:16px;text-align:center;color:#FFF;margin-left:20px;margin-right:38px;}
 .pai_3{margin-top:6px;background-color:#ffaa00;width:16px;line-height:16px;text-align:center;color:#FFF;margin-left:20px;margin-right:38px;}
-.pai_4,.pai_5{margin-top:6px;background-color:#ebeff2;width:16px;line-height:16px;text-align:center;color:#000;margin-left:20px;margin-right:38px;}
+.pai_4,.pai_5,.pai_6,.pai_7,.pai_8,.pai_9,.pai_10{margin-top:6px;background-color:#ebeff2;width:16px;line-height:16px;text-align:center;color:#000;margin-left:20px;margin-right:38px;}
 .paili{width:245px;line-height:28px;border-bottom:#f5f5f5 1px dashed;margin-left:10px;}
-.pai_6{background-color:#cbcbcb;width:10px;height:3px;float:right;margin-top:-15px;}
+.pai_a{background-color:#cbcbcb;width:10px;height:3px;float:right;margin-top:-15px;}

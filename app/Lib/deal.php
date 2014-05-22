@@ -702,7 +702,7 @@ function get_benjin($idx,$all_idx,$amount_money,$month_repay_money,$rate){
 
 function insert_success_deal_list(){
 	//输出成功案例
-	$suc_deal_list =  get_deal_list(11,0,"deal_status in(4,5) "," success_time DESC,sort DESC,id DESC");
+	$suc_deal_list =  get_deal_list(10,0,"deal_status in(4,5) "," success_time DESC,sort DESC,id DESC");
 	$GLOBALS['tmpl']->assign("succuess_deal_list",$suc_deal_list['list']);
 	return $GLOBALS['tmpl']->fetch("inc/insert/success_deal_list.html");
 }
