@@ -18,16 +18,44 @@ class dealsModule extends SiteBaseModule
 				
 					//把提交上来的条件保留到session中
 					//这个是condition
-					if($_POST['type']==1)
+					if($_POST['type']==1)//condition类型
 					{
-				if($_POST['name']=='rate')
-					 {
-							$_SESSION['condition'][$_POST['name']]=' '."AND " . $_POST['name'] .' >= '.   $_POST['value'];
-					 }
-				elseif($_POST['name']=='repay_time')
-					{
-						 	$_SESSION['condition'][$_POST['name']]=' '." AND " . $_POST['name'] .' <= '.   $_POST['value'];
-						}
+						
+						if($_POST['name']=='rate')//利率
+							 {
+									$_SESSION['condition'][$_POST['name']]=' '."AND " . $_POST['name'] .' >= '.   $_POST['value'];
+									if($_POST['value']==0)
+								{
+									unset($_SESSION['condition'][$_POST['name']]);//显示全部
+								}
+							 }
+						elseif($_POST['name']=='repay_time')//返还时间
+							{
+									$_SESSION['condition'][$_POST['name']]=' '." AND " . $_POST['name'] .' <= '.   $_POST['value'];
+									if($_POST['value']==0)
+								{
+									unset($_SESSION['condition'][$_POST['name']]);//显示全部
+								}
+								}
+							
+						
+						elseif($_POST['name']=='cate_id')//分类
+							{
+								
+								$_SESSION['condition'][$_POST['name']]=' '." AND".' '. $_POST['name'] .' = '.  $_POST['value'];
+								if($_POST['value']==0)
+								{
+									unset($_SESSION['condition'][$_POST['name']]);//显示全部
+								}
+								}
+						elseif($_POST['name']=='min_loan_money')//投资起步
+						{
+							$_SESSION['condition'][$_POST['name']]=' '." AND".' '. $_POST['name'] .' >= '.  $_POST['value'];
+								if($_POST['value']==0)
+								{
+									unset($_SESSION['condition'][$_POST['name']]);//显示全部
+								}
+							}
 					}
 					//这个是order
 					if($_POST['type']==2)
@@ -162,6 +190,15 @@ class dealsModule extends SiteBaseModule
 				if(!empty($_SESSION['condition']['repay_time']))			
 						{
 						$condition.= $_SESSION['condition']['repay_time'] ;}
+				if(!empty($_SESSION['condition']['cate_id']))
+					{
+						$condition.= $_SESSION['condition']['cate_id'] ;
+					}
+				if(!empty($_SESSION['condition']['min_loan_money']))
+					{
+						$condition.= $_SESSION['condition']['min_loan_money'] ;
+					}
+				
 				if(!empty($_SESSION['order']))
 					{
 					
@@ -171,7 +208,7 @@ class dealsModule extends SiteBaseModule
 					
 			//echo 1;exit;
 				//echo json_encode($orderby);exit;
-				// echo  $condtion=json_encode($condition);exit;
+				//echo  $condtion=json_encode($condition);exit;
 				//默认的orderby 是 update_time DESC , sort DESC , id DESC
 				 $result = get_deal_list($limit,$n_cate_id,$condition,$orderby);
 				//echo json_encode($result);exit;
