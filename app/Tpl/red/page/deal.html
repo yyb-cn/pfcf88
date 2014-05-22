@@ -60,7 +60,7 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 							{elseif $deal.deal_status eq 0}
 								<img src="{$TMPL}/images/loan_writeM.png" alt="" width="111px" height="34px">
 							{elseif $deal.deal_status eq 1 && $deal.remain_time gt 0}
-								<img style="width:100px; height:100px;" src="{$TMPL}/images/load.png" alt="" style="cursor: pointer" onclick="javascript:window.location.href='{url x="index" r="deal#bid" p="id=$deal.id"}'" width="111px" height="34px">
+								<a href="{url x="index" r="deal#bid" p="id=$deal.id"}" class="btn-orange" style="background:none; border:none; padding:0px"><img style="width:100px; height:100px;" src="{$TMPL}/images/load.png" alt="" style="cursor: hand" width="111px" height="34px"></a>
 							{elseif $deal.deal_status eq 2}
 								<img style=" width:100px; height:100px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px">
 							{elseif $deal.deal_status eq 3 || $deal.remain_time lte 0}
