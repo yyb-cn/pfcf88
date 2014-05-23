@@ -150,9 +150,13 @@
 								  if (data[i].deal_status==0){l+='等待材料'}
 								  else{l+=Math.round(data[i].progress_point)+'%'}//用了函数
 								  l+='</p>'
-			                      l+='<div class="p"><div class="c f_l clearfix" style="width:'
-								  l+=data[i].progress_point+'%;">'  //注意使用了函数
-								  
+			                      l+='<div class="p"><div class="c f_l clearfix" style="'
+								  if(data[i].progress_point == 100){
+									 l+='background:url({$TMPL}/images/progress_bar_full.gif) no-repeat; background-size:113px 14px; width:100%;">'
+								  }
+								  else{
+									 l+='background:url({$TMPL}/images/progress_bar_x.gif) no-repeat; width:'+data[i].progress_point+'%;">'
+								  }
 								  l+='</div></div>'
 			                      l+='</div>'
 			                     l+=' <div class="f_dgray f12"><div>'+data[i].remain_time_format+'</div> </div>'
