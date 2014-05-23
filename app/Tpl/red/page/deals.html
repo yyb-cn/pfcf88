@@ -500,7 +500,15 @@
 								  {else}
 			                      <div class="greenProcessBar progressBar prmar">
 			                          <p>{if $deal.deal_status eq 0}等待材料{else}{function name="round" v=$deal.progress_point f=0}%{/if}</p>
-			                          <div class="p"><div class="c f_l clearfix" style="width:{function name="round" v=$deal.progress_point f=2}%;"></div></div>
+			                          <div class="p">
+                                      <!-- 14年5月23日修改进度条样式 -->
+                                      	{if $deal.progress_point eq 100}
+                                        	<div class="c" style="background:url({$TMPL}/images/progress_bar_full.gif) no-repeat; background-size:113px 14px; width:100%;"></div>
+                                        {else}
+                                        	<div class="c" style="background:url({$TMPL}/images/progress_bar_x.gif) no-repeat; width:{function name="round" v=$deal.progress_point f=0}%;"></div>
+                                        {/if}
+                                      <!-- 14年5月23日修改进度条样式结束 -->
+                                      </div>
 			                      </div>
 			                      <div class="f_dgray f12">
 			                          <div>

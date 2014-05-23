@@ -97,7 +97,13 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
                         <div style="float:left">投资进度：</div>
                         <div class="blueProgressBar progressBar f_l">
                             <div class="p">
-                            	<div class="c" style="width:{function name='round' val=$deal.progress_point f=3}%;"></div>
+                            <!-- 14年5月23日修改进度条样式 -->
+                            	{if $deal.progress_point eq 100}
+                                	<div class="c" style="background:url({$TMPL}/images/progress_bar_full.gif) no-repeat; background-size:113px 14px; width:100%;"></div>
+                                {else}
+                                	<div class="c" style="background:url({$TMPL}/images/progress_bar_x.gif) no-repeat; width:{function name="round" v=$deal.progress_point f=0}%;"></div>
+                                {/if}
+                            <!-- 14年5月23日修改进度条样式结束 -->
                            	</div>
                         </div>
                         <div class="f_l">
