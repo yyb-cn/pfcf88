@@ -1,7 +1,9 @@
 .deals_css{ width:730px; float:left; margin-bottom:10px;}
 .deals_css ul{border:#e5eaed solid 1px; font-size:14px;}
-.deals_css ul li{float:left; margin-right:15px; height:40px; line-height:40px; width:90px; text-align:center; }
+.deals_css ul li{float:left; margin-right:15px; height:40px; line-height:40px; width:100px; text-align:center; }
 
 ul.condition{height:40px;}
 .deals_css ul li.li_f{ background:#f7fcff; padding-left:10px;}
 .li_current{ background:#6db6e1; color:#FFF;border-radius:5px; display:block; height:30px; margin:5px; 15px; line-height:30px;}
+.bgdown{ background:url(../images/jiantu_03.png) no-repeat right 0; padding: 0px 12px; color:#585858;}
+.bgup{ background:url(../images/jiantu_05.png) no-repeat right 0; padding: 0px 12px; color:#585858;}

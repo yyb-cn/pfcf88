@@ -31,7 +31,7 @@ class dealsModule extends SiteBaseModule
 							 }
 						elseif($_POST['name']=='repay_time')//返还时间
 							{
-									$_SESSION['condition'][$_POST['name']]=' '." AND " . $_POST['name'] .' <= '.   $_POST['value'];
+									$_SESSION['condition'][$_POST['name']]=' '." AND " . $_POST['name'] .' = '.   $_POST['value'];
 									if($_POST['value']==0)
 								{
 									unset($_SESSION['condition'][$_POST['name']]);//显示全部
@@ -50,7 +50,15 @@ class dealsModule extends SiteBaseModule
 								}
 						elseif($_POST['name']=='min_loan_money')//投资起步
 						{
-							$_SESSION['condition'][$_POST['name']]=' '." AND".' '. $_POST['name'] .' >= '.  $_POST['value'];
+							$_SESSION['condition'][$_POST['name']]=' '." AND".' '. $_POST['name'] .' = '.  $_POST['value'];
+								if($_POST['value']==0)
+								{
+									unset($_SESSION['condition'][$_POST['name']]);//显示全部
+								}
+							}
+						elseif($_POST['name']=='deal_status')//投资状态
+						{
+							$_SESSION['condition'][$_POST['name']]=' '." AND".' '. $_POST['name'] .' = '.  $_POST['value'];
 								if($_POST['value']==0)
 								{
 									unset($_SESSION['condition'][$_POST['name']]);//显示全部
@@ -184,21 +192,24 @@ class dealsModule extends SiteBaseModule
 				//$condition.="AND repay_time <=6";
 				//吧提交上来的东西编译。
 				//如果有两个条件
-				if(!empty($_SESSION['condition']['rate']))
+				if(isset($_SESSION['condition']['rate']))
 						{
 						$condition.= $_SESSION['condition']['rate'] ;}
-				if(!empty($_SESSION['condition']['repay_time']))			
+				if(isset($_SESSION['condition']['repay_time']))			
 						{
 						$condition.= $_SESSION['condition']['repay_time'] ;}
-				if(!empty($_SESSION['condition']['cate_id']))
+				if(isset($_SESSION['condition']['cate_id']))
 					{
 						$condition.= $_SESSION['condition']['cate_id'] ;
 					}
-				if(!empty($_SESSION['condition']['min_loan_money']))
+				if(isset($_SESSION['condition']['min_loan_money']))
 					{
 						$condition.= $_SESSION['condition']['min_loan_money'] ;
 					}
-				
+				if(isset($_SESSION['condition']['deal_status']))
+					{
+						$condition.= $_SESSION['condition']['deal_status'] ;
+					}
 				if(!empty($_SESSION['order']))
 					{
 					

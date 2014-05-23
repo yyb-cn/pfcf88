@@ -40,8 +40,8 @@
 					<ul  class="condition" >
                     <li class="li_f">投资起步:</li>
 					<li><a  href="javascript:;" class="li_current"     name="min_loan_money" value=0 type=1>全部</a></li>
-					<li><a  href="javascript:;"    name="min_loan_money" value=100 type=1>100元以上</a></li>
-					<li><a  href="javascript:;"    name="min_loan_money" value=1000 type=1>1000元以上</a></li>
+					<li><a  href="javascript:;"    name="min_loan_money" value=100 type=1>100元</a></li>
+					<li><a  href="javascript:;"    name="min_loan_money" value=1000 type=1>1000元</a></li>
 					</ul>
 					
 					<ul  class="condition" >
@@ -63,10 +63,18 @@
 					<ul  class="condition">
                     <li   class="li_f">投资期限：</li>
 					<li><a  href="javascript:;"  class="li_current"  class="tcur"  value="0"  name="repay_time" type=1>全部</a></li>
-					<li><a  href="javascript:;"  data-max="12" value=3  name="repay_time" type=1>3个月以下</a></li>
-					<li><a  href="javascript:;"  data-min="12" value=6  name="repay_time" type=1>6个月以下</a></li>
-					<li><a  href="javascript:;"  data-min="12" value=9 name="repay_time" type=1>9个月以下</a></li>
-					<li><a  href="javascript:;"  data-min="12" value=12  name="repay_time" type=1>12个月以下</a></li>
+					<li><a  href="javascript:;"  data-max="12" value=3  name="repay_time" type=1>3个月</a></li>
+					<li><a  href="javascript:;"  data-min="12" value=6  name="repay_time" type=1>6个月</a></li>
+					<li><a  href="javascript:;"  data-min="12" value=9 name="repay_time" type=1>9个月</a></li>
+					<li><a  href="javascript:;"  data-min="12" value=12  name="repay_time" type=1>12个月</a></li>
+					</ul>
+					<ul  class="condition">
+                    <li   class="li_f">项目状态：</li>
+					<li><a  href="javascript:;"  class="li_current"  class="tcur"  value="0"  name="deal_status" type=1>全部</a></li>
+					<li><a  href="javascript:;"  data-max="12" value=1  name="deal_status" type=1>投标中</a></li>
+					<li><a  href="javascript:;"  data-min="12" value=2  name="deal_status" type=1>投标完成</a></li>
+					<li><a  href="javascript:;"  data-min="12" value=4 name="deal_status" type=1>还款中</a></li>
+					<li><a  href="javascript:;"  data-min="12" value=5  name="deal_status" type=1>还款完成</a></li>
 					</ul>
 			</div>
 		
@@ -172,6 +180,7 @@
 						  l+='</div>'
 			        l+='</div>'
 				 } // 循环结束
+				 if(l==''){l='<div class="item tc"style="width:730px; height:30px;">无记录 </div>'}
 		return l;
 		}	
 		
@@ -193,6 +202,10 @@
 						name:$(this).attr("name"),
 						type:$(this).attr("type")
 						},
+						beforeSend:function(){
+				$("#J_biao_list").append('<div class="item tc"style="width:730px; height:80px;"><img src="{$TMPL}/images/loading.gif" style="position:absolute; left:300px; top:80px;"></div>');
+				
+								},
 					success: function(data){
 						
 						//alert(data)
@@ -210,9 +223,13 @@
 					//alert($(this).attr("check"))
 					if($(this).attr("check")=="asc")
 					{
-						$(this).attr("check","desc")
+						$(".myselect").attr({"check":"asc","class":"myselect bgdown"})
+						$(this).attr({"check":"desc","class":"myselect bgup"})
+						
 						}
-					else($(this).attr("check","asc"))
+					else($(this).attr({"check":"asc","class":"myselect bgdown"})
+						
+					)
 						//alert($(this).attr("check"))
 					$.ajax({
 					type:"POST",
@@ -223,6 +240,11 @@
 						type:$(this).attr("type"),
 						check:$(this).attr("check")
 						},
+			beforeSend:function(){
+				$("#J_biao_list").append('<div class="item tc"style="width:730px; height:80px;"><img src="{$TMPL}/images/loading.gif" style="position:absolute; left:300px; top:80px;"></div>');
+				
+								},
+								
 					success: function(data){
 					
 					//alert(data['page'])
@@ -423,23 +445,23 @@
 			          <div class="f_l tl w170"> 标题  / 借款人 </div>
 					
 			          <div class="f_l w90">
-			             <a  href="javascript:;"  class="myselect" name="borrow_amount" type=2 check="asc" >金额</a>
+			             <a  href="javascript:;"  class="myselect bgdown" name="borrow_amount" type=2 check="asc" >金额</a>
 			          </div> 
-			          <div class="f_l w80">
-			          	<a href="javascript:;"  class="myselect" name="rate" type=2 check="asc">利率</a>
+			          <div class="f_l w80" style="background：#F00">
+			          	<a href="javascript:;"  class="myselect bgdown" name="rate" type=2 check="asc">利率</a>
 			          </div>
 			          <div class="f_l w80">
-			             <a href="javascript:;"  class="myselect" name="repay_time" type=2 check="asc">期限</a>
+			             <a href="javascript:;"  class="myselect bgdown" name="repay_time" type=2 check="asc">期限</a>
 			          </div>
-			          <div class="f_l w125">
-			              <a  href="javascript:;"  class="myselect" name="progress_point" type=2 check="asc">进度</a>
+			          <div class="f_l w111">
+			              <a  href="javascript:;"  class="myselect bgdown" name="progress_point" type=2 check="asc">进度</a>
 			              /
-			              <a href="javascript:;" class="myselect" name="remain_time" type=2 check="asc">剩余时间</a>
+			              <a href="javascript:;" class="myselect bgdown" name="remain_time" type=2 check="asc">剩余时间</a>
 			          </div>
 			     </div>
                  
 				 {/if}
-				<div class="biao-list clearfix" id="J_biao_list" style="padding-left:20px;">
+				<div class="biao-list clearfix" id="J_biao_list" style="padding-left:20px; position:relative; ">
 					{foreach from=$deal_list item="deal" key=key}
 					<div class="item {if $key mod 2 eq 1}item_1{/if} tc" style="width:730px; position:relative;">
 			              <div class="clearfix" style="padding-top:8px;">
