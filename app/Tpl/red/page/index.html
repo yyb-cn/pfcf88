@@ -154,7 +154,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 	<!-- 14年5月21日新增购买项目链接 -->
 	<div class="index_left_baynow" style=" width:655px; height:463px; background:url({$TMPL}/images/xindai_03.png) no-repeat; margin-left:0px;">
         <div class="bay_now1" style=" float:left; padding-left:90px; padding-top:360px;">
-        	<a {if $chengjian.name}href="{$chengjian.share_url}"{else}{/if}>
+        	<a {if $credit.name}href="{$credit.share_url}"{else}{/if}>
         		{if $credit.name}<img src="{$TMPL}/images/xinan_06.png" onmousemove='this.src="{$TMPL}/images/xinan.png"' onMouseOut='this.src="{$TMPL}/images/xinan_06.png"' />{else}<img src="{$TMPL}/images/xinan_08.png" />{/if}
         	</a>
         </div>
