@@ -154,12 +154,12 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 	<!-- 14年5月21日新增购买项目链接 -->
 	<div class="index_left_baynow" style=" width:655px; height:463px; background:url({$TMPL}/images/xindai_03.png) no-repeat; margin-left:0px;">
         <div class="bay_now1" style=" float:left; padding-left:90px; padding-top:360px;">
-        	<a href="{if $credit.name}{$credit.share_url}{else}javascript:;{/if}">
+        	<a {if $chengjian.name}href="{$chengjian.share_url}"{else}{/if}>
         		{if $credit.name}<img src="{$TMPL}/images/xinan_06.png" onmousemove='this.src="{$TMPL}/images/xinan.png"' onMouseOut='this.src="{$TMPL}/images/xinan_06.png"' />{else}<img src="{$TMPL}/images/xinan_08.png" />{/if}
         	</a>
         </div>
         <div class="bay_now2" style=" float:left; padding-left:190px; padding-top:360px;">
-        	<a href="{if $chengjian.name}{$chengjian.share_url}{else}javascript:;{/if}">
+        	<a {if $chengjian.name}href="{$chengjian.share_url}"{else}{/if}>
         		{if $chengjian.name}<img src="{$TMPL}/images/xinan_06.png" onmousemove='this.src="{$TMPL}/images/xinan.png"' onMouseOut='this.src="{$TMPL}/images/xinan_06.png"' />{else}<img src="{$TMPL}/images/xinan_08.png" />{/if}
         	</a>
         </div>
@@ -260,8 +260,10 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 	<div class="blank10"></div>
     <link rel="stylesheet" type="text/css" href="{$TMPL}/css/paihang.css" />
     <ul class="paibox">
-    	<li class="pai">投资收益排行榜</li>
-        <li class="paili_1"><p class="pai1">排序</p><p class="pai1">收益金额（元）</p><p class="pai1">用户名</p></li>
+    	<div class="gray_title clearfix">
+            <div class="f_l f_dgray b">投资收益排行榜</div>
+        </div>
+        <li class="paili_1"><p class="pai1">排序</p><p class="pai1">投资金额（元）</p><p class="pai1">用户名</p></li>
         {foreach from=$charts_user key=key item="arr"}
        
         <li class="paili"><div class="pai_{$key}">{$key}</div><p class="paip">{$arr.money}</p><p class="paim">{$arr.user_name}</p><div class="pai_a"></div></li>
