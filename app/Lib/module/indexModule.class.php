@@ -53,12 +53,13 @@ class indexModule extends SiteBaseModule
 			foreach($deal_data as $kd=>$vd){
 				//lu 累计总交易金额
 				$tatal_money+=$vd['borrow_amount'];
+				}
+			$deal_repay = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_repay where 1 ");	
+			foreach($deal_repay as $kre=>$vre){
 				//lu 已按期还本金额 	
-				if($vd['deal_status']==5){
-					$done_money+=$vd['borrow_amount'];
+				$done_money+=$vre['repay_money'];
 				//lu 为用户带来的 收益 
-				$income+=$vd['borrow_amount']*($vd['rate']/100);	
-					}
+				$income+=$vre['manage_money'];	
 				}	
 			$success_deal['tatal_money']="￥".number_format($tatal_money);
 			$success_deal['done_money']=format_price($done_money);
