@@ -54,13 +54,19 @@ class indexModule extends SiteBaseModule
 				//lu 累计总交易金额
 				$tatal_money+=$vd['borrow_amount'];
 				}
-			$deal_repay = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal_repay where 1 ");	
-			foreach($deal_repay as $kre=>$vre){
-				//lu 已按期还本金额 	
-				$done_money+=$vre['repay_money'];
-				//lu 为用户带来的 收益 
-				$income+=$vre['manage_money'];	
-				}	
+			//lu 已按期还本金额
+			$deal_benjin = $GLOBALS['db']->getAll("select borrow_amount from ".DB_PREFIX."deal where deal_status=5 ");
+			foreach($deal_benjin as $kbj=>$vbj){
+				 	
+				$done_money+=$vbj['borrow_amount'];
+				}
+			//lu 为用户带来的 收益  	
+			$deal_shouyi = $GLOBALS['db']->getAll("select repay_amount from ".DB_PREFIX."user_sta where 1 ");
+			foreach($deal_shouyi as $ksy=>$vsy){
+				$income+=$vsy['repay_amount'];	
+				}
+		
+				
 			$success_deal['tatal_money']="￥".number_format($tatal_money);
 			$success_deal['done_money']=format_price($done_money);
 			$success_deal['income']=format_price($income);
