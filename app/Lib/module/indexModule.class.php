@@ -99,7 +99,7 @@ class indexModule extends SiteBaseModule
 		$user_arr=$GLOBALS['db']->getAll("select id,user_name from ".DB_PREFIX."user where is_delete = 0  ");
 		foreach($user_arr as $ku=>$vu){	
 			 $user_invest[]=$GLOBALS['db']->getAll("select money,user_name from ".DB_PREFIX."deal_load where user_id = '".$vu['id']."'"); 
-			 if(!empty($user_invest)){
+			 if(!empty($user_invest[$ku])){
 				foreach($user_invest as $km=>$vm){
 					foreach($vm as $km2=>$vm2){
 						$charts[$vm2['user_name']]=$charts[$vm2['user_name']]+$vm2['money'];
