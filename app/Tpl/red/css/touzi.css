@@ -1,0 +1,50 @@
+@charset "utf-8";
+/* CSS Document */
+
+.touzibox{width:960px;border:#eff0f2 1px solid;}
+.touzi{width:960px;height:35px;line-height:35px;background-color:#eff0f2;}
+.touzi h1{ font-size:14px;font-weight:bold;float:left;margin-left:20px;}
+.touzi a{font-size:12px;color:#000;}
+.touming{width:960px;height:50px;line-height:50px;margin-top:10px;}
+.touming h1{ font-size:18px;font-weight:bold;float:left;margin-left:20px;}
+.touming p{font-size:12px;float:right;margin-right:20px;}
+.shopbox{ overflow:hidden;}
+.shop1{width:180px;margin-left:20px;text-align:center;margin-top:20px;float:left;}
+.shop1a h2{font-size:12px;font-weight:bold;line-height:20px;}
+.shop1a h1{font-size:18px;font-weight:bold;color:#F00;line-height:30px;}
+.shop1b{margin-bottom:20px;}
+.shop1b img{margin-top:30px;}
+.shop1b h2{font-size:12px;font-weight:bold;line-height:20px;}
+.shop1b h1{font-size:18px;font-weight:bold;color:#F00;line-height:30px;}
+
+.shop2{width:180px;margin-left:20px;text-align:center;margin-top:10px;float:left;}
+.shop2a h2{font-size:12px;font-weight:bold;line-height:20px;}
+.shop2a h1{font-size:18px;font-weight:bold;color:#F00;line-height:30px;}
+.shop2b{margin-bottom:20px;}
+.shop2b img{margin-top:30px;}
+.shop2b h2{font-size:12px;font-weight:bold;line-height:20px;}
+.shop2b h1{font-size:18px;font-weight:bold;color:#F00;line-height:30px;}
+.shop3{margin-left:20px;float:left;margin-top:25px;}
+.shop3a{ overflow:hidden;}
+.shop3a p{float:left;margin-bottom:10px;}
+.jindu{width:113px;border:#d0d0d0 1px solid;float:left;margin: 0 10px;}
+.shop3b{margin-top:10px\9;}
+.shop3b1{color:#F00;font-size:14px;margin-left:5px;}
+.shop3b2{color:#F00;font-size:18px;margin-left:5px;font-weight:bold;}
+.shop3c{padding-left:45px;font-weight:bold;font-size:14px;line-height:50px; background:url(../images/tou_09.png); background-repeat:no-repeat; background-position:left 12px;}
+.shop3d{padding-left:45px;line-height:26px;}
+.shop3f{padding-left:45px;line-height:26px;background:url(../images/tou_15.png);background-repeat:no-repeat; background-position:left 0;}
+.shop4{float:left;margin-left:100px;}
+.shop4a{margin-top:50px;margin-bottom:100px;}
+.shop4b{color:#F00;font-size:18px;font-weight:bold;}
+
+.jilubox{margin-top:15px;width:960px;}
+.jilu{border-left:#f1f0ec 1px solid;border-right:#f1f0ec 1px solid;border-bottom:#f1f0ec 1px solid;width:958px;background-color:#fefcf3;}
+.jilu h1{line-height:50px;height:40px;margin-left:20px;font-size:18px;}
+.jilu3{width:960px;height:2px;background-color:#F00;margin-top:5px;}
+.jilup{margin-left:20px;margin-top:30px;}
+.jilu4{ overflow:hidden;960px;margin-bottom:20px;margin-top:8px;}
+.jilu4a{float:left;background-color:#ededee;width:318px;border-right:#a5a5a5 1px solid;line-height:35px;text-align:center;}
+.jilu4b{float:left;background-color:#ededee;width:319px;border-right:#a5a5a5 1px solid;line-height:35px;text-align:center;}
+.jilu4c{float:left;background-color:#ededee;width:319px;line-height:35px;text-align:center;}
+
