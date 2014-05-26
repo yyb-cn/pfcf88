@@ -148,10 +148,13 @@ class indexModule extends SiteBaseModule
 			}
 			//lu 重构数组  只要5个
 			$numka = count($charts_arr);
-			for($ka=1;$ka<=10;$ka++){
-				$charts_user[$ka]['money']=$charts_arr[$ka][0];
-				$charts_user[$ka]['user_name']=cut_str($charts_arr[$ka][1], 1, 0).'***'.cut_str($charts_arr[$ka][1], 1, -1);
+			for($ka=0;$ka<$numka;$ka++){
+				$charts_use[$ka]['money']=$charts_arr[$ka][0];
+				$charts_use[$ka]['user_name']=cut_str($charts_arr[$ka][1], 1, 0).'***'.cut_str($charts_arr[$ka][1], 1, -1);
 			}
+			for($kai=1;$kai<=10;$kai++){
+				$charts_user[$kai]=$charts_use[$kai-1];
+				}
 			$GLOBALS['tmpl']->assign("charts_user",$charts_user);
 
 		
