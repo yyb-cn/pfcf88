@@ -19,5 +19,18 @@ class aboutfeeModule  extends SiteBaseModule {
 		}
 		$GLOBALS['tmpl']->display("page/aboutfee.html",$cache_id);
     }
+	
+	function fengkong(){
+		
+		$GLOBALS['tmpl']->display("page/index_fengkong.html");
+		}
+	function mechanism(){
+		
+		$GLOBALS['tmpl']->display("page/index_mechanism.html");
+		}
+		function good(){
+		
+		$GLOBALS['tmpl']->display("page/index_jigou.html");
+		}
 }
 ?>

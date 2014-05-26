@@ -1,0 +1,46 @@
+@charset "utf-8";
+/* CSS Document */
+
+.wraper_mechanism { width:993px; margin:0 auto; overflow:hidden;}
+
+.header_mechanism { width:993px; height:129px; background:url(../images/wenfeng-header-bg.png) no-repeat;}
+
+.banner { width:993px; height:461px; background:#667ea0;}
+	.banner .banner1 { float:left; margin-top:9px; margin-left:32px; width:420px; height:282px;}
+	.banner .banner2 { float:left; margin-top:11px; margin-left:32px; width:458px; height:280px;}
+	.banner .banner3 { clear:both; margin-left:32px; width:941px; height:166px;}
+	
+.main { width:971px; padding-left:22px; padding-top:37px; color:#FFF; font-family:"微软雅黑", "黑体", "仿宋"; font-weight:bold; letter-spacing:3px;}
+	.main .title { font-size:22px; margin-bottom:15px;}
+	
+	.main .main1 { float:left; width:417px; height:253px; background:url(../images/wenfeng-main-1.png) no-repeat;}
+		.main1 .main1-msg { margin:27px 0 0 31px;}
+			.main1 .main1-msg .title { margin-left:115px;}
+	
+	.main .main2 { float:left; width:412px; height:253px; background:url(../images/wenfeng-main-2.png) no-repeat;}
+		.main2 .main2-msg { margin:27px 0 0 31px;}
+			.main2 .main2-msg .title { margin-left:115px;}
+	
+	.main .main3 { float:right; margin-right:34px; width:108px; height:549px; background:url(../images/wenfeng-main-3.png) no-repeat;}
+		.main3 .main3-msg {}
+			.main3 .main3-msg .title { margin-top:24px; margin-left:24px; font-size:28px; line-height:50px;}
+			.main3 .main3-msg .msg3 { margin-top:70px; margin-left:40px; width:30px; font-size:28px; line-height:40px;}
+		
+	.main .main4 { float:left; margin-top:54px; width:417px; height:245px; background:url(../images/wenfeng-main-5.png) no-repeat;}
+		.main4 .main4-msg { margin:27px 0 0 31px;  letter-spacing:2px;}
+			.main4 .main4-msg .title { margin-left:100px;}
+			
+	.main .main5 { float:left; margin-top:54px; width:412px; height:245px; background:url(../images/wenfeng-main-4.png) no-repeat;}
+		.main5 .main5-msg { margin:27px 0 0 31px; letter-spacing:5px;}
+			.main5 .main5-msg .title { margin-left:75px;}
+			
+	.main .main6 { float:left; margin-top:-1px; width:945px; height:433px; background:url(../images/wenfeng-main-6.png) no-repeat;}
+		.main6 .main6-msg { margin:27px 0 0 31px; letter-spacing:5px;}
+			.main6 .main6-msg p { margin-left:170px; margin-top:27px; letter-spacing:1px;}
+			.main6 .main6-msg .title { margin-left:370px; margin-top:80px; letter-spacing:3px;}
+	
+	.main .main7 { float:left; width:600px; height:182px; background:url(../images/wenfeng-main-7.png) no-repeat;}
+	
+	.main .main8 { float:left; width:337px; height:182px; background:url(../images/wenfeng-main-8.png) no-repeat;}
+	
+.footer { clear:both; width:993px; height:50px;}

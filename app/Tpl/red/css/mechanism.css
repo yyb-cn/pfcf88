@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+
+.wraper_mechanism { width:993px; margin:0 auto; overflow:hidden;}
+.clear { clear:both; margin:4px 0;}
+
+.header_mechanism { width:993px; height:120px; background:url(../images/mechanism-bg1.png) 0 40px no-repeat;}
+
+.main_mechanism { width:993px; height:845px; color:#FFF; font-family:"微软雅黑", "黑体", "仿宋"; font-weight:bold;}
+
+	.main_mechanism .main_mechanism1 { width:993px; height:215px; background:url(../images/mechanism-bg2.png) no-repeat;}
+		.main_mechanism1 .msg1 { float:right; margin:20px 50px 0 0; font-size:18px; line-height:30px; }
+		
+	.main_mechanism .main_mechanism2 { width:993px; height:216px; background:url(../images/mechanism-bg3.png) no-repeat;}
+		.main_mechanism2 .msg2 { float:left; margin:10px 0 0 42px; font-size:16px; line-height:30px;}
+		
+	.main_mechanism .main_mechanism3 { width:993px; height:216px; background:url(../images/mechanism-bg4.png) no-repeat;}
+		.main_mechanism3 .msg3 { float:right; margin:16px 40px 0 0; font-size:16px; line-height:30px; }
+		
+	.main_mechanism .main_mechanism4 { width:790px; height:156px; margin:0 auto; margin-top:30px;}
+		.main_mechanism4 .msg4 { color:#333; font-size:16px; line-height:30px; }
+		
+.footer_mechanism { width:993px; height:218px; background:url(../images/mechanism-bg5.png) no-repeat;}
