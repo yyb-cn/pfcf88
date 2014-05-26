@@ -34,20 +34,22 @@
 							<li  class="name"><input type="text" value=""  name="email" id="j_username"></li>
 							<li  class="mima"><input type="password" value=""  name="user_pwd" id="j_password"  ></li>
 							
-							<li  class="wj">  {if app_conf("VERIFY_IMAGE") eq 1}<a style="float:left">验证码:</a>{/if}<a  href="{url x="index" r="user#getpassword"}"  title="">{$LANG.FORGET_PASSWORD}</a></li>
+							<li  class="wj">   <?php if($_SESSION['limitimes']>2 && app_conf("VERIFY_IMAGE")==1) :?><a style="float:left">验证码:</a><?php endif;?><a  href="{url x="index" r="user#getpassword"}"  title="">{$LANG.FORGET_PASSWORD}</a></li>
                          
                             
                             <li  class="ver">
-                            	{if app_conf("VERIFY_IMAGE") eq 1}
+                          
+                            <?php if($_SESSION['limitimes']>2 && app_conf("VERIFY_IMAGE")==1) :?>
+                            	
 	                            	<div class="field verify">
 	                                	<div class="verify_row">
 										<input type="text" value="" class="f-input ipttxt" name="verify" />	
 										<img class="ml10" style="margin-top:0" src="{$APP_ROOT}/verify.php?w=89&h=29rand={function name="rand"}" onclick="this.src='{$APP_ROOT}/verify.php?w=89&h=29rand='+ Math.random();" title="看不清楚？换一张" />			
 										</div>
 									</div>
-								{/if}
-                            </li>
 								
+                            </li>
+								<?php endif;?>
 
 							<li><input  type="submit" id="ajax-login-submit" name="commit" value="{$LANG.LOGIN}" class="denglu"></li>
 							<!--<li><a  href=""  title=""  class="w">微博登录</a><a  href=""  title="QQ登陆"  class="q">QQ登录</a></li>-->

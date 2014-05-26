@@ -9,6 +9,7 @@
 
 class userModule extends SiteBaseModule
 {
+	
 	public function register()
 	{		
 		$GLOBALS['tmpl']->caching = true;
@@ -232,18 +233,22 @@ class userModule extends SiteBaseModule
 	}	
 	public function dologin()
 	{
+		
 		if(!$_POST)
 		{
 			 app_redirect("404.html");
 			 exit();
 		}
+		
 		foreach($_POST as $k=>$v)
 		{
 			$_POST[$k] = htmlspecialchars(addslashes($v));
 		}
+		
 		$ajax = intval($_REQUEST['ajax']);
-		//验证码
-		if(app_conf("VERIFY_IMAGE")==1)
+		
+		//验证码 ,输错三次才出现验证码
+		if(app_conf("VERIFY_IMAGE")==1 && $_SESSION['limitimes']>2)
 		{
 			$verify = md5(trim($_REQUEST['verify']));
 			$session_verify = es_session::get('verify');
@@ -251,18 +256,23 @@ class userModule extends SiteBaseModule
 			//echo $session_verify;exit;
 			if($verify!=$session_verify)
 			{				
-				showErr($GLOBALS['lang']['VERIFY_CODE_ERROR'],$ajax,url("shop","user#login"));
+				showErr($GLOBALS['lang']['VERIFY_CODE_ERROR'],$ajax,url("shop","user#login"));// 验证码错误
 			}
+			
 		}
 		
 		require_once APP_ROOT_PATH."system/libs/user.php";
 		if(check_ipop_limit(get_client_ip(),"user_dologin",intval(app_conf("SUBMIT_DELAY")))){
-			$result = do_login_user($_POST['email'],$_POST['user_pwd']);
+			$result = do_login_user($_POST['email'],$_POST['user_pwd']);  //在这里验证用户对不对
+			//print_r($result);exit;
 		}
+		
 		else
 			showErr($GLOBALS['lang']['SUBMIT_TOO_FAST'],$ajax,url("shop","user#login"));
+		
 		if($result['status'])
 		{	
+			unset($_SESSION['limitimes']);
 			$s_user_info = es_session::get("user_info");
 			if(intval($_POST['auto_login'])==1)
 			{
@@ -297,6 +307,7 @@ class userModule extends SiteBaseModule
 		}
 		else
 		{
+			$_SESSION['limitimes']+=1; //linjingxiong 错一次就加一次
 			if($result['data'] == ACCOUNT_NO_EXIST_ERROR)
 			{
 				$err = $GLOBALS['lang']['USER_NOT_EXIST'];
