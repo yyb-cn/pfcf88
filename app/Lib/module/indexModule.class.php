@@ -49,10 +49,12 @@ class indexModule extends SiteBaseModule
 			$GLOBALS['tmpl']->assign("notice_list",$notice_list);
 			
 			//lu 成交数据
-		$deal_data = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal where deal_status in(1,2,4,5) ");
+		$deal_data = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal where deal_status in(1,2,4,5) and is_delete=0  ");
 			foreach($deal_data as $kd=>$vd){
 				//lu 累计总交易金额
 				$tatal_money+=$vd['borrow_amount'];
+				//is_delete=0
+				$deal_id[]=$vd['id'];
 				}
 			//lu 已按期还本金额
 			$deal_benjin = $GLOBALS['db']->getAll("select borrow_amount from ".DB_PREFIX."deal where deal_status=5 ");
@@ -98,12 +100,14 @@ class indexModule extends SiteBaseModule
 		//lu 投资收益排行榜 charts
 		$user_arr=$GLOBALS['db']->getAll("select id,user_name from ".DB_PREFIX."user where is_delete = 0  ");
 		foreach($user_arr as $ku=>$vu){	
-			 $user_invest[]=$GLOBALS['db']->getAll("select money,user_name from ".DB_PREFIX."deal_load where user_id = '".$vu['id']."'"); 
+			 $user_invest[]=$GLOBALS['db']->getAll("select money,user_name,deal_id from ".DB_PREFIX."deal_load where user_id = '".$vu['id']."'"); 
 			 if(!empty($user_invest[$ku])){
 				foreach($user_invest as $km=>$vm){
 					foreach($vm as $km2=>$vm2){
+						if(in_array($vm2['deal_id'],$deal_id)&&$vm2['deal_id']!=0){
 						$charts[$vm2['user_name']]=$charts[$vm2['user_name']]+$vm2['money'];
 						}
+					  }
 					}
 				 }
 			} 
