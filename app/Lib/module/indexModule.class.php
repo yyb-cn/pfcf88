@@ -122,18 +122,6 @@ class indexModule extends SiteBaseModule
 				}
 				 }
 			}
-			 //print_r($charts);exit;
-			/*foreach($vm as $km2=>$vm2){
-						if(in_array($vm2['deal_id'],$deal_id)&&$vm2['deal_id']!=0){
-						 $vm_num=count($vm);
-						 if($vm_num>0){
-							 for($i=1;$i<=$vm_num;$i++){
-								 $charts[$vm2['user_name']]+=$vm2['money'];
-								 }
-							 }
-						} 		
-					  }	
-					  */
 			//lu 投标资金大到小排序
 			foreach($charts as $kc=>$vc){ 
 			$a[]=$vc;
@@ -160,9 +148,9 @@ class indexModule extends SiteBaseModule
 			}
 			//lu 重构数组  只要5个
 			$numka = count($charts_arr);
-			for($ka=0;$ka<10;$ka++){
-				$charts_user[$ka+1]['money']=$charts_arr[$ka][0];
-				$charts_user[$ka+1]['user_name']=cut_str($charts_arr[$ka+1][1], 1, 0).'***'.cut_str($charts_arr[$ka+1][1], 1, -1);
+			for($ka=1;$ka<=10;$ka++){
+				$charts_user[$ka]['money']=$charts_arr[$ka][0];
+				$charts_user[$ka]['user_name']=cut_str($charts_arr[$ka][1], 1, 0).'***'.cut_str($charts_arr[$ka][1], 1, -1);
 			}
 			$GLOBALS['tmpl']->assign("charts_user",$charts_user);
 
