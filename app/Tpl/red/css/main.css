@@ -66,3 +66,22 @@ span.line_disable{ background:url("../images/list_type.gif") no-repeat -18px -15
 .face-close1 { display:inline-block; width:40px; height:40px; float:right; margin:20px 20px 0 0; background:no-repeat url("../images/teach_out.png");}
 .face-close2 { display:inline-block; width:140px; height:40px; clear:both; float:right; margin:420px 100px 0 0;}
 /* 弹出层教学结束 */
+
+/* 14年5月26日改版部分 */
+.trading_top { width:100%; height:430px; overflow:hidden; font-family:'微软雅黑', '黑体', '仿宋';}
+	.trading { width:960px; height:450px; margin:0 auto;}
+	.trading .trading_bg { height:80px;; background:url("../images/trading_bg.gif") no-repeat 0 30px;}
+	.trading .trading_main { height:110px; border-bottom:1px solid #BEBEBE;}
+		.trading_main .trading_num { float:left; width:268px; height:110px; padding-left:50px;}
+			.trading_num .trading_title { font-size:16px; font-weight:bold;}
+			.trading_num .trading_momeny { margin-top:20px; margin-top:12px\9; font-size:26px; font-weight:bold; color:#ee2e53;}
+	.trading .trading_link { height:270px;}
+		.trading_link div { float:left; width:124px; height:124px;}
+		.trading_link div a { color:#5F5353;}
+		.trading_link div a:hover { text-decoration:none; color:#000;}
+		.trading_link div p { font-size:18px; margin:10px 0 0 26px;}
+			.trading_link .trading_link_1 { margin:40px 0 0 115px;}
+			.trading_link .trading_link_2 { margin:40px 180px 0 180px;}
+			.trading_link .trading_link_3 { margin-top:40px; width:128px; height:128px;}
+			.trading_link .trading_link_3 P { margin:6px 0 0 26px;}
+/* 14年5月26日改版部分结束 */
