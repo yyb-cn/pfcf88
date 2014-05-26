@@ -102,15 +102,38 @@ class indexModule extends SiteBaseModule
 		foreach($user_arr as $ku=>$vu){	
 			 $user_invest[]=$GLOBALS['db']->getAll("select money,user_name,deal_id from ".DB_PREFIX."deal_load where user_id = '".$vu['id']."'"); 
 			 if(!empty($user_invest[$ku])){
+				
 				foreach($user_invest as $km=>$vm){
-					foreach($vm as $km2=>$vm2){
-						if(in_array($vm2['deal_id'],$deal_id)&&$vm2['deal_id']!=0){
-						$charts[$vm2['user_name']]=$charts[$vm2['user_name']]+$vm2['money'];
-						}
-					  }
-					}
+				foreach($vm as $km2=>$vm2){
+				
+					
+				}
+					
+				}
+				
+				$vm_num=count($vm);
+				if(in_array($vm2['deal_id'],$deal_id)&&$vm2['deal_id']!=0){
+							 if($vm_num>0){
+									 for($i=0;$i<$vm_num;$i++){
+										$charts[$vm2['user_name']]+=$vm[$i]['money'];
+										
+									 }
+							 }	
+				}
 				 }
-			} 
+			}
+			 //print_r($charts);exit;
+			/*foreach($vm as $km2=>$vm2){
+						if(in_array($vm2['deal_id'],$deal_id)&&$vm2['deal_id']!=0){
+						 $vm_num=count($vm);
+						 if($vm_num>0){
+							 for($i=1;$i<=$vm_num;$i++){
+								 $charts[$vm2['user_name']]+=$vm2['money'];
+								 }
+							 }
+						} 		
+					  }	
+					  */
 			//lu 投标资金大到小排序
 			foreach($charts as $kc=>$vc){ 
 			$a[]=$vc;
