@@ -1,0 +1,49 @@
+.top{
+  width:100%;
+  height:760px;
+  overflow:hidden;
+  margin:0 auto;
+  }
+.main_banner1{
+  background:url(../images/Page1.jpg) no-repeat center top;
+  }
+.slider{
+  width:1000px;
+  height:99px;
+  margin:315px auto;
+  position:relative;
+  background:url(../images/bar_01.png) no-repeat;
+  }
+.slider_menu{
+  width:100px;
+  height:100px;
+  position:absolute;
+  cursor:pointer;
+  top:0;
+  }
+.slider_menuleft{
+  background:url(../images/rotaleft.png) no-repeat;
+  left:21px;
+  }
+.slider_menuleft:hover{
+  background:url(../images/on_rotaleft.png) no-repeat;
+  }
+.slider_menuright{
+  background:url(../images/rotaright.png) no-repeat;
+  right:21px;
+  }
+.slider_menuright:hover{
+  background:url(../images/on_rotaright.png) no-repeat;
+  }
+.slider_menubar {
+	height: 99px;
+	display: block;
+}
+.page {
+	width:1040px;
+	margin:0 auto;
+}
+.page a{
+	width:20px;
+	margin-left:13px;
+}

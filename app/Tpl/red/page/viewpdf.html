@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery大屏图片幻灯片代码_懒人图库</title>
+<link rel="stylesheet" type="text/css" href="app/Tpl/red/viewpdf/css/main.css"/>
+<script type='text/javascript' src="app/Tpl/red/viewpdf/js/jquery.js"></script>
+<script language="JavaScript">
+    //定时器
+	var timer ;
+var BodyHeight,BodyWidth;
+	var yon = 0;                    
+	var xon = 0;
+	var step = 1;
+	var Hoffset = 0;                    
+	var Woffset = 0; 
+	var html = '';
+	var yuan = 03;
+	var _img = 1;
+	for(var i=1; i<32; i++){
+		if( i==3 || i ==7 || i==15){
+			yuan = '01';
+		}
+		else{
+			yuan = '03';
+		}
+		html += '<a onfocus="this.blur()" href="javascript:jumpeBanner('+i+')"><img src="app/Tpl/red/viewpdf/images/yuan_'+yuan+'.png" onmousemove=\'this.src="app/Tpl/red/viewpdf/images/yuan_05.png"\' onMouseOut=\'this.src="app/Tpl/red/viewpdf/images/yuan_'+yuan+'.png"\' /></a>';
+	}
+	
+	$(function(){
+		$(".page").html(html);
+		timer = setInterval(function(){rotateBanner(-1)},500000);
+		$(".slider_menu").hover(function(){
+			clearInterval(timer);
+		}, function(){
+			timer = setInterval(function(){rotateBanner(-1)},500000);
+		});
+       BodyHeight=parseInt(document.body.clientHeight);
+       BodyWidth=parseInt(document.body.clientWidth);
+            //alert(BodyWidth);
+	});
+	// begin:首页视觉区效果
+	
+	function rotateBanner(step){
+		_img = _img + 1;
+		if (_img>31) {
+			_img=1;
+		} else if (_img<=0) {
+			_img=31;
+		}
+		$("#IndexBanner").stop().animate({opacity: 0},300, function(){
+			$(this).css("background-image", "url(app/Tpl/red/viewpdf/images/Page"+_img+".jpg)").animate({opacity: 1},300);
+		});
+	}
+	
+	function jumpeBanner(jump){
+		$("#IndexBanner").stop().animate({opacity: 0},300, function(){
+			$(this).css("background-image", "url(app/Tpl/red/viewpdf/images/Page"+jump+".jpg)").animate({opacity: 1},300);
+		});
+		_img = jump;
+	}
+	// end
+</script>
+</head>
+
+<body >
+<!-- 代码 开始 -->
+<div id="IndexBanner" class="top main_banner1"  style="opacity: 1; background-image: url("app/Tpl/red/viewpdf/images/Page1.jpg");">
+	<div class="slider" style="background-image: url("app/Tpl/red/viewpdf/images/bar_01.png");">
+    	<a class="slider_menu slider_menuleft" onfocus="this.blur()" href="javascript:rotateBanner(-1)"></a>
+        <a class="slider_menu slider_menuright" onfocus="this.blur()" href="javascript:rotateBanner(1)"></a>
+        <span class="slider_menubar"></span>
+    </div>
+</div>
+
+<div class="page">
+    <!--<div class="jump">
+        <a onfocus="this.blur()" href="javascript:jumpeBanner('2')"><img src="images/Page2.jpg" width="120px" height="83px;" /></a>
+        <p>目录</p>
+    </div>
+    <div class="jump">
+        <a onfocus="this.blur()" href="javascript:jumpeBanner('3')"><img src="images/Page3.jpg" width="120px" height="83px;" /></a>
+        <p>一、基金结构</p>
+    </div>
+    <div class="jump">
+        <a onfocus="this.blur()" href="javascript:jumpeBanner('7')"><img src="images/Page7.jpg" width="120px" height="83px;" /></a>
+        <p>二、基金投资项目详解</p>
+    </div>
+    <div class="jump">
+        <a onfocus="this.blur()" href="javascript:jumpeBanner('15')"><img src="images/Page15.jpg" width="120px" height="83px;" /></a>
+        <p>三、基金管理详解</p>
+    </div>-->
+</div>
+
+<!-- 代码 结束 -->
+</div>
+</body>
+</html>

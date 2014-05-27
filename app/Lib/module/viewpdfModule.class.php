@@ -7,12 +7,14 @@
 // | Author: 云淡风轻(88522820@qq.com)
 // +----------------------------------------------------------------------
 
-class viewpdfModule extends SiteBaseModule
+class viewpdfModule 
 {
 	public function index()
-	{
-		echo '这是查看pdf的控制器';exit;
-		$GLOBALS['tmpl']->display("page/mobile_index.html",$cache_id);
+	{	
+		
+		
+		$GLOBALS['tmpl']->display("page/viewpdf.html");
+		
 	}
 }
 ?>
