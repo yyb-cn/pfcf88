@@ -122,7 +122,7 @@
 								{
 									l+='  item_1'
 									}
-								l+='  tc" style="width:730px; position:relative;" onmousemove=\'this.style.background="#e2e6e9"\' onMouseOut=\'this.style.background="#FFF"\'><div class="clearfix" style="padding-top:8px;"><div class="pt10"><div class="f_l tl w170">'
+								l+='  tc" style="width:730px; position:relative; height:85px; padding-top:25px;" onmousemove=\'this.style.background="#e2e6e9"\' onMouseOut=\'this.style.background="#FFF"\'><div class="clearfix" style="padding-top:8px;"><div class="pt10"><div class="f_l tl w170">'
 						l+='<div class="b">';
 						l+='<a href="'+data[i].url+'" '
 						l+='target="_blank" id="deal_my_name">';
@@ -166,19 +166,19 @@
 			            
 					l+='<div style="float:right; width:96px; height:36px;position:absolute;left:600px;top:2px;">'
 						if(data[i].deal_status==1){
-						l+='<a style="background:none; border:none; padding:0px" href="'+data[i].url+'" class="btn-orange"><img style=" width:80px; height:80px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>'
+						l+='<a style="background:none; border:none; padding:0px" href="'+data[i].url+'" class="btn-orange"><img style=" width:80px; height:80px; margin-top:15px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>'
 							}
 						
 					 else if(data[i].deal_status==2){
-						l+='<a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:82px;height:82px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px"></a>'
+						l+='<a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:82px;height:82px; margin-top:15px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px"></a>'
 						}
 						
 					else if(data[i].deal_status==4){
 						
-						l+='<a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_in_progress.png" alt="" width="111px" height="34px"></a>'
+						l+='<a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px; margin-top:15px;" src="{$TMPL}/images/load_in_progress.png" alt="" width="111px" height="34px"></a>'
 						}	
 				else if(data[i].deal_status==5){
-						l+=' <a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_done.png" alt="" width="111px" height="34px"></a>'
+						l+=' <a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px; margin-top:15px;" src="{$TMPL}/images/load_done.png" alt="" width="111px" height="34px"></a>'
 						}
 						l+='</div>'
 						  l+='</div>'
@@ -467,7 +467,7 @@
 				 {/if}
 				<div class="biao-list clearfix" id="J_biao_list" style="position:relative; overflow:hidden;">
 					{foreach from=$deal_list item="deal" key=key}
-					<div class="item {if $key mod 2 eq 1}item_1{/if} tc" style="width:730px; position:relative;" onmousemove='this.style.background="#e2e6e9"' onMouseOut='this.style.background="#FFF"'>
+					<div class="item {if $key mod 2 eq 1}item_1{/if} tc" style="width:730px; position:relative; height:85px; padding-top:25px;" onmousemove='this.style.background="#e2e6e9"' onMouseOut='this.style.background="#FFF"'>
 			              <div class="clearfix" style="padding-top:8px;">
 			                  
 			                  <div class="pt10">
@@ -525,13 +525,13 @@
 			              
 			        </div><div style="float:right; width:96px; height:36px;  position:absolute;left:600px;top:2px;">
 				{if $deal.deal_status eq 1}
-            <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px; height:80px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>
+            <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px; height:80px; margin-top:15px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>
             {elseif $deal.deal_status eq 2}<!--满标-->
-			<a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:82px;height:82px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px"></a>
+			<a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:82px;height:82px; margin-top:15px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px"></a>
             {elseif $deal.deal_status eq 4}<!--还款中-->
-            <a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_in_progress.png" alt="" width="111px" height="34px"></a>
+            <a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px; margin-top:15px;" src="{$TMPL}/images/load_in_progress.png" alt="" width="111px" height="34px"></a>
             {elseif $deal.deal_status eq 5}<!--已还清-->
-            <a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px;" src="{$TMPL}/images/load_done.png" alt="" width="111px" height="34px"></a>
+            <a style="background:none; border:none; padding:0px" href="javascript:;" class="btn-orange"><img style=" width:80px;height:80px; margin-top:15px;" src="{$TMPL}/images/load_done.png" alt="" width="111px" height="34px"></a>
              {/if}
 			</div>
                </div> 
