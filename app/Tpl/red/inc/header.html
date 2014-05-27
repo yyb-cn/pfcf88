@@ -81,7 +81,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 		<ul>
             <!-- <li><a href="{$APP_ROOT}">首页</a></li> -->
             {foreach from=$nav_list item=nav_item key=key}
-			<li  class="onn"><a  title=""  style="padding: 10px 0; cursor: pointer;"  href="{$nav_item.url}" target="{if $nav_item.blank eq 1}_blank{/if}">{$nav_item.name}</a>
+			<li  class="onn"><a  title=""  style="padding: 10px 0; cursor: pointer;"  href="{$nav_item.url}" target="{if $nav_item.blank eq 1}_blank{/if}">{$nav_item.name}{if $nav_item.sub_nav}<img class="head_jia" src="{$TMPL}/images/nav_bg.png">{/if}</a>
             {if $nav_item.sub_nav}
 				<ul  style="display: none;">
                     {foreach from=$nav_item.sub_nav item=sub_item}
