@@ -122,7 +122,7 @@
 								{
 									l+='  item_1'
 									}
-								l+='  tc" style="width:730px; position:relative;"><div class="clearfix" style="padding-top:8px;"><div class="pt10"><div class="f_l tl w170">'
+								l+='  tc" style="width:730px; position:relative;" onmousemove=\'this.style.background="#e2e6e9"\' onMouseOut=\'this.style.background="#FFF"\'><div class="clearfix" style="padding-top:8px;"><div class="pt10"><div class="f_l tl w170">'
 						l+='<div class="b">';
 						l+='<a href="'+data[i].url+'" '
 						l+='target="_blank" id="deal_my_name">';
@@ -465,9 +465,9 @@
 			     </div>
                  
 				 {/if}
-				<div class="biao-list clearfix" id="J_biao_list" style="padding-left:20px; position:relative; ">
+				<div class="biao-list clearfix" id="J_biao_list" style="position:relative; overflow:hidden;">
 					{foreach from=$deal_list item="deal" key=key}
-					<div class="item {if $key mod 2 eq 1}item_1{/if} tc" style="width:730px; position:relative;">
+					<div class="item {if $key mod 2 eq 1}item_1{/if} tc" style="width:730px; position:relative;" onmousemove='this.style.background="#e2e6e9"' onMouseOut='this.style.background="#FFF"'>
 			              <div class="clearfix" style="padding-top:8px;">
 			                  
 			                  <div class="pt10">
@@ -755,6 +755,8 @@
 		
         $("#lastValue").html(formatNum(value));
     }
+	
+	
 </script>
 {include file="inc/footer.html"}
 
