@@ -6,7 +6,7 @@
 	            <ul class="cf">
 	            	{foreach from=$deal_help item=help_cate name="help_cate"}
 					{if $smarty.foreach.help_cate.iteration <= app_conf('HELP_CATE_LIMIT')}
-					<li class="col hp{$smarty.foreach.help_cate.iteration}{if $smarty.foreach.help_cate.last} end{/if}">
+					<li class="col hp{$smarty.foreach.help_cate.iteration}{if $smarty.foreach.help_cate.last} end{/if}" style="height:auto; border:none;">
 	                    <h3>{$help_cate.title}</h3>
 	                    <ul class="sub-list">
 							{foreach from=$help_cate.help_list item=help_item name="help_item"}
