@@ -18,11 +18,14 @@ class SiteBaseModule{
 		$GLOBALS['fcache']->set_dir(APP_ROOT_PATH."public/runtime/data/avatar_cache/");
 		$GLOBALS['dynamic_avatar_cache'] = $GLOBALS['fcache']->get("AVATAR_DYNAMIC_CACHE"); //头像的动态缓存
 		//输出导航菜单
+		
 		$nav_list = get_nav_list();
+		
 		$nav_list= init_nav_list($nav_list);
 		foreach($nav_list as $k=>$v){
 			$nav_list[$k]['sub_nav'] = init_nav_list($v['sub_nav']);
 		}
+		
 		$GLOBALS['tmpl']->assign("nav_list",$nav_list);
 		
 		
