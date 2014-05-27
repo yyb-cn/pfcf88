@@ -152,7 +152,7 @@ class indexModule extends SiteBaseModule
 				$charts_use[$ka]['money']=$charts_arr[$ka][0];
 				$charts_use[$ka]['user_name']=cut_str($charts_arr[$ka][1], 1, 0).'***'.cut_str($charts_arr[$ka][1], 1, -1);
 			}
-			for($kai=1;$kai<=10;$kai++){
+			for($kai=1;$kai<=5;$kai++){
 				$charts_user[$kai]=$charts_use[$kai-1];
 				}
 			$GLOBALS['tmpl']->assign("charts_user",$charts_user);
