@@ -94,8 +94,11 @@ class indexModule extends SiteBaseModule
 		$chengjian= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=5  "," id DESC");
 		// 信贷赢3号
 		$credit= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=3  "," id DESC");
+		// 文峰市场
+		$wenfeng= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=6  "," id DESC");
 			$GLOBALS['tmpl']->assign("chengjian",$chengjian['list'][0]);
 			$GLOBALS['tmpl']->assign("credit",$credit['list'][0]);
+			$GLOBALS['tmpl']->assign("wenfeng",$wenfeng['list'][0]);
 		
 		//lu 投资收益排行榜 charts
 		$user_arr=$GLOBALS['db']->getAll("select id,user_name from ".DB_PREFIX."user where is_delete = 0  ");

@@ -1,9 +1,6 @@
 @charset "utf-8";
 /* CSS Document */
 
-*{ padding:0; margin:0;}
-ul{list-style:none;}
-img{border:0px;}
 .wraper-wenfeng { width:993px; margin:0 auto; overflow:hidden;}
 
 .header-wenfeng { width:993px; height:129px; background:url(../images/wenfeng-header-bg.png) no-repeat;}

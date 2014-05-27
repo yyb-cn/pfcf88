@@ -135,8 +135,8 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
         	</a>
         </div>
         <div class="bay_now3" style=" float:right; padding-right:90px; padding-top:360px;">
-        	<a {if $chengjian.name}href="{$chengjian.share_url}"{else}{/if}>
-        		{if $chengjian.name}<img src="{$TMPL}/images/xinan_06.png" onmousemove='this.src="{$TMPL}/images/xinan.png"' onMouseOut='this.src="{$TMPL}/images/xinan_06.png"' />{else}<img src="{$TMPL}/images/xinan_08.png" />{/if}
+        	<a {if $wenfeng.name}href="{$wenfeng.share_url}"{else}{/if}>
+        		{if $wenfeng.name}<img src="{$TMPL}/images/xinan_06.png" onmousemove='this.src="{$TMPL}/images/xinan.png"' onMouseOut='this.src="{$TMPL}/images/xinan_06.png"' />{else}<img src="{$TMPL}/images/xinan_08.png" />{/if}
         	</a>
         </div>
     </div>
@@ -152,15 +152,9 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                 <span style="font-size: 12px; font-weight: normal;"><a href="{url x="index" r="deals"}" title="{$LANG.MORE}">更多产品列表...</a></span>
             </div>
         </div>
-        <div class="i_deal_list clearfix pr15 pl15">
+        <div class="i_deal_list clearfix">
             {foreach from=$deal_list item="deal" key=key name="deal"}
-            <div class="item {if $key mod 2 eq 1}item_1{/if} clearfix" {if $smarty.foreach.deal.last}style="border-bottom:0"{/if}>
-            
-            <!--
-                <div class="icon f_l">
-                    <a href="{$deal.url}"><img src="{$deal.icon}" class="img_b" height="80" width="80"></a>
-                </div>
-                -->
+            <div class="item clearfix" {if $smarty.foreach.deal.last}style="border-bottom:0; padding-left:15px; padding-right:15px;"{/if} style="padding-left:15px; padding-right:15px;" onmousemove='this.style.background="#e2e6e9"' onMouseOut='this.style.background="#FFF"'>
                 <div class="detail f_r" style="float:left;">
                     <div class="tit b lh24 clearfix">
                         <a href="{$deal.url}" class="f_l" {if $deal.deal_status eq 1}style="color:#428dcb
