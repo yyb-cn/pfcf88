@@ -33,7 +33,7 @@
 						<ul>
 							<li  class="name"><input type="text" value=""  name="email" id="j_username"></li>
 							<li  class="mima"><input type="password" value=""  name="user_pwd" id="j_password"  ></li>
-							
+									<input type="hidden" name="ajax" value="1">
 							<li  class="wj">   <?php if($_SESSION['limitimes']>2 && app_conf("VERIFY_IMAGE")==1) :?><a style="float:left">验证码:</a><?php endif;?><a  href="{url x="index" r="user#getpassword"}"  title="">{$LANG.FORGET_PASSWORD}</a></li>
                          
                             
@@ -44,6 +44,7 @@
 	                            	<div class="field verify">
 	                                	<div class="verify_row">
 										<input type="text" value="" class="f-input ipttxt" name="verify" />	
+											
 										<img class="ml10" style="margin-top:0" src="{$APP_ROOT}/verify.php?w=89&h=29rand={function name="rand"}" onclick="this.src='{$APP_ROOT}/verify.php?w=89&h=29rand='+ Math.random();" title="看不清楚？换一张" />			
 										</div>
 									</div>
@@ -58,6 +59,96 @@
 				</div>
 			</form>
 		</div>
+        <script type="text/javascript">		
+		$(document).ready(function(){
+			var i=0	
+			$("#ajax-login-submit").click(function(){
+				
+			
+				if($.trim($("#j_username").val()).length == 0)
+				{
+					$.showErr("{function name="sprintf" format=$LANG.FORMAT_ERROR_TIP value=$LANG.USER_TITLE_EMAIL}{$LANG.OR}{function name="sprintf" format=$LANG.FORMAT_ERROR_TIP value=$LANG.USER_TITLE_USER_NAME}",function(){
+						$("#j_username").focus();
+					});				
+					return false;
+				}
+		
+				if(!$.minLength($("#j_password").val(),4,false))
+				{
+					$.showErr("{function name="sprintf" format=$LANG.FORMAT_ERROR_TIP value=$LANG.USER_TITLE_USER_PWD}",function(){
+						$("#j_password").focus();
+					});					
+					return false;
+				}
+				
+				var ajaxurl = $("form[name='ajax_login_form']").attr("action");
+				var query = $("form[name='ajax_login_form']").serialize() ;
+				
+				$.ajax({ 
+					url: ajaxurl,
+					dataType: "json",
+					data:query,
+					type: "POST",
+					success: function(ajaxobj){
+						if(ajaxobj.status==1)
+						{
+							//alert(1)
+							var integrate = $("<span id='integrate'>"+ajaxobj.data+"</span>");
+							$("body").append(integrate);
+							update_page_user_tip();
+							$("#integrate").remove();				
+									
+							$.showSuccess(ajaxobj.info,function(){
+								if(ajaxobj.jump!='')
+								location.href = ajaxobj.jump;
+								else
+								location.reload();
+							});							
+						}
+						else
+						{	
+							i+=1
+							
+							$.showErr(ajaxobj.info);
+							if(i>2)	
+							{location.reload();}						
+						}
+					},
+					error:function(ajaxobj)
+					{
+//						if(ajaxobj.responseText!='')
+//						alert(ajaxobj.responseText);
+					}
+				});	
+				
+				return false;
+				
+			});	
+			
+			
+			
+			
+			
+			})
+			
+			
+			function update_page_user_tip()
+		{
+			var ajaxurl = APP_ROOT+"/index.php?ctl=ajax&act=update_user_tip";
+			$.ajax({ 
+			url: ajaxurl,
+			type: "POST",
+			success: function(ajaxobj){
+				$("#user_head_tip").html(ajaxobj);
+			},
+			error:function(ajaxobj)
+			{
+//				if(ajaxobj.responseText!='')
+//				alert(ajaxobj.responseText);
+			}
+		});	
+		}
+		</script>	
     {/if}
 
     <!-- 两段if里均少一个div结束标签,在banner层结束,无需添加 -->
