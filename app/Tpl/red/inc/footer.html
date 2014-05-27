@@ -1,6 +1,6 @@
 	</div>
 	<div class="blank"></div>
-	<div id="ftw">
+	<div id="ftw" style="height:auto;">
         <div id="ft">
         	<div class="wrap">
 	            <ul class="cf">
@@ -21,7 +21,8 @@
 	            </ul>
 				<div class="blank"></div>
 			</div>
-			<div class="footer_line"></div>    
+			<div class="footer_line"></div>   
+<div class="ass" style="height:100px;"> 
 		<div class="wrap">
 				{if $f_link_data}
 				<div class="flink">
@@ -41,7 +42,7 @@
             <a  href=""  target="_blank"><img src="{$TMPL}/images/ssl_360safe.png" onmouseover="this.src='{$TMPL}/images/ssl_360safex.png'" onmouseout="this.src='{$TMPL}/images/ssl_360safe.png'" /></a>
             <a  href=""  target="_blank"><img src="{$TMPL}/images/logo_szfw.png" onmouseover="this.src='{$TMPL}/images/logo_szfwx.png'" onmouseout="this.src='{$TMPL}/images/logo_szfw.png'" /></a>
             </div>
-	        <div class="copyright"> 
+	        <div class="copyright" style="height:100px;"> 
                   <div style="width:300px; float:left; text-align:right;">
 	            	{if app_conf("SHOP_TEL") neq ''}
 					{$LANG.TEL}：{function name="app_conf" value="SHOP_TEL"} {function name="app_conf" value="ONLINE_TIME"}  
@@ -78,9 +79,11 @@
 
 	            </div>
         </div>	
+         <script type="text/javascript"> var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F692e50534419470e4eb34744f40c3b1d' type='text/javascript'%3E%3C/script%3E")) </script>
+</div>
     </div>
 
-	<div id="gotop"></div>
-    <script type="text/javascript"> var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F692e50534419470e4eb34744f40c3b1d' type='text/javascript'%3E%3C/script%3E")) </script>
+	<div id="gotop"></div></div>
+   
 </body>
 </html>
