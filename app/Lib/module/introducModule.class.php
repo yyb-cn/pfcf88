@@ -11,8 +11,21 @@ class introducModule extends SiteBaseModule
 {
 	public function index()
 	{
+		//文峰
+		$GLOBALS['tmpl']->display("page/info_wenfeng.html");
 		
-		$GLOBALS['tmpl']->display("page/wenfeng.html",$cache_id);
+	}
+	public function chengjian()
+	{
+		//城建三期
+		$GLOBALS['tmpl']->display("page/info_chengjian.html");
+		
+	}
+	public function xindai()
+	{
+		//信贷赢
+		$GLOBALS['tmpl']->display("page/info_xindai.html",$cache_id);
+		
 	}
 }
 ?>
