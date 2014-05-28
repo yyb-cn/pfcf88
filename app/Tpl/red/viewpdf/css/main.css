@@ -11,6 +11,9 @@ img{ border:none;}
 .main_banner1{
   background:url(../images/Page1.jpg) no-repeat center top;
   }
+  .main_banner2{
+  background:url(../img/Page1.jpg) no-repeat center top;
+  }
 .slider{
   width:1000px;
   height:99px;

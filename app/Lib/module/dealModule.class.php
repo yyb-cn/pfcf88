@@ -142,6 +142,7 @@ class dealModule extends SiteBaseModule
 		}
 		$deal['create_time']=date("Y-m-d H:i",$deal['create_time']);
 		$GLOBALS['tmpl']->assign("deal",$deal);
+		//print_r($deal);exit;
 		$GLOBALS['tmpl']->display("page/deal.html");
 	}
 	
