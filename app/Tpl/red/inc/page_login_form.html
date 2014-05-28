@@ -10,14 +10,14 @@
 									<span class="holder_tip ps">{$LANG.USER_TITLE_USER_PWD}</span>
 									<input type="password" value="" class="f-input ipttxt" id="login-password" name="user_pwd" size="30" tabindex="2">
 								</div>	
-								{if app_conf("VERIFY_IMAGE") eq 1}
+								 <?php if($_SESSION['limitimes']>2 && app_conf("VERIFY_IMAGE")==1) :?>
 								<div class="field verify">
 									<div class="verify_row">								
 									<input type="text" value="" class="f-input ipttxt" name="verify" />	
 									<img class="ml10" style="margin-top:0" src="{$APP_ROOT}/verify.php?w=89&h=39rand={function name="rand"}" onclick="this.src='{$APP_ROOT}/verify.php?w=89&h=39rand='+ Math.random();" title="看不清楚？换一张" />			
 									</div>
 								</div>
-								{/if}
+							<?php endif;?>
 								<div class="field autologin clearfix" style="font-size:12px;">
 									<div  class="f_l"><input type="checkbox" id="autologin" name="auto_login" value="1" tabindex="3">{$LANG.AUTO_LOGIN}</div>									
 									<div class="lostpassword f_r">
@@ -33,6 +33,7 @@
 		<!--登录表单-->	
 		<script type="text/javascript">		
 		$(document).ready(function(){
+		var i=0	
 				$(".user_login_bar .holder_tip").click(function(){
 					$(this).hide();
 					$(this).parent().find(".f-input").focus();
@@ -98,8 +99,12 @@
 							});							
 						}
 						else
-						{
-							$.showErr(ajaxobj.info);							
+						{	
+							i+=1
+							
+							$.showErr(ajaxobj.info);
+							if(i>2)	
+							{location.reload();}						
 						}
 					},
 					error:function(ajaxobj)
