@@ -14,11 +14,16 @@ img{ border:none;}
   .main_banner2{
   background:url(../img/Page1.jpg) no-repeat center top;
   }
+.main_banner3{
+  background:url(../img_xdy/Page1.jpg) no-repeat center top;
+  }
 .slider{
   width:1000px;
   height:99px;
-  margin:315px auto;
-  position:relative;
+	top:50%;
+	left:50%;
+  margin-left:-500px;
+  position:fixed;
   background:url(../images/bar_01.png) no-repeat;
   }
 .slider_menu{

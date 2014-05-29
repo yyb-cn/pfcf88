@@ -18,7 +18,7 @@ class viewpdfModule
 		break;
 		case 5 :$GLOBALS['tmpl']->display("page/viewpdf.html");//文峰pdf
 		break;
-		case 3 :echo "信贷赢";//文峰pdf
+		case 3 :$GLOBALS['tmpl']->display("page/viewpdf_xdy.html");//信贷赢
 		break;	
 		default:
   			echo "您的请求不存在，<a href='index.php'>点击返回</a>";
