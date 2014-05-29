@@ -370,7 +370,7 @@ class dealModule extends SiteBaseModule
 	
 	
 	//lu 设置批量投资金额
-	function bid_more(){
+/*	function bid_more(){
 		
 		// 获取 正在投资中借款列表    publish_wait =0 AND deal_status=1    load_money
 		$deal_arr = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal where publish_wait =0 AND deal_status=1 AND is_delete=0 AND  load_money=0 ");
@@ -398,10 +398,10 @@ class dealModule extends SiteBaseModule
 		$GLOBALS['tmpl']->assign("user_arr",$user_array);
 		$GLOBALS['tmpl']->assign("deal_arr",$deal_arr);
 		$GLOBALS['tmpl']->display("page/deal_bid_more.html");
-		} 
+		} */
 		
 	//LU 批量投资
-	function dobid_more(){
+	/*function dobid_more(){
 
 		$id = intval($_REQUEST['deal_id']); // fabiao_time
 		
@@ -460,45 +460,9 @@ class dealModule extends SiteBaseModule
 		}	
 		app_redirect(url("index.php?ctl=deal"));
 		
-	}
+	}*/
 	
-	//lu 实现部分用户名用星号代替功能
-function cut_str($string, $sublen, $start = 0, $code = 'UTF-8')
-{
-    if($code == 'UTF-8')
-    {
-        $pa = "/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|\xe0[\xa0-\xbf][\x80-\xbf]|[\xe1-\xef][\x80-\xbf][\x80-\xbf]|\xf0[\x90-\xbf][\x80-\xbf][\x80-\xbf]|[\xf1-\xf7][\x80-\xbf][\x80-\xbf][\x80-\xbf]/";
-        preg_match_all($pa, $string, $t_string);
-
-        if(count($t_string[0]) - $start > $sublen) return join('', array_slice($t_string[0], $start, $sublen));
-        return join('', array_slice($t_string[0], $start, $sublen));
-    }
-    else
-    {
-        $start = $start*2;
-        $sublen = $sublen*2;
-        $strlen = strlen($string);
-        $tmpstr = '';
-
-        for($i=0; $i< $strlen; $i++)
-        {
-            if($i>=$start && $i< ($start+$sublen))
-            {
-                if(ord(substr($string, $i, 1))>129)
-                {
-                    $tmpstr.= substr($string, $i, 2);
-                }
-                else
-                {
-                    $tmpstr.= substr($string, $i, 1);
-                }
-            }
-            if(ord(substr($string, $i, 1))>129) $i++;
-        }
-        //if(strlen($tmpstr)< $strlen ) $tmpstr.= "...";
-        return $tmpstr;
-    }
-}
+	
 }
 
 ?>
