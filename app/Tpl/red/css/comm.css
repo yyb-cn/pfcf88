@@ -45,7 +45,7 @@ img{border:none;margin:0; padding:0;}
 .head_main ul li.onn1{background:url("../images/nav_bghover.png") no-repeat 101px 52px;}
 .head_main ul li ul{position:absolute;border:1px solid #d6dce1;border-top:3px solid #e61717;z-index:5;top:75px;left:0;background:#fff;display:none;}
 .head_main ul li ul li{height:35px;line-height:35px;float:none;border-top:1px dotted #d6dce1;text-align:center;}
-.head_main ul li ul li a{ width:90px;}
+.head_main ul li ul li a{ width:90px;font-size:14px;}
 
 .foot{background:#fff;width:100%;}
 .bottom{width:1000px;margin:auto;}
