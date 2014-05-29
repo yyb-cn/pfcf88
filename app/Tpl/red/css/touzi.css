@@ -24,7 +24,7 @@
 .shop2b img{margin-top:30px;}
 .shop2b h2{font-size:12px;font-weight:bold;line-height:20px;}
 .shop2b h1{font-size:18px;font-weight:bold;color:#F00;line-height:30px;}
-.shop3{margin-left:20px;float:left;margin-top:25px;}
+.shop3{width:300px;margin-left:20px;float:left;margin-top:25px;}
 .shop3a{ overflow:hidden;}
 .shop3a p{float:left;margin-bottom:10px;}
 .jindu{width:113px;border:#d0d0d0 1px solid;float:left;margin: 0 10px;}
@@ -34,7 +34,7 @@
 .shop3c{padding-left:45px;font-weight:bold;font-size:14px;line-height:50px; background:url(../images/tou_09.png); background-repeat:no-repeat; background-position:left 12px;}
 .shop3d{padding-left:45px;line-height:26px;}
 .shop3f{padding-left:45px;line-height:26px;background:url(../images/tou_15.png);background-repeat:no-repeat; background-position:left 0;}
-.shop4{float:left;margin-left:100px;}
+.shop4{float:left;margin-left:80px;}
 .shop4a{margin-top:50px;margin-bottom:100px;}
 .shop4b{color:#F00;font-size:18px;font-weight:bold;}
 
