@@ -1,0 +1,139 @@
+<script type='text/javascript' src="{$TMPL}/js/jquerycaculator.js"></script>
+<script language="JavaScript">
+$(document).ready(function(e) {
+    //principal本金,interest利率,yield收益
+	
+	var principal,interest,nowInterest,moon,yield,nextSelect,vel,str;	//本金,最终利率,该投资项目的最初利率,投资周期,收益,获取投资项目的name,正则规则,正则判断
+	
+	vel = /^\d+(\.\d+)?$/;	//只能是数字
+	
+	$("#goods select").live('change',function(){
+		$("#yield input").val();
+		
+		principal = $("#principal input").val();	//本金
+		
+		$(this).children("option[value=x]").remove();
+			
+		nextSelect = $(this).val();	//这个只是获取下一个select的name
+		
+		$("#ctyle input").val("");
+		$("#ctyle select").css("display","none");
+		$("#ctyle select[name="+nextSelect+"]").removeAttr("style","display");
+	})
+	
+	$("#ctyle select").live('change',function(){
+		$(this).children("option[value=x]").remove();
+		
+		nowInterest = $(this).val();	//当前利率
+		
+		moon = $(this).find("option:selected").attr("moon");	//投资的周期
+		moon = moon/12;
+		
+	})
+	
+	$("#compute img").live('click',function(){
+		
+		principal = $("#principal input").val();	//本金
+		str = vel.exec(principal);	//正则
+		
+		interest = nowInterest;	//赋值
+		
+		if( nextSelect == 'xindai'){	//判断是否选的是信贷三期,判断投资金额的范围使用的利率
+			if( principal >= 20 && principal < 50){
+				interest = nowInterest*1 + 10
+			}
+			if( principal >= 50 && principal < 100){
+				interest = nowInterest*1 + 20
+			}
+			if( principal >= 100 && principal < 200){
+				interest = nowInterest*1 + 25
+			}
+			if( principal >= 300){
+				interest = nowInterest*1 + 30
+			}
+		}
+		
+		if(principal != '' && str != ''){
+			yield = parseInt(principal * 1 * interest * 1 * moon * 1 * 10);	//最终收益 = 本金 * 千分比利率 * 月数 * 10(利率除以1000再乘以10000元等于10,万元转换成元)
+			$("#yield input").val(yield);
+		}
+		else{
+			alert("要输入投资金额并且只能数字才有结果哦!");return false;
+		}
+		
+	})
+	
+});
+</script>
+
+
+<div class="bddf clearfix" style="border-top:0">
+    <div class="gray_title clearfix">
+        <div class="f_l f_dgray b">投资收益计算器</div>
+    </div>
+    
+    <div id="principal" class="clearfix pt5 pb5" id="calculate" style="width: 169px;">
+    	<div class="f_l clearfix lh24" style="width: 169px;height: 35px;">
+            <span class="b f_l">投资金额</span>
+            <span class="f_l" style="padding-left: 5px;">
+                <input type="text" name="amount" id="calculateAmount" class="f_l" style="width: 70px;"><span class="f_l pl5">万元</span>
+            </span>
+        </div>
+        
+        <div id="goods" class="f_l clearfix lh24" style="width: 160px;height: 35px;">
+            <span class="b f_l">投资产品</span>
+            <span class="f_l" style=" margin-left:4px;">
+                <select name="goods">
+                    <option value="x" selected="selected">请选择</option>
+                    <option value="xindai">信贷赢三期</option>
+                    <option value="chengjian">城建三期</option>
+                    <option value="wenfeng">文峰市场</option>
+                </select>
+            </span>
+        </div>
+        
+        <div id="ctyle" class="f_l clearfix lh24" style="width: 160px;height: 35px;">
+            <span class="b f_l">投资周期</span>
+            <span class="f_l" style=" margin-left:4px;">
+                <select name="xindai" style="display:none">
+                    <option value="x">选择周期</option>
+                    <option value="75" moon="3">三个月</option>
+                    <option value="80" moon="6">六个月</option>
+                    <option value="85" moon="9">九个月</option>
+                    <option value="90" moon="12">十二个月</option>
+                </select>  
+                
+                <select name="chengjian" style="display:none">
+                    <option value="x">选择周期</option>
+                    <option value="75" moon="3">三个月</option>
+                    <option value="80" moon="6">六个月</option>
+                    <option value="85" moon="9">九个月</option>
+                    <option value="90" moon="12">十二个月</option>
+                </select>
+                
+                
+                <select name="wenfeng" style="display:none">
+                    <option value="x">选择周期</option>
+                    <option value="75" moon="3">三个月</option>
+                    <option value="80" moon="6">六个月</option>
+                    <option value="85" moon="9">九个月</option>
+                    <option value="90" moon="12">十二个月</option>
+                </select>
+            </span>
+        </div>
+        
+        <div id="yield" class="f_l clearfix lh24" style="width: 160px;height: 35px;">
+            <span class="b f_l">投资收益</span>
+            <span class="f_l" style="padding-left: 5px;">
+                <input type="text" readonly class="f_l" style="width: 70px;"><span class="f_l pl5">元</span>
+            </span>
+        </div>
+        
+        <div id="compute" class="f_l">
+             <div style="text-align:center; margin:5px 0;height:30px;width: 150px;">
+		     	<img src="{$TMPL}/images/calculate.png" alt="" style="cursor: pointer; margin-left:45px" onclick="calculate()">
+		     </div>
+        </div>
+    
+    </div>
+</div>
