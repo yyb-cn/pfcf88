@@ -418,22 +418,24 @@ function userTime(uTime){
 				$("#J_biao_list").append('<div class="item tc"style="width:730px; height:80px;"><img src="{$TMPL}/images/loading.gif" style="position:absolute; left:300px; top:80px;"></div>');	
 								},
 					success: function(data){ 
+					
+					   if(data=='没有找到相应的产品'){
+							$.showErr('没有找到相应的产品');
+							
+							}
 					     //还款列表
-						if(data['result'][0]['deal_status']==4){	                        
+						else if(data['result'][0]['deal_status']==4){                        
 						var str=get_str(data['result']);
 						$("#deal_idd").html(str);
 						$(".pages").html(data['page']); 
 						}
 						//已还清借款
-						if(data['result'][0]['deal_status']==5){
+						else if(data['result'][0]['deal_status']==5){
 							var str=get_string(data['result']);
 							$(".deal_idded").html(str);
 							$(".pages").html(data['page']);
 							}
-						else{
-							$.showErr(data);
-							
-							}
+						
 					}
 				});
 				return false;

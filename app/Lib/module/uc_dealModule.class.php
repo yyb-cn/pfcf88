@@ -52,7 +52,7 @@ class uc_dealModule extends SiteBaseModule
 		    $p  =  $page->show();
 			$arr=array('result'=>$result['list'],'page'=>$p);
 			if(empty($result['list'])){
-				echo  json_encode("没有相关数据");
+				echo  json_encode("没有找到相应的产品");
 				}
 				else{
 			echo json_encode($arr);
