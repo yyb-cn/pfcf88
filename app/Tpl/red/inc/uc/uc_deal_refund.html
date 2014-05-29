@@ -1,7 +1,11 @@
+<div style="margin-bottom:7px;" >
+<input type="text" name="deal_name" id="deal_name" value=""  style="width:200px; height:28px;" /><input type="submit" id="name_submit"  value="搜索"  style="width:100px; height:38px;" />	
+</div>
+<span style=" font-size:14px; color:#666;">(搜索条件：产品全名或部分名称)</span>
 <div id="dashboard" class="dashboard">
 	<ul>
-		<li {if $status eq 0}class="current"{/if}><a href="{url x="index"r="uc_deal#refund" p="status=0"}">还款列表</a></li>
-		<li {if $status eq 1}class="current"{/if}><a href="{url x="index"r="uc_deal#refund" p="status=1"}">已还清借款</a></li>
+		<li id="repaying" {if $status eq 0}class="current"{/if}><a href="{url x="index"r="uc_deal#refund" p="status=0"}">还款列表</a></li>
+		<li id="repayed" {if $status eq 1}class="current"{/if}><a href="{url x="index"r="uc_deal#refund" p="status=1"}">已还清借款</a></li>
 	</ul>
 </div>
 <div class="uc_r_bl_box clearfix pl10 pr10 pt5 pb5">
@@ -31,7 +35,7 @@
 	            状态
 	    </div>
 	</div>
-	<div class="clearfix pt5 pb5 pl10 pr10">
+	<div class="clearfix pt5 pb5 pl10 pr10 deal_idded">
 		{foreach from="$deal_list" item="deal"}
 		<div class="clearfix pb10">
 
@@ -57,12 +61,12 @@
 	            </div>
 	        </div>
 	        <div class="f_l" style="width:100px">
-	        	{if $deal.publis_wait eq 1 || $deal.publis_wait eq 0}
+	        	{if $deal.publish_wait eq 1 || $deal.publish_wait eq 0}
 				<div class="tc">
-	                {function name="to_date" v="$deal.create_time" f="Y-m-d"}
+	                {function name="to_date_" v="$deal.create_time" f="Y-m-d"}
 	            </div>
 	            <div class="tc">
-	                 {function name="to_date" v="$deal.create_time" f="H:i"}
+	                 {function name="to_date_" v="$deal.create_time" f="H:i"}
 	            </div>
 				{else}
 	            <div class="tc">
@@ -74,11 +78,11 @@
 	            {/if}
 	        </div>
 			<div class="f_l tc" style="width:80px">
-				{if $deal.publis_wait eq 1}
+				{if $deal.publish_wait eq 1}
 				等待审核
 				{else}
 					{if $deal.deal_status eq 5}
-						已还清
+						已还清 
 					{elseif $deal.deal_status eq 0}
 						等待材料
 					{elseif $deal.deal_status eq 1 && $deal.remain_time gt 0}
@@ -98,7 +102,9 @@
 		{/foreach}
 	</div>
 	{else}
-	{foreach from="$deal_list" item="deal"}
+    <div id="deal_idd">
+	{foreach from="$deal_list" item="deal" key=key}
+    
 	<div class="bid_item clearfix">
         <div class="bid_title">
         	{$deal.name}
@@ -147,7 +153,9 @@
 			</div>
         </div>
     </div>
+   
 	{/foreach}
+     </div>
 	{/if}
 	{else}
 	<div class="tc p10">暂无记录</div>
@@ -156,3 +164,299 @@
 	<div class="pages">{$pages}</div>
 	<div class="blank"></div>
 </div>
+<script type="text/javascript">
+function format (num) {
+    return (num.toFixed(2) + '').replace(/\d{1,3}(?=(\d{3})+(\.\d*)?$)/g, '$&,');
+}	
+
+
+//lu 把数字转换成千分位
+			function commafy(num) {   
+		//1.先去除空格,判断是否空值和非数   
+		num = num + "";   
+		num = num.replace(/[ ]/g, ""); //去除空格  
+			if (num == "") {   
+			return;   
+			}   
+			if (isNaN(num)){  
+			return;   
+			}   
+			//2.针对是否有小数点，分情况处理   
+			var index = num.indexOf(".");   
+			if (index==-1) {//无小数点   
+			  var reg = /(-?\d+)(\d{3})/;   
+				while (reg.test(num)) {   
+				num = num.replace(reg, "$1,$2")   
+				}   
+				
+			} else {   
+				var intPart = num.substring(0, index);   
+				var pointPart = num.substring(index + 1, num.length);   
+				var reg = /(-?\d+)(\d{3})/;   
+				while (reg.test(intPart)) {   
+				intPart = intPart.replace(reg, "$1,$2");   
+				}   
+			   num = intPart +"."+ pointPart;   
+			}   
+		return '￥'+num;   
+		} 
+	//lu 时间戳转换成八位日期2014-5-5  get_str
+					function get_str_Date(uData){
+					var myDate = new Date(uData*1000);
+					var timezoneOffset = myDate.getTimezoneOffset();
+
+	                myDate.setTime(myDate.getTime() + timezoneOffset * 60 * 1000 + 60*24 * 60 * 1000);
+					var year = myDate.getFullYear();
+					var month = myDate.getMonth() + 1;
+					var day = myDate.getDate();
+					if(month<10){
+						month='0'+month;
+						}
+					if(day<10){
+						day='0'+day;
+						}	
+					return year + '-' + month + '-' + day;
+				}
+	//lu 时间戳转换成八位日期2014-5-5  get_string
+					function get_string_Date(uData){
+					var myDate = new Date(uData*1000);
+					var year = myDate.getFullYear();
+					var month = myDate.getMonth() + 1;
+					var day = myDate.getDate();
+					if(month<10){
+						month='0'+month;
+						}
+					if(day<10){
+						day='0'+day;
+						}	
+					return year + '-' + month + '-' + day;
+				}
+		
+	//lu 时间戳转换成四位时间10:10
+function userTime(uTime){
+
+	var myDate = new Date(uTime*1000);
+	 
+    var hours = myDate.getHours();
+    var minutes = myDate.getMinutes();
+	if(hours<10){
+		hours='0'+hours;
+		}
+	if(minutes<10){
+		minutes='0'+minutes;
+		}
+    return hours + ':' + minutes;
+}
+	//lu 还款列表字符串拼接
+	function get_str(data)
+	{
+		var	str=''
+		var length=data.length
+				 for(var i=0; i<length; i++)  
+							  {  
+		
+			
+// index.php?ctl=uc_deal&act=contract&id='+data[0].id;
+			str+='<div class="bid_item clearfix">'
+       str+='<div class="bid_title">'+data[i].name
+	   
+    str+='<span class="r_c"><a href="javascript:void(0);" onclick="javascript:window.showModalDialog(\'index.php?ctl=uc_deal&act=contract&id='+data[i].id+'\',\'\',\'dialogWidth=1024px;dialogHeight=768px,status=0,toolbar=no,menubar=no,location=no,scrollbars=yes,top=20,left=20,resizable=no\')">查看电子协议</a></span>'
+	
+        str+='</div>'
+        str+='<div class="bid_detail">'
+           str+=' <div class="info">'
+            	str+=' 借款金额：';
+                str+='<span class="f_red"> '+commafy(data[i].borrow_amount)+'</span>';
+            str+='</div>';
+            str+='<div class="info">';
+            	str+='年利率：';
+               str+='<span class="f_red"> ';
+			   str+=data[i].rate+'%'
+			   str+='</span>'; 
+            str+='</div>';
+            str+='<div class="info">';
+            	str+='期限：';
+                str+='<span class="f_red"> '+data[i].repay_time
+				if(data[i].repay_time_type==0){str+='天'}
+				else{str+='个月'}
+				str+='</span>';
+          str+='</div>';
+            str+='<div class="info">';
+            	if( data[i].loantype == 2 || data[i].repay_time_type == 0){str+='还款日'}else{str+='下一还款日：'}
+                str+='<span class="f_red"> ';
+                	if(data[i].repay_time_type == 0)
+						{
+							str+=get_str_Date(data[i].type_next_repay_time)
+						}
+				   else{
+							if (data[i].loantype == 2)
+							{
+							str+=get_str_Date(data[i].end_repay_time)
+							}	
+							else
+							{
+							str+=get_str_Date(data[i].next_repay_time)
+							}
+						}
+				str+='</span>';
+            str+='</div>';
+            str+='<div class="info">';
+            	str+='月还款额：';
+               str+='<span class="f_red"> ￥'+data[i].true_month_repay_money.toFixed(2)+'</span>';
+            str+='</div>';
+            str+='<div class="info">';
+            	str+='罚息：';
+                str+='<span class="f_red"> ￥'
+				if(data[i].impose_money!=null){str+=data[i].impose_money.toFixed(2)}
+				else{str+='0.00'}				str+='</span>';
+            str+='</div>';
+           str+='<div class="info" style="width: 115px; text-align: right;">';
+                str+='<input class="refundBnt" type="button" onclick="window.location.href=\'index.php?ctl=uc_deal&act=quick_refund&id='+data[i].id+'\'">'
+				str+=' '
+             if (!data[i].exceed_the_time)
+			 {
+				str+='<input class="inrepayBtn" type="button" onclick="window.location.href=\'index.php?ctl=uc_deal&act=inrepay_refund&id='+data[i].id+'\'">'
+				}
+			str+='</div>';
+       str+='</div>';
+    str+='</div>  ';
+			}
+				 return str;
+	}
+
+	//lu 已还清借款字符串拼接
+	function get_string(data)
+	{
+		var	str=''
+		var length=data.length
+				 for(var i=0; i<length; i++)  
+							  { 
+		
+		str+='<div class="clearfix pb10">'
+
+	        str+='<div class="f_l tl" style="width:170px">'
+	            str+='<a href="'+data[i].url+'">'+data[i].name+'</a>'
+	        str+='</div>'
+	        str+='<div class="f_l f_red" style="width:80px">'
+	        	 str+=data[i].borrow_amount_format
+	        str+='</div>'
+	        str+='<div class="f_l f_red" style="width:50px">'
+	           str+=data[i].rate+'%'
+	        str+='</div>'
+	        str+='<div class="f_l f_red" style="width:50px">'
+	            str+=data[i].repay_time
+				if(data[i].repay_time_type == 0){str+='天'}else{str+='个月'} 
+	        str+='</div>'
+	        str+='<div class="f_l" style="width:90px">'
+	            str+='<div class="blueProgressBar progressBar w90">'
+	                str+='<div class="p"><div class="c" style="width:'+data[i].progress_point+'%;"> </div></div>'
+	               
+	           str+=' </div>'
+	            str+='<div>'
+	                str+='<p class="f_l" style="width:100%">'+data[i].progress_point+' % 已完成</p>'
+	            str+='</div>'
+	        str+='</div>'
+	       str+=' <div class="f_l" style="width:100px">'
+	        	if(data[i].publish_wait == 1 || data[i].publish_wait == 0){
+				str+='<div class="tc">' 
+					str+=get_string_Date(data[i].create_time)
+	          
+	            str+='</div>'
+	            str+='<div class="tc">'
+	                  str+=userTime(data[i].create_time)
+	            str+='</div>'
+				}else{
+	            str+='<div class="tc">'
+					str+=get_string_Date(data[i].start_time)
+	                
+	            str+='</div>'
+	           str+=' <div class="tc">'
+	                  str+=userTime(data[i].start_time)
+					 
+	            str+='</div>'
+	            }
+	        str+='</div>'
+			str+='<div class="f_l tc" style="width:80px">'
+				if (data[i].publis_wait == 1)
+				{str+='等待审核'}
+				else{
+					if(data[i].deal_status == 5)
+						{str+='已还清'}
+					else if(data[i].deal_status == 0)
+						{str+='等待材料'}
+					else if(data[i].deal_status == 1 && data[i].remain_time > 0)
+						{str+='进行中'}
+					else if(data[i].deal_status == 2)
+						{str+='已满标'}
+					else if(data[i].deal_status == 3 || data[i].remain_time <= 0)
+						{str+='流标'}
+					else if(data[i].deal_status == 4)
+						{str+='还款中'}
+					
+				}
+			str+='</div>'
+	    str+='</div>'
+		str+='<div style="border-bottom:1px dotted #9D9D9D;margin:5px 0 ">'
+		str+='</div>'					  }
+							 return str;
+		}
+    $(document).ready(function(){ 
+	
+		//lu 搜索还款列表功能
+		$("#name_submit").live('click',function(){
+			var url=document.URL;
+					//var deal_name=$("#deal_name").val(); 	
+					//alert($("#deal_name").val());			
+					$.ajax({
+					type:"POST",
+					url: url,
+					dataType:'json',//从php返回的值以 JSON方式 解释
+					data:{
+						deal_name:$("#deal_name").val()
+						},
+						beforeSend:function(){
+				$("#J_biao_list").append('<div class="item tc"style="width:730px; height:80px;"><img src="{$TMPL}/images/loading.gif" style="position:absolute; left:300px; top:80px;"></div>');	
+								},
+					success: function(data){ 
+					     //还款列表
+						if(data['result'][0]['deal_status']==4){	                        
+						var str=get_str(data['result']);
+						$("#deal_idd").html(str);
+						$(".pages").html(data['page']); 
+						}
+						//已还清借款
+						if(data['result'][0]['deal_status']==5){
+							var str=get_string(data['result']);
+							$(".deal_idded").html(str);
+							$(".pages").html(data['page']);
+							}
+						else{
+							$.showErr(data);
+							
+							}
+					}
+				});
+				return false;
+			})
+	   //lu 无刷新分页		
+		$(".pages a").live('click',function(){
+			//alert($(this).attr('href'))
+			$.ajax({
+					type:"GET",
+					url: $(this).attr('href'),
+					dataType:'json',//从php返回的值以 JSON方式 解释
+					//data:{a:"1"},
+					/*beforeSend:function(){
+					    $("#J_biao_list").text("请稍等!");
+	           		 },*/
+					success: function(data){
+					var str=get_str(data['result'])
+					 $("#deal_idd").html(str);
+					 $(".pages").html(data['page']);	
+						}
+				})
+			return false;
+			})	
+	
+    });  
+</script>

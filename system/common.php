@@ -21,6 +21,15 @@ function get_gmtime()
 {
 	return (time() - date('Z'));
 }
+//lu 发标时间错误修改
+function to_date_($utc_time, $format = 'Y-m-d H:i:s') {
+	if (empty ( $utc_time )) {
+		return '';
+	}
+	$timezone = intval(app_conf('TIME_ZONE'));
+	$time = $utc_time + $timezone * 3600-8*3600; 
+	return date ($format, $time );
+}
 
 function to_date($utc_time, $format = 'Y-m-d H:i:s') {
 	if (empty ( $utc_time )) {

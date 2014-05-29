@@ -28,6 +28,38 @@ class uc_dealModule extends SiteBaseModule
 		if($status == 1){
 			$deal_status = 5;
 		}
+		//lu  偿还贷款收索功能
+		//判断是否ajax提交
+		if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])&& strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
+			$page = intval($_REQUEST['p']);
+				if($page==0)
+					$page = 1;
+				$limit = (($page-1)*app_conf("DEAL_PAGE_SIZE")).",".app_conf("DEAL_PAGE_SIZE");
+				//app_conf("DEAL_PAGE_SIZE")==10, $limit=0,10
+				
+			//已还清借款
+			if($_GET['status']==1){
+				$deal_status=5; 
+				}
+				//还款列表
+				else{
+				$deal_status=4; 
+					}
+			$deal_name=$_POST['deal_name']; 		
+			$result = get_deal_list($limit,0,"deal_status =  '".$deal_status."'  and name like '%".$deal_name."%' ","id DESC");
+			//分页
+			$page = new Page($result['count'],app_conf("PAGE_SIZE"));   //初始化分页对象 		
+		    $p  =  $page->show();
+			$arr=array('result'=>$result['list'],'page'=>$p);
+			if(empty($result['list'])){
+				echo  json_encode("没有相关数据");
+				}
+				else{
+			echo json_encode($arr);
+				}
+			}
+	//lu 不是AJAX提交
+	else {
 		
 		$result = get_deal_list($limit,0,"deal_status =$deal_status AND user_id=".$user_id,"id DESC");
 		$GLOBALS['tmpl']->assign("deal_list",$result['list']);
@@ -40,7 +72,7 @@ class uc_dealModule extends SiteBaseModule
 		$GLOBALS['tmpl']->assign("inc_file","inc/uc/uc_deal_refund.html");
 		$GLOBALS['tmpl']->display("page/uc.html");	
 	}
-	
+}
 	public function contract(){
 		$id = intval($_REQUEST['id']);
 		if($id == 0){
