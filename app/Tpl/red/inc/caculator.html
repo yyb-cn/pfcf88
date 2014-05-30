@@ -122,7 +122,7 @@ $(document).ready(function() {
 			}
 		}
 		
-		if(principal != '' && str != ''){
+		if(principal != null && str != null){
 			yield = parseInt(principal * 1 * interest * 1 * moon * 1 * 10);	//最终收益 = 本金 * 千分比利率 * 月数 * 10(利率除以1000再乘以10000元等于10,万元转换成元)
 			$("#yield input").val(yield);
 		}

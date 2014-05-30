@@ -380,9 +380,9 @@ class dealModule extends SiteBaseModule
 		
 		case 3 :forceDownload('public/comment/201405/pfcf88xindaiying.pdf');//下载信贷赢pdf
 		break;
-		case 5 :forceDownload('public/comment/201405/pfcf88wenfeng.pdf');//下载文峰pdf
+		case 5 :forceDownload('public/comment/201405/pfcfchengjian3.pdf');//下载文峰pdf
 		break;
-		case 6 :forceDownload('public/comment/201405/pfcfchengjian3.pdf.pdf');//下载嘉良
+		case 6 :forceDownload('public/comment/201405/pfcf88wenfeng.pdf.pdf');//下载嘉良
 		break;	
 		default:
   			echo "您的请求不存在，<a href='index.php'>点击返回</a>";

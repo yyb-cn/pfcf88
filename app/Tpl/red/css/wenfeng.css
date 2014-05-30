@@ -1,9 +1,16 @@
 @charset "utf-8";
 /* CSS Document */
-
+a { color:#333}
+a:hover{ color:#F00; text-decoration:none;}
 .wraper-wenfeng { width:993px; margin:0 auto; overflow:hidden;}
 
-.header-wenfeng { width:993px; height:129px; background:url(../images/wenfeng-header-bg.png) no-repeat;}
+.header-wenfeng { width:993px; height:100px; background:url(../images/wenfeng-header-bg.png) no-repeat;}
+
+.banner-wenfeng-main { width:993px; height:30px; clear:float;}
+	.banner-wenfeng-show-list { float:right;}
+		.banner-wenfeng-show-list .banner-wenfeng-li { float:left; height:30px; line-height:30px; margin-right:20px;}
+			.banner-wenfeng-show-list .banner-wenfeng-li a { font-size:16px; color:#333}
+			.banner-wenfeng-show-list .banner-wenfeng-li a:hover { color:red}
 
 .banner-wenfeng { width:993px; height:461px; background:#667ea0;}
 	.banner-wenfeng .banner-wenfeng1 { float:left; margin-top:9px; margin-left:32px; width:420px; height:282px;}
@@ -61,7 +68,7 @@
 	.jian-right{float:right;margin-top:8px;margin-right:10px;}
 	.banner-jian3{margin-top:39px;}
 	
-	.header-tou{width:993px;height:130px; overflow:hidden;}
+	.header-tou{width:993px;height:90px; overflow:hidden;}
 	.headleft{float:left;width:208px;height:3px;background-color:#434343;margin-top:50px;}
 	.headright{float:right;width:208px;height:3px;background-color:#434343;margin-top:50px;}
 	.header-tou p{float:left;font-size:25px;color:#434343;font-weight:bold;margin-top:45px;margin-top:38px\9;margin-left:95px;}

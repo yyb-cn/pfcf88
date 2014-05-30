@@ -5,7 +5,7 @@
 .touzi{width:960px;height:35px;line-height:35px;background-color:#eff0f2;}
 .touzi h1{ font-size:14px;font-weight:bold;float:left;margin-left:20px;}
 .touzi a{font-size:12px;color:#000;}
-.touming{width:960px;height:50px;line-height:50px;margin-top:10px;}
+.touming{ width:960px;height:30px;line-height:30px;margin-top:10px;}
 .touming h1{ font-size:18px;font-weight:bold;float:left;margin-left:20px;}
 .touming p{font-size:12px;float:right;margin-right:20px;}
 .shopbox{ overflow:hidden;}
@@ -48,3 +48,4 @@
 .jilu4b{float:left;background-color:#ededee;width:319px;border-right:#a5a5a5 1px solid;line-height:35px;text-align:center;}
 .jilu4c{float:left;background-color:#ededee;width:319px;line-height:35px;text-align:center;}
 
+.touming-top { width:938px; height:17px; padding-left:22px; margin-top:10px;}

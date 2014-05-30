@@ -7,10 +7,9 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 	<div class="blank"></div> 
 	<div class="touzibox">
     	<div class="touzi">
-        	<h1>投资详情<a href="{url x="index" r="viewpdf" p="cat=$deal.cate_id"}" target="_blank">+>查看资料</a>&nbsp;&nbsp;<a href="{url x="index" r="deal" p="cat=$deal.cate_id&act=downloadfile"}" target="_blank" style=" color:red; font-size:14px;">下载PDF</a></h1>
-            <a href="{url x="index" r="deals"}" style="float:right;margin-right:22px; line-height:40px;">《 返回投资列表</a>
+        	<h1><a href="{url x="index" r="deals"}" style="font-size:14px;font-weight:bold;">投资列表</a></h1>
 			<!-- Baidu Button BEGIN -->
-			
+			 <a href="{url x="index" r="deals"}" style="float:right;margin-right:22px; line-height:40px;">《 返回投资列表</a>
 				<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" style="float:right; padding:7px 10px 0 0;">
 				<a class="bds_qzone"></a>
 				<a class="bds_tsina"></a>
@@ -26,11 +25,17 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 				<!-- Baidu Button END -->
 				
         </div>
-			
+        
+		<div class="touming-top">
+        <a href="{url x="index" r="viewpdf" p="cat=$deal.cate_id"}" target="_blank"><img src="{$TMPL}/images/deal_nav2.png" width="65px" /></a>&nbsp;&nbsp;
+        <a href="{url x="index" r="deal" p="cat=$deal.cate_id&act=downloadfile"}"><img src="{$TMPL}/images/deal_nav1.png" width="65px" /></a>
+        </div>
+        
         <div class="touming">
         	<h1>{$deal.color_name}</h1>
             <p>投资编号：{$deal.id}</p>
         </div>
+        
         <div class="shopbox">
         	<div class="shop1">
             	<div class="shop1a">
