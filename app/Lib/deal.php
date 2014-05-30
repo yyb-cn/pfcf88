@@ -228,7 +228,31 @@ function get_deal($id=0,$cate_id=0)
 	
 }
 
+/**
 
+下载pdf函数  linjingxiong++
+**/
+
+	function forceDownload($filename) {
+
+	if (false == file_exists($filename)) {
+		return false;
+	}
+	
+	// http headers
+	header('Content-Type: application-x/force-download');
+	header('Content-Disposition: attachment; filename="' . basename($filename) .'"');
+	header('Content-length: ' . filesize($filename));
+
+	// for IE6
+	if (false === strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6')) {
+		header('Cache-Control: no-cache, must-revalidate');
+	}
+	header('Pragma: no-cache');
+		
+	// read file content and output
+	return readfile($filename);;
+}
 /**
  * 获取正在进行的投标列表
  */

@@ -2,13 +2,12 @@
 <?php
 $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 ?>
-
 <link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dealcss"}" />
 <link rel="stylesheet" type="text/css" href="{$TMPL}/css/touzi.css" />
 	<div class="blank"></div> 
 	<div class="touzibox">
     	<div class="touzi">
-        	<h1>投资详情<a href="{url x="index" r="viewpdf" p="cat=$deal.cate_id"}" >+>查看资料</a></h1>
+        	<h1>投资详情<a href="{url x="index" r="viewpdf" p="cat=$deal.cate_id"}" target="_blank">+>查看资料</a>&nbsp;&nbsp;<a href="{url x="index" r="deal" p="cat=$deal.cate_id&act=downloadfile"}" target="_blank" style=" color:red; font-size:14px;">下载PDF</a></h1>
             <a href="{url x="index" r="deals"}" style="float:right;margin-right:22px; line-height:40px;">《 返回投资列表</a>
 			<!-- Baidu Button BEGIN -->
 			

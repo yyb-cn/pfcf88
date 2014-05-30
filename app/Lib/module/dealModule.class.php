@@ -222,6 +222,8 @@ class dealModule extends SiteBaseModule
 		$GLOBALS['tmpl']->assign("deal",$deal);
 		$GLOBALS['tmpl']->display("page/deal_bid.html");
 	}
+	
+
 	function dobidstepone(){
 		if(!$GLOBALS['user_info'])
 			showErr($GLOBALS['lang']['PLEASE_LOGIN_FIRST'],1);
@@ -368,7 +370,27 @@ class dealModule extends SiteBaseModule
 		}
 	}
 	
-	
+	function downloadfile(){
+		
+		
+		$cat_id=intval($_REQUEST['cat']);
+		
+		
+		switch($cat_id){
+		
+		case 3 :forceDownload('public/comment/201405/pfcf88xindaiying.pdf');//下载信贷赢pdf
+		break;
+		case 5 :forceDownload('public/comment/201405/pfcf88wenfeng.pdf');//下载文峰pdf
+		break;
+		case 6 :forceDownload('public/comment/201405/pfcfchengjian3.pdf.pdf');//下载嘉良
+		break;	
+		default:
+  			echo "您的请求不存在，<a href='index.php'>点击返回</a>";
+			
+			}
+		
+		
+		}
 	//lu 设置批量投资金额
 /*	function bid_more(){
 		
