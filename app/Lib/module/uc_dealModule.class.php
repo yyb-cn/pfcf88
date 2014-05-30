@@ -45,7 +45,10 @@ class uc_dealModule extends SiteBaseModule
 				else{
 				$deal_status=4; 
 					}
-			$deal_name=$_POST['deal_name']; 		
+			$deal_name=$_POST['deal_name']; 
+			if(ctype_space($_POST['deal_name'])){
+				$deal_name='';
+				}		
 			$result = get_deal_list($limit,0,"deal_status =  '".$deal_status."'  and name like '%".$deal_name."%' ","id DESC");
 			//分页
 			$page = new Page($result['count'],app_conf("PAGE_SIZE"));   //初始化分页对象 		

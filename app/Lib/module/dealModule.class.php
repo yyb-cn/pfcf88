@@ -51,7 +51,7 @@ class dealModule extends SiteBaseModule
 		}
 		//lu 用户名中间部分用星号代替 echo   cut_str($str, 1, 0).'**'.cut_str($str, 1, -1);
 		foreach($load_list as $k_n=>$v_n){
-			$load_list[$k_n]['user_name']=$this->cut_str($load_list[$k_n]['user_name'], 1, 0).'****'.$this->cut_str($load_list[$k_n]['user_name'], 1, -1);
+			$load_list[$k_n]['user_name']=cut_str($load_list[$k_n]['user_name'], 1, 0).'****'.cut_str($load_list[$k_n]['user_name'], 1, -1);
 			
 			}
 		
