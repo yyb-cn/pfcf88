@@ -1,5 +1,9 @@
+<style>
+.uc_plus { float:right; margin:10px 10px 0 0;}
+.c_hd { cursor:pointer;}
+</style>
 <div id="uc_cate">
-	<div class="c_hd"><?php echo sprintf($GLOBALS['lang']['UC_CENTER_F'],app_conf("SHOP_TITLE"))?></div>
+	<div class="c_hd"><?php echo sprintf($GLOBALS['lang']['UC_CENTER_F'],app_conf("SHOP_TITLE"))?><span class="uc_plus"><img src="{$TMPL}/images/uc_minus.gif" /></span></div>
 	<div class="c_body">
 		<ul>
 			<li class="{if $MODULE_NAME eq 'uc_center' &&$ACTION_NAME neq 'setweibo'}act{/if}" ><a class="uc_cate" href="{url x="index" r="uc_center"}" title="{$LANG.UC_CENTER}">{$LANG.UC_CENTER}</a></li>
@@ -12,7 +16,7 @@
     <!--显示特殊用户-->
     {insert name="uc_center_special"}
     
-	<div class="c_hd">理财管理</div>
+	<div class="c_hd">理财管理<span class="uc_plus"><img src="{$TMPL}/images/uc_minus.gif" /></span></div>
 	<div class="c_body">
 		<ul>
 			<li class="{if $MODULE_NAME eq 'uc_invest'}act{/if}" > <a class="uc_cate" href="{url x="index" r="uc_invest"}" title="{$LANG.UC_INVEST}">{$LANG.UC_INVEST}</a></li>
@@ -21,7 +25,7 @@
 			<li class="{if $MODULE_NAME eq 'uc_autobid'}act{/if}" > <a class="uc_cate" href="{url x="index" r="uc_autobid"}" title="{$LANG.UC_AUTO_BID}">{$LANG.UC_AUTO_BID}</a></li>
 		</ul>
 	</div>
-	<div class="c_hd">个人设置</div>
+	<div class="c_hd">个人设置<span class="uc_plus"><img src="{$TMPL}/images/uc_minus.gif" /></span></div>
 	<div class="c_body">
 		<ul>
 			<li class="{if $MODULE_NAME eq 'uc_account' && $ACTION_NAME neq 'mobile'}act{/if}" > <a class="uc_cate" href="{url x="index" r="uc_account"}" title="{$LANG.UC_ACCOUNT}">{$LANG.UC_ACCOUNT}</a></li>
@@ -32,7 +36,17 @@
 		</ul>
 	</div>
 </div>
-<Script>
-
-
+<script>
+$(document).ready(function() {
+	$('.c_hd').click(function(){
+		if($(this).next().is(":hidden")){
+			$(this).find("img").attr('src','{$TMPL}/images/uc_minus.gif');
+			$(this).next().slideDown(300);
+		}
+		else{
+			$(this).find("img").attr('src','{$TMPL}/images/uc_plus.gif');
+			$(this).next().slideUp(300);
+		}
+	})
+});
 </script>  
