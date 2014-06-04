@@ -1,42 +1,35 @@
-<div class="f_l" style="width: 230px; padding-top:10px;">
-		目前投资总额：<span class="f_red">{function name="format_price" v="$deal.load_money"}</span>
-</div>
-<div class="f_l" style="width: 230px; padding-top:10px;">
-	剩余投资金额：<span class="f_red">{$deal.need_money}</span>
- </div>
- <div class="f_l" style="width: 230px; padding-top:10px;">
- 	剩余投资时间：
-        <span class="f_red">
-            {if $deal.deal_status neq 1}
-			0天0时0分
-			{else}
-			{$deal.remain_time_format}
-			{/if}
-        </span>
-  </div>
+ <div class="jshop2">
+    	<p>目前投资总额：<span>{function name="format_price" v="$deal.load_money"}</span></p>
+        <p>剩余投资金额：<span>{$deal.need_money}</span></p>
+        <p>剩余投资时间：<span>{if $deal.deal_status neq 1}
+							0天0时0分
+							{else}
+							{$deal.remain_time_format}
+							{/if}</span></p>
+							
+    </div>
+    <div class="jshop3" style="margin-left:-20px;width:980px;">
+    	<img src="{$TMPL}/images/tou_z_27.png">
+        <img style="margin-left:270px;" src="{$TMPL}/images/tou_z_30.png">
+        <img style="margin-left:265px;" src="{$TMPL}/images/tou_z_33.png">	
+    </div> 
+
+
+
+
   <div class="blank5"></div>
   <table border="0" cellspacing="1" style="background:#ccc;width: 100%;">
     <tbody>
-        <tr style="height: 30px;">
-            <td width="20%" style="background: #F6F6F6;">
-                <div align="center">投资人</div>
-            </td>
-            <td width="20%" style="background: #F6F6F6;">
-                <div align="center">投资金额 </div>
-            </td>
-            <td width="20%" style="background: #F6F6F6;">
-                <div align="center">投资时间</div>
-            </td>
-        </tr>
+        
 		{foreach from="$load_list" item="load"}
 		<tr>
-			<td class="wb tc">
+			<td width="20%" class="wb tc">
 				<a href="{url x="index" r="space" p="id=$load.user_id"}" class="f_red">{$load.user_name}</a>
 			</td>
-			<td class="wb tc">
+			<td width="20%" class="wb tc">
 				{function name="format_price" v="$load.money"}
 			</td>
-			<td class="wb tc">
+			<td width="20%" class="wb tc">
 				{function name="to_date" v="$load.create_time" f="Y-m-d"}
 				{function name="to_date" v="$load.create_time" f="H:i"}
 			</td>

@@ -1,136 +1,88 @@
 {include file="inc/header.html"}
 <?php
+
 $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 ?>
 <link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dealcss"}" />
-<link rel="stylesheet" type="text/css" href="{$TMPL}/css/touzi.css" />
-	<div class="blank"></div> 
-	<div class="touzibox">
-    	<div class="touzi">
-        	<h1><a href="{url x="index" r="deals"}" style="font-size:14px;font-weight:bold;">投资列表</a></h1>
-			<!-- Baidu Button BEGIN -->
-			 <a href="{url x="index" r="deals"}" style="float:right;margin-right:22px; line-height:40px;">《 返回投资列表</a>
-				<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" style="float:right; padding:7px 10px 0 0;">
-				<a class="bds_qzone"></a>
-				<a class="bds_tsina"></a>
-				<a class="bds_tqq"></a>
-				<a class="bds_renren"></a>
-				<a class="bds_t163"></a>
-				</div>
-				<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6536504" ></script>
-				<script type="text/javascript" id="bdshell_js"></script>
-				<script type="text/javascript">
-				document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
-				</script>
-				<!-- Baidu Button END -->
-				
-        </div>
-        
-		<div class="touming-top">
-        <a href="{url x="index" r="viewpdf" p="cat=$deal.cate_id"}" target="_blank"><img src="{$TMPL}/images/deal_nav2.png" width="65px" /></a>&nbsp;&nbsp;
-        <a href="{url x="index" r="deal" p="cat=$deal.cate_id&act=downloadfile"}"><img src="{$TMPL}/images/deal_nav1.png" width="65px" /></a>
-        </div>
-        
-        <div class="touming">
-        	<h1>{$deal.color_name}</h1>
-            <p>投资编号：{$deal.id}</p>
-        </div>
-        
-        <div class="shopbox">
-        	<div class="shop1">
-            	<div class="shop1a">
-                	<img src="{$TMPL}/images/tou_06.png">
-                    <h2>投资金额</h2>
-                    <h1>{$deal.borrow_amount_format}</h1>
+<link rel="stylesheet" type="text/css" href="{$TMPL}/css/wenfeng.css" />
+<p class="xiangp"><a href="{url x="index"}">首页</a>〉<a href="{url x="index" r="deals"}">投资列表</a>〉<a >{$deal.color_name}</a></p>
+<div class="xshop">
+	<div class="xshop1">
+    	<h1>{$deal.color_name}（机构担保）</h1>
+        <p>投资编号：{$deal.id}</p>
+    </div>
+    <div class="xshop2">
+    	<div class="xshopleft">
+        	<div class="xshopleft_1">
+            	<div class="xshopleft_1a">
+                	<h1>{$deal.borrow_amount_format}</h1>
+                    <p>投资金额</p>
                 </div>
-                <div class="shop1b">
-                	<img src="{$TMPL}/images/tou_18.png">
-                    <h2>最低投资金额</h2>
-                    <h1>{$deal.min_loan_money}元</h1>
+                <div class="xshopleft_1b">
+                	<h1>{$deal.rate_foramt}％</h1>
+                    <p>年利率</p>
+                </div>
+                <div class="xshopleft_1b">
+                	<h1>{$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}</h1>
+                    <p>投资期限</p>
                 </div>
             </div>
-            <div class="shop2">
-            	<div class="shop2a">
-                	<img src="{$TMPL}/images/tou_03.png">
-                    <h2>产品年利率</h2>
-                    <h1>{$deal.rate_foramt}%</h1>
+            <div class="xshopleft_2">
+            	<div class="xshopleft_2a">
+                	<img src="{$TMPL}/images/tou_z_06.png">
+					
+					  {if $deal.deal_status eq 1}<!--进行中-->
+                    <p>还需：{$deal.need_money}</p>
+					 {elseif $deal.deal_status eq 5}
+					 <p>回款成功</p>
+					  {elseif $deal.deal_status eq 2}
+					  <p>还需：{$deal.need_money}</p>
+					  
+					 {elseif $deal.deal_status eq 4}<!--还款中-->
+					<p>待还本息：{function name="number_format" v=$deal.need_remain_repay_money f=2}元</p>
+					{/if}
                 </div>
-                <div class="shop2b">
-                	<img src="{$TMPL}/images/tou_21.png">
-					{if $deal.loantype eq 2}
-							<h2>到期利息<h2><h1>{$deal.month_repay_money_format}</h1>
-						{else}
-							<h2>月还{if $deal.loantype eq 0}本{else}利{/if}息</h2>
-							<h1>{$deal.month_repay_money_format}</h1>
-						{/if}
-                    
+                <div class="xshopleft_2b">
+                	<img src="{$TMPL}/images/tou_z_09.png">
+                    <p>计息时间：{$deal.repay_start_time}</p>
+                </div>
+                <div class="xshopleft_2c">
+                	<div class="xshopleft_2ca"><div class="tiaozi"><div class="tiaozibeijing" style="width:{function name='round' val=$deal.progress_point f=0}%;"></div></div><p class="xshopleft_2cap">{function name='round' val=$deal.progress_point f=0}% </p></div><!--正在回款是否为100-->
+                    <p class="xshopleft_2cp">投资进度</p><!--注意的地方-->
                 </div>
             </div>
-            <div class="shop3">
-            	<div class="shop3a">
-				<!--////////////////////////////////////////////////-->
-                	{if  $deal.deal_status eq 5}<!--以还清-->
-						
-							<p>投资进度: </p>
-                        <div class="jindu">
-					<div class="c" style="background:url({$TMPL}/images/progress_bar_full.gif) no-repeat; background-size:113px 14px; height:15px;"></div>
-						</div>
-					</div>
-                        {elseif $deal.deal_status eq 4}<!--还款中-->
-                            <div class="f_l">投资进度：</div>
-							<div class="jindu">
-							<div class="c" style="background:url({$TMPL}/images/progress_bar_full.gif) no-repeat; background-size:113px 14px; width:100%; height:15px;">
-							</div>
-							</div>
-							</div>
-                <div class="shop3b">已还本息：<span class="shop3b1">{function name="number_format" v=$deal.repay_money f=2}元</span></div>
-				<div class="shop3b">待还本息：<span class="shop3b2">{function name="number_format" v=$deal.need_remain_repay_money f=2}元</span></div>
-						{else}<!--0等材料.1进行中.2满标.3流标-->
-						<p>投资进度: </p>
-                    {if $deal.progress_point eq 100}
-					<div class="jindu">
-                              <div class="c" style="background:url({$TMPL}/images/progress_bar_full.gif) no-repeat; background-size:113px 14px; width:100%; height:15px;"></div>
-							  </div>
-							  
-					{else}
-					<div class="jindu">
-						<div class="c" style="background:url({$TMPL}/images/progress_bar_x.gif) no-repeat; width:{function name="round" v=$deal.progress_point f=0}%; float:left; height:15px">
-							</div>
-							
-					</div>
-                     {/if}
-					  <span class="f_red">
-                            	{function name='round' val=$deal.progress_point f=0}% 
-                           	</span>
-				
+             <div class="xshopleft_2">
+            	<div class="xshopleft_2a">
+                	<img src="{$TMPL}/images/tou_z_06.png">
+                    <p>月还{if $deal.loantype eq 0}本{else}利{/if}息:{$deal.month_repay_money_format}</p>
                 </div>
-                <div class="shop3b">已完成,<span class="shop3b1">{$deal.buy_count}</span>{$LANG.DEAL_BID_COUNT}，{$LANG.MUST_NEED_BID}<span class="shop3b2">{$deal.need_money}</span></div>
-						{/if}
-				<!--/////////////////////////////////////////////-->
-                <div class="shop3c">担保范围： {if $deal.warrant eq 1}本金{elseif $deal.warrant eq 2}本金及利息{else}无{/if}</div>
-                <div class="shop3d">发标时间:{$deal.create_time}</div>
-                <div class="shop3f">{$LANG.TIME_LEFT}：
+                <div class="xshopleft_2b">
+                	<img src="{$TMPL}/images/tou_z_19.png">
+                    <p>偿还方式：{if $deal.loantype eq 0}等额本息{elseif $deal.loantype eq 1}付息还本{elseif $deal.loantype eq 2}到期还本息{/if}</p>
+                </div>
+                <div class="xshopleft_3c">
+                	<img src="{$TMPL}/images/tou_z_22.png">
+                    <p>担保范围： {if $deal.warrant eq 1}本金{elseif $deal.warrant eq 2}本金及利息{else}无{/if}</p>
+                </div>
+            </div>
+        </div>
+        <div class="xshopright">
+        	<p>{$LANG.TIME_LEFT}：
 							{if $deal.deal_status neq 1}
 							0天0时0分
 							{else}
 							{$deal.remain_time_format}
-							{/if}</div>
-                <div class="shop3d">投资期限: {$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}</div>
-                {if $deal.loantype neq 2}
-				<div class="shop3d">偿还周期：按月投资</div>
-				{/if}
-                <div class="shop3d">偿还方式：{if $deal.loantype eq 0}等额本息{elseif $deal.loantype eq 1}付息还本{elseif $deal.loantype eq 2}到期还本息{/if}</div>
-               
-				{if $deal.loantype neq 2}
-						<!--<div class="shop3d">
-							提前还款费率：<span class="f_red">{function name="app_conf" v="COMPENSATE_FEE"}%</span>
-						</div>
-						{/if}
-						-->
-            </div>
-            <div class="shop4">
-            	
-				 {if $deal.is_delete eq 2}
+							{/if}</p>
+				{if $deal.deal_status eq 1}			
+            <p class="xshoprightp1">已完成<span> {$deal.buy_count} </span>笔投资</p>
+			{elseif $deal.deal_status eq 2}	
+			  <p class="xshoprightp1">已完成<span> {$deal.buy_count} </span>笔投资</p>
+			{elseif $deal.deal_status eq 4}	
+			<p class="xshoprightp1">已还本息：<span> {function name="number_format" v=$deal.repay_money f=2}元</span></p>
+			
+			{/if}
+			
+			 {if $deal.is_delete eq 2}
 								<img class="shop4a" src="{$TMPL}/imagest_publish.png" alt="">
 							{elseif $deal.deal_status eq 5}
 								<img class="shop4a" src="{$TMPL}/images/load_done.png" alt="">
@@ -139,35 +91,27 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 							{elseif $deal.deal_status eq 0}
 								<img class="shop4a" src="{$TMPL}/images/loan_writeM.png" alt="" width="111px" height="34px">
 							{elseif $deal.deal_status eq 1 && $deal.remain_time gt 0}
-								<a href="{url x="index" r="deal#bid" p="id=$deal.id"}" class="btn-orange" style="background:none; border:none; padding:0px"><img class="shop4a" src="{$TMPL}/images/load.png" alt="" ></a>
+								<a href="{url x="index" r="deal#bid" p="id=$deal.id"}" class="btn-orange" style="background:none; border:none; padding:0px"><img class="shop4a" src="{$TMPL}/images/tou_z_03.png" alt="" ></a>
 							{elseif $deal.deal_status eq 2}
 								<img class="shop4a" src="{$TMPL}/images/load_full.png" alt="">
 							{elseif $deal.deal_status eq 3 || $deal.remain_time lte 0}
 								<img class="shop4a" src="{$TMPL}/images/load_fail.png" alt="" >
 							{/if}
-				{if $ACTION_NAME neq 'preview'}
-						<div class="shop4b" style="width:auto" id="addFav">
-							{if $deal.is_faved gt 0}
+			
+            <p class="xshoprightp2">最低投资金额{$deal.min_loan_money}元</p>
+        </div>
+    </div>
+    <p class="xshopp">{if $deal.is_faved gt 0}
 							已关注
 							{else}
 							<a href="javascript:;" class="shop4b" id="addFavLink" onclick="collect_deal(this,'{$deal.id}',fav_result);">关注此投资</a>
-							{/if}
-						</div>
-						{/if}
-                
-            </div>
-        </div>
-    </div>
-	<div class="jilubox">
-    	<img src="{$TMPL}/images/tou_27.png">
-    	<div class="jilu">
-        <h1>投资记录</h1>
-        <div class="jilu3"></div>
-       
-       
-		 {include file="inc/deal/load_list.html"}
-        </div>
-    </div>
+							{/if}</p>
+</div>
+<div class="jshop">
+	<h1>投资记录</h1>
+	 {include file="inc/deal/load_list.html"}
+  
+</div>
 <script type='text/javascript'>
 	function fav_result(o)
 	{

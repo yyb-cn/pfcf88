@@ -141,7 +141,9 @@ class dealModule extends SiteBaseModule
 			$GLOBALS['tmpl']->assign("message_login_tip",sprintf($GLOBALS['lang']['MESSAGE_LOGIN_TIP'],url("shop","user#login"),url("shop","user#register")));
 		}
 		$deal['create_time']=date("Y-m-d H:i",$deal['create_time']);
+		$deal['repay_start_time']=date("Y-m-d",$deal['repay_start_time']);
 		$GLOBALS['tmpl']->assign("deal",$deal);
+		
 		//print_r($deal);exit;
 		$GLOBALS['tmpl']->display("page/deal.html");
 	}
