@@ -184,7 +184,7 @@
 						  l+='</div>'
 			        l+='</div>'
 				 } // 循环结束
-				 if(l==''){l='<div class="item tc"style="width:730px; height:30px;">无记录 </div>'}
+				 if(l==''){l='<div class="item tc"style="width:730px; height:114px;line-height:114px;">没有符合条件的产品</div>'}
 		return l;
 		}	
 		
@@ -207,7 +207,7 @@
 						type:$(this).attr("type")
 						},
 						beforeSend:function(){
-				$("#J_biao_list").append('<div class="item tc"style="width:730px; height:80px;"><img src="{$TMPL}/images/loading.gif" style="position:absolute; left:300px; top:80px;"></div>');
+				$("#J_biao_list").append('<img src="{$TMPL}/images/loading.gif" style="position:absolute; left:350px; top:30px;">');
 				
 								},
 					success: function(data){
@@ -245,7 +245,7 @@
 						check:$(this).attr("check")
 						},
 			beforeSend:function(){
-				$("#J_biao_list").append('<div class="item tc"style="width:730px; height:80px;"><img src="{$TMPL}/images/loading.gif" style="position:absolute; left:300px; top:80px;"></div>');
+				$("#J_biao_list").append('<img src="{$TMPL}/images/loading.gif" style="position:absolute; left:350px; top:30px;">');
 				
 								},
 								
