@@ -67,23 +67,24 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 			<div class="hd-tel">客服电话：<span>{function name="app_conf" v="SHOP_TEL"}</span></div>
 		</div>
 	</div>
-	<div class="user_login_bar clearfix">
-		<div class="wrap ">
-			<div class="blank"></div>
-			<div class="blank5"></div>
-			<div class="inc f_r" style="width:320px; height:350px;">	<div class="user_inc_top" style="text-align:left;">{$page_title}<!-- <span>&nbsp;{$LANG.OR} {if $api_callback}<a href="{url x="shop" r="user#api_create"}">{else}<a href="{url x="shop" r="user#register"}">{/if}{$CREATE_TIP}</a></span>	--></div>
-				<div class="clearfix">
-					<div class="user-lr-box-left f_r">
-						{insert name="load_login_form"}
-						<div class="blank10"></div>
-						<div class="app_login_box">
-						<!--{insert name="get_app_login" v="0"}-->
-						</div>
-					</div>
-				</div>
-				<div class="inc_foot"></div>
-			</div>
-		</div>
+	<div class="user_login_bar clearfix" style="background:#084A6D;">
+        <div class="wrap ">
+            <div class="blank"></div>
+            <div class="blank5"></div>
+            <div class="bg_logo" style=" float:left; margin:100px 0 0 160px; background:url({$TMPL}/images/bj_01.png) no-repeat center 0; width:286px; height:132px;"></div>
+            <div class="inc f_r" style="width:320px; height:350px; background:url({$TMPL}/images/bj_02.png) no-repeat center 0;">	<div class="user_inc_top" style="text-align:left;">{$page_title}<!-- <span>&nbsp;{$LANG.OR} {if $api_callback}<a href="{url x="shop" r="user#api_create"}">{else}<a href="{url x="shop" r="user#register"}">{/if}{$CREATE_TIP}</a></span>	--></div>
+                <div class="clearfix">
+                    <div class="user-lr-box-left f_r">
+                        {insert name="load_login_form"}
+                        <div class="blank10"></div>
+                        <div class="app_login_box">
+                        <!--{insert name="get_app_login" v="0"}-->
+                        </div>
+                    </div>
+                </div>
+                <div class="inc_foot"></div>
+            </div>
+        </div>
 	</div>
 	<div class="blank20"></div>
     <center><img style="width:865px; height:98px;" src="{$TMPL}/images/user_login.png" alt="" /></center>
