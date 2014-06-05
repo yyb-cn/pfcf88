@@ -36,19 +36,18 @@
                 
                 <select name="chengjian" style="display:none">
                     <option value="x">选择周期</option>
-                    <option value="75" moon="3">三个月</option>
-                    <option value="80" moon="6">六个月</option>
+                    <option value="85" moon="3">三个月</option>
+                    <option value="85" moon="6">六个月</option>
                     <option value="85" moon="9">九个月</option>
-                    <option value="90" moon="12">十二个月</option>
+                    <option value="85" moon="12">十二个月</option>
                 </select>
-                
                 
                 <select name="wenfeng" style="display:none">
                     <option value="x">选择周期</option>
-                    <option value="75" moon="3">三个月</option>
-                    <option value="80" moon="6">六个月</option>
+                    <option value="85" moon="3">三个月</option>
+                    <option value="85" moon="6">六个月</option>
                     <option value="85" moon="9">九个月</option>
-                    <option value="90" moon="12">十二个月</option>
+                    <option value="85" moon="12">十二个月</option>
                 </select>
             </span>
         </div>
@@ -114,7 +113,7 @@ $(document).ready(function() {
 			if( principal >= 50 && principal < 100){
 				interest = nowInterest*1 + 20
 			}
-			if( principal >= 100 && principal < 200){
+			if( principal >= 100 && principal < 300){
 				interest = nowInterest*1 + 25
 			}
 			if( principal >= 300){
@@ -122,12 +121,32 @@ $(document).ready(function() {
 			}
 		}
 		
-		if(principal != null && str != null){
-			yield = parseInt(principal * 1 * interest * 1 * moon * 1 * 10);	//最终收益 = 本金 * 千分比利率 * 月数 * 10(利率除以1000再乘以10000元等于10,万元转换成元)
-			$("#yield input").val(yield);
+		if( nextSelect == 'chengjian' || nextSelect == 'wenfeng'){	//判断是否选的是城建或文峰,判断投资金额的范围使用的利率
+			if( principal >= 20 && principal < 50){
+				interest = nowInterest*1 + 8
+			}
+			if( principal >= 50 && principal < 100){
+				interest = nowInterest*1 + 15
+			}
+			if( principal >= 100 && principal < 300){
+				interest = nowInterest*1 + 25
+			}
+			if( principal >= 300){
+				interest = nowInterest*1 + 35
+			}
+		}
+		
+		if(interest != null && moon != null){
+			if(principal != null && str != null){
+				yield = parseInt(principal * 1 * interest * 1 * moon * 1 * 10);	//最终收益 = 本金 * 千分比利率 * 月数 * 10(利率除以1000再乘以10000元等于10,万元转换成元)
+				$("#yield input").val(yield);
+			}
+			else{
+				alert("要输入投资金额并且只能数字才有结果哦!");return false;
+			}
 		}
 		else{
-			alert("要输入投资金额并且只能数字才有结果哦!");return false;
+			alert("请选择投资产品和投资周期!");return false;
 		}
 		
 	})
