@@ -187,8 +187,8 @@ li.yshop2b_ca{margin-left:20px;}
 
 
 .jiuheaer{ overflow:hidden;width:980px;margin-left:-15px;}
-.jiuheaer_left{float:left;width:250px;height:1px;background-color:#535353;margin-top:12px;margin-bottom:15px;}
-.jiuheaer h1{float:left;color:535353;font-family:"微软雅黑";margin-left:100px;}
-.jiuheaer_right{float:right;width:250px;height:1px;background-color:#535353;margin-top:12px;margin-bottom:15px;}
+.jiuheaer_left{float:left;width:250px;height:1px;background-color:#535353;margin-top:30px;margin-bottom:15px;}
+.jiuheaer h1{float:left;color:535353;font-family:"微软雅黑";margin-left:100px; line-height:50px;}
+.jiuheaer_right{float:right;width:250px;height:1px;background-color:#535353;margin-top:30px;margin-bottom:15px;}
 .jiup{width:770px;margin:40px auto;font-size:14px;text-indent:2em;}
 .jiushop{width:980px;margin-left:-15px;height:1472px;margin-bottom:30px;}
