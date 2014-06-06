@@ -166,7 +166,9 @@ li.yshop2b_ca{margin-left:20px;}
 .xshopleft_2cp{margin-top:10px;}
 .xshopleft_2ca{ overflow:hidden;margin:0 auto;width:98px;}
 .xshopleft_2ca img{float:left;margin-top:25px;}
-.xshopleft_2cap{float:left;margin-top:20px;margin-left:2px;}
+.tiaozi { float:left; width:60px; height:8px; border:1px solid #428DCB; margin-top:25px;}
+.tiaozi .tiaozibeijing { background:#428DCB; width:58px; height:100%; float:left;}
+.xshopleft_2cap{ float:right; margin-top:20px;margin-left:2px;}
 .xshopleft_3c{float:left;width:188px;text-align:center;margin-top:20px;margin-bottom:25px;}
 .xshopleft_3c p{margin-top:8px;}
 .xshopright{float:right;margin-top:15px;margin-right:70px;}

@@ -88,3 +88,56 @@ span.line_disable{ background:url("../images/list_type.gif") no-repeat -18px -15
 			.trading_link .trading_link_3 { margin-top:40px; width:128px; height:128px;}
 			.trading_link .trading_link_3 P { margin:6px 0 0 0;}
 /* 14年5月26日改版部分结束 */
+
+/* 14年6月6日新增进度条样式 */
+.newbar{ overflow:hidden; background-color: #F7F7F7; background-image: linear-gradient(to bottom, #F5F5F5, #F9F9F9); background-repeat: repeat-x; border-radius: 4px; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1) inset; width:100%;}
+
+.progressBar .p .bar-c { border-radius:4px; background-color: #149BDF; background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); background-size: 30px 30px;}
+
+.progressBar .p .baring { -webkit-animation:bar-bar-bar 2s linear infinite; -moz-animation:bar-bar-bar 2s linear infinite; -ms-animation:bar-bar-bar 2s linear infinite; -o-animation:bar-bar-bar 2s linear infinite; animation:bar-bar-bar 2s linear infinite;}
+
+@-webkit-keyframes bar-bar-bar{
+	from{
+		background-position:30px 0
+	}
+	to{
+		background-position:0 0
+	}
+}
+
+@-moz-keyframes bar-bar-bar{
+	from{
+		background-position:30px 0;
+	}
+	to{
+		background-position:0 0;
+	}
+}
+
+@-ms-keyframes bar-bar-bar{
+	from{
+		background-position:30px 0;
+	}
+	to{
+		background-position:0 0;
+	}
+}
+
+@-o-keyframes bar-bar-bar{
+	from{
+		background-position:30px 0;
+	}
+	to{
+		background-position:0 0;
+	}
+}
+
+@keyframes bar-bar-bar{
+	from{
+		background-position:30px 0;
+	}
+	to{
+		background-position:0 0;
+	}
+}
+/* 14年6月6日新增进度条样式结束 */

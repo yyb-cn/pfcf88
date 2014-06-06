@@ -179,14 +179,14 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     
                         <div class="info info2 f_l clearfix" style="width:225px;">
                             <div class="f_l">投资进度：</div>
-                            <div class="greenProcessBar progressBar f_l indexbar">						
+                            <div class="greenProcessBar progressBar f_l indexbar newbar">						
                                 <p>{function name="round" v=$deal.progress_point f=0}%</p>
                                 <div class="p">
                                 <!-- 14年5月23日修改进度条样式 -->
                                 	{if $deal.progress_point eq 100}
-                                    	<div class="c" style="background:url({$TMPL}/images/progress_bar_full.gif) no-repeat; background-size:126px 14px; width:100%;"></div>
+                                    	<div class="c bar-c" style="width:100%;"></div>
                                     {else}
-                                    	<div class="c" style="background:url({$TMPL}/images/progress_bar_x.gif) no-repeat; width:{function name="round" v=$deal.progress_point f=0}%;"></div>
+                                    	<div class="c bar-c baring" style="width:{function name="round" v=$deal.progress_point f=0}%;"></div>
                                     {/if}
                                 <!-- 14年5月23日修改进度条样式结束 -->
                                 </div>

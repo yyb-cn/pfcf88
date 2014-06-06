@@ -145,17 +145,17 @@
 								else if (data[i].deal_status==1 && data[i].remain_time<=0)
 								 	{l+='<span class="f_red"> 流标</span>'}
 							else{
-			                      l+='<div class="greenProcessBar progressBar prmar">'
+			                      l+='<div class="greenProcessBar progressBar prmar newbar">'
 			                      l+='<p>'
 								  if (data[i].deal_status==0){l+='等待材料'}
 								  else{l+=Math.round(data[i].progress_point)+'%'}//用了函数
 								  l+='</p>'
-			                      l+='<div class="p"><div class="c f_l clearfix" style="'
+			                      l+='<div class="p">'
 								  if(data[i].progress_point == 100){
-									 l+='background:url({$TMPL}/images/progress_bar_full.gif) no-repeat; background-size:113px 14px; width:100%;">'
+									 l+='<div class="c bar-c" style="width:100%;">'
 								  }
 								  else{
-									 l+='background:url({$TMPL}/images/progress_bar_x.gif) no-repeat; width:'+data[i].progress_point+'%;">'
+									 l+='<div class="c bar-c baring" style="width:'+data[i].progress_point+'%;">'
 								  }
 								  l+='</div></div>'
 			                      l+='</div>'
@@ -502,14 +502,14 @@
 								  {elseif $deal.deal_status eq 1 && $deal.remain_time lte 0}
 								 	<span class="f_red"> 流标</span>
 								  {else}
-			                      <div class="greenProcessBar progressBar prmar">
+			                      <div class="greenProcessBar progressBar prmar newbar">
 			                          <p>{if $deal.deal_status eq 0}等待材料{else}{function name="round" v=$deal.progress_point f=0}%{/if}</p>
 			                          <div class="p">
                                       <!-- 14年5月23日修改进度条样式 -->
                                       	{if $deal.progress_point eq 100}
-                                        	<div class="c" style="background:url({$TMPL}/images/progress_bar_full.gif) no-repeat; background-size:113px 14px; width:100%;"></div>
+                                        	<div class="c bar-c" style="width:100%;"></div>
                                         {else}
-                                        	<div class="c" style="background:url({$TMPL}/images/progress_bar_x.gif) no-repeat; width:{function name="round" v=$deal.progress_point f=0}%;"></div>
+                                            <div class="c bar-c baring" style="width:{function name="round" v=$deal.progress_point f=0}%;"></div>
                                         {/if}
                                       <!-- 14年5月23日修改进度条样式结束 -->
                                       </div>
@@ -523,7 +523,7 @@
 			                  </div>
                               
 			              
-			        </div><div style="float:right; width:96px; height:36px;  position:absolute;left:600px;top:2px;">
+			</div><div style="float:right; width:96px; height:36px;  position:absolute;left:600px;top:2px;">
 				{if $deal.deal_status eq 1}
             <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px; height:80px; margin-top:15px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>
             {elseif $deal.deal_status eq 2}<!--满标-->
@@ -762,5 +762,59 @@
     }
 	
 </script>
-{include file="inc/footer.html"}
 
+<style>
+/* 14年6月6日新增进度条样式 */
+.newbar{ overflow:hidden; background-color: #F7F7F7; background-image: linear-gradient(to bottom, #F5F5F5, #F9F9F9); background-repeat: repeat-x; border-radius: 4px; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1) inset; width:100%;}
+
+.progressBar .p .bar-c { border-radius:4px; background-color: #149BDF; background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); background-size: 30px 30px;}
+
+.progressBar .p .baring { -webkit-animation:bar-bar-bar 2s linear infinite; -moz-animation:bar-bar-bar 2s linear infinite; -ms-animation:bar-bar-bar 2s linear infinite; -o-animation:bar-bar-bar 2s linear infinite; animation:bar-bar-bar 2s linear infinite;}
+
+@-webkit-keyframes bar-bar-bar{
+	from{
+		background-position:30px 0
+	}
+	to{
+		background-position:0 0
+	}
+}
+
+@-moz-keyframes bar-bar-bar{
+	from{
+		background-position:30px 0;
+	}
+	to{
+		background-position:0 0;
+	}
+}
+
+@-ms-keyframes bar-bar-bar{
+	from{
+		background-position:30px 0;
+	}
+	to{
+		background-position:0 0;
+	}
+}
+
+@-o-keyframes bar-bar-bar{
+	from{
+		background-position:30px 0;
+	}
+	to{
+		background-position:0 0;
+	}
+}
+
+@keyframes bar-bar-bar{
+	from{
+		background-position:30px 0;
+	}
+	to{
+		background-position:0 0;
+	}
+}
+/* 14年6月6日新增进度条样式结束 */
+</style>
+{include file="inc/footer.html"}
