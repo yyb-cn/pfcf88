@@ -32,18 +32,18 @@ img{border:none;margin:0; padding:0;}
 .cong{position:absolute;top:111px;left:175px;z-index:222;color:#888;top:120px\0;}
 .dao{position:absolute;top:149px;left:175px;z-index:222;color:#888;top:162px\0;}
 
-.headf{height:112px;position:relative;z-index:10; font-family:"微软雅黑";}
+.headf{height:87px;position:relative;z-index:10; font-family:"微软雅黑";}
 .head_main{width:1000px;margin:auto;}
-.head_main img{float:left;padding-top:20px;}
+.head_main img{float:left;padding-top:10px;}
 .head_main ul{float:right;}
-.head_main ul li{float:left;line-height:107px;height:107px;padding:0 20px;z-index:2;}
+.head_main ul li{float:left;line-height:87px;height:87px;padding:0 20px;z-index:2;}
 .head_main ul li a{font-size:18px;color:#242b33;z-index:2;}
 .head_main ul li a:hover{color:#d90000;}
 .head_main ul li.on{border-bottom:3px solid #e61717;}
 .head_main ul li.onnn{position:relative;}
-.head_main ul li.onn{background:url("../images/nav_bg.png") no-repeat 100px 52px;}
-.head_main ul li.onn1{background:url("../images/nav_bghover.png") no-repeat 101px 52px;}
-.head_main ul li ul{position:absolute;border:1px solid #d6dce1;border-top:3px solid #e61717;z-index:5;top:75px;left:0;background:#fff;display:none;}
+.head_main ul li.onn{background:url("../images/nav_bg.png") no-repeat 100px 42px;}
+.head_main ul li.onn1{background:url("../images/nav_bghover.png") no-repeat 101px 42px;}
+.head_main ul li ul{position:absolute;border:1px solid #d6dce1;border-top:3px solid #e61717;z-index:5;top:65px;left:0;background:#fff;display:none;}
 .head_main ul li ul li{height:35px;line-height:35px;float:none;border-top:1px dotted #d6dce1;text-align:center;}
 .head_main ul li ul li a{ width:90px;font-size:14px;}
 
@@ -87,3 +87,10 @@ img{border:none;margin:0; padding:0;}
 .fund_center{ padding-left:45px; padding-top:15px; float:left;}
 .fund_right{ float:left; padding-top:25px; padding-left:45px; font-size:26px; font-weight:bold; color:#F60;}
 .clear{ clear:both;}
+
+/*************14年6月9日添加微博微信链接***************/
+.weixin { background:url(../images/weixin.png) no-repeat; position:relative; width:22px; height:20px; margin:10px 5px 0 5px; float:left;}
+	.weixin_main { display:none; background:url(../images/weixin_main.png) no-repeat; position:absolute; width:154px; height:200px; margin-top:20px; margin-left:-66px; position:fixed\9;}
+.weibo { background:url(../images/weibo.png) no-repeat; position:relative; width:22px; height:20px; margin:10px 5px 0 5px; float:left;}
+	.weibo_main { display:none; background:url(../images/weibo_main.png) no-repeat; position:absolute; width:154px; height:115px; margin-top:20px; margin-left:-66px; position:fixed\9;}
+/*************14年6月9日添加微博微信链接结束***************/

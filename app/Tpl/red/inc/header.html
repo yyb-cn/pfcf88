@@ -52,7 +52,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 <a id="vote" href="{url x="index" r="vote"}" target="_blank"></a>
 {/if}
 
-<div class="header" id="header" style="position:fixed; z-index:1000; top:0; left:0; right:0 ; margin:auto;"> 
+<div class="header" id="header" style="position:fixed; z-index:1000; top:0; left:0; right:0 ; margin:auto; overflow:inherit;"> 
 	<div class="wrap constr">
 		<div class="wrap clearfix">
 			<div class="logo f_l pt15">
@@ -64,11 +64,13 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 			</a>
 			</div>
 			<div class="f_r">
+            	<div class="weixin"><div class="weixin_main"></div></div>
+                <div class="weibo"><div class="weibo_main"></div></div>
+                
 				<span id="user_head_tip" class="pr">
 				{insert name="load_user_tip"}
 				<span class="li"><a href="{url x="index"}">首页</a></span><span class="li"><a href="{url x="index" r="helpcenter"}">帮助</a></span><span class="li">客服电话：<span style="color:#96E7FE; font-size:16px;">{function name="app_conf" v="SHOP_TEL"}</span></span>
 				</span>
-
 			</div>
             <div class="hd-tel"></div>		
 		</div><!--end wrap-->
@@ -77,7 +79,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 <div class="hidden-layer" style="height:40px;"></div>
 	<div  class="headf">
 	<div  class="head_main">
-		<a  href="{$APP_ROOT}/index.php"  title=""> <img  src="{$TMPL}/images/logo0530.jpg" width="365"  alt=""></a>
+		<a  href="{$APP_ROOT}/index.php"  title=""> <img  src="{$TMPL}/images/logo0530.png" width="266"  alt=""></a>
 		<ul>
             <!-- <li><a href="{$APP_ROOT}">首页</a></li> -->
             {foreach from=$nav_list item=nav_item key=key}
@@ -95,3 +97,23 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 	</div>
 </div>
 <div class="wrap">
+
+<script>
+    $(".weixin").mouseenter(function(){
+		$(this).css("background","url({$TMPL}/images/weixin.png) no-repeat 0 -30px");
+		$(".weixin_main").show();
+	})
+	$(".weixin").mouseleave(function(){
+		$(this).css("background","url({$TMPL}/images/weixin.png) no-repeat");
+		$(".weixin_main").hide();
+	})
+	
+	$(".weibo").mouseenter(function(){
+		$(this).css("background","url({$TMPL}/images/weibo.png) no-repeat 0 -32px");
+		$(".weibo_main").show();
+	})
+	$(".weibo").mouseleave(function(){
+		$(this).css("background","url({$TMPL}/images/weibo.png) no-repeat");
+		$(".weibo_main").hide();
+	})
+</script>
