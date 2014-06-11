@@ -93,4 +93,6 @@ img{border:none;margin:0; padding:0;}
 	.weixin_main { display:none; background:url(../images/weixin_main.png) no-repeat; position:absolute; width:154px; height:200px; margin-top:20px; margin-left:-66px; position:fixed\9;}
 .weibo { background:url(../images/weibo.png) no-repeat; position:relative; width:22px; height:20px; margin:10px 5px 0 5px; float:left;}
 	.weibo_main { display:none; background:url(../images/weibo_main.png) no-repeat; position:absolute; width:154px; height:115px; margin-top:20px; margin-left:-66px; position:fixed\9;}
+		.weibo_main p { text-align:center; line-height:25px;}
+		.weibo_main .mar_top { margin-top:45px;}
 /*************14年6月9日添加微博微信链接结束***************/
