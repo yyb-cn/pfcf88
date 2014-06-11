@@ -32,5 +32,9 @@ class aboutfeeModule  extends SiteBaseModule {
 		
 		$GLOBALS['tmpl']->display("page/index_jigou.html");
 		}
+	function mechanism_detail(){
+	
+		$GLOBALS['tmpl']->display("page/index_mechanism_detail.html");
+	}
 }
 ?>

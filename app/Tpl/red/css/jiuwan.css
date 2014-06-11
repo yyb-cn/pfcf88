@@ -80,3 +80,19 @@
 .wanshop6{width:960px;height:139px;background-color:#9f2d3d; overflow:hidden;margin-bottom:25px;}
 .wanshop6 img{float:left;}
 .wanshop6 p{font-size:14px;font-weight:bold;color:#FFF;width:670px;margin-top:40px;margin-right:80px;float:right;letter-spacing:1px;}
+
+/*资质证书*/
+.zhshop1{width:1200px; height:650px; background:url(../images/zheng_03.png) no-repeat;margin-left:-10px; overflow:hidden;}
+.zhshop1a{margin-left:54px;padding-top:62px; float:left;}
+.zhshop1b{margin-right:0px;padding-top:0px; float:right;}
+.zhshop1b_a{padding-right:325px;padding-top:20px;width:267px;height:197px;}
+.zhshop1b_b{padding-right:325px;padding-top:14px;width:267px;height:193px;}
+.zhshop2{width:1200px; height:500px; background:url(../images/zheng_06.png) no-repeat;margin-left:-10px; margin-top:-180px;}
+.zhshop2a{margin-left:48px;padding-top:55px;}
+
+@media {
+					.zhshop1b_a{padding-right:222px\9;padding-top:20px;width:267px;height:197px;}
+					.zhshop1b_b{padding-right:222px\9;padding-top:14px;width:267px;height:193px;}}
+				}
+				
+/*资质证书结束*/
