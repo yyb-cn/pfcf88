@@ -44,7 +44,7 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
                 </div>
                 <div class="xshopleft_2b">
                 	<img src="{$TMPL}/images/tou_z_09.png">
-                    <p>计息时间：{$deal.repay_start_time}</p>
+                    <p>计息时间： {if $deal.deal_status eq 4 }{$deal.repay_start_time}{else}等待确认{/if}</p>
                 </div>
                 <div class="xshopleft_2c">
                 	<div class="xshopleft_2ca"><div class="tiaozi"><div class="tiaozibeijing" style="width:{function name='round' val=$deal.progress_point f=0}%;"></div></div><div class="xshopleft_2cap">{function name='round' val=$deal.progress_point f=0}% </div></div><!--正在回款是否为100-->

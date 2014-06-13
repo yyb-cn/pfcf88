@@ -12,6 +12,8 @@
  */
 function get_deal($id=0,$cate_id=0)
 {		
+
+
 		$time = get_gmtime();
 			
 		if($id==0)  //有ID时不自动获取
