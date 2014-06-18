@@ -193,12 +193,12 @@
 		
 		//无刷新多条件筛选
 				$(".condition li a").live('click',function(){
-					
+					var url=window.location.href;
 					$(this).parent().siblings().children().removeClass("li_current")
 					$(this).addClass("li_current")//样式
 					$.ajax({
 					type:"POST",
-					url: "",
+					url: url,
 					dataType:'json',//从php返回的值以 JSON方式 解释
 					data:{
 						value:$(this).attr("value"),
