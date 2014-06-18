@@ -42,10 +42,14 @@ class indexModule extends SiteBaseModule
 			}
 			//最新借款列表
 			$deal_list =  get_deal_list(6,0,"publish_wait =0 AND deal_status in(1,2,4,5) "," id DESC");
+			foreach($deal_list['list'] as $ke => $vel){
+				$deal_list['list'][$ke]['repay_start_time'] = date('Y-m-d',$vel['repay_start_time']);
+			}
 			$GLOBALS['tmpl']->assign("deal_list",$deal_list['list']);
 						
 			//输出公告
 			$notice_list = get_notice(0);
+			$notice_list[0]['update_time'] = date('m月d日',$notice_list['update_time']);
 			$GLOBALS['tmpl']->assign("notice_list",$notice_list);
 			
 			//lu 成交数据

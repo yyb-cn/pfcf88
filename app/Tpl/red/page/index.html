@@ -44,264 +44,217 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 		</div>
 	</div>
  <!--图片切换结束--> 
- 
- 	<!-- 14年5月26日修改成交记录 -->
-    <div class="trading_top" style="border-bottom:none;">
-    	<div class="trading">
-        	<div class="trading_bg">
-            </div>
-            
-            <div class="trading_main">
-            	<div class="trading_num numm1">
-                	<p class="trading_title">&nbsp;累计总交易金额</p>
-                    <p class="trading_momeny">{$success_deal.tatal_money}元</p>
+
+<div class="wrap">
+
+	<!-- 14年6月18日修改"关于我们" -->
+    <div class="blank10"></div><div class="blank10"></div>
+    <div class="about">
+    	<div class="title_140618">
+        	<div class="title_left">关于我们</div>
+        </div>
+    	<ul class="about_main">
+        	<li class="about1"><a href="#"><img src="{$TMPL}/images/about_01.png" /></a></li>
+            <li class="about2"><a href="{url x="index" r="aboutfee" p="act=mechanism"}"><img src="{$TMPL}/images/about_02.png" /></a></li>
+            <li class="about3"><a href="{url x="index" r="aboutfee" p="act=good"}"><img src="{$TMPL}/images/about_03.png" /></a></li>
+            <li class="about4"><a href="{url x="index" r="aboutfee" p="act=fengkong"}"><img src="{$TMPL}/images/about_04.png" /></a></li>
+        </ul>
+    </div>
+    <div class="trading_record">
+    	<div class="title_140618">
+        	<div class="title_left">成交记录</div>
+        </div>
+    	<ul class="trading_main">
+        	<li><p class="trading_title">累计总交易金额</p><p class="trading_money">{$success_deal.tatal_money}元</p></li>
+            <li><p class="trading_title">已按期还本金</p><p class="trading_money">{$success_deal.done_money}元</p></li>
+            <li><p class="trading_title">为用户带来的收益</p><p class="trading_money">{$success_deal.income}元</p></li>
+        </ul>
+    </div>
+    <!-- 14年6月18日修改"关于我们"结束 -->
+
+    
+    <!-- 14年6月18日修改“收益对比" -->
+	<div class="blank10"></div><div class="blank10"></div>
+    <div class="benefit_comparison">
+    	<div class="title_140618">
+        	<div class="title_left">收益对比</div>
+        </div>
+        <div class="comparison_main">
+        	<div class="comparison_title">假如你有十万元用来理财，一年之后你将会得到</div>
+            <ul>
+            	<li class="main_1">
+                    <p>银行</p>
+                    <p class="this_color">￥385</p>
+                    <p class="bank_bg" id="main_1_line"></p>
+                    <div class="main_1_line">
                 </div>
-                <div class="trading_num numm2">
-                	<p class="trading_title">&nbsp;已按期还本金额</p>
-                    <p class="trading_momeny">{$success_deal.done_money}元</p>
-                </div>
-                <div class="trading_num numm3">
-                	<p class="trading_title">&nbsp;为用户带来的收益</p>
-                    <p class="trading_momeny">{$success_deal.income}元</p>
-                </div>
-            </div>
-            
-            <div class="trading_link" style="margin-left:-15px;">
-                <div class="trading_link_1"><a href="{url x="index" r="aboutfee" p="act=mechanism"}"><img style="margin-left:-10px;margin-bottom:10px;" benefit="benefit1" src="{$TMPL}/images/zhu_tux_03.png" onmousemove='this.src="{$TMPL}/images/zhu_tu_14.png"' onMouseOut='this.src="{$TMPL}/images/zhu_tux_03.png"' /><p>专业机构</p></a>
+                </li>
                 
+                <li class="main_2">
+                    <p>理财通</p>
+                    <p class="this_color">￥5925</p>
+                    <p class="weixin_bg" id="main_2_line"></p>
+                    <div class="main_2_line">
+                </li>
+                <li class="main_3">
+                    <p>浦发财富</p>
+                    <p class="this_color">￥12000</p>
+                    <p class="pfcf_bg" id="main_3_line"></p>
+                    <div class="main_3_line">
+                </li>
+                <li class="main_4">
+                    <p>余额宝</p>
+                    <p class="this_color">￥5800</p>
+                    <p class="epay_bg" id="main_4_line"></p>
+                    <div class="main_4_line">
+                </li>
+                <li class="main_5">
+                    <p>国债</p>
+                    <p class="this_color">￥5000</p>
+                    <p class="debt_bg" id="main_5_line"></p>
+                    <div class="main_5_line">
+                </li>
+            </ul>
+            <div class="main_1_line_msg">活期：活期存款占一国货币供应的最大部分，也是商业银行的重要资金来源。鉴于活期存款不仅有货币支付手段和流通手段的职能，同时还具有较强的派生能力，因此，商业银行在任何时候都把活期存款作为经营重点。由于该类存款存取频繁，手续复杂，所费成本较高，西方国家商业银行一般都不支付利息,有时甚至还要收取一定的手续费，我国目前活期存款年利率为0.35%。</div>
+            <div class="main_2_line_msg">理财通：理财通是由腾讯公司推出的基于微信的金融理财开放平台，首批接入华夏基金等一线大品牌基金公司，理财通背后的金融产品为货币基金，1月22日正式上线，现阶段只能在手机端操作。</div>
+            <div class="main_3_line_msg">浦发财富：由浦发财富推出，以团购众筹投资形式对合作机构推荐的优质债权项目进行自动投资的在线理财平台，具有稳健、安全、流动性强几大特点。保本保收益，年化收益率可达7%-12%，超低投资门槛，1000元即可加入。</div>
+            <div class="main_4_line_msg">余额宝：余额宝是由第三方支付平台支付宝为个人用户打造的一项余额增值服务，实际上是购买了一款由天弘基金提供的名为"增利宝"的货币基金，转入余额宝的资金在第二个工作日由基金公司进行份额确认，对已确认的份额会开始计算收益。其实质是货币基金，仍有风险。</div>
+            <div class="main_5_line_msg">国债：国债，又称国家公债，是国家以其信用为基础，按照债的一般原则，通过向社会筹集资金所形成的债权债务关系。国债是由国家发行的债券，是中央政府为筹集财政资金而发行的一种政府债券，是中央政府向投资者出具的、承诺在一定时期支付利息和到期偿还本金的债权债务凭证，2013年发行的三年期国债利率在5%。</div>
+        </div>
+    </div>
+    <!-- 14年6月18日修改“收益对比"结束 -->
+
+    <!--14年6月18日修改直接购买-->
+    <div class="blank10"></div><div class="blank10"></div>
+    <div class="buying">
+    	<ul>
+        	<li class="buy1">
+            	<div class="buy1_main">
+                	<div class="buy_hot"></div>
+                	<p class="buy_title1">信贷赢三期</p>
+                    <p class="buy_title2">（最低投资额度：100元）</p>
                 </div>
-                <div class="trading_link_2"><a href="{url x="index" r="aboutfee" p="act=good"}"><img style="margin-left:-10px;margin-bottom:10px;" benefit="benefit1" src="{$TMPL}/images/zhu_tux_05.png" onmousemove='this.src="{$TMPL}/images/zhu_tu_12.png"' onMouseOut='this.src="{$TMPL}/images/zhu_tux_05.png"' /><p>九重保障</p></a></div>
-                <div class="trading_link_3"><a href="{url x="index" r="aboutfee" p="act=fengkong"}"><img style="margin-left:-10px;margin-bottom:10px;" benefit="benefit1" src="{$TMPL}/images/zhu_tux_07.png" onmousemove='this.src="{$TMPL}/images/zhu_tu_13.png"' onMouseOut='this.src="{$TMPL}/images/zhu_tux_07.png"' /><p>风控完善</p></a></div>
-            </div>
-            
-        </div>
-            
-        </div>
-    </div>
-    <!-- 14年5月26日修改成交记录结束 -->
-
-    
-    <!-- 14年5月22日添加"收益对比" -->
-	<div class="blank10"></div>
-    <div class="benefit_comparison" style="width:100%; border-bottom:1px dotted #D6DCE1; overflow:hidden;">
-    	<div style="width:1000px; height:175px; background:url({$TMPL}/images/benefit-comparison-header.gif) no-repeat;">
-            <p style="line-height:22px;letter-spacing:2px;text-indent:36px;  display:none; padding-top:90px; padding-left:100px; padding-right:100px; font-size:16px; color:#535353; font-family:'微软雅黑', '黑体', '仿宋'" id="benefit1">活期：活期存款占一国货币供应的最大部分，也是商业银行的重要资金来源。鉴于活期存款不仅有货币支付手段和流通手段的职能，同时还具有较强的派生能力，因此，商业银行在任何时候都把活期存款作为经营重点。由于该类存款存取频繁，手续复杂，所费成本较高，西方国家商业银行一般都不支付利息,有时甚至还要收取一定的手续费，我国目前活期存款年利率为0.35%。</p>
-            <p style="line-height:22px;letter-spacing:2px;text-indent:36px;  display:none; padding-top:90px; padding-left:100px; padding-right:100px; font-size:16px; color:#535353; font-family:'微软雅黑', '黑体', '仿宋'" id="benefit2">理财通：理财通是由腾讯公司推出的基于微信的金融理财开放平台，首批接入华夏基金等一线大品牌基金公司，理财通背后的金融产品为货币基金，1月22日正式上线，现阶段只能在手机端操作。</p>
-            <p style=" display:none; padding-top:90px; padding-left:100px; padding-right:100px; line-height:22px;letter-spacing:2px;text-indent:36px; font-size:16px; color:#535353; font-family:'微软雅黑', '黑体', '仿宋'" id="benefit3">浦发财富：由浦发财富推出，以团购众筹投资形式对合作机构推荐的优质债权项目进行自动投资的在线理财平台，具有稳健、安全、流动性强几大特点。保本保收益，年化收益率可达7%-12%，超低投资门槛，1000元即可加入。</p>
-            <p style=" line-height:22px;letter-spacing:2px;text-indent:36px; display:none; padding-top:90px; padding-left:100px; padding-right:100px; font-size:16px; color:#535353; font-family:'微软雅黑', '黑体', '仿宋'" id="benefit4">余额宝：余额宝是由第三方支付平台支付宝为个人用户打造的一项余额增值服务，实际上是购买了一款由天弘基金提供的名为"增利宝"的货币基金，转入余额宝的资金在第二个工作日由基金公司进行份额确认，对已确认的份额会开始计算收益。其实质是货币基金，仍有风险。</p>
-            <p style="line-height:22px;letter-spacing:2px;text-indent:36px;  display:none; padding-top:90px; padding-left:100px; padding-right:100px; font-size:16px; color:#535353; font-family:'微软雅黑', '黑体', '仿宋'" id="benefit5">国债：国债，又称国家公债，是国家以其信用为基础，按照债的一般原则，通过向社会筹集资金所形成的债权债务关系。国债是由国家发行的债券，是中央政府为筹集财政资金而发行的一种政府债券，是中央政府向投资者出具的、承诺在一定时期支付利息和到期偿还本金的债权债务凭证，2013年发行的三年期国债利率在5%。</p>
-        </div>
-        <div class="blank10"></div>
-    	<div id="benefit_comparison_img" style="width:1000px; height:320px; background:url({$TMPL}/images/benefit-comparison.png) no-repeat;">
-        	<div class="benefit1" style="float:left; padding-top:166px; padding-left:135px;">
-            	<img benefit="benefit1" src="{$TMPL}/images/grey-1.gif" onmousemove='this.src="{$TMPL}/images/current-1.gif"' onMouseOut='this.src="{$TMPL}/images/grey-1.gif"' />
-            </div>
-            <div class="benefit2" style="float:left; padding-top:100px; padding-left:45px;">
-            	<img benefit="benefit2" src="{$TMPL}/images/grey-2.gif" onmousemove='this.src="{$TMPL}/images/current-2.gif"' onMouseOut='this.src="{$TMPL}/images/grey-2.gif"' />
-            </div>
-            <div class="benefit3" style="float:left; padding-top:30px; padding-left:60px;">
-            	<img benefit="benefit3" src="{$TMPL}/images/grey-3.gif" onmousemove='this.src="{$TMPL}/images/current-3.gif"' onMouseOut='this.src="{$TMPL}/images/grey-3.gif"' />
-            </div>
-            <div class="benefit4" style="float:left; padding-top:100px; padding-left:60px;">
-            	<img benefit="benefit4" src="{$TMPL}/images/grey-4.gif" onmousemove='this.src="{$TMPL}/images/current-4.gif"' onMouseOut='this.src="{$TMPL}/images/grey-4.gif"' />
-            </div>
-            <div class="benefit5" style="float:left; padding-top:166px; padding-left:45px;">
-            	<img benefit="benefit5" src="{$TMPL}/images/grey-5.gif" onmousemove='this.src="{$TMPL}/images/current-5.gif"' onMouseOut='this.src="{$TMPL}/images/grey-5.gif"' />
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript">
-	$(document).ready(function(e) {
-		$("#benefit_comparison_img img").mousemove(function(){
-			//alert(1111);
-			var thisP = $(this).attr("benefit");
-			//alert(thisP);
-			$(".benefit_comparison p").css("display","none");
-			$('#'+thisP+'').css("display","block");
-		})
-	})
-	</script>
-    <!-- end class="benefit_comparison" -->
-    <!-- 14年5月22日添加"收益对比"结束 -->
-    
-<div class="wrap">      
-<div class="blank10"></div>
-<!--添加三个直接购买-->
-	<div class="index_left_baynow" style=" width:960px; height:463px; background:url({$TMPL}/images/shop_03.png) no-repeat; margin-left:0px;">
-        <div class="bay_now1" style=" float:left; padding-left:90px; padding-top:360px;">
-        	<a {if $credit.name}href="{$credit.share_url}"{else}{/if}>
-        		{if $credit.name}<img src="{$TMPL}/images/xinan_06.png" onmousemove='this.src="{$TMPL}/images/xinan.png"' onMouseOut='this.src="{$TMPL}/images/xinan_06.png"' />{else}<img src="{$TMPL}/images/xinan_08.png" />{/if}
-        	</a>
-        </div>
-        <div class="bay_now2" style=" float:left; padding-left:190px; padding-top:360px;">
-        	<a {if $chengjian.name}href="{$chengjian.share_url}"{else}{/if}>
-        		{if $chengjian.name}<img src="{$TMPL}/images/xinan_06.png" onmousemove='this.src="{$TMPL}/images/xinan.png"' onMouseOut='this.src="{$TMPL}/images/xinan_06.png"' />{else}<img src="{$TMPL}/images/xinan_08.png" />{/if}
-        	</a>
-        </div>
-        <div class="bay_now3" style=" float:right; padding-right:90px; padding-top:360px;">
-        	<a {if $wenfeng.name}href="{$wenfeng.share_url}"{else}{/if}>
-        		{if $wenfeng.name}<img src="{$TMPL}/images/xinan_06.png" onmousemove='this.src="{$TMPL}/images/xinan.png"' onMouseOut='this.src="{$TMPL}/images/xinan_06.png"' />{else}<img src="{$TMPL}/images/xinan_08.png" />{/if}
-        	</a>
-        </div>
-    </div>
-
-<!--添加三个直接购买结束-->
-<div class="f_l" style="width:655px; width:656px\9;">
-
-    
-    <div class="index_left">
-        <div class="gray_title clearfix">
-            <div class="f_l f_dgray b">最新产品列表</div>
-            <div class="f_r">
-                <span style="font-size: 12px; font-weight: normal;"><a href="{url x="index" r="deals"}" title="{$LANG.MORE}">更多产品列表...</a></span>
-            </div>
-        </div>
-        <div class="i_deal_list clearfix">
-            {foreach from=$deal_list item="deal" key=key name="deal"}
-            <div class="item clearfix" {if $smarty.foreach.deal.last}style="border-bottom:0; padding-left:15px; padding-right:15px;"{/if} style="padding-left:15px; padding-right:15px;" onmousemove='this.style.background="#e2e6e9"' onMouseOut='this.style.background="#FFF"'>
-                <div class="detail f_r" style="float:left;">
-                    <div class="tit b lh24 clearfix">
-                        <a href="{$deal.url}" class="f_l" {if $deal.deal_status eq 1}style="color:#428dcb
-    " {elseif $deal.deal_status eq 2}style="color:#c35977" {elseif $deal.deal_status eq 4}style="color:#749e54" {elseif $deal.deal_status eq 5}style="color:#ba052f" {/if} >
-                        {$deal.color_name}</a>
-                    </div>
-                    <div class="clearfix" style=" padding-top:10px;">
-                        <div class="info f_l" style="width:225px;">投资金额：</div>
-                        <div class="info info2 f_l" style="width:180px;">年利率：</div>
-                        <div class="info info3 f_l" style="width:100px;">投资期限：</div>
-                    </div>
-                    <div class="clearfix">
-                        <div class="info f_l" style="width:225px;"><span class="f_red" style=" font-size:20px;">{$deal.borrow_amount_format}</span></div>
-                        <div class="info info2 f_l" style="width:180px;"><span class="f_red" style=" font-size:20px;">{$deal.rate} %</span></div>
-                        <div class="info info3 f_l" style="width:100px;"><span class="f_red" style=" font-size:20px;">{$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}</span></div>
-                    </div>
-                    <div class="clearfix">
-    
-                        <div class="info info2 f_l clearfix" style="width:225px;">
-                            <div class="f_l">投资进度：</div>
-                            <div class="greenProcessBar progressBar f_l indexbar newbar">						
-                                <p>{function name="round" v=$deal.progress_point f=0}%</p>
-                                <div class="p">
-                                <!-- 14年5月23日修改进度条样式 -->
-                                	{if $deal.progress_point eq 100}
-                                    	<div class="c bar-c" style="width:100%;"></div>
-                                    {else}
-                                    	<div class="c bar-c baring" style="width:{function name="round" v=$deal.progress_point f=0}%;"></div>
-                                    {/if}
-                                <!-- 14年5月23日修改进度条样式结束 -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="info info3 f_l" style="width:180px;">{if $deal.deal_status eq 2}<span class="f_red">满标</font>{elseif $deal.deal_status eq 4}<span class="f_red">还款中</font>{elseif $deal.deal_status eq 5}还款完毕{else}还需：<span class="f_red">{$deal.need_money}</span>{/if}</div>
-                    </div>
-                    
-                    
-                    
+                <div class="buy_bottom">
+                {if $credit.name}
+                    <a class="buy_now" href="{$credit.share_url}">立 刻 购 买</a>
+                {else}
+                    <a class="buy_over">已 经 售 完</a>
+                {/if}
                 </div>
-                {if $deal.deal_status eq 1}
-                <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px; height:80px; margin-top:20px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>
-                {elseif $deal.deal_status eq 2}<!--满标-->
-                <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px;height:80px; margin-top:20px;" src="{$TMPL}/images/load_full.png" alt="" width="111px" height="34px"></a>
-                {elseif $deal.deal_status eq 4}<!--还款中-->
-                <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px;height:80px; margin-top:20px;" src="{$TMPL}/images/load_in_progress.png" alt="" width="111px" height="34px"></a>
-                {elseif $deal.deal_status eq 5}<!--已还清-->
-                <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px;height:80px; margin-top:20px;" src="{$TMPL}/images/load_done.png" alt="" width="111px" height="34px"></a>
-                 {/if}
-            </div>
+            </li>
+            <li class="buy2">
+            	<div class="buy2_main">
+                	<p class="buy_title1">城建三期</p>
+                    <p class="buy_title2">（最低投资额度：100元）</p>
+                </div>
+                <div class="buy_bottom">
+                {if $chengjian.name}
+                    <a class="buy_now" href="{$chengjian.share_url}">立 刻 购 买</a>
+                {else}
+                    <a class="buy_over">已 经 售 完</a>
+                {/if}
+                </div>
+            </li>
+            <li class="buy3">
+            	<div class="buy3_main">
+                	<p class="buy_title1">文峰市场</p>
+                    <p class="buy_title2">（最低投资额度：100元）</p>
+                </div>
+                <div class="buy_bottom">
+                {if $wenfeng.name}
+                    <a class="buy_now" href="{$wenfeng.share_url}">立 刻 购 买</a>
+                {else}
+                    <a class="buy_over">已 经 售 完</a>
+                {/if}
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!--14年6月18日修改直接购买结束-->
+    
+    <!--14年6月18日修改投资列表-->
+    <div class="blank10"></div><div class="blank10"></div>
+    <div class="invest_list">
+    	<div class="title_140618">
+        	<div class="title_left">最新产品列表</div>
+            <div class="title_right"><a href="{url x="index" r="deals"}">更多</a></div>
+        </div>
+        <ul>
+       		{foreach from=$deal_list item="deal" key=key name="deal"}
+        	<li class="invest_main">
+            	{if $deal.deal_status eq 1}<a href="{$deal.url}" class="invest_current"></a>{/if}
+           		<p class="invest_title"><a href="{$deal.url}">{$deal.color_name}</a></p>
+                <div class="invest_hot"></div>
+                <div class="invests_msg1">
+                	<p class="invest_tit">投资金额</p>
+                    <p class="invest_msg1">{$deal.borrow_amount_format}</p>
+                    <p class="invest_msg2"><span>投资进度：</span><span class="newbar bar_p"><span class="bar_c {if $deal.progress_point != 100}baring{/if}" style="width:{function name="round" v=$deal.progress_point f=0}%; height:17px;"></span></span>&nbsp;{function name="round" v=$deal.progress_point f=0}%</p>
+                </div>
+                <div class="invests_msg2">
+                	<p class="invest_tit">年利率</p>
+                    <p class="invest_msg1">{$deal.rate}%</p>
+                    <p class="invest_msg2">{if $deal.deal_status eq 2}满标{elseif $deal.deal_status eq 4}还款中{elseif $deal.deal_status eq 5}还款完毕{else}还需：{$deal.need_money}{/if}</p>
+                </div>
+                <div class="invests_msg3">
+                	<p class="invest_tit">投资期限</p>
+                    <p class="invest_msg1">{$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}</p>
+                    <p class="invest_msg2">计息时间：{if $deal.deal_status eq 4}{$deal.repay_start_time|date="Y-m-d",###}{elseif $deal.deal_status eq 5}{$deal.repay_start_time|date="Y-m-d",###}{elseif $deal.deal_status eq 1}满标计息{else}等待确认{/if}</p>
+                </div>
+          	</li>
             {/foreach}
-        </div>
+        </ul>
+        <div class="invest_bottom">更多理财产品...</div>
     </div>
-</div>
+	<!--14年6月18日修改投资列表结束-->
 
 <div class="index_right f_r">
 	<adv adv_id="首页右侧顶部广告" />
-	<div class="r-block">
-		<div class="gray_title clearfix">
-			<div class="f_l f_dgray b">网站公告</div>
-			<div class="f_r">
-            	<div style="vertical-align: middle;_padding: 8px 0;">
-	                <span style="font-weight: normal;">
-	                    <a href="{url x="index" r="notice#list_notice"}"> 更多</a>
-	                </span>
-	                <span><img src="{$TMPL}/images/more.gif" align="absmiddle" alt="{$LANG.MORE}" style="" title="{$LANG.MORE}"></span>
-	            </div>
-        	</div>
-		</div>
-		<div class="notice-list clearfix">
-			<ul>
-				{foreach from=$notice_list item="notice"}
-                <li style="padding:2px 0;">
-                    <span>
-					<a href="{$notice.url}">{$notice.title}</a>
-					</span>
-                </li>
-				{/foreach}
-	        </ul>
-		</div>
-	</div>
-	<div class="blank10"></div>
-    <link rel="stylesheet" type="text/css" href="{$TMPL}/css/paihang.css" />
-    <ul class="paibox">
-    	<div class="gray_title clearfix">
-            <div class="f_l f_dgray b">投资排行榜</div>
-        </div>
-        <li class="paili_1"><p class="pai1">排序</p><p class="pai1">投资金额（元）</p><p class="pai1">用户名</p></li>
-        {foreach from=$charts_user key=key item="arr"}
-       
-        <li class="paili"><div class="pai_{$key}">{$key}</div><p class="paip">{$arr.money}</p><p class="paim">{$arr.user_name}</p><div class="pai_a"></div></li>
-         
-        {/foreach}
-    </ul>
-	{insert name="success_deal_list"}
-	<!--使用技巧-->
-	<!--<div class="blank10"></div>
-	<div class="r-block">
-		<div class="gray_title clearfix">
-			<div class="f_l f_dgray b">使用技巧</div>
-			<div class="f_r">
-	        	<div style="vertical-align: middle;_padding: 8px 0;">
-	                <span style="font-weight: normal;">
-	                    <a href="{url x="index" r="usagetip"}"> {$LANG.MORE}</a>
-	                </span>
-	                <span><img src="{$TMPL}/images/more.gif" align="absmiddle" alt="{$LANG.MORE}" style="" title="{$LANG.MORE}"></span>
-	            </div>
-	    	</div>
-		</div>
-		<div class="clearfix" style="padding:5px 15px; height:auto">
-			<ul>
-			{foreach from="$use_tech_list.list" item="use"}
-            <li class="f_l" style="width: 220px; padding: 2px; overflow:hidden;white-space:nowrap;text-overflow:ellipsis; -o-text-overflow:ellipsis;" >
-				 · <a href="{url x="index" r="usagetip" p="id=$use.id"}"  title="{$use.title}">{$use.title}</a>
-				</li>
-			{/foreach}
-       		</ul>
-		</div>
-	</div>-->
     
-    <!--行业新闻-->
-    <div class="blank10"></div>
-    <div class="r-block">
-		<div class="gray_title clearfix">
-			<div class="f_l f_dgray b">行业新闻</div>
-			<div class="f_r">
-	        	<div style="vertical-align: middle;_padding: 8px 0;">
-	                <span style="font-weight: normal;">
-	                    <a href="{url x="index" r="news"}"> {$LANG.MORE}</a>
-	                </span>
-	                <span><img src="{$TMPL}/images/more.gif" align="absmiddle" alt="{$LANG.MORE}" style="" title="{$LANG.MORE}"></span>
-	            </div>
-	    	</div>
-		</div>
-		<div class="clearfix" style="padding:5px 15px; height:auto; height:100%;">
-			<ul>
-			{foreach from="$news_list.list" item="news"}
-            <li class="f_l" style="width: 230px; padding: 2px; overflow:hidden;white-space:nowrap;text-overflow:ellipsis; -o-text-overflow:ellipsis;" >
-				 · <a href="{url x="index" r="news" p="id=$news.id"}"  title="{$news.title}">{$news.title}</a>
-				</li>
-			{/foreach}
-       		</ul>
-		</div>
-	</div>
+	<!--14年6月18日修改公告列表-->
+    <div class="affiche_list">
+    	<div class="title_140618">
+        	<div class="title_left">网站公告</div>
+            <div class="title_right"><a href="#">更多</a></div>
+        </div>
+        <ul>
+        {foreach from=$notice_list item="notice"}
+        	<li><a href="{$notice.url}"><span class="f_l">· {$notice.title}</span><span class="f_r">{$notice.update_time}</span></a></li>
+        {/foreach}
+        </ul>
+    </div>
+    <!--14年6月18日修改公告列表结束-->
+    
+    <!--14年6月18日修改排行榜列表结束-->
+    <div class="blank10"></div><div class="blank10"></div>
+	<div class="ranking">
+    	<div class="title_140618">
+        	<div class="title_left">投资排行榜</div>
+            <div class="title_right"><a href="#">更多</a></div>
+        </div>
+        <ul>
+        	<li class="title"><span class="msg1">排序</span><span class="msg2">投资金额（元）</span><span class="msg3">用户名</span></li>
+        {foreach from=$charts_user key=key item="arr"}
+            <li><span class="msg1 {if $key == 1}num1{elseif $key == 2}num2{elseif $key == 3}num3{/if}">{$key}</span><span class="msg2">{$arr.money}</span><span class="msg3">{$arr.user_name}</span></li>
+        {/foreach}
+        </ul>
+   	</div>
+    <!--14年6月18日修改排行榜列表结束-->
+    
+    <!--14年6月18日修改行业新闻-->
+    <div class="blank10"></div><div class="blank10"></div>
+	<div class="news">
+    	<div class="title_140618">
+        	<div class="title_left">行业新闻</div>
+            <div class="title_right"><a href="{$LANG.MORE}">更多</a></div>
+        </div>
+        <ul>
+        {foreach from="$news_list.list" item="news"}
+        	<li><a href="#">· {$news.title}</a></li>
+        {/foreach}
+        </ul>
+   	</div>
+    <!--14年6月18日修改行业新闻结束-->
+    
 </div>
 
 <!-- 新手教程开始(第一次打开页面会有灰色的教学浮动层) -->
@@ -321,6 +274,21 @@ $(document).ready(function(e) {
 		//alert(1111);
 		$(".face-teach").hide();
 	})
+	
+	$("#main_1_line,#main_2_line,#main_3_line,#main_4_line,#main_5_line").mousemove(function(){
+		var thisClass = $(this).attr('id');
+		//alert(thisClass);
+		$(".main_1_line,.main_2_line,.main_3_line,.main_4_line,.main_5_line").hide();
+		$(".main_1_line_msg,.main_2_line_msg,.main_3_line_msg,.main_4_line_msg,.main_5_line_msg").hide();
+		$('.'+thisClass).show();
+		$('.'+thisClass+'_msg').show();
+	})
+	
+	$(".invest_main").mousemove(function(){
+		$(".invest_current").hide();
+		$(this).children('.invest_current').show();
+	})
+
 })
 </script>
 <!-- end class="face-teach" -->

@@ -68,7 +68,7 @@ span.line_disable{ background:url("../images/list_type.gif") no-repeat -18px -15
 /* 弹出层教学结束 */
 
 /* 14年5月26日改版部分 */
-.trading_top { width:100%; height:430px; overflow:hidden; font-family:'微软雅黑', '黑体', '仿宋'; text-align:center;}
+/*.trading_top { width:100%; height:430px; overflow:hidden; font-family:'微软雅黑', '黑体', '仿宋'; text-align:center;}
 	.trading { width:960px; height:450px; margin:0 auto;}
 	.trading .trading_bg { height:80px;; background:url("../images/trading_bg.gif") no-repeat 0 30px;}
 	.trading .trading_main { height:110px; border-bottom:1px solid #BEBEBE;}
@@ -86,15 +86,15 @@ span.line_disable{ background:url("../images/list_type.gif") no-repeat -18px -15
 			.trading_link .trading_link_1 { margin:40px 0 0 115px;}
 			.trading_link .trading_link_2 { margin:40px 180px 0 180px;}
 			.trading_link .trading_link_3 { margin-top:40px; width:128px; height:128px;}
-			.trading_link .trading_link_3 P { margin:6px 0 0 0;}
+			.trading_link .trading_link_3 P { margin:6px 0 0 0;}*/
 /* 14年5月26日改版部分结束 */
 
 /* 14年6月6日新增进度条样式 */
 .newbar{ overflow:hidden; background-color: #F7F7F7; background-image: linear-gradient(to bottom, #F5F5F5, #F9F9F9); background-repeat: repeat-x; border-radius: 4px; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1) inset; width:100%;}
 
-.progressBar .p .bar-c { border-radius:4px; background-color: #149BDF; background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); background-size: 30px 30px;}
+.invest_list .bar_c { border-radius:4px; background-color: #149BDF; background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent); background-size: 30px 30px;}
 
-.progressBar .p .baring { -webkit-animation:bar-bar-bar 2s linear infinite; -moz-animation:bar-bar-bar 2s linear infinite; -ms-animation:bar-bar-bar 2s linear infinite; -o-animation:bar-bar-bar 2s linear infinite; animation:bar-bar-bar 2s linear infinite;}
+.invest_list .baring { -webkit-animation:bar-bar-bar 2s linear infinite; -moz-animation:bar-bar-bar 2s linear infinite; -ms-animation:bar-bar-bar 2s linear infinite; -o-animation:bar-bar-bar 2s linear infinite; animation:bar-bar-bar 2s linear infinite;}
 
 @-webkit-keyframes bar-bar-bar{
 	from{
@@ -141,3 +141,128 @@ span.line_disable{ background:url("../images/list_type.gif") no-repeat -18px -15
 	}
 }
 /* 14年6月6日新增进度条样式结束 */
+
+/* 14年6月18日改版部分 */
+/* 公共样式及标题 */
+a { color:#666;}
+a:hover { text-decoration:none;}
+.title_140618 { width:100%; height:66px; border-bottom:1px solid #d2d2d2;}
+	.title_left { float:left; font-size:23px; font-weight:bold; line-height:66px; text-indent:28px;}
+	.title_right { float:right; padding-top:30px; padding-right:15px;}
+		.title_right a:hover { color:#ff6f24;}
+
+/* 关于我们 */
+.about { width:680px; height:335px; border:1px solid #d2d2d2; float:left;}
+	.about_main li { float:left; width:170px; height:268px; position:relative;}
+		.about_main li a { float:left; display:block; width:170px; height:268px; position:relative; overflow:hidden;}
+		.about_main li a img { width:100%; height:100%;}
+		.about_main li a:hover { position:absolute; left:-5px; top:-8px; width:180px; height:284px; z-index:10;}
+
+/* 成交记录 */	
+.trading_record { width:260px; height:335px; border:1px solid #d2d2d2; float:right;}
+	.trading_main { height:268px;}
+		.trading_main li { height:74px; padding-top:15px; text-indent:28px;}
+		.trading_title { font-size:18px; font-weight:bold;}
+		.trading_money { font-size:23px; color:red; font-weight:bold; margin-top:15px;}
+		
+/* 收益对比 */
+.benefit_comparison { width:960px; height:660px; border:1px solid #d2d2d2;}
+	.comparison_main { width:960px; height:614px; overflow:hidden;}
+		.comparison_title { font-size:18px; font-weight:bold; text-align:center; height:60px; line-height:60px;}
+		.comparison_main ul { height:420px; border-bottom:2px solid #b8b8b8; margin:0 40px; padding:0 24px;}
+			.comparison_main ul li { float:left; width:119px; margin-right:59px; text-align:center; color:#afafaf; font-size:18px; font-weight:bold;}
+			
+			.comparison_main .main_1 { height:200px; margin-top:180px; margin-bottom:40px; position:relative;}
+				.comparison_main .main_1 .this_color { font-size:20px; height:30px; line-height:30px; color:#ef3356;}
+				.comparison_main .main_1 .bank_bg { background:url(../images/contrast.png) no-repeat 0 28px; height:151px; background-color:#ef3356;}
+			.comparison_main .main_1_line { border:1px solid #b4b4b4; width:0; height:82px; position:absolute; right:58px; top:158px; height:80px\9; top:160px\9; display:none;}
+				
+			.comparison_main .main_2 { height:260px; margin-top:120px; margin-bottom:40px; position:relative;}
+				.comparison_main .main_2 .this_color { font-size:20px; height:30px; line-height:30px; color:#ef3356;}
+				.comparison_main .main_2 .weixin_bg { background:url(../images/contrast.png) no-repeat -120px 45px; height:211px; background-color:#80e386;}
+			.comparison_main .main_2_line { border:1px solid #b4b4b4; width:0; height:123px; position:absolute; right:58px; top:175px; height:121px\9; top:177px\9; display:none;}
+				
+			.comparison_main .main_3 { height:380px; margin-bottom:40px; position:relative;}
+				.comparison_main .main_3 .this_color { font-size:20px; height:30px; line-height:30px; color:#ef3356;}
+				.comparison_main .main_3 .pfcf_bg { background:url(../images/contrast.png) no-repeat -240px 50px; height:331px; background-color:#084c71;}
+			.comparison_main .main_3_line { border:1px solid #b4b4b4; width:0; height:239px; position:absolute; right:58px; top:180px; height:237px\9; top:182px\9; display:none;}
+				
+			.comparison_main .main_4 { height:260px; margin-top:120px; margin-bottom:40px; position:relative;}
+				.comparison_main .main_4 .this_color { font-size:20px; height:30px; line-height:30px; color:#ef3356;}
+				.comparison_main .main_4 .epay_bg { background:url(../images/contrast.png) no-repeat -360px 45px; height:211px; background-color:#fd8934;}
+			.comparison_main .main_4_line { border:1px solid #b4b4b4; width:0; height:123px; position:absolute; right:58px; top:175px; height:121px\9; top:177px\9; display:none;}
+				
+			.comparison_main .main_5 { height:200px; margin-top:180px; margin-bottom:40px; margin-right:0; position:relative;}
+				.comparison_main .main_5 .this_color { font-size:20px; height:30px; line-height:30px; color:#ef3356;}
+				.comparison_main .main_5 .debt_bg { background:url(../images/contrast.png) no-repeat -480px 35px; height:151px; background-color:#cc49bd;}
+			.comparison_main .main_5_line { border:1px solid #b4b4b4; width:0; height:73px; position:absolute; right:58px; top:165px; height:71px\9; top:167px\9; display:none;}
+			
+		.main_1_line_msg,.main_2_line_msg,.main_3_line_msg,.main_4_line_msg,.main_5_line_msg { height:100px; padding:15px 40px; font-size:16px; font-weight:bold; color:#666; text-indent:2em; display:none;}
+		
+/* 立刻购买 */
+.buying { width:962px; height:340px;}
+	.buying ul li { float:left; width:310px; height:340px; border:1px solid #d2d2d2;}
+		.buying li .buy_title1 { font-size:22px; font-weight:bold; text-indent:22px; padding-top:35px;}
+		.buying li .buy_title2 { font-size:16px; text-indent:22px; margin-top:15px; color:#848484; white-space:nowrap;}
+		
+		.buy_bottom { width:310px; height:80px;}
+			.buy_now { display:block; width:310px; height:80px; background:#fd8934; font-size:26px; text-align:center; line-height:80px; color:#FFF;}
+				.buy_now:hover { text-decoration:none; color:#FFF;}
+			.buy_over { display:block; width:310px; height:80px; background:#c0bcbb; font-size:26px; text-align:center; line-height:80px; color:#FFF;}
+				.buy_over:hover { text-decoration:none; color:#FFF;}
+		
+		.buy1_main { height:260px; background:url(../images/invest_xindai.png) 22px 120px no-repeat; border-bottom:1px solid #d2d2d2; position:relative;}
+		
+	.buy2 { margin:0 13px;}
+		.buy2_main { height:260px; background:url(../images/invest_chengjian.png) 22px 120px no-repeat; border-bottom:1px solid #d2d2d2; position:relative;}
+		
+		.buy3_main { height:260px; background:url(../images/invest_wenfeng.png) 22px 120px no-repeat; border-bottom:1px solid #d2d2d2; position:relative;}
+		
+		.buy_hot { width:128px; height:128px; background:url(../images/invest_hot.png) no-repeat; margin-left:182px; margin-left:160px\9; position:absolute;}
+		
+/* 投资列表 */
+.invest_list { float:left; width:655px; border:1px solid #d2d2d2;}
+	.invest_list ul li { width:550px; height:195px; border-bottom:1px solid #d2d2d2; padding-left:105px; position:relative;}
+		.invest_list ul li:hover { background:#e8e8e8;}
+	
+	.invest_main .invest_current { position:absolute; display:block; display:none; background:url(../images/goods_current.png) no-repeat; width:80px; height:165px; top:14px; left:-25px;}
+	
+		.invest_title { width:470px; height:76px; font-size:16px; text-indent:4px; line-height:76px; float:left; font-weight:bold;}
+			.invest_hot { width:74px; height:76px; background:url(../images/goods_hot.png) no-repeat; float:right;}
+		
+		.invests_msg1 { width:260px; float:left;}
+		.invests_msg2 { width:130px; float:left;}
+		.invests_msg3 { width:160px; float:left;}
+		
+			.invest_tit { font-size:16px; height:20px; line-height:20px;}
+			.invest_msg1 { font-size:30px; height:40px; line-height:40px;}
+			.invest_msg2 { font-size:12px; height:30px; line-height:30px;}
+				.invest_msg2 span { display:block; float:left;}
+				.invest_msg2 .bar_p { width:120px; height:17px; border:1px solid #d2d2d2; border-radius:4px; margin-top:5px; text-align:center; line-height:17px;}
+		
+	.invest_list .invest_bottom { width:655px; height:70px; text-align:center; line-height:70px; font-size:18px; cursor:pointer;}
+	
+/* 公告列表 */
+.affiche_list { width:280px; float:right; border:1px solid #d2d2d2;}
+	.affiche_list ul { margin:20px 15px;}
+	.affiche_list ul li { width:250px; height:25px; line-height:25px; white-space:nowrap;}
+		.affiche_list .f_l { width:180px; overflow:hidden; text-overflow: ellipsis;}
+		.affiche_list ul li a:hover { color:#ff6f24;}
+		
+/* 投资排行榜 */
+.ranking { width:280px; float:right; border:1px solid #d2d2d2;}
+	.ranking ul { margin:20px 15px;}
+	.ranking ul li { width:250px; height:25px; line-height:25px; white-space:nowrap; text-align:center; margin:3px 0;}
+	.ranking .title { background:#f5f5f5;}
+	.ranking .msg1 { width:45px; float:left; display:block;}
+	.ranking .msg2 { width:155px; float:left; display:block;}
+	.ranking .msg3 { width:50px; float:left; display:block;}
+	.ranking .num1 { background:#d70703; margin:0 10px; width:25px;}
+	.ranking .num2 { background:#fc7e06; margin:0 10px; width:25px;}
+	.ranking .num3 { background:#fbae00; margin:0 10px; width:25px;}
+	
+/* 行业新闻 */
+.news { width:280px; float:right; border:1px solid #d2d2d2;}
+	.news ul { margin:20px 15px;}
+	.news ul li { width:250px; height:25px; line-height:25px; white-space:nowrap; margin:3px 0; overflow:hidden; text-overflow: ellipsis;}
+/* 14年6月18日改版部分结束 */
