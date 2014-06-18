@@ -195,24 +195,23 @@
 				$(".condition li a").live('click',function(){
 					
 					$(this).parent().siblings().children().removeClass("li_current")
-					$(this).addClass("li_current")
-					
+					$(this).addClass("li_current")//样式
 					$.ajax({
 					type:"POST",
-					url: "index.php?ctl=deals",
+					url: "",
 					dataType:'json',//从php返回的值以 JSON方式 解释
 					data:{
 						value:$(this).attr("value"),
 						name:$(this).attr("name"),
 						type:$(this).attr("type")
 						},
-						beforeSend:function(){
+					beforeSend:function(){
 				$("#J_biao_list").append('<img src="{$TMPL}/images/loading.gif" style="position:absolute; left:350px; top:30px;">');
 				
 								},
 					success: function(data){
 						
-						//alert(data)
+						alert(data['page']);
 						var l=get_l(data['result'])
 		
 					
@@ -244,7 +243,7 @@
 						type:$(this).attr("type"),
 						check:$(this).attr("check")
 						},
-			beforeSend:function(){
+					beforeSend:function(){
 				$("#J_biao_list").append('<img src="{$TMPL}/images/loading.gif" style="position:absolute; left:350px; top:30px;">');
 				
 								},
@@ -265,7 +264,7 @@
 	//无刷新分页		
 		$("#pages a").live('click',function(){
 			
-			//alert($(this).attr('href'))
+			alert($(this).attr('href'))
 			$.ajax({
 					type:"GET",
 					url: $(this).attr('href'),
@@ -275,7 +274,7 @@
 					    $("#J_biao_list").text("请稍等!");
 	           		 },*/
 					success: function(data){
-					
+					alert(data['page'])
 					var l=get_l(data['result'])
 		
 					 $("#J_biao_list").html(l);
