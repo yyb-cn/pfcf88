@@ -181,9 +181,12 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
         </div>
         <ul>
        		{foreach from=$deal_list item="deal" key=key name="deal"}
+           	<?php $i+=1;?>
         	<li class="invest_main">
             	{if $deal.deal_status eq 1}<a href="{$deal.url}" class="invest_current"></a>{/if}
-           		<p class="invest_title"><a href="{$deal.url}">{$deal.color_name}</a></p>
+                
+           		<p class="invest_title"   ><a href="{$deal.url}" <?php if($i==1) :?> style="color:#f97c5e;"<?php elseif($i == 2):?> style="color:#ba5a76;"<?php elseif($i == 3):$i =0 ?> style="color:#789855;"<?php endif;?> >{$deal.color_name}</a></p>
+                
                 <div class="invest_hot"></div>
                 <div class="invests_msg1">
                 	<p class="invest_tit">投资金额</p>
