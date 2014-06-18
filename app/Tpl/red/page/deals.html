@@ -211,7 +211,7 @@
 								},
 					success: function(data){
 						
-						alert(data['page']);
+						//alert(data['page']);
 						var l=get_l(data['result'])
 		
 					
@@ -264,7 +264,7 @@
 	//无刷新分页		
 		$("#pages a").live('click',function(){
 			
-			alert($(this).attr('href'))
+			//alert($(this).attr('href'))
 			$.ajax({
 					type:"GET",
 					url: $(this).attr('href'),
@@ -274,7 +274,7 @@
 					    $("#J_biao_list").text("请稍等!");
 	           		 },*/
 					success: function(data){
-					alert(data['page'])
+					//alert(data['page'])
 					var l=get_l(data['result'])
 		
 					 $("#J_biao_list").html(l);
