@@ -181,17 +181,17 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
         </div>
         <ul>
        		{foreach from=$deal_list item="deal" key=key name="deal"}
-           	<?php $i+=1;?>
-        	<li class="invest_main">
+           	<?php $i+=1; $d+=1; ?>
+        	<li class="invest_main" <?php if($d > 3):?> style="display:none" <?php endif; ?> >
             	{if $deal.deal_status eq 1}<a href="{$deal.url}" class="invest_current"></a>{/if}
                 
            		<p class="invest_title"   ><a href="{$deal.url}" <?php if($i==1) :?> style="color:#f97c5e;"<?php elseif($i == 2):?> style="color:#ba5a76;"<?php elseif($i == 3):$i =0 ?> style="color:#789855;"<?php endif;?> >{$deal.color_name}</a></p>
                 
-                <div class="invest_hot"></div>
+                {if $deal.deal_status eq 1}<div class="invest_hot"></div>{/if}
                 <div class="invests_msg1">
                 	<p class="invest_tit">投资金额</p>
                     <p class="invest_msg1">{$deal.borrow_amount_format}</p>
-                    <p class="invest_msg2"><span>投资进度：</span><span class="newbar bar_p"><span class="bar_c {if $deal.progress_point != 100}baring{/if}" style="width:{function name="round" v=$deal.progress_point f=0}%; height:17px;"></span></span>&nbsp;{function name="round" v=$deal.progress_point f=0}%</p>
+                    <p class="invest_msg2"><span>投资进度：</span><span class="newbar bar_p"><span class="bar_c {if $deal.progress_point != 100}baring{/if}" style="width:{function name="round" v=$deal.progress_point f=0}%; height:15px;"></span></span>&nbsp;{function name="round" v=$deal.progress_point f=0}%</p>
                 </div>
                 <div class="invests_msg2">
                 	<p class="invest_tit">年利率</p>
@@ -217,7 +217,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     <div class="affiche_list">
     	<div class="title_140618">
         	<div class="title_left">网站公告</div>
-            <div class="title_right"><a href="#">更多</a></div>
+            <div class="title_right"><a href="{url x="index" r="notice#list_notice"}">更多</a></div>
         </div>
         <ul>
         {foreach from=$notice_list item="notice"}
@@ -248,11 +248,11 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 	<div class="news">
     	<div class="title_140618">
         	<div class="title_left">行业新闻</div>
-            <div class="title_right"><a href="{$LANG.MORE}">更多</a></div>
+            <div class="title_right"><a href="{url x="index" r="news"}">更多</a></div>
         </div>
         <ul>
         {foreach from="$news_list.list" item="news"}
-        	<li><a href="#">· {$news.title}</a></li>
+        	<li><a href="{url x="index" r="news" p="id=$news.id"}">· {$news.title}</a></li>
         {/foreach}
         </ul>
    	</div>
@@ -280,7 +280,6 @@ $(document).ready(function(e) {
 	
 	$("#main_1_line,#main_2_line,#main_3_line,#main_4_line,#main_5_line").mousemove(function(){
 		var thisClass = $(this).attr('id');
-		//alert(thisClass);
 		$(".main_1_line,.main_2_line,.main_3_line,.main_4_line,.main_5_line").hide();
 		$(".main_1_line_msg,.main_2_line_msg,.main_3_line_msg,.main_4_line_msg,.main_5_line_msg").hide();
 		$('.'+thisClass).show();
@@ -290,6 +289,11 @@ $(document).ready(function(e) {
 	$(".invest_main").mousemove(function(){
 		$(".invest_current").hide();
 		$(this).children('.invest_current').show();
+	})
+	
+	$(".invest_bottom").click(function(){
+		$(".invest_main").show();
+		$(this).hide();
 	})
 
 })
