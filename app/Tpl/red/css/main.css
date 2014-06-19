@@ -241,6 +241,7 @@ a:hover { text-decoration:none;}
 				.invest_msg2 .bar_p { width:120px; height:15px; border:1px solid #d2d2d2; border-radius:4px; margin-top:7px; text-align:center; line-height:15px;}
 		
 	.invest_list .invest_bottom { width:655px; height:70px; text-align:center; line-height:70px; font-size:18px; cursor:pointer;}
+		.invest_list .invest_bottom:hover { background:#e8e8e8;}
 	
 /* 公告列表 */
 .affiche_list { width:280px; float:right; border:1px solid #d2d2d2;}
