@@ -130,7 +130,9 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     	<ul>
         	<li class="buy1">
             	<div class="buy1_main">
+                {if $credit.name}
                 	<div class="buy_hot"></div>
+                {/if}
                 	<p class="buy_title1">信贷赢三期</p>
                     <p class="buy_title2">（最低投资额度：100元）</p>
                 </div>
@@ -144,8 +146,11 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
             </li>
             <li class="buy2">
             	<div class="buy2_main">
+                {if $chengjian.name}
+                	<div class="buy_hot"></div>
+                {/if}
                 	<p class="buy_title1">城建三期</p>
-                    <p class="buy_title2">（最低投资额度：100元）</p>
+                    <p class="buy_title2">（最低投资额度：500元）</p>
                 </div>
                 <div class="buy_bottom">
                 {if $chengjian.name}
@@ -157,8 +162,11 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
             </li>
             <li class="buy3">
             	<div class="buy3_main">
+                {if $wenfeng.name}
+                	<div class="buy_hot"></div>
+                {/if}
                 	<p class="buy_title1">文峰市场</p>
-                    <p class="buy_title2">（最低投资额度：100元）</p>
+                    <p class="buy_title2">（最低投资额度：1000元）</p>
                 </div>
                 <div class="buy_bottom">
                 {if $wenfeng.name}
