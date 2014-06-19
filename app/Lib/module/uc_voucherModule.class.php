@@ -13,12 +13,18 @@ class uc_voucherModule extends SiteBaseModule
 {
 	public function index()
 	{
-		 
+			
 		$page = intval($_REQUEST['p']);
 		if($page==0)
 		$page = 1;
 		$limit = (($page-1)*app_conf("PAGE_SIZE")).",".app_conf("PAGE_SIZE");
+		//echo $GLOBALS['user_info']['id'];exit;  69
+		
+	/*	$sql='select * from fanwe_ecv as e left join fanwe_ecv_type as et on e.ecv_type_id = et.id where 
+
+			e.user_id = 69 order by e.id desc limit 0,10'*/
 		$result = get_voucher_list($limit,$GLOBALS['user_info']['id']);
+		//print_r($result);exit;
 		
 		$GLOBALS['tmpl']->assign("list",$result['list']);
 		$page = new Page($result['count'],app_conf("PAGE_SIZE"));   //初始化分页对象 		
@@ -27,7 +33,9 @@ class uc_voucherModule extends SiteBaseModule
 	
 		
 		$GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['UC_VOUCHER']);
-		$GLOBALS['tmpl']->assign("inc_file","inc/uc/uc_voucher_index.html");
+		
+		$GLOBALS['tmpl']->assign("inc_file","inc/uc/uc_voucher_index.html");//主要数据在这里
+		
 		$GLOBALS['tmpl']->display("uc.html");
 	}
 //	public function incharge()
@@ -89,7 +97,10 @@ class uc_voucherModule extends SiteBaseModule
 	public function do_exchange()
 	{
 		$id = intval($_REQUEST['id']);
+		//echo $id;exit;
+		
 		$ecv_type = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."ecv_type where id = ".$id);
+		echo 
 		if(!$ecv_type)
 		{
 			showErr($GLOBALS['lang']['INVALID_VOUCHER']);
