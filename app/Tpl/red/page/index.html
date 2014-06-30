@@ -49,7 +49,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 
 	<!-- 14年6月18日修改"关于我们" -->
     <div class="blank10"></div><div class="blank10"></div>
-    <div class="about">
+    <div class="about white">
     	<div class="title_140618">
         	<div class="title_left">关于我们</div>
         </div>
@@ -60,7 +60,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
             <li class="about4"><a href="{url x="index" r="aboutfee" p="act=fengkong"}"><img src="{$TMPL}/images/about_04.png" /></a></li>
         </ul>
     </div>
-    <div class="trading_record">
+    <div class="trading_record white">
     	<div class="title_140618">
         	<div class="title_left">成交记录</div>
         </div>
@@ -75,7 +75,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     
     <!-- 14年6月18日修改“收益对比" -->
 	<div class="blank10"></div><div class="blank10"></div>
-    <div class="benefit_comparison">
+    <div class="benefit_comparison white">
     	<div class="title_140618">
         	<div class="title_left">收益对比</div>
         </div>
@@ -88,7 +88,6 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                     <p class="bank_bg" id="main_1_line"></p>
                     <div class="main_1_line"></div>
                 </li>
-                
                 <li class="main_2">
                     <p>理财通</p>
                     <p class="this_color">￥5925</p>
@@ -125,7 +124,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 
     <!--14年6月18日修改直接购买-->
     <div class="blank10"></div><div class="blank10"></div>
-    <div class="buying">
+    <div class="buying white">
     	<ul>
         	<li class="buy1">
             	<div class="buy1_main">
@@ -181,7 +180,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     
     <!--14年6月18日修改投资列表-->
     <div class="blank10"></div><div class="blank10"></div>
-    <div class="invest_list">
+    <div class="invest_list white">
     	<div class="title_140618">
         	<div class="title_left">最新产品列表</div>
             <div class="title_right"><a href="{url x="index" r="deals"}">更多</a></div>
@@ -221,7 +220,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 	<adv adv_id="首页右侧顶部广告" />
     
 	<!--14年6月18日修改公告列表-->
-    <div class="affiche_list">
+    <div class="affiche_list white">
     	<div class="title_140618">
         	<div class="title_left">网站公告</div>
             <div class="title_right"><a href="{url x="index" r="notice#list_notice"}">更多</a></div>
@@ -236,7 +235,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     
     <!--14年6月18日修改排行榜列表结束-->
     <div class="blank10"></div><div class="blank10"></div>
-	<div class="ranking">
+	<div class="ranking white">
     	<div class="title_140618">
         	<div class="title_left">投资排行榜</div>
             <div class="title_right"><a href="javascript:;">更多</a></div>
@@ -252,7 +251,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     
     <!--14年6月18日修改行业新闻-->
     <div class="blank10"></div><div class="blank10"></div>
-	<div class="news">
+	<div class="news white">
     	<div class="title_140618">
         	<div class="title_left">行业新闻</div>
             <div class="title_right"><a href="{url x="index" r="news"}">更多</a></div>
@@ -280,6 +279,8 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 
 <script type="text/javascript">
 $(document).ready(function(e) {
+	$('body').css('background-color','#F6F6F6');
+	$('.headf').addClass('white');
 	$(".body-light a").click(function(){
 		//alert(1111);
 		$(".face-teach").hide();
