@@ -45,6 +45,8 @@ class indexModule extends SiteBaseModule
 			foreach($deal_list['list'] as $ke => $vel){
 				$deal_list['list'][$ke]['repay_start_time'] = date('Y-m-d',$vel['repay_start_time']);
 			}
+			
+			//var_dump($deal_list['list']);exit;
 			$GLOBALS['tmpl']->assign("deal_list",$deal_list['list']);
 						
 			//输出公告
