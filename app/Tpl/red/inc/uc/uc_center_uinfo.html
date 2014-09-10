@@ -26,6 +26,12 @@
 	                	{$user_data.user_name}
 	                </div>
 	            </div>
+				 <div style="height:24px; line-height:24px">
+	                <div class="f_l" style="width:70px;">
+					账户余额：
+	                </div>
+	                <div class="f_l"> {function name="format_price" v=$user_info.money}</div>
+	            </div>
 	            <div style="height:24px; line-height:24px">
 	                <div class="f_l" style="width:70px;">
 					注册时间：
@@ -40,6 +46,7 @@
 	                </div>
 	                <div class="f_l">{$user_data.user_location}</div>
 	            </div>
+				
 	            <div style="height:24px; line-height:24px">
 	                <div class="f_l" style="width:70px;">
 					角色：

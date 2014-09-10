@@ -43,6 +43,8 @@ class uc_centerModule extends SiteBaseModule
 	{	
 		$this->init_user();
 		$user_info = $this->user_data;
+		
+		//print_r($user_info);exit;
 			 
 		$ajax =intval($_REQUEST['ajax']);
 		if($ajax==0)
