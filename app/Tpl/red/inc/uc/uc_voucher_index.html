@@ -1,9 +1,13 @@
 <div class="inc wb">
-	<div class="inc_top">{$page_title}</div>
+
 	<div class="inc_main">
-		<div class="sub_nav">
-			<span {if $ACTION_NAME eq 'index'}class="act"{/if}><a href="{url x="shop" r="uc_voucher#index"}">{$LANG.UC_VOUCHER}</a></span>
-			<span {if $ACTION_NAME eq 'exchange'}class="act"{/if}><a href="{url x="shop" r="uc_voucher#exchange"}">{$LANG.UC_VOUCHER_EXCHARGE}</a></span>
+		<div id="dashboard" class="dashboard">
+		<ul>
+				<li {if $ACTION_NAME eq 'index'}class="current"{/if}><a href="{url x="shop" r="uc_voucher#index"}">{$LANG.UC_VOUCHER}</a></li>
+				<li {if $ACTION_NAME eq 'incharge'}class="current"{/if}><a href="{url x="shop" r="uc_voucher#exchange"}">{$LANG.UC_VOUCHER_EXCHARGE}</a></li>
+			</ul>
+			
+			
 		</div>
 		<div class="blank"></div>
 		<div class="uc-table">

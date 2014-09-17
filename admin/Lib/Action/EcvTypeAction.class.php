@@ -1,11 +1,26 @@
 <?php
-// +----------------------------------------------------------------------
-// | Fanwe 方维p2p借贷系统
-// +----------------------------------------------------------------------
-// | Copyright (c) 2011 http://www.fanwe.com All rights reserved.
-// +----------------------------------------------------------------------
-// | Author: 云淡风轻(88522820@qq.com)
-// +----------------------------------------------------------------------
+//---------------------------
+//这个是后台代金券的相关操作。包括
+/*
+	index  主页
+	add  添加(模板)
+	insert  添加(操作)
+	
+		只用填写这四个参数
+		
+		begin_time  
+		end_time
+		name
+		money
+		
+	send  发送代金券(模板)
+	dosend 发送代金券(操作)
+	‘
+	'
+	’
+*/
+	
+//
 
 class EcvTypeAction extends CommonAction{
 	public function index()
@@ -21,6 +36,7 @@ class EcvTypeAction extends CommonAction{
 		$ajax = intval($_REQUEST['ajax']);
 		$data = M(MODULE_NAME)->create ();
 
+			//print_r($data);exit;
 		//开始验证有效性
 		$this->assign("jumpUrl",u(MODULE_NAME."/add"));
 		if(!check_empty($data['name']))
@@ -121,7 +137,7 @@ class EcvTypeAction extends CommonAction{
 		}
 	}
 	
-	public function send()
+	public function send()   //给会员发送代金券的页面
 	{
 		$id = intval($_REQUEST['id']);
 		$ecv_type = M("EcvType")->getById($id);
@@ -135,8 +151,9 @@ class EcvTypeAction extends CommonAction{
 		$this->display();
 	}	
 	
-	public function doSend()
+	public function doSend()   //按提交内容不同执行发送代金券，
 	{
+		
 		require_once APP_ROOT_PATH."system/libs/voucher.php";
 		$ecv_type_id = intval($_REQUEST['ecv_type_id']);
 		$need_password = intval($_REQUEST['need_password']);

@@ -1,11 +1,4 @@
 <?php
-// +----------------------------------------------------------------------
-// | Fanwe 方维p2p借贷系统
-// +----------------------------------------------------------------------
-// | Copyright (c) 2011 http://www.fanwe.com All rights reserved.
-// +----------------------------------------------------------------------
-// | Author: 云淡风轻(88522820@qq.com)
-// +----------------------------------------------------------------------
 
 //关于代金券的全局函数
 /**
@@ -28,14 +21,20 @@ function send_voucher($ecv_type_id,$user_id=0,$is_password=false)
 	do{
 		$ecv_data['sn'] = uniqid();
 		//$ecv_data['sn'] = md5(get_gmtime());
-		$GLOBALS['db']->autoExecute(DB_PREFIX."ecv",$ecv_data,'INSERT','','SILENT');
+		//print_r($ecv_data);exit;
+		 $GLOBALS['db']->autoExecute(DB_PREFIX."ecv",$ecv_data,'INSERT','','SILENT');//autoExecute(表,$字段,'插入动作','条件','执行模式');
+		//echo M('ecv')->getlastsql();exit;
 		$insert_id = $GLOBALS['db']->insert_id();
+		
 	}while(intval($insert_id) == 0);
+	
+	//echo $insert_id;exit;
 	if($insert_id)
 	{
 		$GLOBALS['db']->query("update ".DB_PREFIX."ecv_type set gen_count = gen_count + 1 where id = ".$ecv_type_id);
 	}
 	return $insert_id;
+	
 }
 
 ?>

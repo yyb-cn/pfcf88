@@ -19,6 +19,7 @@ class IndexAction extends AuthAction{
 	{
 		$navs = M("RoleNav")->where("is_effect=1 and is_delete=0")->order("sort asc")->findAll();
 		$this->assign("navs",$navs);
+		//print_r($navs);exit;
 		$this->display();
 	}
 	//框架左侧
@@ -29,15 +30,19 @@ class IndexAction extends AuthAction{
 		
 		$nav_id = intval($_REQUEST['id']);
 		$nav_group = M("RoleGroup")->where("nav_id=".$nav_id." and is_effect = 1 and is_delete = 0")->order("sort asc")->findAll();		
+		
+		//print_r($nav_group);exit; //一级分类
 		foreach($nav_group as $k=>$v)
 		{
 			$sql = "select role_node.`action` as a,role_module.`module` as m,role_node.id as nid,role_node.name as name from ".conf("DB_PREFIX")."role_node as role_node left join ".
 				   conf("DB_PREFIX")."role_module as role_module on role_module.id = role_node.module_id ".
 				   "where role_node.is_effect = 1 and role_node.is_delete = 0 and role_module.is_effect = 1 and role_module.is_delete = 0 and role_node.group_id = ".$v['id']." order by role_node.id asc";
 			
-			$nav_group[$k]['nodes'] = M()->query($sql);
+			$nav_group[$k]['nodes']= M()->query($sql);//二级分类
 		}
 		$this->assign("menus",$nav_group);
+		
+		//print_r($nav_group);exit;
 		$this->display();
 	}
 	//默认框架主区域

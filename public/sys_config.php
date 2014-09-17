@@ -62,7 +62,7 @@ return array(
 'INTEGRATE_CFG'=>'',
 'SHOP_SEO_TITLE'=>'p2p信贷',
 'IDCARDPASSED_POINT'=>'10',
-'CACHE_ON'=>'1',
+'CACHE_ON'=>'0',
 'EXPIRED_TIME'=>'0',
 'FILTER_WORD'=>'',
 'STYLE_OPEN'=>'0',

@@ -5,7 +5,6 @@
 <load href='__TMPL__Common/js/jquery.weebox.js' />
 <load href='__TMPL__Common/style/weebox.css' />
 
-
 <script type="text/javascript">
 	function show_detail(id)
 	{
@@ -62,18 +61,9 @@
 		</select>
 		贷款人：
 		<input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" size="10" />
-		贷款状态
-		<select name="deal_status">
-			<option value="all" <if condition="$_REQUEST['deal_status'] eq 'all' || trim($_REQUEST['deal_status']) eq ''">selected="selected"</if>>所有状态</option>
-			<option value="0" <if condition="$_REQUEST['deal_status'] neq 'all' && trim($_REQUEST['deal_status']) neq '' && intval($_REQUEST['deal_status']) eq 0">selected="selected"</if>>{%DEAL_STATUS_0}</option>
-			<option value="1" <if condition="intval($_REQUEST['deal_status']) eq 1">selected="selected"</if>>{%DEAL_STATUS_1}</option>
-			<option value="2" <if condition="intval($_REQUEST['deal_status']) eq 2">selected="selected"</if>>{%DEAL_STATUS_2}</option>
-			<option value="3" <if condition="intval($_REQUEST['deal_status']) eq 3">selected="selected"</if>>{%DEAL_STATUS_3}</option>
-			<option value="4" <if condition="intval($_REQUEST['deal_status']) eq 4">selected="selected"</if>>{%DEAL_STATUS_4}</option>
-			<option value="5" <if condition="intval($_REQUEST['deal_status']) eq 5">selected="selected"</if>>{%DEAL_STATUS_5}</option>
-		</select>
+		
 		<input type="hidden" value="Deal" name="m" />
-		<input type="hidden" value="index" name="a" />
+		<input type="hidden" value="after_repay_list" name="a" />
 		<input type="submit" class="button" value="{%SEARCH}" />
 	</form>
 </div>

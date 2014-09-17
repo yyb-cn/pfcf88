@@ -5,7 +5,6 @@
 <load href='__TMPL__Common/js/jquery.weebox.js' />
 <load href='__TMPL__Common/style/weebox.css' />
 
-
 <script type="text/javascript">
 	function show_detail(id)
 	{
@@ -14,6 +13,13 @@
 	function preview(id)
 	{
 		window.open("__ROOT__/index.php?ctl=deal&id="+id+"&preview=1");
+	}
+	function send_three_msg(){
+		var url = "";
+		url += "&name="+$("#ThreeGetForm input[name='name']").val();
+		url += "&cate_id="+$("#ThreeGetForm select[name='cate_id']").val();
+		url += "&user_name="+$("#ThreeGetForm input[name='user_name']").val();
+		window.location.href = '{:u("Deal/three_msg")}'+url;
 	}
 </script>
 <php>
@@ -29,12 +35,7 @@
 	
 	function a_get_buy_status($buy_status,$deal_id)
 	{
-		if($buy_status==2){
-			return "<span style='color:red'>".l("DEAL_STATUS_".$buy_status)."</span>";
-		}
-		else{
-			return l("DEAL_STATUS_".$buy_status);
-		}
+		return l("DEAL_STATUS_".$buy_status);
 	}
 	function get_buy_type_title($buy_type)
 	{
@@ -50,7 +51,7 @@
 </div>
 <div class="blank5"></div>
 <div class="search_row">
-	<form name="search" action="__APP__" method="get">	
+	<form name="search" action="__APP__" method="get" id="ThreeGetForm">	
 		{%DEAL_NAME}：<input type="text" class="textbox" name="name" value="{:trim($_REQUEST['name'])}" />
 		
 		{%CATE_TREE}：
@@ -62,19 +63,10 @@
 		</select>
 		贷款人：
 		<input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" size="10" />
-		贷款状态
-		<select name="deal_status">
-			<option value="all" <if condition="$_REQUEST['deal_status'] eq 'all' || trim($_REQUEST['deal_status']) eq ''">selected="selected"</if>>所有状态</option>
-			<option value="0" <if condition="$_REQUEST['deal_status'] neq 'all' && trim($_REQUEST['deal_status']) neq '' && intval($_REQUEST['deal_status']) eq 0">selected="selected"</if>>{%DEAL_STATUS_0}</option>
-			<option value="1" <if condition="intval($_REQUEST['deal_status']) eq 1">selected="selected"</if>>{%DEAL_STATUS_1}</option>
-			<option value="2" <if condition="intval($_REQUEST['deal_status']) eq 2">selected="selected"</if>>{%DEAL_STATUS_2}</option>
-			<option value="3" <if condition="intval($_REQUEST['deal_status']) eq 3">selected="selected"</if>>{%DEAL_STATUS_3}</option>
-			<option value="4" <if condition="intval($_REQUEST['deal_status']) eq 4">selected="selected"</if>>{%DEAL_STATUS_4}</option>
-			<option value="5" <if condition="intval($_REQUEST['deal_status']) eq 5">selected="selected"</if>>{%DEAL_STATUS_5}</option>
-		</select>
 		<input type="hidden" value="Deal" name="m" />
-		<input type="hidden" value="index" name="a" />
+		<input type="hidden" value="three" name="a" />
 		<input type="submit" class="button" value="{%SEARCH}" />
+		<input type="button" class="button" onclick="send_three_msg();" value="发送三日内需还款的提示消息" />
 	</form>
 </div>
 <div class="blank5"></div>

@@ -1,0 +1,36 @@
+@charset "utf-8";
+
+/* 全局样式 */
+body{ padding:0; margin:0; font-size:12px; background:#EEE; font-family:"微软雅黑", "黑体", "仿宋"}
+ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,p { padding:0; margin:0;}
+ul{list-style:none;}
+img{border:0px;}
+a{ text-decoration:none;}	
+
+.wraper { width:1200px; margin:0 auto;}
+
+.header { width:1200px; height:150px; background:#333;}
+
+.main { width:1200px; height:1500px; background:#666;}
+
+.footer { width:1200px; height:200px; background:#333;}
+
+.sidebar { width:150px; height:542px; left:150px; top:200px; position:fixed; font-size:16px;}
+	.sidebar div { width:150px; font-size:20px; line-height:130px; text-align:center;}
+	.sidebar a { color:#000;}
+	.sidebar a:hover { color:#FFF;}
+	
+	.sidebar1 { background:#115A83; height:65px;}
+		.sidebar1 a { display:block; width:150px; height:65px; line-height:65px;}
+	.other_bg { background:#115AAA;}
+	
+	.sidebar2 { background:#FD8934; height:130px;}
+		.sidebar2 a { display:block; width:150px; height:130px;}
+		
+	.sidebar3 { background:#2A97C0; height:130px;}
+		.sidebar3 a { display:block; width:150px; height:130px;}
+		
+	.sidebar4 { background:#EF3356; height:130px;}
+		.sidebar4 a { display:block; width:150px; height:130px;}
+		
+.register {}

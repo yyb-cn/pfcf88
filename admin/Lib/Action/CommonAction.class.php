@@ -11,6 +11,7 @@ class CommonAction extends AuthAction{
 	public function index() {		
 		//列表过滤器，生成查询Map对象
 		$map = $this->_search ();
+		
 		//追加默认参数
 		if($this->get("default_map"))
 		$map = array_merge($map,$this->get("default_map"));
@@ -20,6 +21,7 @@ class CommonAction extends AuthAction{
 		}
 		$name=$this->getActionName();
 		$model = D ($name);
+		
 		if (! empty ( $model )) {
 			$this->_list ( $model, $map );
 		}

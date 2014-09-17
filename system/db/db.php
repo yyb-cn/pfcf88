@@ -602,7 +602,7 @@ class mysql_db
 
             if (!empty($fields))
             {
-                $sql = 'INSERT INTO ' . $table . ' (' . implode(', ', $fields) . ') VALUES (' . implode(', ', $values) . ')';                
+				$sql = 'INSERT INTO ' . $table . ' (' . implode(', ', $fields) . ') VALUES (' . implode(', ', $values) . ')';                
             }
         }
         else

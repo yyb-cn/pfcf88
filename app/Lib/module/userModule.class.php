@@ -64,22 +64,22 @@ class userModule extends SiteBaseModule
 
 		//lu 推荐人验证与赋值
 		// 判断是否ajax 提交
-	
-			if($_POST['referral']){
-				$user_pid=$GLOBALS['db']->getOne("select `id` from ".DB_PREFIX."user where `user_name` = '".$_POST['referral']."' ");
-				if($user_pid>0&&!empty($user_pid)){
-					$user_data['pid']=$user_pid;
-					}
-					else{
-						showErr("推荐人不存在");
-						
-						}
+		if($_POST['referral'])
+		{
+			$user_pid=$GLOBALS['db']->getOne("select `id` from ".DB_PREFIX."user where `user_name` = '".$_POST['referral']."' ");
+			if($user_pid>0&&!empty($user_pid)){
+				$user_data['pid']=$user_pid;
 				}
+			else{
+				showErr("推荐人不存在");
+						
+				}
+		}
 		
 			
 		
 		$res = save_user($user_data);
-	
+		
 		if($_REQUEST['subscribe']==1)
 		{
 			//订阅
@@ -98,12 +98,20 @@ class userModule extends SiteBaseModule
 				$GLOBALS['db']->autoExecute(DB_PREFIX."mobile_list",$mobile,'INSERT','','SILENT');
 			}
 		}
+		//print_r($GLOBALS['referer']);exit;
 		if($res['status'] == 1)
 		{
 			$user_id = intval($res['data']);
 			//更新来路
-			$GLOBALS['db']->query("update ".DB_PREFIX."user set referer = '".$GLOBALS['referer']."' where id = ".$user_id);
+			$GLOBALS['db']->query("update ".DB_PREFIX."user set referer = '".$GLOBALS['referer']."' where id = ".$user_id);//注册来源
 			$user_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id = ".$user_id);
+			
+			//注册发送代金券
+			require_once APP_ROOT_PATH."system/libs/voucher.php";   
+			 $rs = send_voucher(1,$user_id,1);   //send_voucher(代金券ID,用户ID,'是否需要密码')
+			
+			
+			
 			if($user_info['is_effect']==1)
 			{
 				//在此自动登录

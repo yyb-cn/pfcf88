@@ -1,0 +1,74 @@
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+
+<script type="text/javascript">
+	function show_detail(id)
+	{
+		$.weeboxs.open(ROOT+'?m=Deal&a=show_detail&id='+id, {contentType:'ajax',showButton:false,title:LANG['COUNT_TOTAL_DEAL'],width:600,height:330});
+	}
+	function preview(id)
+	{
+		window.open("__ROOT__/index.php?ctl=deal&id="+id+"&preview=1");
+	}
+</script>
+<php>
+	function a_get_deal_type($type,$id)
+	{
+		$deal = M("Deal")->getById($id);
+		if($deal['is_coupon'])
+		return l("COUNT_TYPE_".$deal['deal_type']);
+		else
+		return l("NO_DEAL_COUPON_GEN");
+		
+	}
+	
+	function a_get_buy_status($buy_status,$deal_id)
+	{
+		if($buy_status==2){
+			return "<span style='color:red'>".l("DEAL_STATUS_".$buy_status)."</span>";
+		}
+		else{
+			return l("DEAL_STATUS_".$buy_status);
+		}
+	}
+	function get_buy_type_title($buy_type)
+	{
+		return l("DEAL_BUY_TYPE_".$buy_type);
+	}
+</php>
+<div class="main">
+<div class="main_title">代金券列表</div>
+<div class="blank5"></div>
+<div class="button_row">
+	<input type="button" class="button" value="{%ADD}" onclick="add();" />
+	<input type="button" class="button" value="{%DEL}" onclick="del();" />
+</div>
+<div class="blank5"></div>
+
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="deal" 
+	checkbox="true" 
+	action="true" 
+	datasource="list" 
+	show="id:{%ID}|50px
+		,name|msubstr:代金券名称:edit
+		,begin_time|msubstr:开始时间:edit
+		,end_time|msubstr:到期时间:edit
+		,exchange_score|msubstr:兑换积分:edit
+		,money|msubstr:金额:edit
+		
+		" 
+	actionlist="edit:{%EDIT}, del:{%DEL},show_detail:投标列表, preview:{%PREVIEW}"
+	actionwidth="160px" /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />
