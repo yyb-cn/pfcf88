@@ -206,7 +206,8 @@ class userModule extends SiteBaseModule
 	}
 	
 	public function login()
-	{
+	{	
+	
 		$login_info = es_session::get("user_info");
 		if($login_info)
 		{
@@ -215,6 +216,7 @@ class userModule extends SiteBaseModule
 				
 		$GLOBALS['tmpl']->caching = true;
 		$cache_id  = md5(MODULE_NAME.ACTION_NAME.$GLOBALS['deal_city']['id']);		
+		//echo $cache_id;exit;
 		if (!$GLOBALS['tmpl']->is_cached('user_login.html', $cache_id))	
 		{
 			$GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['USER_LOGIN']);

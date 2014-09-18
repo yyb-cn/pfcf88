@@ -98,12 +98,17 @@
 							update_page_user_tip();
 							$("#integrate").remove();				
 									
-							$.showSuccess(ajaxobj.info,function(){
+						/*	$.showSuccess(ajaxobj.info,function(){
 								if(ajaxobj.jump!='')
 								location.href = ajaxobj.jump;
 								else
 								location.reload();
-							});							
+							});	*/			
+						if(ajaxobj.jump!='')
+							location.href = ajaxobj.jump;
+							else
+						location.reload();
+							
 						}
 						else
 						{	

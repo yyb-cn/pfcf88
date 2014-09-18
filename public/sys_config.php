@@ -89,7 +89,7 @@ return array(
 'WORKPASSED_POINT'=>'10',
 'DOMAIN_ROOT'=>'',
 'MAIN_APP'=>'shop',
-'VERIFY_IMAGE'=>'0',
+'VERIFY_IMAGE'=>'1',
 'APNS_MSG_LOCK'=>'1',
 'PROMOTE_MSG_PAGE'=>'0',
 'APNS_MSG_PAGE'=>'0',
