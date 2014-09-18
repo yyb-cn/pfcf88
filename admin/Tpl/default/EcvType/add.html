@@ -65,8 +65,8 @@
 <div class="blank5"></div>
 <form name="edit" action="__APP__" method="post" enctype="multipart/form-data">
 <div class="button_row">
-	<input type="button" class="button conf_btn" rel="1" value="{%DEAL_BASE_INFO}" />&nbsp;
-	<input type="button" class="button conf_btn" rel="2" value="{%SEO_CONFIG}" />&nbsp;	
+	<input type="button" class="button conf_btn" rel="1" value="代金券基本信息" />&nbsp;
+	
 &nbsp;	
 </div>
 <div class="blank5"></div>
@@ -74,205 +74,54 @@
 	<tr>
 		<td colspan=2 class="topTd"></td>
 	</tr>
+	
 	<tr>
-		<td class="item_title">颜色:</td>
+		<td class="item_title">代金券名称:</td>
 		<td class="item_input">
-			<input type="text" name="titlecolor" class="textbox" maxlength="6" size="6" id="colorpickerField" value="" />
-			<span clss="tip_span">不填即为默认颜色</span>
+			<input type="text" class="textbox require" name="name" style="width:200px;" />
 		</td>
 	</tr>
 	<tr>
-		<td class="item_title">{%DEAL_NAME}:</td>
+		<td class="item_title">面额:</td>
+		<td class="item_input"><input type="text" class="textbox require" name="money" /> 元</td>
+	</tr>
+	<tr>
+		<td class="item_title">生效时间:</td>
 		<td class="item_input">
-			<input type="text" class="textbox require" name="name" style="width:500px;" />
-		</td>
+		
+			<input type="text" class="textbox " name="begin_time" id="begin_time" value="{$vo.begin_time}" onfocus="this.blur(); return showCalendar('begin_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_bad_time');" />
+			<input type="button" class="button" id="btn_bad_time" value="{%SELECT_TIME}" onclick="return showCalendar('begin_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_bad_time');" />
+			<input type="button" class="button" value="{%CLEAR_TIME}" onclick="$('#begin_time').val('');" />
+			<span class="tip_span">为空则没有时间限制</span>
 	</tr>
 	<tr>
-		<td class="item_title">{%DEAL_SUB_NAME}:</td>
-		<td class="item_input"><input type="text" class="textbox require" name="sub_name" /> <span class='tip_span'>[{%DEAL_SUB_NAME_TIP}]</span></td>
-	</tr>
-	<tr>
-		<td class="item_title">会员ID:</td>
-		<td class="item_input"><input type="text" class="textbox require" name="user_id" /> 
-	</tr>
-	<tr>
-		<td class="item_title">{%CATE_TREE}:</td>
-		<td class="item_input">	
-		<select name="cate_id" class="require">
-			<option value="0">=={%NO_SELECT_CATE}==</option>
-			<foreach name="deal_cate_tree" item="cate_item">
-				<option value="{$cate_item.id}">{$cate_item.title_show}</option>
-			</foreach>
-		</select>
+		<td class="item_title">失效时间:</td>
+		
+		<td class="item_input">
+		<input type="text" class="textbox require" name="end_time" id="end_time" value="{$vo.end_time}" onfocus="this.blur(); return showCalendar('end_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_bad_time');" />
+			<input type="button" class="button" id="btn_bad_time" value="{%SELECT_TIME}" onclick="return showCalendar('end_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_bad_time');" />
+			<input type="button" class="button" value="{%CLEAR_TIME}" onclick="$('#end_time').val('');" />
+			<span class="tip_span">为空则没有时间限制</span>
 		</td>
 	</tr>
 	
-	<tr>
-		<td class="item_title">担保机构:</td>
-		<td class="item_input">
-		<select name="agency_id">
-			<option value="0">=={%NO_SELECT_AGENCY}==</option>
-			<foreach name="deal_agency" item="agency_item">
-				<option value="{$agency_item.id}"><if condition="$agency_item['short_name'] neq ''">{$agency_item.short_name}<else/>{$agency_item.name}</if></option>
-			</foreach>
-		</select>
-		<span class="tip_span">机构担保标时可选择</span>
-		</td>
-	</tr>
 	
 	<tr>
-		<td class="item_title">担保范围:</td>
+		<td class="item_title">是否可积分兑换:</td>
 		<td class="item_input">
-		<select name="warrant">
-			<option value="0">无</option>
-			<option value="1">本金</option>
-			<option value="2">本金及利息</option>
-		</select>
+			<lable>可以<input type="radio" name="send_type" value="1"/></lable>
+			<lable>不可以<input type="radio" name="send_type" value="0"  checked="checked" /></lable>
 		</td>
 	</tr>
+	<tr>
+		<td class="item_title">需要积分兑换:</td>
+		<td class="item_input"><input type="text" class="textbox require" name="exchange_score" /> </td>
+	</tr>
+	<tr>
+		<td colspan=2 class="bottomTd"></td>
+	</tr>
+</table>
 
-	<tr>
-		<td class="item_title">{%DEAL_ICON}:</td>
-		<td class="item_input">
-			<html:imgUpload name = 'icon' id='icon' />
-		</td>
-	</tr>
-	
-	<tr>
-		<td class="item_title">{%TYPE_TREE}:</td>
-		<td class="item_input">
-		<select name="type_id">
-			<option value="0">=={%NO_SELECT_TYPE}==</option>
-			<foreach name="deal_type_tree" item="type_item">
-				<option value="{$type_item.id}">{$type_item.name}</option>
-			</foreach>
-		</select>
-		</td>
-	</tr>
-	
-	<tr>
-		<td class="item_title">还款方式:</td>
-		<td class="item_input">
-			<select name="loantype">
-				<option value="0">等额本息</option>
-				<option value="1">付息还本</option>
-				<option value="2">到期本息</option>
-			</select>
-		</td>
-	</tr>
-	
-	<tr>
-		<td class="item_title">{%BORROW_AMOUNT}:</td>
-		<td class="item_input">
-			<input type="text" class="textbox require" name="borrow_amount" />
-		</td>
-	</tr>
-	<tr>
-		<td class="item_title">{%MIN_LOAN_MONEY}:</td>
-		<td class="item_input">
-			<input type="text" class="textbox require" name="min_loan_money" />
-		</td>
-	</tr>
-	<tr>
-		<td class="item_title">{%REPAY_TIME}:</td>
-		<td class="item_input">
-			<input type="text" id="repay_time" class="textbox require" SIZE="5"  name="repay_time" value="3" />
-			<select id="repay_time_type" name="repay_time_type">
-				<option value="0">天</option>
-				<option value="1" selected="selected">月</option>
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td class="item_title">{%RATE}:</td>
-		<td class="item_input">
-			<input type="text" class="textbox require" SIZE="5" name="rate"  value=""  />%
-		</td>
-	</tr>
-	<tr>
-		<td class="item_title">筹标期限:</td>
-		<td class="item_input">
-			<input type="text" class="textbox" SIZE="5" name="enddate" value="{$vo.enddate}"  />
-		</td>
-	</tr>
-	<tr>
-		<td class="item_title">成交服务费:</td>
-		<td class="item_input">
-			<input type="text" class="textbox" SIZE="5" name="services_fee" value=""  />%
-			<span class="tip_span">按发布时的会员等级</span>
-		</td>
-	</tr>
-	<tr>
-		<td class="item_title">{%DEAL_DESCRIPTION}:</td>
-		<td class="item_input">
-			 <html:editor id="description" name="description" style="width:500px;height:200px" content="" />
-		</td>
-	</tr>
-	<tr>
-		<td class="item_title">借款状态:</td>
-		<td class="item_input">
-			<label>{%DEAL_STATUS_0}待等材料<input type="radio" name="deal_status" value="0" checked="checked" /></label>
-			<label>{%DEAL_STATUS_1}<input type="radio" name="deal_status" value="1" /></label>
-			<label>{%DEAL_STATUS_3}<input type="radio" name="deal_status" value="3" /></label>
-		</td>
-	</tr>
-	<tr id="start_time_box" style="display:none">
-		<td class="item_title">开始时间:</td>
-		<td class="item_input">
-			<input type="text" class="textbox" name="start_time" value="" id="start_time"  onfocus="this.blur(); return showCalendar('start_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_start_time');" />
-			<input type="button" class="button" id="btn_start_time" value="{%SELECT_TIME}" onclick="return showCalendar('start_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_start_time');" />
-			<input type="button" class="button" value="{%CLEAR_TIME}" onclick="$('#start_time').val('');" />		
-		</td>
-	</tr>
-	<tr id="bad_time_box" style="display:none">
-		<td class="item_title">{%DEAL_STATUS_3}时间:</td>
-		<td class="item_input">
-			<input type="text" class="textbox" name="bad_time" id="bad_time" value="" onfocus="this.blur(); return showCalendar('bad_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_bad_time');" />
-			<input type="button" class="button" id="btn_bad_time" value="{%SELECT_TIME}" onclick="return showCalendar('bad_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_bad_time');" />
-			<input type="button" class="button" value="{%CLEAR_TIME}" onclick="$('#bad_time').val('');" />	
-		</td>
-	</tr>
-	<tr id="bad_info_box">
-		<td class="item_title">{%DEAL_STATUS_3}原因:</td>
-		<td class="item_input">
-			<textarea type="text" class="textbox" name="bad_msg" id="bad_msg" value="" rows="3" cols="50"></textarea>
-		</td>
-	</tr>
-	<tr>
-		<td class="item_title">{%IS_EFFECT}:</td>
-		<td class="item_input">
-			<lable>{%IS_EFFECT_1}<input type="radio" name="is_effect" value="1" checked="checked" /></lable>
-			<lable>{%IS_EFFECT_0}<input type="radio" name="is_effect" value="0" /></lable>
-		</td>
-	</tr>
-	<tr>
-		<td class="item_title">{%SORT}:</td>
-		<td class="item_input"><input type="text" class="textbox" name="sort" value="{$new_sort}" /></td>
-	</tr>
-	<tr>
-		<td colspan=2 class="bottomTd"></td>
-	</tr>
-</table>
-<table class="form conf_tab" cellpadding=0 cellspacing=0 rel="2">
-	<tr>
-		<td colspan=2 class="topTd"></td>
-	</tr>
-	<tr>
-		<td class="item_title">{%DEAL_SEO_TITLE}:</td>
-		<td class="item_input"><textarea class="textarea" name="seo_title" ></textarea></td>
-	</tr>
-	<tr>
-		<td class="item_title">{%DEAL_SEO_KEYWORD}:</td>
-		<td class="item_input"><textarea class="textarea" name="seo_keyword" ></textarea></td>
-	</tr>
-	<tr>
-		<td class="item_title">{%DEAL_SEO_DESCRIPTION}:</td>
-		<td class="item_input"><textarea class="textarea" name="seo_description" ></textarea></td>
-	</tr>
-	<tr>
-		<td colspan=2 class="bottomTd"></td>
-	</tr>
-</table>
 <div class="blank5"></div>
 	<table class="form" cellpadding=0 cellspacing=0>
 		<tr>
@@ -282,11 +131,12 @@
 			<td class="item_title"></td>
 			<td class="item_input">
 			<!--隐藏元素-->
-			<input type="hidden" name="{:conf("VAR_MODULE")}" value="Deal" />
+			
+			<input type="hidden" name="{:conf("VAR_MODULE")}" value="EcvType" /><!--根据这个判断处理地址-->
 			<input type="hidden" name="{:conf("VAR_ACTION")}" value="insert" />
-			<!--隐藏元素-->
+			
 			<input type="submit" class="button" value="{%ADD}" />
-			<input type="reset" class="button" value="{%RESET}" />
+			<input type="reset" class="button" value="重置" />
 			</td>
 		</tr>
 		<tr>

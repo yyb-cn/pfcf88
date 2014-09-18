@@ -15,7 +15,7 @@ class uc_voucherModule extends SiteBaseModule
 	{
 			//echo $GLOBALS['user_info']['id'];exit;
 				
-			//	require_once APP_ROOT_PATH."system/libs/voucher.php";   //代金券测试
+			//	require_once APP_ROOT_PATH."system/libs/voucher.php";   //发代金券测试
 			//	 $rs = send_voucher(1,$GLOBALS['user_info']['id'],1);
 			
 				//exit;

@@ -1,4 +1,5 @@
 {// 引入标签库 }
+
 <tagLib name="html" />
 <include file="Public:header" />
 <load href='__TMPL__Common/js/jquery.bgiframe.js' />
@@ -16,15 +17,6 @@
 	}
 </script>
 <php>
-	function a_get_deal_type($type,$id)
-	{
-		$deal = M("Deal")->getById($id);
-		if($deal['is_coupon'])
-		return l("COUNT_TYPE_".$deal['deal_type']);
-		else
-		return l("NO_DEAL_COUPON_GEN");
-		
-	}
 	
 	function a_get_buy_status($buy_status,$deal_id)
 	{
@@ -35,9 +27,20 @@
 			return l("DEAL_STATUS_".$buy_status);
 		}
 	}
-	function get_buy_type_title($buy_type)
+	
+	function get_send_type_name($send_type)
 	{
-		return l("DEAL_BUY_TYPE_".$buy_type);
+		if($send_type==1){
+			return "可积分兑换";
+		}
+		else{
+			return '不可积分兑换';
+		}
+	}
+	function date_int($time)
+	{
+	
+		return date("Y-m-d H:i:s",$time);
 	}
 </php>
 <div class="main">
@@ -59,13 +62,13 @@
 	datasource="list" 
 	show="id:{%ID}|50px
 		,name|msubstr:代金券名称:edit
-		,begin_time|msubstr:开始时间:edit
-		,end_time|msubstr:到期时间:edit
+		,begin_time|date_int:开始时间:edit
+		,end_time|date_int:到期时间:edit
 		,exchange_score|msubstr:兑换积分:edit
 		,money|msubstr:金额:edit
-		
+		,send_type|get_send_type_name:类型:edit
 		" 
-	actionlist="edit:{%EDIT}, del:{%DEL},show_detail:投标列表, preview:{%PREVIEW}"
+	actionlist="edit:{%EDIT}, del:删除"
 	actionwidth="160px" /> 
 
 <div class="blank5"></div>

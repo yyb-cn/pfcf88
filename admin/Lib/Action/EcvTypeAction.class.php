@@ -32,11 +32,12 @@ class EcvTypeAction extends CommonAction{
 		$this->display();
 	}
 	public function insert() {
+		//print_r($_POST);exit;
 		B('FilterString');
 		$ajax = intval($_REQUEST['ajax']);
 		$data = M(MODULE_NAME)->create ();
-
-			//print_r($data);exit;
+	
+			
 		//开始验证有效性
 		$this->assign("jumpUrl",u(MODULE_NAME."/add"));
 		if(!check_empty($data['name']))
@@ -74,7 +75,7 @@ class EcvTypeAction extends CommonAction{
 	public function update() {
 		B('FilterString');
 		$data = M(MODULE_NAME)->create ();
-				
+				//print_r($data);exit;
 		$log_info = M(MODULE_NAME)->where("id=".intval($data['id']))->getField("name");
 		//开始验证有效性
 		$this->assign("jumpUrl",u(MODULE_NAME."/edit",array("id"=>$data['id'])));
@@ -90,6 +91,7 @@ class EcvTypeAction extends CommonAction{
 		$data['begin_time'] = trim($data['begin_time'])==''?0:to_timespan($data['begin_time']);
 		$data['end_time'] = trim($data['end_time'])==''?0:to_timespan($data['end_time']);
 		// 更新数据
+		//print_r($data);exit;
 		$list=M(MODULE_NAME)->save ($data);
 		if (false !== $list) {
 			//成功提示
@@ -107,7 +109,7 @@ class EcvTypeAction extends CommonAction{
 	}
 	
 	
-	public function foreverdelete() {
+	public function delete() {
 		//彻底删除指定记录
 		$ajax = intval($_REQUEST['ajax']);
 		$id = $_REQUEST ['id'];
