@@ -63,10 +63,30 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 						<a href="{url x="index" r="uc_money#incharge"}" target="_blank">我要充值</a>
 					</td>
 				</tr>
+				<!--代金券-->
+				
+				<tr>
+					<td class="tit tr w100">代金券：</td>
+					<td class="f_red">
+						{$voucher.name}
+						&nbsp;&nbsp;
+						面额：{$voucher.money}
+						&nbsp;&nbsp;
+						使用代金券
+						<input type="checkbox" name="yn"/>
+					</td>
+				</tr>
+			
 				<tr>
 					<td class="tit tr w100 btm">投标金额：</td>
 					<td class="f_red bg btm">
 						<input class="f-input w70" name="bid_money" id="J_BIDMONEY" /> 元&nbsp;&nbsp;<span class="f_dgray">(最低投标金额为{function name="round" v=$deal.min_loan_money f=2}元{if (int)app_conf('DEAL_BID_MULTIPLE') gt 0},并且是{function name='app_conf' v='DEAL_BID_MULTIPLE'}的倍数{/if})</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="tit tr w100">总计：</td><!--后台,资金数据从数据库获取-->
+					<td class="f_red" id="totle">
+						
 					</td>
 				</tr>
 			</table>
@@ -81,6 +101,34 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 </div>
 <script type="text/javascript">
 	jQuery(function(){
+		
+		$("#J_BIDMONEY").change(function(){
+		
+		if($("input:checkbox").attr("checked")==true){
+		var totle=Number($("#J_BIDMONEY").val())+Number({$voucher.money});
+		
+		
+		}
+		else{
+			totle=Number($("#J_BIDMONEY").val())
+		}
+		
+		$("#totle").html(totle)
+		})
+	$("input:checkbox").change(function(){	
+	
+		if($("input:checkbox").attr("checked")==true){
+		var totle=Number($("#J_BIDMONEY").val())+Number({$voucher.money});
+		}
+		else{
+			totle=Number($("#J_BIDMONEY").val())
+		}
+		$("#totle").html(totle)
+	})
+	
+	
+	
+	
 		$("#BidForm").submit(function(){
 			if($.trim($("#J_BIDMONEY").val())=="" || !$.checkNumber($("#J_BIDMONEY").val()){if (int)app_conf('DEAL_BID_MULTIPLE') gt 0} || parseFloat($("#J_BIDMONEY").val())%{function name='app_conf' v='DEAL_BID_MULTIPLE'}!=0{/if} || parseFloat($("#J_BIDMONEY").val())<=0 || parseFloat($("#J_BIDMONEY").val())<{$deal.min_loan_money}){
 				$.showErr(LANG.BID_MONEY_NOT_TRUE,function(){
@@ -93,6 +141,7 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 				data:query,
 				dataType:"json",
 				success:function(result){
+			//alert(result.deal_status);
 					if(result.status==1){
 						alert(result.info);
 						window.location.href=result.jump;

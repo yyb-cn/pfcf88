@@ -111,7 +111,7 @@
 		<td class="item_title">失效时间:</td>
 		
 		<td class="item_input">
-		<input type="text" class="textbox require" name="end_time" id="end_time" value="<?php echo date("Y-m-d H:i:s",$vo['end_time'])?>" onfocus="this.blur(); return showCalendar('end_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_bad_time');" />
+		<input type="text" class="textbox " name="end_time" id="end_time" value="<?php echo date("Y-m-d H:i:s",$vo['end_time'])?>" onfocus="this.blur(); return showCalendar('end_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_bad_time');" />
 			<input type="button" class="button" id="btn_bad_time" value="{%SELECT_TIME}" onclick="return showCalendar('end_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_bad_time');" />
 			<input type="button" class="button" value="{%CLEAR_TIME}" onclick="$('#end_time').val('');" />
 			<span class="tip_span">为空则没有时间限制</span>
@@ -128,7 +128,7 @@
 	</tr>
 	<tr>
 		<td class="item_title">需要积分兑换:</td>
-		<td class="item_input"><input type="text" class="textbox require" name="exchange_score" value="{$vo.exchange_score}"/> </td>
+		<td class="item_input"><input type="text" class="textbox " name="exchange_score" value="{$vo.exchange_score}"/> </td>
 	</tr>
 	<tr>
 		<td colspan=2 class="bottomTd"></td>

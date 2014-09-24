@@ -214,7 +214,10 @@ class dealModule extends SiteBaseModule
 		if($deal['user_id'] == $GLOBALS['user_info']['id']){
 			showErr($GLOBALS['lang']['CANT_BID_BY_YOURSELF']);
 		}
-		
+		require APP_ROOT_PATH.'app/Lib/uc.php';
+		$result = get_voucher_list(1,$GLOBALS['user_info']['id']);
+		//print_r( $result);exit;
+		$GLOBALS['tmpl']->assign("voucher",$result['list'][0]);
 		$seo_title = $deal['seo_title']!=''?$deal['seo_title']:$deal['type_match_row'] . " - " . $deal['name'];
 		$GLOBALS['tmpl']->assign("page_title",$seo_title);
 		$seo_keyword = $deal['seo_keyword']!=''?$deal['seo_keyword']:$deal['type_match_row'].",".$deal['name'];
@@ -264,13 +267,15 @@ class dealModule extends SiteBaseModule
 	}
 	
 	function dobid(){
+	
+	
 		$ajax = intval($_REQUEST["ajax"]);
 		$id = intval($_REQUEST["id"]);
 		if(!$GLOBALS['user_info'])
 			showErr($GLOBALS['lang']['PLEASE_LOGIN_FIRST'],$ajax);
 			
 		$deal = get_deal($id);
-		
+		//echo json_encode($deal)
 		if(trim($_REQUEST["bid_money"])=="" || !is_numeric($_REQUEST["bid_money"]) || floatval($_REQUEST["bid_money"])<=0 || floatval($_REQUEST["bid_money"]) < $deal['min_loan_money']){
 			showErr($GLOBALS['lang']['BID_MONEY_NOT_TRUE'],$ajax);
 		}
