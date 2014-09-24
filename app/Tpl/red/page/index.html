@@ -49,7 +49,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 
 	<!-- 14年6月18日修改"关于我们" -->
     <div class="blank10"></div><div class="blank10"></div>
-    <div class="about">
+    <div class="about white box_shadow">
     	<div class="title_140618">
         	<div class="title_left">关于我们</div>
         </div>
@@ -60,7 +60,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
             <li class="about4"><a href="{url x="index" r="aboutfee" p="act=fengkong"}"><img src="{$TMPL}/images/about_04.png" /></a></li>
         </ul>
     </div>
-    <div class="trading_record">
+    <div class="trading_record white box_shadow">
     	<div class="title_140618">
         	<div class="title_left">成交记录</div>
         </div>
@@ -75,7 +75,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     
     <!-- 14年6月18日修改“收益对比" -->
 	<div class="blank10"></div><div class="blank10"></div>
-    <div class="benefit_comparison">
+    <div class="benefit_comparison white box_shadow">
     	<div class="title_140618">
         	<div class="title_left">收益对比</div>
         </div>
@@ -86,33 +86,31 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                     <p>银行</p>
                     <p class="this_color">￥385</p>
                     <p class="bank_bg" id="main_1_line"></p>
-                    <div class="main_1_line">
-                </div>
+                    <div class="main_1_line"></div>
                 </li>
-                
                 <li class="main_2">
                     <p>理财通</p>
                     <p class="this_color">￥5925</p>
                     <p class="weixin_bg" id="main_2_line"></p>
-                    <div class="main_2_line">
+                    <div class="main_2_line"></div>
                 </li>
                 <li class="main_3">
                     <p>浦发财富</p>
                     <p class="this_color">￥12000</p>
                     <p class="pfcf_bg" id="main_3_line"></p>
-                    <div class="main_3_line">
+                    <div class="main_3_line"></div>
                 </li>
                 <li class="main_4">
                     <p>余额宝</p>
                     <p class="this_color">￥5800</p>
                     <p class="epay_bg" id="main_4_line"></p>
-                    <div class="main_4_line">
+                    <div class="main_4_line"></div>
                 </li>
                 <li class="main_5">
                     <p>国债</p>
                     <p class="this_color">￥5000</p>
                     <p class="debt_bg" id="main_5_line"></p>
-                    <div class="main_5_line">
+                    <div class="main_5_line"></div>
                 </li>
             </ul>
             <div class="main_1_line_msg">活期：活期存款占一国货币供应的最大部分，也是商业银行的重要资金来源。鉴于活期存款不仅有货币支付手段和流通手段的职能，同时还具有较强的派生能力，因此，商业银行在任何时候都把活期存款作为经营重点。由于该类存款存取频繁，手续复杂，所费成本较高，西方国家商业银行一般都不支付利息,有时甚至还要收取一定的手续费，我国目前活期存款年利率为0.35%。</div>
@@ -128,12 +126,12 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     <div class="blank10"></div><div class="blank10"></div>
     <div class="buying">
     	<ul>
-        	<li class="buy1">
+        	<li class="buy1 white box_shadow">
             	<div class="buy1_main">
                 {if $credit.name}
                 	<div class="buy_hot"></div>
                 {/if}
-                	<p class="buy_title1">信贷赢二期</p>
+                	<p class="buy_title1">信贷赢三期</p>
                     <p class="buy_title2">（最低投资额度：100元）</p>
                 </div>
                 <div class="buy_bottom">
@@ -144,13 +142,13 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                 {/if}
                 </div>
             </li>
-            <li class="buy2">
+            <li class="buy2 white box_shadow">
             	<div class="buy2_main">
                 {if $chengjian.name}
                 	<div class="buy_hot"></div>
                 {/if}
-                	<p class="buy_title1">信贷赢三期</p>
-                    <p class="buy_title2">（最低投资额度：1000元）</p>
+                	<p class="buy_title1">城建三期</p>
+                    <p class="buy_title2">（最低投资额度：500元）</p>
                 </div>
                 <div class="buy_bottom">
                 {if $chengjian.name}
@@ -160,13 +158,13 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                 {/if}
                 </div>
             </li>
-            <li class="buy3">
+            <li class="buy3 white box_shadow">
             	<div class="buy3_main">
                 {if $wenfeng.name}
                 	<div class="buy_hot"></div>
                 {/if}
-                	<p class="buy_title1">信贷赢九期</p>
-                    <p class="buy_title2">（最低投资额度：1万元）</p>
+                	<p class="buy_title1">文峰市场</p>
+                    <p class="buy_title2">（最低投资额度：1000元）</p>
                 </div>
                 <div class="buy_bottom">
                 {if $wenfeng.name}
@@ -182,7 +180,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     
     <!--14年6月18日修改投资列表-->
     <div class="blank10"></div><div class="blank10"></div>
-    <div class="invest_list">
+    <div class="invest_list white box_shadow">
     	<div class="title_140618">
         	<div class="title_left">最新产品列表</div>
             <div class="title_right"><a href="{url x="index" r="deals"}">更多</a></div>
@@ -222,7 +220,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 	<adv adv_id="首页右侧顶部广告" />
     
 	<!--14年6月18日修改公告列表-->
-    <div class="affiche_list">
+    <div class="affiche_list white box_shadow">
     	<div class="title_140618">
         	<div class="title_left">网站公告</div>
             <div class="title_right"><a href="{url x="index" r="notice#list_notice"}">更多</a></div>
@@ -237,7 +235,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     
     <!--14年6月18日修改排行榜列表结束-->
     <div class="blank10"></div><div class="blank10"></div>
-	<div class="ranking">
+	<div class="ranking white box_shadow">
     	<div class="title_140618">
         	<div class="title_left">投资排行榜</div>
             <div class="title_right"><a href="javascript:;">更多</a></div>
@@ -253,7 +251,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     
     <!--14年6月18日修改行业新闻-->
     <div class="blank10"></div><div class="blank10"></div>
-	<div class="news">
+	<div class="news white box_shadow">
     	<div class="title_140618">
         	<div class="title_left">行业新闻</div>
             <div class="title_right"><a href="{url x="index" r="news"}">更多</a></div>
@@ -268,23 +266,10 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     
 </div>
 
-<!-- 新手教程开始(第一次打开页面会有灰色的教学浮动层) -->
-<?php if (empty($_COOKIE['p2p_teached']) && empty($_COOKIE['user_name'])): ?>
-	<div class="face-teach">
-		<div class="body-light">
-	    	<a class="face-close1" href="javascript:scroll(0,0)"></a>
-	        <a class="face-close2" href="javascript:scroll(0,0)"></a>
-	    </div>
-	</div>
-	<?php setcookie('p2p_teached','teached',time()+86400) //当没有用户COOKIE和该效果赋予的COOKIE时,弹出教学窗口层,并设置一个1天的有效_COOKIE['teached']值防止反复弹出 ?>
-<?php endif ?>
-
 <script type="text/javascript">
 $(document).ready(function(e) {
-	$(".body-light a").click(function(){
-		//alert(1111);
-		$(".face-teach").hide();
-	})
+	$('body').css('background-color','#E6E6E6');
+	$('.headf').addClass('white');
 	
 	$("#main_1_line,#main_2_line,#main_3_line,#main_4_line,#main_5_line").mousemove(function(){
 		var thisClass = $(this).attr('id');
@@ -306,7 +291,5 @@ $(document).ready(function(e) {
 
 })
 </script>
-<!-- end class="face-teach" -->
-<!-- 新手教程结束 -->
 
 {include file="inc/footer.html"}
