@@ -195,7 +195,17 @@
 		$count = $GLOBALS['db']->getOne($sql_count);
 		return array("list"=>$list,'count'=>$count);
 	}
-	
+	function get_voucher_list_can($limit,$user_id)
+	{
+		$user_id = intval($user_id);
+		$sql = "select * from ".DB_PREFIX."ecv as e left join ".DB_PREFIX."ecv_type as et on e.ecv_type_id = et.id where e.user_id = ".$user_id." and e.used_yn=0 order by e.id desc limit ".$limit;
+		//return($sql);
+		$sql_count = "select count(*) from ".DB_PREFIX."ecv where user_id = ".$user_id;
+		
+		$list = $GLOBALS['db']->getAll($sql);
+		$count = $GLOBALS['db']->getOne($sql_count);
+		return array("list"=>$list,'count'=>$count);
+	}
 	//查询可兑换代金券列表
 	function get_exchange_voucher_list($limit)
 	{

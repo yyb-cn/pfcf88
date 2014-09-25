@@ -67,6 +67,8 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 				
 				<tr>
 					<td class="tit tr w100">代金券：</td>
+					
+				<?php if(!empty($voucher)):?>
 					<td class="f_red">
 						{$voucher.name}
 						&nbsp;&nbsp;
@@ -75,6 +77,9 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 						使用代金券
 						<input type="checkbox" value="9" name="ggsmd" />
 					</td>
+				<?php  else :?>
+					<td class="f_red">&nbsp;没有可用代金券</td>
+				<?php endif;?>	
 				</tr>
 			
 				<tr>
@@ -85,8 +90,8 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 				</tr>
 				<tr>
 					<td class="tit tr w100 ">总计：</td><!--后台,资金数据从数据库获取-->
-					<td class="f_red" id="totle">
-										
+					<td class="f_red">
+							<span id="totle">0</span>&nbsp元			
 					</td>
 			
 					
@@ -160,9 +165,6 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 				data:query, 
 				dataType:"json",
 				success:function(result){
-					 
-				 alert(result)
-
 				
 					if(result.status==1){
 					

@@ -215,7 +215,7 @@ class dealModule extends SiteBaseModule
 			showErr($GLOBALS['lang']['CANT_BID_BY_YOURSELF']);
 		}
 		require APP_ROOT_PATH.'app/Lib/uc.php';
-		$result = get_voucher_list(1,$GLOBALS['user_info']['id']);
+		$result = get_voucher_list_can(1,$GLOBALS['user_info']['id']);
 		//print_r( $result);exit;
 		$GLOBALS['tmpl']->assign("voucher",$result['list'][0]);
 		$seo_title = $deal['seo_title']!=''?$deal['seo_title']:$deal['type_match_row'] . " - " . $deal['name'];
@@ -267,36 +267,134 @@ class dealModule extends SiteBaseModule
 	}
 	
 	function dobid(){
-				$data['user_id'] = $GLOBALS['user_info']['id'];
+				
+		$ajax = intval($_REQUEST["ajax"]);
+		$id = intval($_REQUEST["id"]);
+		if(!$GLOBALS['user_info'])
+			showErr($GLOBALS['lang']['PLEASE_LOGIN_FIRST'],$ajax);
+			
+		$deal = get_deal($id);
+		//echo json_encode($deal)
+		if(trim($_REQUEST["bid_money"])=="" || !is_numeric($_REQUEST["bid_money"]) || floatval($_REQUEST["bid_money"])<=0 || floatval($_REQUEST["bid_money"]) < $deal['min_loan_money']){
+			showErr($GLOBALS['lang']['BID_MONEY_NOT_TRUE'],$ajax);
+		}
+		
+		if((int)trim(app_conf('DEAL_BID_MULTIPLE')) > 0){
+			 if(intval($_REQUEST["bid_money"])%(int)trim(app_conf('DEAL_BID_MULTIPLE'))!=0){
+			 	showErr($GLOBALS['lang']['BID_MONEY_NOT_TRUE'],$ajax);
+			 	exit();
+			 }
+		}
+		
+		
+		if(!$deal){
+			showErr($GLOBALS['lang']['PLEASE_SPEC_DEAL'],$ajax);
+		}
+		
+		if(floatval($deal['progress_point']) >= 100){
+			showErr($GLOBALS['lang']['DEAL_BID_FULL'],$ajax);
+		}
+		
+		if(floatval($deal['deal_status']) != 1 ){
+			showErr($GLOBALS['lang']['DEAL_FAILD_OPEN'],$ajax);
+		}
+		
+		if(floatval($_REQUEST["bid_money"]) > $GLOBALS['user_info']['money']){
+			showErr($GLOBALS['lang']['MONEY_NOT_ENOUGHT'],$ajax);
+		}
+		
+		//判断所投的钱是否超过了剩余投标额度
+		if(floatval($_REQUEST["bid_money"]) > ($deal['borrow_amount'] - $deal['load_money'])){
+			showErr(sprintf($GLOBALS['lang']['DEAL_LOAN_NOT_ENOUGHT'],format_price($deal['borrow_amount'] - $deal['load_money'])),$ajax);
+		}
+		
+		$data['user_id'] = $GLOBALS['user_info']['id'];
 		$data['user_name'] = $GLOBALS['user_info']['user_name'];
 		$data['deal_id'] = $id;
 		$data['money'] = trim($_REQUEST["bid_money"]);
+		$data['create_time'] = get_gmtime();
 		
-		//echo trim($_REQUEST["tmoney"]);//
+		//以下为代金券判断操作
+		
 		if($_REQUEST['check'])//判断复选框是否为勾选
 		{
 			require APP_ROOT_PATH.'app/Lib/uc.php';
-			$result = get_voucher_list(1,$GLOBALS['user_info']['id']);
-			
-			$data['money']+=$result['list'][0]['money'];
-				if(trim($_REQUEST["tmoney"])!==$data['money'])
+			$result = get_voucher_list_can(1,$GLOBALS['user_info']['id']);
+			if(empty($result['list']))
+			{
+				showErr('代金券不存在,请联系客服',$ajax);
+			}
+			$data['money']+=$result['list'][0]['money'];//bid_money=金额+代金券金额;bid_money!=提交过来的tmoney;出错!
+				if(trim($_REQUEST['tmoney'])!=$data['money'])
 				{
 					showErr('代金券金额不符合系统金额,请联系客服',$ajax);
 				}
-			//操作数据库
-			$GLOBALS['db']->query("update ".DB_PREFIX."ecv set use_count = use_count + 1 where sn = '".$ecv_sn."' and password = '".$ecv_password."'");
-		//更新代金券库
-			//get_voucher_list($limit,$user_id)					//查询数据库中代金券，然后 //bid_money=金额+代金券金额;bid_money!=提交过来的tmoney;出错!
-								//更新代金券数据库使用情况。update  使用次数 +1
+			////更新代金券数据库使用情况。used_yn 为1,暂时只有一种代金券
+			$GLOBALS['db']->query("update ".DB_PREFIX."ecv set used_yn = 1 where  user_id = '".$data['user_id']."'");
+			
+								
 		}
 		
-		echo $data['money'];
-		//echo $data['money'] = trim($_REQUEST["bid_money"]);
-	//	echo  1;echo 2;
-		
-		$data['create_time'] = get_gmtime();
-		
-		//$GLOBALS['db']->autoExecute(DB_PREFIX."deal_load",$data,"INSERT");//插入一条投资目录
+		$GLOBALS['db']->autoExecute(DB_PREFIX."deal_load",$data,"INSERT");//插入一条投资目录
+		$load_id = $GLOBALS['db']->insert_id();//获取插入的ID
+		if($load_id > 0){
+			//更改资金记录
+			$msg = sprintf('编号%s的投标,付款单号%s',$id,$load_id);
+			require_once APP_ROOT_PATH."system/libs/user.php";	
+			modify_account(array('money'=>-trim($_REQUEST["bid_money"]),'score'=>0),$GLOBALS['user_info']['id'],$msg);
+			$deal = get_deal($id);
+			sys_user_status($GLOBALS['user_info']['id']);
+			//超过一半的时候
+			
+			if($deal['deal_status']==1 && $deal['progress_point'] >= 50 && $deal['progress_point']<=60 && $deal['is_send_half_msg'] == 0)
+			{
+				$msg_conf = get_user_msg_conf($deal['user_id']);
+				//邮件
+				if(app_conf("MAIL_ON")){
+					if(!$msg_conf || intval($msg_conf['mail_half'])==1){
+						$load_tmpl = $GLOBALS['db']->getRowCached("select * from ".DB_PREFIX."msg_template where name = 'TPL_DEAL_HALF_EMAIL'");
+						$user_info = $GLOBALS['db']->getRow("select email,user_name from ".DB_PREFIX."user where id = ".$deal['user_id']);
+						$tmpl_content = $load_tmpl['content'];
+						$notice['user_name'] = $user_info['user_name'];
+						$notice['deal_name'] = $deal['name'];
+						$notice['deal_url'] = get_domain().$deal['url'];
+						$notice['site_name'] = app_conf("SHOP_TITLE");
+						$notice['site_url'] = get_domain().APP_ROOT;
+						$notice['help_url'] = get_domain().url("index","helpcenter");
+						$notice['msg_cof_setting_url'] = get_domain().url("index","uc_msg#setting");
+						
+						
+						$GLOBALS['tmpl']->assign("notice",$notice);
+						
+						$msg = $GLOBALS['tmpl']->fetch("str:".$tmpl_content);
+						$msg_data['dest'] = $user_info['email'];
+						$msg_data['send_type'] = 1;
+						$msg_data['title'] = "您的借款列表“".$deal['name']."”招标过半！";
+						$msg_data['content'] = addslashes($msg);
+						$msg_data['send_time'] = 0;
+						$msg_data['is_send'] = 0;
+						$msg_data['create_time'] = get_gmtime();
+						$msg_data['user_id'] =  $deal['user_id'];
+						$msg_data['is_html'] = $load_tmpl['is_html'];
+						$GLOBALS['db']->autoExecute(DB_PREFIX."deal_msg_list",$msg_data); //插入
+					}
+				}
+				
+				//站内信
+				if(intval($msg_conf['sms_half'])==1){
+					$content = "<p>您在".app_conf("SHOP_TITLE")."的借款“<a href=\"".$deal['url']."\">".$deal['name']."</a>”完成度超过50%"; 
+					send_user_msg("",$content,0,$deal['user_id'],get_gmtime(),0,true,15);
+				}
+				
+				//更新
+				$GLOBALS['db']->autoExecute(DB_PREFIX."deal",array("is_send_half_msg"=>1),"UPDATE","id=".$id);
+			}
+			
+			showSuccess($GLOBALS['lang']['DEAL_BID_SUCCESS'],$ajax,url("index","deal",array("id"=>$id)));
+		}
+		else{
+			showErr($GLOBALS['lang']['ERROR_TITLE'],$ajax);
+		}
 	
 	}
 	
