@@ -73,7 +73,7 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 						面额：{$voucher.money}
 						&nbsp;&nbsp;
 						使用代金券
-						<input type="checkbox" name="yn"/>
+						<input type="checkbox" value="9" name="ggsmd" />
 					</td>
 				</tr>
 			
@@ -84,51 +84,70 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 					</td>
 				</tr>
 				<tr>
-					<td class="tit tr w100">总计：</td><!--后台,资金数据从数据库获取-->
+					<td class="tit tr w100 ">总计：</td><!--后台,资金数据从数据库获取-->
 					<td class="f_red" id="totle">
-						
+										
 					</td>
+			
+					
 				</tr>
+				
 			</table>
 		</div>
 		<div class="blank20"></div>
 		<div class="blank20"></div>
 		<div class="clearfix bbd bid_act_box">
 			<input type="hidden" name="id" value="{$deal.id}" />
+			<input type="hidden" name="check" id="checkbox" value="	23" />
+			<input type="hidden" name="tmoney" id="tmoney">
 			<input  type="submit" class="bid_submit_button mt20" id="J_bid_submit" value="确认投标" />
 		</div>
 	</form>
 </div>
 <script type="text/javascript">
 	jQuery(function(){
+		if($("input:checkbox").attr("checked")==true){
+			$("#checkbox").attr('value',1)
+		}
+		else
+		{
+			$("#checkbox").attr('value',0)
+		}
 		
 		$("#J_BIDMONEY").change(function(){
 		
 		if($("input:checkbox").attr("checked")==true){
 		var totle=Number($("#J_BIDMONEY").val())+Number({$voucher.money});
-		
-		
+			
 		}
 		else{
+			
 			totle=Number($("#J_BIDMONEY").val())
 		}
-		
+		$("#tmoney").attr('value',totle)//获取总计中的值
 		$("#totle").html(totle)
 		})
 	$("input:checkbox").change(function(){	
-	
+		
+				
 		if($("input:checkbox").attr("checked")==true){
+		
+			$("#checkbox").attr('value',1)
+			
 		var totle=Number($("#J_BIDMONEY").val())+Number({$voucher.money});
 		}
 		else{
+		$("#checkbox").attr('value',0)
+			
 			totle=Number($("#J_BIDMONEY").val())
 		}
+		$("#tmoney").attr('value',totle)//获取总计中的值
 		$("#totle").html(totle)
 	})
 	
 	
 	
-	
+	//ajax提交表单
 		$("#BidForm").submit(function(){
 			if($.trim($("#J_BIDMONEY").val())=="" || !$.checkNumber($("#J_BIDMONEY").val()){if (int)app_conf('DEAL_BID_MULTIPLE') gt 0} || parseFloat($("#J_BIDMONEY").val())%{function name='app_conf' v='DEAL_BID_MULTIPLE'}!=0{/if} || parseFloat($("#J_BIDMONEY").val())<=0 || parseFloat($("#J_BIDMONEY").val())<{$deal.min_loan_money}){
 				$.showErr(LANG.BID_MONEY_NOT_TRUE,function(){
@@ -138,11 +157,15 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 			var query = $(this).serialize();
 			$.ajax({
 				url:APP_ROOT + "/index.php?ctl=deal&act=dobid&ajax=1",
-				data:query,
+				data:query, 
 				dataType:"json",
 				success:function(result){
-			//alert(result.deal_status);
+					 
+				 alert(result)
+
+				
 					if(result.status==1){
+					
 						alert(result.info);
 						window.location.href=result.jump;
 					}

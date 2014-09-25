@@ -32,10 +32,10 @@
 <!--条件搜索开始-->  
 
 <link  rel="stylesheet"  href="{$TMPL}/css/deals.css">
-<div style=" margin:0 auto;width:1000px; overflow:hidden; position:relative;">
+<div style=" margin:0 auto;width:1000px; position:relative;">
 <div style=" float:left;width:730px;">
-<div class="deals_css">
-			<div >
+<div class="deals_css white box_shadow">
+			<div>
 					<ul  class="condition" >
                     <li class="li_f">投资起步:</li>
 					<li><a  href="javascript:;" class="li_current"     name="min_loan_money" value=0 type=1>全部</a></li>
@@ -424,7 +424,7 @@
   
     
 	<div id="content" class="clearfix">
-		<div class="long f_l">
+		<div class="long f_l white box_shadow">
 			<div class="clearfix bddf">
 				{if $cate_id gt 0}
 				<div class="clearfix"><img src="{$TMPL}/images/cate_top_{$cate_id}.jpg"></div>
@@ -543,13 +543,13 @@
                 
                 
 				<div class="blank"></div>
-				<div class="pages" id="pages">{$pages}</div>
+				<div class="pages" id="pages" style="padding:10px 0;">{$pages}</div>
 				{/if}
 			</div>
 		</div>
          </div>
         <div style=" float:right;width:0px; position:absolute;left:740px;top:0;">
-		<div class="short">
+		<div class="short" style="overflow:inherit;">
 		<adv adv_id="我要理财列表页右侧顶部广告" />
 			<!-- <div class="bddf clearfix" style="border-top:0">
 				<div class="gray_title clearfix">
@@ -611,7 +611,7 @@
 			
             {include file="inc/caculator.html"}
             
-			<div class="bddf clearfix" style="border-top:0; margin-top:10px;">
+			<div class="bddf clearfix white box_shadow" style="border-top:0; margin-top:10px;">
 				<div class="gray_title clearfix">
 		            <div class="f_l f_dgray b">理财计算器</div>
 		        </div>
@@ -680,6 +680,10 @@
 				$(this).addClass("f_dgray");
 			}
 		});
+		
+		$('body').css('background-color','#E6E6E6');
+		$('.headf').addClass('white');
+
 	});
 	
 	
@@ -815,5 +819,11 @@
 	}
 }
 /* 14年6月6日新增进度条样式结束 */
+
+/* 14年9月25修改背景灰色样式 */
+.white { background:#FFF;}
+
+.box_shadow { box-shadow:2px 3px 5px #999; -moz-box-shadow:2px 3px 5px #999; -webkit-box-shadow:2px 3px 5px #999; border-bottom:2px\9; border-bottom:#bbb\9; border-right:2px\9; border-right:#bbb\9;}
+/* 14年9月25修改背景灰色样式结束 */
 </style>
 {include file="inc/footer.html"}
