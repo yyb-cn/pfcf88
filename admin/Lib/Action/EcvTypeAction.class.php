@@ -72,15 +72,28 @@ class EcvTypeAction extends CommonAction{
 		$condition['id'] = $id;		
 		$vo = M(MODULE_NAME)->where($condition)->find();
 		//var_dump($vo);exit;
-		$vo['begin_time']=$vo['begin_time']?$vo['begin_time']:'没有限制';
-		$vo['end_time']=$vo['end_time']?$vo['end_time']:'没有限制';
+		$vo['begin_time']=$vo['begin_time']?date("Y-m-d H:i:s",$vo['begin_time']):'没有限制';
+		$vo['end_time']=$vo['end_time']?date("Y-m-d H:i:s",$vo['end_time']):'没有限制';
 		$this->assign ( 'vo', $vo );
 		$this->display ();
 	}
 	
 	public function update() {
+	
 		B('FilterString');
 		$data = M(MODULE_NAME)->create ();
+		//print_r($data);exit;
+		$arr=M(MODULE_NAME)->where(array('id'=>$data['id'] ,'reg_send'=> 1))->find();//当前数组为是
+		
+		$reg_num=M(MODULE_NAME)->where(array('reg_send'=>'1'))->count();//为是的数量
+		if($data['reg_send']){           //如果选择了是
+			if(!empty($arr)or($reg_num==0))
+			{
+				echo '可以';exit;
+			}
+			else{echo 'cuo';exit;}
+		}
+		
 				//print_r($data);exit;
 		$log_info = M(MODULE_NAME)->where("id=".intval($data['id']))->getField("name");
 		//开始验证有效性
@@ -98,6 +111,7 @@ class EcvTypeAction extends CommonAction{
 		$data['end_time'] = trim($data['end_time'])==''?0:to_timespan($data['end_time']);
 		// 更新数据
 		//print_r($data);exit;
+		
 		$list=M(MODULE_NAME)->save ($data);
 		if (false !== $list) {
 			//成功提示
