@@ -40,7 +40,7 @@ class indexModule extends SiteBaseModule
 				else
 				unset($f_link_group[$k]);
 			}
-			//最新借款列表
+			//最新借款列表**产品发布**********************经常要修改的地方*********************
 			$deal_list =  get_deal_list(6,0,"publish_wait =0 AND deal_status in(1,2,4,5) "," id DESC");
 			foreach($deal_list['list'] as $ke => $vel){
 				$deal_list['list'][$ke]['repay_start_time'] = date('Y-m-d',$vel['repay_start_time']);
@@ -99,11 +99,13 @@ class indexModule extends SiteBaseModule
 		}
 		//lu 马上购买 
 		// 广西城建三期
-		$chengjian= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=5  "," id DESC");
-		// 信贷赢3号
-		$credit= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=3  "," id DESC");
-		// 文峰市场
-		$wenfeng= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=6  "," id DESC");
+		/**产品发布**********************经常要修改的地方*********************/
+		$credit= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=3  "," id DESC");//左边
+		
+		$chengjian= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=7  "," id DESC");//中
+		
+		$wenfeng= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=8  "," id DESC");//右边
+		
 			$GLOBALS['tmpl']->assign("chengjian",$chengjian['list'][0]);
 			$GLOBALS['tmpl']->assign("credit",$credit['list'][0]);
 			$GLOBALS['tmpl']->assign("wenfeng",$wenfeng['list'][0]);
