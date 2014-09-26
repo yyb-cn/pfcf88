@@ -429,11 +429,13 @@
 				{if $cate_id gt 0}
 				<div class="clearfix"><img src="{$TMPL}/images/cate_top_{$cate_id}.jpg"></div>
 				{/if}
+				
 				{if $total_money}
 				<div class="biao_top_countbox clearfix">
-					<div class="f_l">总成交金额：<span class="f_red">{function name="format_price" v="$total_money"}</span></div>
+					<!--<div class="f_l">总成交金额：<span class="f_red">{function name="format_price" v="$total_money"}</span></div>-->
 				</div>
 				{/if}
+				
 				{if $deal_list}
 				{if $cate_id eq "-1"}
 				<div class="f_dgray b tc" style="height:40px;line-height:40px;">

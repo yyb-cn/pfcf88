@@ -5,8 +5,8 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 ?>
 <link rel="stylesheet" type="text/css" href="{function name="parse_css" v="$dealcss"}" />
 <link rel="stylesheet" type="text/css" href="{$TMPL}/css/wenfeng.css" />
-<p class="xiangp"><a href="{url x="index"}">首页</a>〉<a href="{url x="index" r="deals"}">投资列表</a>〉<a >{$deal.color_name}</a></p>
-<div class="xshop">
+<p class="xiangp"><a href="{url x="index"}">首页</a>&gt;<a href="{url x="index" r="deals"}">投资列表</a>&gt;<a >{$deal.color_name}</a></p>
+<div class="xshop white box_shadow">
 	<div class="xshop1">
     	<h1>{$deal.color_name}（机构担保）</h1>
         <p>投资编号：{$deal.id}</p>
@@ -114,7 +114,7 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 							<a href="javascript:;" class="shop4b" id="addFavLink" onclick="collect_deal(this,'{$deal.id}',fav_result);">关注此投资</a>
 							{/if}</p>
 </div>
-<div class="jshop">
+<div class="jshop white box_shadow">
 	<h1>投资记录</h1>
 	 {include file="inc/deal/load_list.html"}
   
@@ -136,5 +136,8 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 			$("#J_deal_tab_box .box_view_"+$(this).attr("rel")).removeClass("hide");
 		});
 	});
+	$('body').css('background-color','#E6E6E6');
+	$('.headf').addClass('white box_shadow');
+
 </script>
 {include file="inc/footer.html"}

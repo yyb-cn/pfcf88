@@ -30,7 +30,6 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 						<a  href=""  title=""></a>
 					</div>
 
-				
 			</div>
 			<div  class="yuandian">
 				<ul>
@@ -134,6 +133,23 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                 	<p class="buy_title1">信贷赢三期</p>
                     <p class="buy_title2">（最低投资额度：100元）</p>
                 </div>
+                <div class="buy1_img">
+                	<div class="buy_img_l f_l">
+                    	<div class="circle">
+                            <div class="pie_left"><div class="left"></div></div>
+                            <div class="pie_right"><div class="right"></div></div>
+                            <div class="mask"><span>90</span>天</div>
+                        </div>
+                    </div>
+                    <div class="buy_img_r f_l">
+                    	<div class="buy_img_r_1">
+                        	<p>7.5%</p>
+                        </div>
+                        <div class="buy_img_r_2">
+                        	<p>预期年化收益率</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="buy_bottom">
                 {if $credit.name}
                     <a class="buy_now" href="{$credit.share_url}">立 刻 购 买</a>
@@ -150,6 +166,23 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                 	<p class="buy_title1">信贷赢八期</p>
                     <p class="buy_title2">（最低投资额度：500元）</p>
                 </div>
+                <div class="buy2_img">
+                	<div class="buy_img_l f_l">
+                    	<div class="circle">
+                            <div class="pie_left"><div class="left"></div></div>
+                            <div class="pie_right"><div class="right"></div></div>
+                            <div class="mask"><span>270</span>天</div>
+                        </div>
+                    </div>
+                    <div class="buy_img_r f_l">
+                    	<div class="buy_img_r_1">
+                        	<p>8.5%</p>
+                        </div>
+                        <div class="buy_img_r_2">
+                        	<p>预期年化收益率</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="buy_bottom">
                 {if $chengjian.name}
                     <a class="buy_now" href="{$chengjian.share_url}">立 刻 购 买</a>
@@ -165,6 +198,23 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                 {/if}
                 	<p class="buy_title1">信贷赢九期</p>
                     <p class="buy_title2">（最低投资额度：1000元）</p>
+                </div>
+                <div class="buy3_img">
+                	<div class="buy_img_l f_l">
+                    	<div class="circle">
+                            <div class="pie_left"><div class="left"></div></div>
+                            <div class="pie_right"><div class="right"></div></div>
+                            <div class="mask"><span>365</span>天</div>
+                        </div>
+                    </div>
+                    <div class="buy_img_r f_l">
+                    	<div class="buy_img_r_1">
+                        	<p>12%</p>
+                        </div>
+                        <div class="buy_img_r_2">
+                        	<p>预期年化收益率</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="buy_bottom">
                 {if $wenfeng.name}
@@ -290,6 +340,21 @@ $(document).ready(function(e) {
 	})
 
 })
+
+$(function() {
+	$('.circle').each(function(index, el) {
+		var num = $(this).find('span').text();
+		if(num > 360){num = 360;}
+		num = (360 - num) / 360 * 100 * 3.6;
+		if (num<=180) {
+			$(this).find('.right').css('transform', "rotate(" + num + "deg)");
+		} else {
+			$(this).find('.right').css('transform', "rotate(180deg)");
+			$(this).find('.left').css('transform', "rotate(" + (num - 180) + "deg)");
+		};
+	});
+});
+
 </script>
 
 {include file="inc/footer.html"}

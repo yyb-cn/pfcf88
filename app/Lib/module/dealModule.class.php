@@ -225,6 +225,9 @@ class dealModule extends SiteBaseModule
 		$seo_description = $deal['seo_description']!=''?$deal['seo_description']:$deal['name'];
 
 		$GLOBALS['tmpl']->assign("deal",$deal);
+		
+		var_dump($deal);exit;
+		
 		$GLOBALS['tmpl']->display("page/deal_bid.html");
 	}
 	

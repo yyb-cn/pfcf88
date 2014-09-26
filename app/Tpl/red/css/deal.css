@@ -141,3 +141,5 @@ padding-left: 100px;
 .bid-table td.btm{ border-bottom:none;}
 .bid_act_box{ padding-left:83px; border-top:1px solid #E3E1E2; background:url(../images/bid_sure_bg.jpg) repeat-x 0 0; height:89px}
 .bid_submit_button{ cursor:pointer; text-indent:-100em; border:none; background:url(../images/submit_sure.png) no-repeat 0 0; width:142px; height:58px}
+
+.box_shadow { box-shadow:2px 3px 5px #999; -moz-box-shadow:2px 3px 5px #999; -webkit-box-shadow:2px 3px 5px #999; border-bottom:2px\9; border-bottom:#bbb\9; border-right:2px\9; border-right:#bbb\9;}
