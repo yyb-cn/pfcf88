@@ -31,6 +31,7 @@ class userModule extends SiteBaseModule
 	
 	public function doregister()
 	{
+			
 		//验证码
 		if(app_conf("VERIFY_IMAGE")==1)
 		{
@@ -107,8 +108,22 @@ class userModule extends SiteBaseModule
 			$user_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id = ".$user_id);
 			
 			//注册发送代金券
-			require_once APP_ROOT_PATH."system/libs/voucher.php";   
-			 $rs = send_voucher(1,$user_id,1);   //send_voucher(代金券ID,用户ID,'是否需要密码')
+			$voucher_info=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."ecv_type where `reg_send` = 1");
+			if(!empty($voucher_info))
+			{
+				if($voucher_info['end_time']>time()){
+				
+					require_once APP_ROOT_PATH."system/libs/voucher.php";   
+					$rs = send_voucher($voucher_info['id'],$user_id,1);   
+					//发送站内信
+					//send_voucher(代金券ID,用户ID,'是否需要密码')
+					$voucher_info['end_time']=$voucher_info['end_time']?date("Y-m-d H:i:s",$voucher_info['end_time']):'没有限制';
+					$title="注册就送代金券";
+					$content="恭喜你,获得代金券".$voucher_info['name']."到期时间为:".$voucher_info['end_time'];
+					send_user_msg($title,$content,0,$user_id,time(),0,true);
+			
+				}
+			}
 			
 			
 			

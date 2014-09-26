@@ -32,14 +32,18 @@ class EcvTypeAction extends CommonAction{
 		$this->display();
 	}
 	public function insert() {
-		//print_r($_POST);exit;
+		
 		B('FilterString');
 		$ajax = intval($_REQUEST['ajax']);
 		$data = M(MODULE_NAME)->create ();
-		$data=$_POST;
-		//print_r($data);exit;
-	//print_r($_POST);exit;		
-		//开始验证有效性
+		$reg_num=M(MODULE_NAME)->where(array('reg_send'=>'1'))->count();//为是的数量
+		
+		if($data['reg_send']&&$reg_num)
+		{
+			$this->error( "只能有一个注册就送");
+		}
+		//$data=$_POST;
+		//如果已经有就不要再插入了
 		$this->assign("jumpUrl",u(MODULE_NAME."/add"));
 		if(!check_empty($data['name']))
 		{
@@ -83,15 +87,12 @@ class EcvTypeAction extends CommonAction{
 		B('FilterString');
 		$data = M(MODULE_NAME)->create ();
 		//print_r($data);exit;
-		$arr=M(MODULE_NAME)->where(array('id'=>$data['id'] ,'reg_send'=> 1))->find();//当前数组为是
+		$arr=M(MODULE_NAME)->where(array('id'=>$data['id'] ,'reg_send'=>0))->find();//当前数组为是
 		
 		$reg_num=M(MODULE_NAME)->where(array('reg_send'=>'1'))->count();//为是的数量
-		if($data['reg_send']){           //如果选择了是
-			if(!empty($arr)or($reg_num==0))
-			{
-				echo '可以';exit;
-			}
-			else{echo 'cuo';exit;}
+		if($data['reg_send']&&!empty($arr)&&$reg_num)//确保唯一性
+		{
+			$this->error("只能有一个注册就送",0,'$log_info.L("UPDATE_FAILED")');
 		}
 		
 				//print_r($data);exit;

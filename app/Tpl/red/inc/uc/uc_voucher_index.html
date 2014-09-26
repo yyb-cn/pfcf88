@@ -4,7 +4,7 @@
 		<div id="dashboard" class="dashboard">
 		<ul>
 				<li {if $ACTION_NAME eq 'index'}class="current"{/if}><a href="{url x="shop" r="uc_voucher#index"}">{$LANG.UC_VOUCHER}</a></li>
-				<li {if $ACTION_NAME eq 'incharge'}class="current"{/if}><a href="{url x="shop" r="uc_voucher#exchange"}">{$LANG.UC_VOUCHER_EXCHARGE}</a></li>
+				<!--<li {if $ACTION_NAME eq 'incharge'}class="current"{/if}><a href="{url x="shop" r="uc_voucher#exchange"}">{$LANG.UC_VOUCHER_EXCHARGE}</a></li>-->
 			</ul>
 			
 			
@@ -15,22 +15,20 @@
 								<tr>
 									<th>{$LANG.VOUCHER_INFO}</th>
 									<th>{$LANG.VOUCHER_TIME}</th>
-									<th>{$LANG.VOUCHER_USE_LIMIT}</th>
-									<th>{$LANG.VOUCHER_USE_COUNT}</th>
+									
+									<th>使用状态</th>
 								</tr>
 								{foreach from=$list item=voucher key=key}
 								<tr {if $key mod 2 eq  0}class="alt"{/if}>
 									<td style="text-align:left;">
 										{$LANG.VOUCHER_NAME}：{$voucher.name}<br />
 										{$LANG.VOUCHER_MONEY}：{function name="format_price" value=$voucher.money}<br />
-										{$LANG.VOUCHER_SN}：{$voucher.sn}
-										{if $voucher.password}
-										<br />{$LANG.VOUCHER_PASSWORD}：{$voucher.password}
-										{/if}
+										
+										
 									</td>
 									<td>{if $voucher.begin_time eq 0}无限{else}{function name="to_date" value=$voucher.begin_time}{/if} {if $voucher.end_time eq 0}{else}{$LANG.TO} {function name="to_date" value=$voucher.end_time}{/if} </td>
-									<td>{$voucher.use_limit}</td>
-									<td>{$voucher.use_count}</td>
+									
+									<td>{if $voucher.use_count}已用{else}可用{/if}</td>
 									
 								</tr>
 								{/foreach}
