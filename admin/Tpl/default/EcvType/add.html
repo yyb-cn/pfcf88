@@ -101,11 +101,12 @@
 		<input type="text" class="textbox " name="end_time" id="end_time" value="{$vo.end_time}" onfocus="this.blur(); return showCalendar('end_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_bad_time');" />
 			<input type="button" class="button" id="btn_bad_time" value="{%SELECT_TIME}" onclick="return showCalendar('end_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_bad_time');" />
 			<input type="button" class="button" value="{%CLEAR_TIME}" onclick="$('#end_time').val('');" />
+			
 			<span class="tip_span">为空则没有时间限制</span>
 		</td>
 	</tr>
 	
-	
+	<!--
 	<tr>
 		<td class="item_title">是否可积分兑换:</td>
 		<td class="item_input">
@@ -113,10 +114,20 @@
 			<lable>不可以<input type="radio" name="send_type" value="0"  checked="checked" /></lable>
 		</td>
 	</tr>
+	-->
+	<tr>
+		<td class="item_title">选为注册就送:</td>
+		<td class="item_input">
+			<lable>是<input type="radio" name="reg_send" value="1"/></lable>
+			<lable>否<input type="radio" name="reg_send" value="0"  checked="checked" /></lable>
+		</td>
+	</tr>
+	<!--
 	<tr>
 		<td class="item_title">需要积分兑换:</td>
 		<td class="item_input"><input type="text" class="textbox " name="exchange_score" /> </td>
 	</tr>
+	-->
 	<tr>
 		<td colspan=2 class="bottomTd"></td>
 	</tr>

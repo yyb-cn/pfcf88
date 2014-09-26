@@ -36,8 +36,9 @@ class EcvTypeAction extends CommonAction{
 		B('FilterString');
 		$ajax = intval($_REQUEST['ajax']);
 		$data = M(MODULE_NAME)->create ();
-	
-			
+		$data=$_POST;
+		//print_r($data);exit;
+	//print_r($_POST);exit;		
 		//开始验证有效性
 		$this->assign("jumpUrl",u(MODULE_NAME."/add"));
 		if(!check_empty($data['name']))
@@ -53,6 +54,8 @@ class EcvTypeAction extends CommonAction{
 		$data['end_time'] = trim($data['end_time'])==''?0:to_timespan($data['end_time']);
 		// 更新数据
 		$log_info = $data['name'];
+		//print_r($data);exit;
+		//echo MODULE_NAME;exit;
 		$list=M(MODULE_NAME)->add($data);
 		if (false !== $list) {
 			//成功提示
@@ -68,6 +71,9 @@ class EcvTypeAction extends CommonAction{
 		$id = intval($_REQUEST ['id']);
 		$condition['id'] = $id;		
 		$vo = M(MODULE_NAME)->where($condition)->find();
+		//var_dump($vo);exit;
+		$vo['begin_time']=$vo['begin_time']?$vo['begin_time']:'没有限制';
+		$vo['end_time']=$vo['end_time']?$vo['end_time']:'没有限制';
 		$this->assign ( 'vo', $vo );
 		$this->display ();
 	}

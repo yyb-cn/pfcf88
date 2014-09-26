@@ -39,8 +39,12 @@
 	}
 	function date_int($time)
 	{
-	
+		if($time==0){return '没有限制';}
 		return date("Y-m-d H:i:s",$time);
+	}
+	function reg_send($reg)
+	{
+		if($reg){return '是';}else{ return '否';}
 	}
 </php>
 <div class="main">
@@ -64,9 +68,10 @@
 		,name|msubstr:代金券名称:edit
 		,begin_time|date_int:开始时间:edit
 		,end_time|date_int:到期时间:edit
-		,exchange_score|msubstr:兑换积分:edit
+		
 		,money|msubstr:金额:edit
-		,send_type|get_send_type_name:类型:edit
+		,gen_count|msubstr:已兑换
+		,reg_send|reg_send:注册发送:edit
 		" 
 	actionlist="edit:{%EDIT}, del:删除"
 	actionwidth="160px" /> 
