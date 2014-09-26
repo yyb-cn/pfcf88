@@ -120,7 +120,7 @@ class userModule extends SiteBaseModule
 					$voucher_info['end_time']=$voucher_info['end_time']?date("Y-m-d H:i:s",$voucher_info['end_time']):'没有限制';
 					$title="注册就送代金券";
 					$content="恭喜你,获得代金券".$voucher_info['name']."到期时间为:".$voucher_info['end_time'];
-					send_user_msg($title,$content,0,$user_id,time(),0,true);
+					send_user_msg($title,$content,0,$user_id,time(),0,true,true);
 			
 				}
 			}
