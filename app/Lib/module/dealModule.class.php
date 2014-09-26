@@ -223,10 +223,11 @@ class dealModule extends SiteBaseModule
 		$seo_keyword = $deal['seo_keyword']!=''?$deal['seo_keyword']:$deal['type_match_row'].",".$deal['name'];
 		$GLOBALS['tmpl']->assign("page_keyword",$seo_keyword.",");
 		$seo_description = $deal['seo_description']!=''?$deal['seo_description']:$deal['name'];
-
+		
 		$GLOBALS['tmpl']->assign("deal",$deal);
 		
-		var_dump($deal);exit;
+		
+		
 		
 		$GLOBALS['tmpl']->display("page/deal_bid.html");
 	}

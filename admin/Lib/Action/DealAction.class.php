@@ -462,6 +462,7 @@ class DealAction extends CommonAction{
 		$ajax = intval($_REQUEST['ajax']);
 		$data = M(MODULE_NAME)->create ();
 
+			//var_dump($data);exit;
 		//开始验证有效性
 		$this->assign("jumpUrl",u(MODULE_NAME."/add"));
 		

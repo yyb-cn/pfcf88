@@ -31,7 +31,7 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 				</tr>
 				<tr>
 					<td class="tit tr w100">还款方式：</td>
-					<td>每月还款</td>
+					<td>{if $deal.loantype eq 0}等额本息{elseif $deal.loantype eq 1}付息还本{elseif $deal.loantype eq 2}到期还本息{/if}</td>
 				</tr>
 				
 				<tr>
