@@ -6,7 +6,7 @@
 // +----------------------------------------------------------------------
 // | Author: 云淡风轻(88522820@qq.com)
 // +----------------------------------------------------------------------
-
+/**
 class captureModule extends SiteBaseModule
 {
 	public function bank()
@@ -366,3 +366,4 @@ class captureModule extends SiteBaseModule
 
 }
 ?>
+*/
