@@ -201,7 +201,7 @@ class dealModule extends SiteBaseModule
 		
 		//如果未绑定手机
 		if(intval($GLOBALS['user_info']['mobilepassed'])==0 || intval($GLOBALS['user_info']['idcardpassed'])==0){
-			$GLOBALS['tmpl']->assign("page_title","成为借出者");
+			$GLOBALS['tmpl']->assign("page_title","成为理财人");
 			$GLOBALS['tmpl']->display("page/deal_mobilepaseed.html");
 			exit();
 		}
