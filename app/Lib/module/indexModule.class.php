@@ -63,16 +63,18 @@ class indexModule extends SiteBaseModule
 				 	
 				$done_money+=$vbj['borrow_amount'];
 				}
-			//lu 为用户带来的 收益  	
-			$deal_shouyi = $GLOBALS['db']->getAll("select repay_amount from ".DB_PREFIX."user_sta ");
-			foreach($deal_shouyi as $ksy=>$vsy){
-				$income+=$vsy['repay_amount'];	
-				}
-		
-				
+			//lu 为用户带来的 收益  
+
+			$deal_success_money=$GLOBALS['db']->getAll("select rate ,repay_time,repay_money from ".DB_PREFIX."deal  where deal_status=5 ");
+			
+			$income_totle=0;
+			foreach($deal_success_money as $k=>$v){
+				$income_totle+=$v['repay_money']*$v['rate']*$v['repay_time']/12*0.01;//计算总利率
+			}
+			
 			$success_deal['tatal_money']="￥".number_format($tatal_money);
 			$success_deal['done_money']=format_price($done_money);
-			$success_deal['income']=format_price($income);
+			$success_deal['income']=format_price($income_totle);//总收益
 			$GLOBALS['tmpl']->assign("success_deal",$success_deal);	
 			
 			//使用技巧
