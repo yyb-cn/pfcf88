@@ -65,11 +65,20 @@ class indexModule extends SiteBaseModule
 				}
 			//lu 为用户带来的 收益  
 
-			$deal_success_money=$GLOBALS['db']->getAll("select rate ,repay_time,repay_money from ".DB_PREFIX."deal  where deal_status=5 ");
+			$deal_success_money=$GLOBALS['db']->getAll("select rate ,repay_time,repay_money,repay_time_type from ".DB_PREFIX."deal  where deal_status=5 ");
+			
+			//print_r($deal_success_money);exit;
 			
 			$income_totle=0;
 			foreach($deal_success_money as $k=>$v){
+				if($v['repay_time_type']){//月份
 				$income_totle+=$v['repay_money']*$v['rate']*$v['repay_time']/12*0.01;//计算总利率
+				}
+				else//天数
+				{
+					$income_totle+=$v['repay_money']*$v['rate']*$v['repay_time']/365*0.01;//计算总利率
+				}
+				
 			}
 			
 			$success_deal['tatal_money']="￥".number_format($tatal_money);
