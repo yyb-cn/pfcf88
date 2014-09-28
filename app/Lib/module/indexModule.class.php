@@ -1,11 +1,4 @@
 <?php
-// +----------------------------------------------------------------------
-// | Fanwe 方维p2p借贷系统
-// +----------------------------------------------------------------------
-// | Copyright (c) 2011 http://www.fanwe.com All rights reserved.
-// +----------------------------------------------------------------------
-// | Author: 云淡风轻(88522820@qq.com)
-// +----------------------------------------------------------------------
 
 define(MODULE_NAME,"index");
 require APP_ROOT_PATH.'app/Lib/deal.php';
@@ -71,7 +64,7 @@ class indexModule extends SiteBaseModule
 				$done_money+=$vbj['borrow_amount'];
 				}
 			//lu 为用户带来的 收益  	
-			$deal_shouyi = $GLOBALS['db']->getAll("select repay_amount from ".DB_PREFIX."user_sta where 1 ");
+			$deal_shouyi = $GLOBALS['db']->getAll("select repay_amount from ".DB_PREFIX."user_sta ");
 			foreach($deal_shouyi as $ksy=>$vsy){
 				$income+=$vsy['repay_amount'];	
 				}

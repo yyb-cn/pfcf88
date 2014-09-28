@@ -23,7 +23,7 @@ class CacheAction extends CommonAction{
 		@unlink(get_real_path()."public/runtime/app/config_cache.php");	
 		
 		header("Content-Type:text/html; charset=utf-8");
-       	exit("<div style='line-height:50px; text-align:center; color:#f30;'>".L('CLEAR_SUCCESS')."</div><div style='text-align:center;'><input type='button' onclick='$.weeboxs.close();' class='button' value='关闭' /></div>");
+       	exit("<div style='line-height:50px; text-align:center; color:#f30;'>".L('CLEAR_SUCCESS')."，<span id='miao'>2</span>秒后自动关闭...</div><div style='text-align:center;'><input id='out' type='button' onclick='$.weeboxs.close();' class='button' value='关闭' /></div>");
 	}
 	
 	public function clear_parse_file()
@@ -36,7 +36,7 @@ class CacheAction extends CommonAction{
 		clear_dir_file(get_real_path()."public/runtime/app/tpl_compiled/");
 		
 		header("Content-Type:text/html; charset=utf-8");
-       	exit("<div style='line-height:50px; text-align:center; color:#f30;'>".L('CLEAR_SUCCESS')."</div><div style='text-align:center;'><input type='button' onclick='$.weeboxs.close();' class='button' value='关闭' /></div>");
+       	exit("<div style='line-height:50px; text-align:center; color:#f30;'>".L('CLEAR_SUCCESS')."，<span id='miao'>2</span>秒后自动关闭...</div><div style='text-align:center;'><input type='button' onclick='$.weeboxs.close();' class='button' value='关闭' /></div>");
 	}
 	
 	public function clear_data()
@@ -89,7 +89,7 @@ class CacheAction extends CommonAction{
 			clear_auto_cache("byouhui_filter_nav_cache");
 		}
 		header("Content-Type:text/html; charset=utf-8");
-       	exit("<div style='line-height:50px; text-align:center; color:#f30;'>".L('CLEAR_SUCCESS')."</div><div style='text-align:center;'><input type='button' onclick='$.weeboxs.close();' class='button' value='关闭' /></div>");
+       	exit("<div style='line-height:50px; text-align:center; color:#f30;'>".L('CLEAR_SUCCESS')."，<span id='miao'>2</span>秒后自动关闭...</div><div style='text-align:center;'><input type='button' onclick='$.weeboxs.close();' class='button' value='关闭' /></div>");
 	}
 
 	
@@ -143,7 +143,7 @@ class CacheAction extends CommonAction{
 			$ajax = intval($_REQUEST['ajax']);
 			clear_auto_cache("cache_deal_cart");
        		$data['status'] = 1;
-       		$data['info'] = "<div style='line-height:50px; text-align:center; color:#f30;'>同步成功</div><div style='text-align:center;'><input type='button' onclick='$.weeboxs.close();' class='button' value='关闭' /></div>";
+       		$data['info'] = "<div style='line-height:50px; text-align:center; color:#f30;'>同步成功，<span id='miao'>2</span>秒后自动关闭...</div><div style='text-align:center;'><input type='button' onclick='$.weeboxs.close();' class='button' value='关闭' /></div>";
 			header("Content-Type:text/html; charset=utf-8");
             exit(json_encode($data));
 		}
@@ -171,7 +171,7 @@ class CacheAction extends CommonAction{
 		clear_dir_file(get_real_path()."public/runtime/app/tpl_compiled/");
 		
 		header("Content-Type:text/html; charset=utf-8");
-       	exit("<div style='line-height:50px; text-align:center; color:#f30;'>".L('CLEAR_SUCCESS')."</div><div style='text-align:center;'><input type='button' onclick='$.weeboxs.close();' class='button' value='关闭' /></div>");
+       	exit("<div style='line-height:50px; text-align:center; color:#f30;'>".L('CLEAR_SUCCESS')."，<span id='miao'>2</span>秒后自动关闭...</div><div style='text-align:center;'><input type='button' onclick='$.weeboxs.close();' class='button' value='关闭' /></div>");
 	}
 	
 	private function clear_image_file($path)

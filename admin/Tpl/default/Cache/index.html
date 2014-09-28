@@ -84,3 +84,25 @@
 	</div>
 </body>
 </html>
+<script>
+$(window).ready(function() {
+	function time(){
+		var t = 1;
+		ttt = window.setInterval(
+			function goto(){
+				$("#miao").html(t);
+				if(t == 0){
+					$.weeboxs.close();
+					clearTimeout(ttt);
+				}
+				t--;
+			}
+		,1000);
+	}
+    $(":input").live('click',(
+		function(){
+			time();
+		})
+	)
+});
+</script>
