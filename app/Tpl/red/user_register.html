@@ -122,6 +122,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 										<span class="hint">已存在的用户才可以成为推荐人</span>
 									</div>			
 									<div class="blank1"></div>
+								
 									
 									
 									<!--{foreach from=$field_list item=field_item}
@@ -144,9 +145,11 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 									{/foreach}-->
                                     
 									{if app_conf("VERIFY_IMAGE") eq 1}
-									<div class="field autologin">
-										<div class="verify_row">								
-										<input type="text" value="" class="f-input" name="verify" />	
+									<div class="field mobile pr">
+										<div class="verify_row">	
+										<label >验证码</label>		
+										<input type="text" value="" class="f-input" name="verify" />
+								
 										<img src="{$APP_ROOT}/verify.php?rand={function name="rand"}" onclick="this.src='{$APP_ROOT}/verify.php?rand='+ Math.random();" title="看不清楚？换一张" />			
 										</div>
 									</div>
