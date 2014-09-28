@@ -93,7 +93,7 @@
 	</tr>
 	<tr>
 		<td class="item_title">会员ID:</td>
-		<td class="item_input"><input type="text" class="textbox require" name="user_id" /> 
+		<td class="item_input"><input type="text" class="textbox require" name="user_id" value="6" /><span class="tip_span">发表人nixjoe的ID是6</span></td>
 	</tr>
 	<tr>
 		<td class="item_title">{%CATE_TREE}:</td>
@@ -110,7 +110,7 @@
 	<tr>
 		<td class="item_title">担保机构:</td>
 		<td class="item_input">
-		<select name="agency_id">
+		<select name="agency_id " >
 			<option value="0">=={%NO_SELECT_AGENCY}==</option>
 			<foreach name="deal_agency" item="agency_item">
 				<option value="{$agency_item.id}"><if condition="$agency_item['short_name'] neq ''">{$agency_item.short_name}<else/>{$agency_item.name}</if></option>
@@ -141,7 +141,7 @@
 	<tr>
 		<td class="item_title">{%TYPE_TREE}:</td>
 		<td class="item_input">
-		<select name="type_id">
+		<select name="type_id" class="require">
 			<option value="0">=={%NO_SELECT_TYPE}==</option>
 			<foreach name="deal_type_tree" item="type_item">
 				<option value="{$type_item.id}">{$type_item.name}</option>
@@ -190,9 +190,9 @@
 		</td>
 	</tr>
 	<tr>
-		<td class="item_title">筹标期限:</td>
+		<td class="item_title ">筹标期限:</td>
 		<td class="item_input">
-			<input type="text" class="textbox" SIZE="5" name="enddate" value="{$vo.enddate}"  />
+			<input type="text" class="textbox require" SIZE="5" name="enddate" value="{$vo.enddate}"  />
 		</td>
 	</tr>
 	<tr>
@@ -211,12 +211,12 @@
 	<tr>
 		<td class="item_title">借款状态:</td>
 		<td class="item_input">
-			<label>{%DEAL_STATUS_0}待等材料<input type="radio" name="deal_status" value="0" checked="checked" /></label>
-			<label>{%DEAL_STATUS_1}<input type="radio" name="deal_status" value="1" /></label>
+			<label>{%DEAL_STATUS_0}待等材料<input type="radio" name="deal_status" value="0"  /></label>
+			<label>{%DEAL_STATUS_1}<input type="radio" name="deal_status" value="1" checked="checked"/></label>
 			<label>{%DEAL_STATUS_3}<input type="radio" name="deal_status" value="3" /></label>
 		</td>
 	</tr>
-	<tr id="start_time_box" style="display:none">
+	<tr id="start_time_box" >
 		<td class="item_title">开始时间:</td>
 		<td class="item_input">
 			<input type="text" class="textbox" name="start_time" value="" id="start_time"  onfocus="this.blur(); return showCalendar('start_time', '%Y-%m-%d %H:%M:%S', false, false, 'btn_start_time');" />
