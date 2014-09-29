@@ -27,7 +27,7 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 				</tr>
 				<tr>
 					<td class="tit tr w100">借款期限：</td>
-					<td class="f_red bg">{$deal.repay_time}个月</td>
+					<td class="f_red bg">{$deal.repay_time}{if $deal.repay_time_type eq 0}天{else}个月{/if}</td>
 				</tr>
 				<tr>
 					<td class="tit tr w100">还款方式：</td>
