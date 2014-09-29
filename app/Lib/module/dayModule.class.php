@@ -20,17 +20,17 @@ class dayModule extends SiteBaseModule
 		$GLOBALS['tmpl']->assign("time",$time);
 		$GLOBALS['tmpl']->assign("yn",$data['yn']);
 		$GLOBALS['db']->autoExecute(DB_PREFIX."day",$data,"INSERT","","SILENT");
-		$GLOBALS['tmpl']->display("page/day/mobile/index.html");
-		/*
+	
 		if($this->check_wap())
 		{
-			echo 1;exit;//手机端
+				$GLOBALS['tmpl']->display("page/day/mobile/index.html");//手机端
+		
 		}
 		else{
 		$GLOBALS['tmpl']->display("page/day/index.html");//浏览器端
 			}
 	
-		*/
+		
 		
 		
 		
