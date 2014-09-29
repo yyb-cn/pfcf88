@@ -108,7 +108,7 @@ class indexModule extends SiteBaseModule
 		//print_r($credit);exit;
 		$chengjian= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=7  "," id DESC");//中
 		
-		$wenfeng= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=8  "," id DESC");//右边
+		$wenfeng= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=9  "," id DESC");//右边
 		
 			$GLOBALS['tmpl']->assign("chengjian",$chengjian['list'][0]);
 			$GLOBALS['tmpl']->assign("credit",$credit['list'][0]);
