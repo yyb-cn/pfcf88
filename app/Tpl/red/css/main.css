@@ -169,7 +169,7 @@ a:hover { text-decoration:none;}
 		.trading_money { font-size:23px; color:red; font-weight:bold; margin-top:15px;}
 		
 /* 收益对比 */
-.benefit_comparison { width:960px; height:660px; border:1px solid #d2d2d2;}
+.benefit_comparison { width:960px; height:55px; border:1px solid #d2d2d2; background: url(../images/good_bg.png) no-repeat; font-size:40px; text-align:center; color:#fdec7b; font-weight:bold; padding-top:300px;}
 	.comparison_main { width:960px; height:614px; overflow:hidden;}
 		.comparison_title { font-size:18px; font-weight:bold; text-align:center; height:60px; line-height:60px;}
 		.comparison_main ul { height:420px; border-bottom:2px solid #b8b8b8; margin:0 40px; padding:0 24px;}

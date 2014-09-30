@@ -69,6 +69,23 @@ class indexModule extends SiteBaseModule
 			
 			//print_r($deal_success_money);exit;
 			
+			/**七天投资总额**/
+			$seven_deal=$GLOBALS['db']->getAll("select money,deal_id,user_id from " .DB_PREFIX."deal_load where deal_id=101  ");//七天的deal_id 是101
+			$seven_money_totle=0;
+			$peo=array();
+			foreach($seven_deal as  $k=>$v)
+			{
+				$seven_money_totle+=$v['money'];
+				$peo[]=$v['user_id'];
+			}
+			//共有多少人投资
+			$seven_nums=count(array_unique($peo));//数组中值不相同的个数  
+			
+				$GLOBALS['tmpl']->assign("seven_nums",$seven_nums);//投资人数 
+				$GLOBALS['tmpl']->assign("seven_money_totle",$seven_money_totle);   //投资金额 
+			/**七天投资总额**/
+		
+			
 			$income_totle=0;
 			foreach($deal_success_money as $k=>$v){
 				if($v['repay_time_type']){//月份
