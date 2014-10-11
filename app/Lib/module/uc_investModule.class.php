@@ -53,10 +53,15 @@ class uc_investModule extends SiteBaseModule
 		$page = 1;
 		$limit = (($page-1)*app_conf("PAGE_SIZE")).",".app_conf("PAGE_SIZE");
     	
-    	$sql = "select d.*,u.user_name,dl.money as u_load_money,u.level_id,u.province_id,u.city_id from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=d.user_id where dl.user_id = ".$user_id." $condtion group by dl.id order by dl.create_time desc limit ".$limit;
+    	$sql = "select d.*,u.user_name,dl.money as u_load_money,dl.id as deal_load_id,u.level_id,u.province_id,u.city_id from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=d.user_id where dl.user_id = ".$user_id." $condtion group by dl.id order by dl.create_time desc limit ".$limit;
 		$sql_count = "select count(DISTINCT dl.id) from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id where dl.user_id = ".$user_id." $condtion ";
 		$list = $GLOBALS['db']->getAll($sql);
+		
+	
 		foreach($list as $k=>$v){
+		
+			$list[$k]['made']=$list[$k]['deal_load_id'].md5('jlpe');	//认购验证码
+				
 			$list[$k]['borrow_amount_format'] = format_price($v['borrow_amount']);
 			
 			$list[$k]['rate_foramt'] = number_format($v['rate'],2);
@@ -93,6 +98,8 @@ class uc_investModule extends SiteBaseModule
 			$list[$k]['point_level'] = $GLOBALS['db']->getOne("select name from ".DB_PREFIX."user_level where id = ".intval($v['level_id']));
 		}
 		$count = $GLOBALS['db']->getOne($sql_count);
+		
+		//print_r($list);exit;
 		
 		$GLOBALS['tmpl']->assign("list",$list);
 		$page = new Page($count,app_conf("PAGE_SIZE"));   //初始化分页对象 		

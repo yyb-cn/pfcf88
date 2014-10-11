@@ -31,7 +31,7 @@ class IndexAction extends AuthAction{
 		$nav_id = intval($_REQUEST['id']);
 		$nav_group = M("RoleGroup")->where("nav_id=".$nav_id." and is_effect = 1 and is_delete = 0")->order("sort asc")->findAll();		
 		
-		//print_r($nav_group);exit; //一级分类
+		//print_r($nav_group);exit; //一级分类  5个分类
 		foreach($nav_group as $k=>$v)
 		{
 			$sql = "select role_node.`action` as a,role_module.`module` as m,role_node.id as nid,role_node.name as name from ".conf("DB_PREFIX")."role_node as role_node left join ".
@@ -40,6 +40,7 @@ class IndexAction extends AuthAction{
 			
 			$nav_group[$k]['nodes']= M()->query($sql);//二级分类
 		}
+		
 		$this->assign("menus",$nav_group);
 		
 		//print_r($nav_group);exit;

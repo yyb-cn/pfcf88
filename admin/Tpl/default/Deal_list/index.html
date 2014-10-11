@@ -1,0 +1,88 @@
+{// 引入标签库 }
+
+<tagLib name="html" />
+<include file="Public:header" />
+<load href='__TMPL__Common/js/jquery.bgiframe.js' />
+<load href='__TMPL__Common/js/jquery.weebox.js' />
+<load href='__TMPL__Common/style/weebox.css' />
+
+<script type="text/javascript">
+	function show_detail(id)
+	{
+		$.weeboxs.open(ROOT+'?m=Deal&a=show_detail&id='+id, {contentType:'ajax',showButton:false,title:LANG['COUNT_TOTAL_DEAL'],width:600,height:330});
+	}
+	function preview(id)
+	{
+		window.open("__ROOT__/index.php?ctl=deal&id="+id+"&preview=1");
+	}
+</script>
+<php>
+	
+	function a_get_buy_status($buy_status,$deal_id)
+	{
+		if($buy_status==2){
+			return "<span style='color:red'>".l("DEAL_STATUS_".$buy_status)."</span>";
+		}
+		else{
+			return l("DEAL_STATUS_".$buy_status);
+		}
+	}
+	
+	function get_send_type_name($send_type)
+	{
+		if($send_type==1){
+			return "可积分兑换";
+		}
+		else{
+			return '不可积分兑换';
+		}
+	}
+	function date_int($time)
+	{
+		
+		return date("Y-m-d H:i:s",$time);
+	}
+	function reg_send($reg)
+	{
+		if($reg){return '是';}else{ return '否';}
+	}
+	function day_type($a)
+	{
+		if($a){return '月';}else{return '日';}
+	
+	}
+</php>
+<div class="main">
+<div class="main_title">代金券列表</div>
+<div class="blank5"></div>
+<div class="button_row">
+	<input type="button" class="button" value="{%ADD}" onclick="add();" />
+	<input type="button" class="button" value="{%DEL}" onclick="del();" />
+</div>
+<div class="blank5"></div>
+
+<div class="blank5"></div>
+<html:list 
+	id="dataTable" 
+	style="dataTable" 
+	name="deal" 
+	checkbox="true" 
+	
+	datasource="list" 
+	show="deal_load_id:{%ID}(重要)|100px
+		,name:投资名称
+		,user_name:投资人
+		,deal_time|date_int:交易时间
+		
+		,u_load_money:交易金额
+		,repay_time:期限
+		,repay_time_type|day_type:时间类型
+		
+		" 
+	
+	actionwidth="160px" /> 
+
+<div class="blank5"></div>
+<div class="page">{$page}</div>
+</div>
+<include file="Public:footer" />

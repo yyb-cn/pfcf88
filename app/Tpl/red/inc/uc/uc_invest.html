@@ -15,8 +15,10 @@
 	        <div class="f_l" style="width:100px; padding-right:50px;">标题</div>
 	        <div class="f_l" style="width:100px;padding-right:50px;">我的投标金额</div>
 	        <div class="f_l" style="width:135px;padding-right:50px;">期限/利率</div>
-	        <div class="f_l" style="width:120px;padding-right:50px;">进度/剩余时间</div>
+	        <div class="f_l" style="width:120px;">进度/剩余时间</div>
+			<div class="f_l" style="width:100px;">认购确认函</div>
 	    </div>
+		
 	</div>
 	{if $list}
 	<div class="clearfix pt10 pl15 pr15" id="my_favoriteLoan_list">
@@ -30,7 +32,8 @@
 	                <div class="f_l f_red" style="width:100px;padding-right:50px;">
 	                	{function name="format_price" v="$item.u_load_money"}
 	                </div>
-	                <div class="f_l f_red" style="width:135px;padding-right:50px;">
+	                
+					<div class="f_l f_red" style="width:135px;padding-right:50px;">
 	                    <div>
 	                        {$item.repay_time}{if $item.repay_time_type eq 0}天{else}个月{/if},
 	                        {function name="number_format" v="$item.rate" f="2"}%
@@ -43,6 +46,12 @@
 	                    </div>
 	                    <div class="f_dgray" style="font-size:12px">
 	                         <p>{function name="round" v="$item.progress_point"}% 已完成</p>
+	                    </div>
+	                </div>
+					
+					<div class="f_l f_red" style="width:100px;">
+	                    <div>
+	                      <a href="http://rg.jlpefund.com?code={function name="base64_encode" v=$item.made}" >查看</a>
 	                    </div>
 	                </div>
 	            </div>
