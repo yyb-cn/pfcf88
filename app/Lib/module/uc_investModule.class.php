@@ -57,7 +57,6 @@ class uc_investModule extends SiteBaseModule
 		$sql_count = "select count(DISTINCT dl.id) from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id where dl.user_id = ".$user_id." $condtion ";
 		$list = $GLOBALS['db']->getAll($sql);
 		
-	
 		foreach($list as $k=>$v){
 		
 			$list[$k]['made']=$list[$k]['deal_load_id'].md5('jlpe');	//认购验证码
