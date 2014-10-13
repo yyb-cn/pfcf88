@@ -54,8 +54,8 @@ class dealModule extends SiteBaseModule
 			$load_list[$k_n]['user_name']=cut_str($load_list[$k_n]['user_name'], 1, 0).'****'.cut_str($load_list[$k_n]['user_name'], 1, -1);
 			
 			}
-		
-		
+		//print_r($load_list);exit;
+		//本项目投资列表——@@———————————————————@—————————————————@——————————@—————————————！！
 		$GLOBALS['tmpl']->assign("load_list",$load_list);	
 		$GLOBALS['tmpl']->assign("credit_file",$credit_file);
 		$GLOBALS['tmpl']->assign("u_info",$u_info);
