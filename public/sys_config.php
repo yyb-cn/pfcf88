@@ -29,7 +29,7 @@ return array(
 'SHOP_TITLE'=>'p2p信贷',
 'SHOP_KEYWORD'=>'p2p信贷、贷款,借贷，网贷',
 'SHOP_DESCRIPTION'=>'p2p信贷、贷款,借贷，网贷',
-'SHOP_TEL'=>'400-716-1518',
+'SHOP_TEL'=>'400-990-4388',
 'INVITE_REFERRALS'=>'0',
 'INVITE_REFERRALS_TYPE'=>'0',
 'ONLINE_MSN'=>'',
