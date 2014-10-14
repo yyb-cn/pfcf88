@@ -99,7 +99,7 @@
 					<input type="hidden" value="{$user_info.user_name}" name="user_name"/>
 					<input type="hidden" value="{$user_info.mobile}" name="mobile"/>
 					<input type="hidden" value="{$user_info.id}" name="id" />
-					<input type="submit" class="ok-next-btn f_l" id="settings-submit" name="commit" value="{$LANG.MODIFY}">
+					<input type="submit" class="ok-next-btn f_l" id="settings-submit"  value="{$LANG.MODIFY}">
 					<span class="next-href f_l"><a href="javascript:void(0);" onclick="skip_user_profile();">{$LANG.STEP_NEXT}</a></span>
 				</div>
 				
@@ -123,13 +123,15 @@ $(document).ready(function(){
 				}
 				{/if}
 			{/foreach}
+			
+	
 			var query  = $("form#step-one-form").serialize();
 			$.ajax({
-				url:APP_ROOT+"/index.php?ctl=uc_account&act=save&s_ajax=1",
+				url:APP_ROOT+"/index.php?ctl=uc_account&act=save&s_ajax=1",  /* 第一步第二步*/
 				data:query,
 				dataType:"post",
 				success:function(result){
-					window.location.href= "{url x="shop" r="user#steptwo"}";
+					window.location.href= "{url x="shop" r="user#stepthree"}";
 				}
 			});
 			return false;

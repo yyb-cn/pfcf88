@@ -109,6 +109,8 @@ class uc_accountModule extends SiteBaseModule
 	public function save()
 	{
 		require_once APP_ROOT_PATH.'system/libs/user.php';
+		
+		
 		foreach($_REQUEST as $k=>$v)
 		{
 			$_REQUEST[$k] = htmlspecialchars(addslashes(trim($v)));

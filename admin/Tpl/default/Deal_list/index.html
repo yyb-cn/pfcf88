@@ -13,7 +13,7 @@
 	}
 	function preview(id)
 	{
-		window.open("__ROOT__/index.php?ctl=deal&id="+id+"&preview=1");
+		window.open("__ROOT__/index.php?ctl=deal_list&id="+id+"&preview=1");
 	}
 </script>
 <php>
@@ -53,9 +53,21 @@
 	}
 </php>
 <div class="main">
-<div class="main_title">代金券列表</div>
-<div class="blank5"></div>
 
+<div class="main_title">交易列表</div>
+<div class="blank5"></div>
+<div class="search_row">
+	<form name="search" action="__APP__" method="get">	
+		{%DEAL_NAME}：<input type="text" class="textbox" name="name" value="{:trim($_REQUEST['name'])}" />
+		
+		投资人：
+		<input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" size="10" />
+		
+		<input type="hidden" value="deal_list" name="m" />
+		<input type="hidden" value="index" name="a" />
+		<input type="submit" class="button" value="{%SEARCH}" />
+	</form>
+</div>
 <div class="blank5"></div>
 
 <div class="blank5"></div>
@@ -67,7 +79,7 @@
 	
 	datasource="list" 
 	show="deal_load_id:{%ID}(重要)|100px
-		,name:投资名称
+		,name:项目名称
 		,user_name:投资人
 		,deal_time|date_int:交易时间
 		
