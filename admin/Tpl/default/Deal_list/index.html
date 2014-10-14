@@ -71,25 +71,77 @@
 <div class="blank5"></div>
 
 <div class="blank5"></div>
-<html:list 
-	id="dataTable" 
-	style="dataTable" 
-	name="deal" 
-	checkbox="true" 
+
+	<table id="dataTable" class="dataTable" cellpadding="0" cellspacing="0">
+<tr>
+	<td colspan="9" class="topTd">
+		&nbsp;
+	</td>
+</tr>
+<tr class="row">
+	<th width="8">
+		<input type="checkbox" id="check" onclick="CheckAll('dataTable')">
+	</th>
+	<th width="100px ">
+		<a  class="cai"  href="javascript:sortBy('deal_load_id','<?php echo $_GET[_sort]?0:1?>','deal_list','index')" title="按照编号(重要) ">编号(重要)</a>
+	</th>
+	<th>
+		<a href="javascript:sortBy('name','<?php echo $_GET[_sort]?0:1?>','deal_list','index')" title="按照项目名称 ">项目名称   </a>
+	</th>
+	<th>
+		<a href="javascript:sortBy('user_name','<?php echo $_GET[_sort]?0:1?>','deal_list','index')" title="按照投资人 ">投资人   </a>
+	</th>
+	<th>
+		<a href="javascript:sortBy('deal_time','<?php echo $_GET[_sort]?0:1?>','deal_list','index')" title="按照交易时间 ">交易时间      </a>
+	</th>
+	<th>
+		<a href="javascript:sortBy('u_load_money','<?php echo $_GET[_sort]?0:1?>','deal_list','index')" title="按照交易金额 ">交易金额   </a>
+	</th>
+	<th>
+		<a href="javascript:sortBy('repay_time','<?php echo $_GET[_sort]?0:1?>','deal_list','index')" title="按照期限 ">期限   </a>
+	</th>
+	<th>
+		<a href="javascript:sortBy('repay_time_type','<?php echo $_GET[_sort]?0:1?>','deal_list','index')" title="按照时间类型 ">时间类型       </a>
+	</th>
 	
-	datasource="list" 
-	show="deal_load_id:{%ID}(重要)|100px
-		,name:项目名称
-		,user_name:投资人
-		,deal_time|date_int:交易时间
-		
-		,u_load_money:交易金额
-		,repay_time:期限
-		,repay_time_type|day_type:时间类型
-		
-		" 
-	
-	actionwidth="160px" /> 
+</tr>
+
+<?php foreach( $list as $k=>$v) :?>
+<tr class="row">
+	<td>
+		<input type="checkbox" name="key" class="key" value="">
+	</td>
+	<td>
+		&nbsp;{$v.deal_load_id}
+	</td>
+	<td>
+		&nbsp;{$v.name}
+	</td>
+	<td>
+		&nbsp;{$v.user_name}
+	</td>
+	<td>
+		&nbsp;<?php echo date("Y-m-d H:i:s",$v['deal_time'])?>
+	</td>
+	<td>
+		&nbsp;{$v.u_load_money}
+	</td>
+	<td>
+		&nbsp;{$v.repay_time}
+	</td>
+	<td>
+		&nbsp;<?php echo  $v['repay_time_type']?'个月':'天'?>
+	</td>
+</tr>
+<?php endforeach;?>
+<tr>
+	<td colspan="9" class="bottomTd">
+		 &nbsp;
+	</td>
+</tr>
+</table>
+
+
 
 <div class="blank5"></div>
 <div class="page">{$page}</div>
