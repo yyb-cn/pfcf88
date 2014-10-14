@@ -58,6 +58,7 @@
 <div class="blank5"></div>
 <div class="search_row">
 	<form name="search" action="__APP__" method="get">	
+		编号：<input type="text" class="textbox" name="deal_load_id" value="{:trim($_REQUEST['deal_load_id'])}" />
 		{%DEAL_NAME}：<input type="text" class="textbox" name="name" value="{:trim($_REQUEST['name'])}" />
 		
 		投资人：
@@ -86,13 +87,10 @@
 		<a  class="cai"  href="javascript:sortBy('deal_load_id','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照编号(重要) ">编号(重要)</a>
 	</th>
 	<th>
-		<a href="javascript:sortBy('name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照项目名称 ">项目名称   </a>
-	</th>
-	<th>
 		<a href="javascript:sortBy('user_name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照投资人 ">投资人   </a>
 	</th>
 	<th>
-		<a href="javascript:sortBy('deal_time','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照交易时间 ">交易时间      </a>
+		<a href="javascript:sortBy('name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照项目名称 ">项目名称   </a>
 	</th>
 	<th>
 		<a href="javascript:sortBy('u_load_money','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照交易金额 ">交易金额   </a>
@@ -101,9 +99,15 @@
 		<a href="javascript:sortBy('repay_time','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照期限 ">期限   </a>
 	</th>
 	<th>
-		<a href="javascript:sortBy('repay_time_type','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照时间类型 ">时间类型       </a>
+		<a href="javascript:sortBy('deal_time','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照交易时间 ">交易时间      </a>
 	</th>
 	
+	
+	
+	
+	<th>
+			认购证明
+	</th>
 </tr>
 
 <?php foreach($list as $k=>$v) :?>
@@ -114,23 +118,27 @@
 	<td>
 		&nbsp;{$v.deal_load_id}
 	</td>
+	
+	<td>
+		&nbsp;<a href="m.php?m=User&a=index&user_name={$v.user_name}">{$v.user_name}<a/>
+	</td>
 	<td>
 		&nbsp;{$v.name}
-	</td>
-	<td>
-		&nbsp;{$v.user_name}
-	</td>
-	<td>
-		&nbsp;<?php echo date("Y-m-d H:i:s",$v['deal_time'])?>
 	</td>
 	<td>
 		&nbsp;{$v.u_load_money}
 	</td>
 	<td>
-		&nbsp;{$v.repay_time}
+		&nbsp;{$v.repay_time}&nbsp;<?php echo  $v['repay_time_type']?'个月':'天'?>
 	</td>
 	<td>
-		&nbsp;<?php echo  $v['repay_time_type']?'个月':'天'?>
+		&nbsp;<?php echo date("Y-m-d H:i:s",$v['deal_time'])?>
+	</td>
+	
+	
+	<td>
+		<a href="http://rg.jlpefund.com/m.php" target="_blank">录入</a>
+		<a href="http://rg.jlpefund.com?code=<?php echo base64_encode((md5('jlpe').$v['deal_load_id']))?>">查看</a>
 	</td>
 </tr>
 <?php endforeach;?>

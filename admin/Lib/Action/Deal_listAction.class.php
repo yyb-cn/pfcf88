@@ -16,7 +16,10 @@ class Deal_listAction extends CommonAction{
 			
 			$condition .= "and   d.name ="."'".$_REQUEST['name']."'";
 		}
-		
+		if(trim($_REQUEST['deal_load_id']!=''))
+		{
+			$condition .= "and   dl.id ="."'".$_REQUEST['deal_load_id']."'";
+		}
 		
 		if(trim($_REQUEST['_sort'])==0){
 			$sort='desc';
@@ -26,6 +29,14 @@ class Deal_listAction extends CommonAction{
 			$sort='asc';
 		
 		}
+		if(trim($_REQUEST['_order'])=='')
+		{
+		
+			$order=	"order  by deal_time desc";
+			
+		}
+		
+		
 		if(trim($_REQUEST['_order'])=='name')
 		{
 			$order=	"order  by  d.name  ".$sort;
