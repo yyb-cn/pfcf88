@@ -52,7 +52,7 @@
 	
 	}
 </php>
-<div class="main">
+<div class="main" onload="opener.location.reload()">
 
 <div class="main_title">交易列表</div>
 <div class="blank5"></div>
@@ -106,7 +106,7 @@
 	
 	
 	<th>
-			认购证明
+			<a href="javascript:sortBy('deal_load_check_yn','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="认购证明 ">认购证明      </a>
 	</th>
 </tr>
 
@@ -136,9 +136,15 @@
 	</td>
 	
 	
-	<td>
-		<a href="http://rg.jlpefund.com/m.php" target="_blank">录入</a>
-		<a href="http://rg.jlpefund.com?code=<?php echo base64_encode((md5('jlpe').$v['deal_load_id']))?>">查看</a>
+	<td width=150>
+		<?php if(!$v['deal_load_check_yn']) :?>
+		<a href="http://rg.jlpefund.com/m.php" target="_blank" >请录入</a>
+		<a  href="?m=Deal_list&a=check&id={$v.deal_load_id}"  onclick="confirm('确认录入');">确认录入</a>
+		<?php  else :?>
+				<a >已经录入</a>
+				<a href="http://rg.jlpefund.com?code=<?php echo base64_encode((md5('jlpe').$v['deal_load_id']))?>">查看</a>
+		<?php  endif;?>
+		
 	</td>
 </tr>
 <?php endforeach;?>

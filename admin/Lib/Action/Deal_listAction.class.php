@@ -61,16 +61,29 @@ class Deal_listAction extends CommonAction{
 		{
 			$order=	"order  by d.repay_time ".$sort;
 		}
+		elseif(trim($_REQUEST['_order'])=='deal_load_check_yn')
+		{
+			$order=	"order  by dl.deal_load_check_yn ".$sort;
+		}
+    	$sql = "select d.name,d.repay_time,d.repay_time_type,dl.user_name,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time , dl.deal_load_check_yn from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=d.user_id where ".$condition .' '. $order;
 		
-    	$sql = "select d.name,d.repay_time,d.repay_time_type,dl.user_name,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=d.user_id where ".$condition .' '. $order;
 		
 		$list = $GLOBALS['db']->getAll($sql);
+		//deal_load_check_yn
+		//print_r($list);exit;
 		
 		$this->assign('list',$list);
 		$this->display();
 		
 	}
-	
+	public function check(){
+		
+		$id=trim($_REQUEST['id']);
+		
+		$GLOBALS['db']->query("update ".DB_PREFIX."deal_load set deal_load_check_yn = 1 where id = ".$id);
+		
+		redirect('?m=Deal_list&a=index');
+	}
 	
 	
 }
