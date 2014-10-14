@@ -13,7 +13,7 @@
 	}
 	function preview(id)
 	{
-		window.open("__ROOT__/index.php?ctl=deal_list&id="+id+"&preview=1");
+		window.open("__ROOT__/index.php?ctl=Deal_list&id="+id+"&preview=1");
 	}
 </script>
 <php>
@@ -63,7 +63,7 @@
 		投资人：
 		<input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" size="10" />
 		
-		<input type="hidden" value="deal_list" name="m" />
+		<input type="hidden" value="Deal_list" name="m" />
 		<input type="hidden" value="index" name="a" />
 		<input type="submit" class="button" value="{%SEARCH}" />
 	</form>
@@ -83,30 +83,30 @@
 		<input type="checkbox" id="check" onclick="CheckAll('dataTable')">
 	</th>
 	<th width="100px ">
-		<a  class="cai"  href="javascript:sortBy('deal_load_id','<?php echo $_GET[_sort]?0:1?>','deal_list','index')" title="按照编号(重要) ">编号(重要)</a>
+		<a  class="cai"  href="javascript:sortBy('deal_load_id','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照编号(重要) ">编号(重要)</a>
 	</th>
 	<th>
-		<a href="javascript:sortBy('name','<?php echo $_GET[_sort]?0:1?>','deal_list','index')" title="按照项目名称 ">项目名称   </a>
+		<a href="javascript:sortBy('name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照项目名称 ">项目名称   </a>
 	</th>
 	<th>
-		<a href="javascript:sortBy('user_name','<?php echo $_GET[_sort]?0:1?>','deal_list','index')" title="按照投资人 ">投资人   </a>
+		<a href="javascript:sortBy('user_name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照投资人 ">投资人   </a>
 	</th>
 	<th>
-		<a href="javascript:sortBy('deal_time','<?php echo $_GET[_sort]?0:1?>','deal_list','index')" title="按照交易时间 ">交易时间      </a>
+		<a href="javascript:sortBy('deal_time','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照交易时间 ">交易时间      </a>
 	</th>
 	<th>
-		<a href="javascript:sortBy('u_load_money','<?php echo $_GET[_sort]?0:1?>','deal_list','index')" title="按照交易金额 ">交易金额   </a>
+		<a href="javascript:sortBy('u_load_money','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照交易金额 ">交易金额   </a>
 	</th>
 	<th>
-		<a href="javascript:sortBy('repay_time','<?php echo $_GET[_sort]?0:1?>','deal_list','index')" title="按照期限 ">期限   </a>
+		<a href="javascript:sortBy('repay_time','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照期限 ">期限   </a>
 	</th>
 	<th>
-		<a href="javascript:sortBy('repay_time_type','<?php echo $_GET[_sort]?0:1?>','deal_list','index')" title="按照时间类型 ">时间类型       </a>
+		<a href="javascript:sortBy('repay_time_type','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照时间类型 ">时间类型       </a>
 	</th>
 	
 </tr>
 
-<?php foreach( $list as $k=>$v) :?>
+<?php foreach($list as $k=>$v) :?>
 <tr class="row">
 	<td>
 		<input type="checkbox" name="key" class="key" value="">

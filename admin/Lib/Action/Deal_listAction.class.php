@@ -4,19 +4,20 @@ class Deal_listAction extends CommonAction{
 	public function index()
 	{
 		$condition=' d.deal_status in(1,2,4,5) ';
+		
 		if(trim($_REQUEST['user_name'])!='')
 		{
-			//echo $_REQUEST['user_name'];
+			
 			$condition .= " and  dl.user_name ="."'".$_REQUEST['user_name']."'";
 		}
 		
 		if(trim($_REQUEST['name'])!='')
 		{
-			//echo $_REQUEST['user_name'];
+			
 			$condition .= "and   d.name ="."'".$_REQUEST['name']."'";
 		}
 		
-		//print_r($_REQUEST);exit;
+		
 		if(trim($_REQUEST['_sort'])==0){
 			$sort='desc';
 		
@@ -49,10 +50,8 @@ class Deal_listAction extends CommonAction{
 		{
 			$order=	"order  by d.repay_time ".$sort;
 		}
-		//echo $order;exit;
-	//print_r($_REQUEST);exit;
-			
-    	$sql = "select d.name,d.repay_time,d.repay_time_type,dl.user_name,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=d.user_id where ".$condition." and d.deal_status in(1)  " .$order;
+		
+    	$sql = "select d.name,d.repay_time,d.repay_time_type,dl.user_name,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=d.user_id where ".$condition .' '. $order;
 		
 		$list = $GLOBALS['db']->getAll($sql);
 		
