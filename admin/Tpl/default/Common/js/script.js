@@ -48,6 +48,7 @@ function sortBy(field,sortType,module_name,action_name)
 	location.href = CURRENT_URL+"&_sort="+sortType+"&_order="+field+"&";
 }
 //添加跳转
+
 function add()
 {
 	location.href = ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=add";

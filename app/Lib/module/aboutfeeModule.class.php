@@ -36,5 +36,15 @@ class aboutfeeModule  extends SiteBaseModule {
 	
 		$GLOBALS['tmpl']->display("page/index_mechanism_detail.html");
 	}
+	
+	function office(){
+	
+		$GLOBALS['tmpl']->display("page/office.html");
+	}
+	
+	
+	
+	
+	
 }
 ?>
