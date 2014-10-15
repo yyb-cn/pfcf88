@@ -121,14 +121,29 @@ class indexModule extends SiteBaseModule
 		//lu 马上购买 
 		// 广西城建三期
 		/**产品发布**********************经常要修改的地方*********************/
-		$credit= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=10  "," id DESC");//左边
-		//print_r($credit);exit;
-		$chengjian= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=11  "," id DESC");//中
 		
-		$wenfeng= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=9  "," id DESC");//右边
+		
+		
+		
+		$credit= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=10 "," id DESC");//左边
+		
+		$credit['list'][0]['longtime']=$credit['list'][0]['repay_time']?$credit['list'][0]['repay_time']*30:$credit['list'][0]['repay_time'];
+		$credit['list'][0]['rate']=round($credit['list'][0]['rate'],1);
+		
+		$chengjian= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=12  "," id DESC");//中
+		
+		$chengjian['list'][0]['longtime']=$chengjian['list'][0]['repay_time']?$chengjian['list'][0]['repay_time']*30:$chengjian['list'][0]['repay_time'];
+		$chengjian['list'][0]['rate']=round($chengjian['list'][0]['rate'],1);
+		
+		
+		$wenfeng= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id= 9 "," id DESC");//右边
+		$wenfeng['list'][0]['longtime']=$wenfeng['list'][0]['repay_time']?$wenfeng['list'][0]['repay_time']*30:$wenfeng['list'][0]['repay_time'];
+		$wenfeng['list'][0]['rate']=round($wenfeng['list'][0]['rate'],1);
+		
+			$GLOBALS['tmpl']->assign("credit",$credit['list'][0]);
 		
 			$GLOBALS['tmpl']->assign("chengjian",$chengjian['list'][0]);
-			$GLOBALS['tmpl']->assign("credit",$credit['list'][0]);
+			
 			$GLOBALS['tmpl']->assign("wenfeng",$wenfeng['list'][0]);
 		
 		//lu 投资收益排行榜 charts

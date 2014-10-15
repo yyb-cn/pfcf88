@@ -9,9 +9,6 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 <script type='text/javascript' src='http://hexinlif.com/Site/inWebSit?siteId=33'></script><!--统计代码-->
 <!--图片切换开始-->
 	<div  class="banner box_shadow">
-		
-        {insert name="index_login_box"}
-        
 		<div  id="banner">
 			<div  id="bannerpic">
 				
@@ -50,9 +47,6 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 	<!-- 14年6月18日修改"关于我们" -->
     <div class="blank10"></div><div class="blank10"></div>
     <div class="about white box_shadow">
-    	<div class="title_140618">
-        	<div class="title_left">关于我们</div>
-        </div>
     	<ul class="about_main">
         	<li class="about1"><a href="{url x="index" r="help" p="id=71"}"><img src="{$TMPL}/images/about_01.png" /></a></li>
             <li class="about2"><a href="{url x="index" r="aboutfee" p="act=mechanism"}"><img src="{$TMPL}/images/about_02.png" /></a></li>
@@ -67,64 +61,9 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     	<ul class="trading_main">
         	<li><p class="trading_title">累计总交易金额</p><p class="trading_money">{$success_deal.tatal_money}元</p></li>
             <li><p class="trading_title">已按期还本金</p><p class="trading_money">{$success_deal.done_money}元</p></li>
-            <li><p class="trading_title">为用户带来的收益</p><p class="trading_money">{$success_deal.income}元</p></li>
         </ul>
     </div>
-    <!-- 14年6月18日修改"关于我们"结束 -->
-
-    
-    <!-- 14年6月18日修改“收益对比" -->
-    <!-- 14年9月29日活动更换广告注释
-	<div class="blank10"></div><div class="blank10"></div>
-    <div class="benefit_comparison white box_shadow">
-    	<div class="title_140618">
-        	<div class="title_left">收益对比</div>
-        </div>
-        <div class="comparison_main">
-        	<div class="comparison_title">假如你有十万元用来理财，一年之后你将会得到</div>
-            <ul>
-            	<li class="main_1">
-                    <p>银行</p>
-                    <p class="this_color">￥385</p>
-                    <p class="bank_bg" id="main_1_line"></p>
-                    <div class="main_1_line"></div>
-                </li>
-                <li class="main_2">
-                    <p>理财通</p>
-                    <p class="this_color">￥5925</p>
-                    <p class="weixin_bg" id="main_2_line"></p>
-                    <div class="main_2_line"></div>
-                </li>
-                <li class="main_3">
-                    <p>浦发财富</p>
-                    <p class="this_color">￥12000</p>
-                    <p class="pfcf_bg" id="main_3_line"></p>
-                    <div class="main_3_line"></div>
-                </li>
-                <li class="main_4">
-                    <p>余额宝</p>
-                    <p class="this_color">￥5800</p>
-                    <p class="epay_bg" id="main_4_line"></p>
-                    <div class="main_4_line"></div>
-                </li>
-                <li class="main_5">
-                    <p>国债</p>
-                    <p class="this_color">￥5000</p>
-                    <p class="debt_bg" id="main_5_line"></p>
-                    <div class="main_5_line"></div>
-                </li>
-            </ul>
-            <div class="main_1_line_msg">活期：活期存款占一国货币供应的最大部分，也是商业银行的重要资金来源。鉴于活期存款不仅有货币支付手段和流通手段的职能，同时还具有较强的派生能力，因此，商业银行在任何时候都把活期存款作为经营重点。由于该类存款存取频繁，手续复杂，所费成本较高，西方国家商业银行一般都不支付利息,有时甚至还要收取一定的手续费，我国目前活期存款年利率为0.35%。</div>
-            <div class="main_2_line_msg">理财通：理财通是由腾讯公司推出的基于微信的金融理财开放平台，首批接入华夏基金等一线大品牌基金公司，理财通背后的金融产品为货币基金，1月22日正式上线，现阶段只能在手机端操作。</div>
-            <div class="main_3_line_msg">浦发财富：由浦发财富推出，以团购众筹投资形式对合作机构推荐的优质债权项目进行自动投资的在线理财平台，具有稳健、安全、流动性强几大特点。保本保收益，年化收益率可达7%-12%，超低投资门槛，1000元即可加入。</div>
-            <div class="main_4_line_msg">余额宝：余额宝是由第三方支付平台支付宝为个人用户打造的一项余额增值服务，实际上是购买了一款由天弘基金提供的名为"增利宝"的货币基金，转入余额宝的资金在第二个工作日由基金公司进行份额确认，对已确认的份额会开始计算收益。其实质是货币基金，仍有风险。</div>
-            <div class="main_5_line_msg">国债：国债，又称国家公债，是国家以其信用为基础，按照债的一般原则，通过向社会筹集资金所形成的债权债务关系。国债是由国家发行的债券，是中央政府为筹集财政资金而发行的一种政府债券，是中央政府向投资者出具的、承诺在一定时期支付利息和到期偿还本金的债权债务凭证，2013年发行的三年期国债利率在5%。</div>
-        </div>
-    </div>
-    -->
-    <!-- 14年6月18日修改“收益对比"结束 -->
-    
-    <!-- 14年9月29日更换7天收益广告 -->
+   
     <div class="blank10"></div><div class="blank10"></div>
 	
     <div class="benefit_comparison white box_shadow">
@@ -142,20 +81,20 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                 {if $credit.name}
                 	<div class="buy_hot"></div>
                 {/if}
-                	<p class="buy_title1"> 信贷赢90天产品</p>
-                    <p class="buy_title2">（最低投资额度：100元）</p>
+                	<p class="buy_title1"> 7天理财计划</p>
+                    <p class="buy_title2">（最低投资额度：1000元）</p>
                 </div>
                 <div class="buy1_img">
                 	<div class="buy_img_l f_l">
                     	<div class="circle">
                             <div class="pie_left"><div class="left"></div></div>
                             <div class="pie_right"><div class="right"></div></div>
-                            <div class="mask"><span>90</span>天</div>
+                            <div class="mask"><span>7</span>天</div>
                         </div>
                     </div>
                     <div class="buy_img_r f_l">
                     	<div class="buy_img_r_1">
-                        	<p>9.3%</p>
+                        	<p>7%</p>
                         </div>
                         <div class="buy_img_r_2">
                         	<p>预期年化收益率</p>
@@ -175,7 +114,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                 {if $chengjian.name}
                 	<div class="buy_hot"></div>
                 {/if}
-                	<p class="buy_title1">信贷赢80天产品</p>
+                	<p class="buy_title1">信贷赢30天产品</p>
                     <p class="buy_title2">（最低投资额度：100元）</p>
                 </div>
                 <div class="buy2_img">
@@ -183,12 +122,12 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                     	<div class="circle">
                             <div class="pie_left"><div class="left"></div></div>
                             <div class="pie_right"><div class="right"></div></div>
-                            <div class="mask"><span>180</span>天</div>
+                            <div class="mask"><span>30</span>天</div>
                         </div>
                     </div>
                     <div class="buy_img_r f_l">
                     	<div class="buy_img_r_1">
-                        	<p>10%</p>
+                        	<p>7.5%</p>
                         </div>
                         <div class="buy_img_r_2">
                         	<p>预期年化收益率</p>
@@ -208,20 +147,20 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                 {if $wenfeng.name}
                 	<div class="buy_hot"></div>
                 {/if}
-                	<p class="buy_title1">7天理财计划</p>
-                    <p class="buy_title2">（最低投资额度：1000元）</p>
+                	<p class="buy_title1">信贷赢90天产品</p>
+                    <p class="buy_title2">（最低投资额度：100元）</p>
                 </div>
                 <div class="buy3_img">
                 	<div class="buy_img_l f_l">
                     	<div class="circle">
                             <div class="pie_left"><div class="left"></div></div>
                             <div class="pie_right"><div class="right"></div></div>
-                            <div class="mask"><span>7</span>天</div>
+                            <div class="mask"><span>90</span>天</div>
                         </div>
                     </div>
                     <div class="buy_img_r f_l">
                     	<div class="buy_img_r_1">
-                        	<p>7%</p>
+                        	<p>9.3%</p>
                         </div>
                         <div class="buy_img_r_2">
                         	<p>预期年化收益率</p>
