@@ -132,17 +132,19 @@ class indexModule extends SiteBaseModule
 		
 		$credit= get_deal_list(1,0,"publish_wait =0  AND cate_id=".$cate[0]['id']," id DESC");//左边
 		
-		$credit['list'][0]['longtime']=$credit['list'][0]['repay_time']?$credit['list'][0]['repay_time']*30:$credit['list'][0]['repay_time'];
+		
+		
+		$credit['list'][0]['longtime']=$credit['list'][0]['repay_time_type']?$credit['list'][0]['repay_time']*30:$credit['list'][0]['repay_time'];
 		$credit['list'][0]['rate']=round($credit['list'][0]['rate'],1);
 		
 		$chengjian= get_deal_list(1,0,"publish_wait =0 AND  cate_id= ".$cate[1]['id']," id DESC");//中
 		
-		$chengjian['list'][0]['longtime']=$chengjian['list'][0]['repay_time']?$chengjian['list'][0]['repay_time']*30:$chengjian['list'][0]['repay_time'];
+		$chengjian['list'][0]['longtime']=$chengjian['list'][0]['repay_time_type']?$chengjian['list'][0]['repay_time']*30:$chengjian['list'][0]['repay_time'];
 		$chengjian['list'][0]['rate']=round($chengjian['list'][0]['rate'],1);
 		
 		
 		$wenfeng= get_deal_list(1,0,"publish_wait =0 AND cate_id=  ".$cate[2]['id']," id DESC");//右边
-		$wenfeng['list'][0]['longtime']=$wenfeng['list'][0]['repay_time']?$wenfeng['list'][0]['repay_time']*30:$wenfeng['list'][0]['repay_time'];
+		$wenfeng['list'][0]['longtime']=$wenfeng['list'][0]['repay_time_type']?$wenfeng['list'][0]['repay_time']*30:$wenfeng['list'][0]['repay_time'];
 		$wenfeng['list'][0]['rate']=round($wenfeng['list'][0]['rate'],1);
 		
 			$GLOBALS['tmpl']->assign("credit",$credit['list'][0]);
