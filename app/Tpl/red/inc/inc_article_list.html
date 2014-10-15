@@ -8,7 +8,7 @@
 				<a href="{$item.url}" title="{$item.title}">{$item.title}</a>
 			</span>
 			<span class="f_r">
-				{function name="to_date" v=$item.update_time f="Y-m-d"}
+				{function name="to_date" v=$item.create_time f="Y-m-d"}
 			</span>
 		</li>
 		{/foreach}
