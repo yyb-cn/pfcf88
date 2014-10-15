@@ -45,7 +45,7 @@ class indexModule extends SiteBaseModule
 			//输出公告
 			$notice_list = get_notice(0);
 			foreach($notice_list as $kkd=>$vxd){
-				$notice_list[$kkd]['update_time'] = date('m月d日',$vxd['update_time']);
+				$notice_list[$kkd]['update_time'] = date('m月d日',$vxd['create_time']);
 				}
 			$GLOBALS['tmpl']->assign("notice_list",$notice_list);
 			
