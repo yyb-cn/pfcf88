@@ -70,31 +70,28 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 		
     </div>
 	
-    <!-- 14年9月29日更换7天收益广告结束 -->
-
-    <!--14年6月18日修改直接购买-->
     <div class="blank10"></div><div class="blank10"></div>
     <div class="buying">
     	<ul>
         	<li class="buy1 white box_shadow">
             	<div class="buy1_main">
-                {if $credit.name}
+                {if $credit.deal_status eq 1}
                 	<div class="buy_hot"></div>
                 {/if}
-                	<p class="buy_title1"> 7天理财计划</p>
-                    <p class="buy_title2">（最低投资额度：1000元）</p>
+                	<p class="buy_title1"> {$credit.sub_name}</p>
+                    <p class="buy_title2">（最低投资额度：{$credit.min_loan_money}元）</p>
                 </div>
                 <div class="buy1_img">
                 	<div class="buy_img_l f_l">
                     	<div class="circle">
                             <div class="pie_left"><div class="left"></div></div>
                             <div class="pie_right"><div class="right"></div></div>
-                            <div class="mask"><span>7</span>天</div>
+                            <div class="mask"><span>{$credit.longtime}</span>天</div>
                         </div>
                     </div>
                     <div class="buy_img_r f_l">
                     	<div class="buy_img_r_1">
-                        	<p>7%</p>
+                        	<p>{$credit.rate}%</p>
                         </div>
                         <div class="buy_img_r_2">
                         	<p>预期年化收益率</p>
@@ -102,7 +99,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                     </div>
                 </div>
                 <div class="buy_bottom">
-                {if $credit.name}
+                {if $credit.deal_status eq 1}
                     <a class="buy_now" href="{$credit.share_url}">立 刻 购 买</a>
                 {else}
                     <a class="buy_over">已 经 售 完</a>
@@ -111,23 +108,23 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
             </li>
             <li class="buy2 white box_shadow">
             	<div class="buy2_main">
-                {if $chengjian.name}
+                {if $chengjian.deal_status eq 1}
                 	<div class="buy_hot"></div>
                 {/if}
-                	<p class="buy_title1">信贷赢30天产品</p>
-                    <p class="buy_title2">（最低投资额度：100元）</p>
+                	<p class="buy_title1">{$chengjian.sub_name}</p>
+                    <p class="buy_title2">（最低投资额度：{$chengjian.min_loan_money}元）</p>
                 </div>
                 <div class="buy2_img">
                 	<div class="buy_img_l f_l">
                     	<div class="circle">
                             <div class="pie_left"><div class="left"></div></div>
                             <div class="pie_right"><div class="right"></div></div>
-                            <div class="mask"><span>30</span>天</div>
+                            <div class="mask"><span>{$chengjian.longtime}</span>天</div>
                         </div>
                     </div>
                     <div class="buy_img_r f_l">
                     	<div class="buy_img_r_1">
-                        	<p>7.5%</p>
+                        	<p>{$chengjian.rate}%</p>
                         </div>
                         <div class="buy_img_r_2">
                         	<p>预期年化收益率</p>
@@ -135,7 +132,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                     </div>
                 </div>
                 <div class="buy_bottom">
-                {if $chengjian.name}
+                {if $chengjian.deal_status eq 1}
                     <a class="buy_now" href="{$chengjian.share_url}">立 刻 购 买</a>
                 {else}
                     <a class="buy_over">已 经 售 完</a>
@@ -144,23 +141,23 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
             </li>
             <li class="buy3 white box_shadow">
             	<div class="buy3_main">
-                {if $wenfeng.name}
+                {if $wenfeng.deal_status eq 1}
                 	<div class="buy_hot"></div>
                 {/if}
-                	<p class="buy_title1">信贷赢90天产品</p>
-                    <p class="buy_title2">（最低投资额度：100元）</p>
+                	<p class="buy_title1">{$wenfeng.sub_name}</p>
+                    <p class="buy_title2">（最低投资额度：{$wenfeng.min_loan_money}元）</p>
                 </div>
                 <div class="buy3_img">
                 	<div class="buy_img_l f_l">
                     	<div class="circle">
                             <div class="pie_left"><div class="left"></div></div>
                             <div class="pie_right"><div class="right"></div></div>
-                            <div class="mask"><span>90</span>天</div>
+                            <div class="mask"><span>{$wenfeng.longtime}</span>天</div>
                         </div>
                     </div>
                     <div class="buy_img_r f_l">
                     	<div class="buy_img_r_1">
-                        	<p>9.3%</p>
+                        	<p>{$chengjian.rate}%</p>
                         </div>
                         <div class="buy_img_r_2">
                         	<p>预期年化收益率</p>
@@ -168,7 +165,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                     </div>
                 </div>
                 <div class="buy_bottom">
-                {if $wenfeng.name}
+                {if $wenfeng.deal_status eq 1}
                     <a class="buy_now" href="{$wenfeng.share_url}">立 刻 购 买</a>
                 {else}
                     <a class="buy_over">已 经 售 完</a>

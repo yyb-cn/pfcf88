@@ -123,20 +123,25 @@ class indexModule extends SiteBaseModule
 		/**产品发布**********************经常要修改的地方*********************/
 		
 		
+		//获取分类
 		
+		$cate=$GLOBALS['db']->getAll("select id,sort from ".DB_PREFIX."deal_cate order by sort desc limit 3");
 		
-		$credit= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=10 "," id DESC");//左边
+		//print_r($cate);exit;
+		//echo $cate[2]['id'];exit;
+		
+		$credit= get_deal_list(1,0,"publish_wait =0  AND cate_id=".$cate[0]['id']," id DESC");//左边
 		
 		$credit['list'][0]['longtime']=$credit['list'][0]['repay_time']?$credit['list'][0]['repay_time']*30:$credit['list'][0]['repay_time'];
 		$credit['list'][0]['rate']=round($credit['list'][0]['rate'],1);
 		
-		$chengjian= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=12  "," id DESC");//中
+		$chengjian= get_deal_list(1,0,"publish_wait =0 AND  cate_id= ".$cate[1]['id']," id DESC");//中
 		
 		$chengjian['list'][0]['longtime']=$chengjian['list'][0]['repay_time']?$chengjian['list'][0]['repay_time']*30:$chengjian['list'][0]['repay_time'];
 		$chengjian['list'][0]['rate']=round($chengjian['list'][0]['rate'],1);
 		
 		
-		$wenfeng= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id= 9 "," id DESC");//右边
+		$wenfeng= get_deal_list(1,0,"publish_wait =0 AND cate_id=  ".$cate[2]['id']," id DESC");//右边
 		$wenfeng['list'][0]['longtime']=$wenfeng['list'][0]['repay_time']?$wenfeng['list'][0]['repay_time']*30:$wenfeng['list'][0]['repay_time'];
 		$wenfeng['list'][0]['rate']=round($wenfeng['list'][0]['rate'],1);
 		
