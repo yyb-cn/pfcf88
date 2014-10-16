@@ -12,10 +12,14 @@ $GLOBALS['tmpl']->assign("site_info",get_site_info());
 
 if(app_conf("SHOP_OPEN")==0)
 {
-	$GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['SHOP_CLOSE']);
-	$GLOBALS['tmpl']->assign("html",app_conf("SHOP_CLOSE_HTML"));
+
+
+	echo app_conf("SHOP_CLOSE_HTML");exit;
+	
+	$GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['SHOP_CLOSE']);//网站暂时关闭
+	$GLOBALS['tmpl']->assign("html",app_conf("SHOP_CLOSE_HTML"));//系统关闭
 	$GLOBALS['tmpl']->display("shop_close.html");
-	exit;
+	
 }
 
 //输出根路径
