@@ -1355,7 +1355,7 @@ function get_loan_type_name($type_id){
 	
 function format_price($price)
 {
-	return app_conf("CURRENCY_UNIT")."".number_format($price,0);
+	return app_conf("CURRENCY_UNIT")."".number_format($price,2);
 }
 function format_score($score)
 {
