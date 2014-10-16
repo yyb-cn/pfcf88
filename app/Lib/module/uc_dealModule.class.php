@@ -24,12 +24,12 @@ class uc_dealModule extends SiteBaseModule
 			$page = 1;
 		$limit = (($page-1)*app_conf("PAGE_SIZE")).",".app_conf("PAGE_SIZE");
 			
-		$deal_status = 4;
+		$deal_status = 4;//默认为4正在回款
 		if($status == 1){
-			$deal_status = 5;
+			$deal_status = 5;//5是已经还清的
 		}
 		//lu  偿还贷款收索功能
-		//判断是否ajax提交
+		//判断是否ajax提交、搜索框
 		if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])&& strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
 			$page = intval($_REQUEST['p']);
 				if($page==0)
@@ -65,6 +65,8 @@ class uc_dealModule extends SiteBaseModule
 	else {
 		
 		$result = get_deal_list($limit,0,"deal_status =$deal_status AND user_id=".$user_id,"id DESC");
+		
+		
 		$GLOBALS['tmpl']->assign("deal_list",$result['list']);
 		
 		$page = new Page($result['count'],app_conf("PAGE_SIZE"));   //初始化分页对象 		
@@ -76,6 +78,10 @@ class uc_dealModule extends SiteBaseModule
 		$GLOBALS['tmpl']->display("page/uc.html");	
 	}
 }
+	
+	
+	
+	
 	public function contract(){
 		$id = intval($_REQUEST['id']);
 		if($id == 0){
@@ -122,6 +128,9 @@ class uc_dealModule extends SiteBaseModule
 		$GLOBALS['tmpl']->display("inc/uc/uc_deal_contract.html");	
 	}
 	
+	
+	
+	
 	//正常还款操作界面
 	public function quick_refund(){
 		$id = intval($_REQUEST['id']);
@@ -146,7 +155,7 @@ class uc_dealModule extends SiteBaseModule
 	
 	
 	
-	//正常还款执行界面
+	//正常还款执行动作
 	public function repay_borrow_money(){
 		$id = intval($_REQUEST['id']);
 		if($id == 0){
