@@ -99,8 +99,8 @@ class indexModule extends SiteBaseModule
 			}
 			
 			$success_deal['tatal_money']="￥".number_format($tatal_money);
-			$success_deal['done_money']=format_price($done_money);
-			$success_deal['income']=format_price($income_totle);//总收益
+			$success_deal['done_money']="￥".number_format($done_money);
+			$success_deal['income']="￥".number_format($income_totle);//总收益
 			$GLOBALS['tmpl']->assign("success_deal",$success_deal);	
 			
 			//使用技巧
