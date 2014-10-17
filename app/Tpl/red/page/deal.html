@@ -15,7 +15,7 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
     	<div class="xshopleft">
         	<div class="xshopleft_1">
             	<div class="xshopleft_1a">
-                	<h1>{$deal.borrow_amount_format}</h1>
+                	<h1>￥{$deal.borrow_amount_format}</h1>
                     <p>投资金额</p>
                 </div>
                 <div class="xshopleft_1b">
@@ -32,14 +32,14 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
                 	<img src="{$TMPL}/images/tou_z_06.png">
 					
 					  {if $deal.deal_status eq 1}<!--进行中-->
-                    <p>还需：{$deal.need_money}</p>
+                    <p>还需：￥{$deal.need_money}</p>
 					 {elseif $deal.deal_status eq 5}
 					 <p>回款成功</p>
 					  {elseif $deal.deal_status eq 2}
-					  <p>还需：{$deal.need_money}</p>
+					  <p>还需：￥{$deal.need_money}</p>
 					  
 					 {elseif $deal.deal_status eq 4}<!--还款中-->
-					<p>待还本息：{function name="number_format" v=$deal.need_remain_repay_money f=2}元</p>
+					<p>待还本息：￥{function name="number_format" v=$deal.need_remain_repay_money f=2}元</p>
 					{/if}
                 </div>
                 <div class="xshopleft_2b">
