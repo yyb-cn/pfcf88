@@ -196,13 +196,13 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                 {if $deal.deal_status eq 1}<div class="invest_hot"></div>{/if}
                 <div class="invests_msg1">
                 	<p class="invest_tit">投资金额</p>
-                    <p class="invest_msg1">{$deal.borrow_amount_format}</p>
+                    <p class="invest_msg1">￥{$deal.borrow_amount_format}</p>
                     <p class="invest_msg2"><span>投资进度：</span><span class="newbar bar_p"><span class="bar_c {if $deal.progress_point != 100}baring{/if}" style="width:{function name="round" v=$deal.progress_point f=0}%; height:15px;"></span></span>&nbsp;{function name="round" v=$deal.progress_point f=0}%</p>
                 </div>
                 <div class="invests_msg2">
                 	<p class="invest_tit">年利率</p>
                     <p class="invest_msg1">{$deal.rate}%</p>
-                    <p class="invest_msg2">{if $deal.deal_status eq 2}满标{elseif $deal.deal_status eq 4}还款中{elseif $deal.deal_status eq 5}还款完毕{else}还需：{$deal.need_money}{/if}</p>
+                    <p class="invest_msg2">{if $deal.deal_status eq 2}满标{elseif $deal.deal_status eq 4}还款中{elseif $deal.deal_status eq 5}还款完毕{else}还需：￥{$deal.need_money}{/if}</p>
                 </div>
                 <div class="invests_msg3">
                 	<p class="invest_tit">投资期限</p>

@@ -71,7 +71,7 @@ function get_deal($id=0,$cate_id=0)
 				$deal['agency_info'] = $GLOBALS['db']->getRowCached("select * from ".DB_PREFIX."deal_agency where id = ".$deal['agency_id']." and is_effect = 1");
 			}
 			
-			$deal['borrow_amount_format'] = format_price($deal['borrow_amount']);
+			$deal['borrow_amount_format'] = number_format($deal['borrow_amount']);
 			
 			$deal['rate_foramt'] = number_format($deal['rate'],2);
 
@@ -95,7 +95,7 @@ function get_deal($id=0,$cate_id=0)
             if($deal['repay_time_type'] == 0){
                 $deal['month_repay_money'] = $deal['borrow_amount'] * $deal['rate']/365/100 * $deal['repay_time'];
             }    
-			$deal['month_repay_money_format'] = format_price($deal['month_repay_money']);
+			$deal['month_repay_money_format'] = number_format($deal['month_repay_money']);
 			
 			//到期还本息管理费
 			if($deal['loantype'] == 2)
@@ -103,12 +103,12 @@ function get_deal($id=0,$cate_id=0)
 			else
 				$deal['month_manage_money'] = $deal['borrow_amount']*app_conf('MANAGE_FEE')/100;
 				
-			$deal['month_manage_money_format'] = format_price($deal['month_manage_money']);
+			$deal['month_manage_money_format'] = number_format($deal['month_manage_money']);
 			$deal['all_manage_money'] = $deal['month_manage_money'] * $deal["repay_time"];
 			$deal['true_month_repay_money'] = $deal['month_repay_money'] + $deal['month_manage_money'];
 			
 			//还需多少钱
-			$deal['need_money'] = format_price($deal['borrow_amount'] - $deal['load_money']);
+			$deal['need_money'] = number_format($deal['borrow_amount'] - $deal['load_money']);
 			//百分比
 			$deal['progress_point'] = $deal['load_money']/$deal['borrow_amount']*100;
 			
@@ -310,7 +310,7 @@ function get_deal_list($limit,$cate_id=0, $where='',$orderby = '')
 					$deal['color_name'] = $deal['name'];
 				}	
 				//格式化数据
-				$deal['borrow_amount_format'] = format_price($deal['borrow_amount']);
+				$deal['borrow_amount_format'] = number_format($deal['borrow_amount']);
 				
 				$deal['rate_foramt'] = number_format($deal['rate'],2);
 				
@@ -327,7 +327,7 @@ function get_deal_list($limit,$cate_id=0, $where='',$orderby = '')
 					$deal['month_repay_money'] = $deal['borrow_amount'] * $deal['rate']/12/100 * $true_repay_time;
 					
 
-				$deal['month_repay_money_format'] = format_price($deal['month_repay_money']);
+				$deal['month_repay_money_format'] = number_format($deal['month_repay_money']);
 				
 				//到期还本息管理费
 				if($deal['loantype'] == 2){
@@ -336,12 +336,12 @@ function get_deal_list($limit,$cate_id=0, $where='',$orderby = '')
 				else
 					$deal['month_manage_money'] = $deal['borrow_amount']*app_conf('MANAGE_FEE')/100;
 					
-				$deal['month_manage_money_format'] = format_price($deal['month_manage_money']);
+				$deal['month_manage_money_format'] = number_format($deal['month_manage_money']);
 				$deal['all_manage_money'] = $deal['month_manage_money'] * $deal["repay_time"];
 				$deal['true_month_repay_money'] = $deal['month_repay_money'] + $deal['month_manage_money'];
 			
 				//还需多少钱
-				$deal['need_money'] = format_price($deal['borrow_amount'] - $deal['load_money']);
+				$deal['need_money'] = number_format($deal['borrow_amount'] - $deal['load_money']);
 				
 				$durl = url("index","deal",array("id"=>$deal['id']));				
 				$deal['share_url'] = get_domain().$durl;
