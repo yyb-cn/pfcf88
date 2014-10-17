@@ -34,7 +34,7 @@ class UserCarryAction extends CommonAction{
 		$vo['region_lv3_name'] = M("DeliveryRegion")->where("id=".$vo['region_lv3'])->getField("name");
 		$vo['region_lv4_name'] = M("DeliveryRegion")->where("id=".$vo['region_lv4'])->getField("name");
 		$vo['bank_name'] =  M("bank")->where("id=".$vo['bank_id'])->getField("name");
-		
+		 
 		$this->assign("vo",$vo);
 		
 		//print_r($vo);exit;
@@ -124,6 +124,7 @@ class UserCarryAction extends CommonAction{
 		
 		$vo = M(MODULE_NAME)->where($condition)->select();
 		
+		
 		foreach($vo as $k=>$v)
 		{
 		
@@ -132,14 +133,16 @@ class UserCarryAction extends CommonAction{
 		$v['region_lv3_name'] = M("DeliveryRegion")->where("id=".$v['region_lv3'])->getField("name");
 		$v['region_lv4_name'] = M("DeliveryRegion")->where("id=".$v['region_lv4'])->getField("name");
 		$v['phone']=M("User")->where("id=".$v['user_id'])->getField("mobile");
+		$v['user_name']=M("User")->where("id=".$v['user_id'])->getField("user_name");
 		$v['bank_name'] =  M("bank")->where("id=".$v['bank_id'])->getField("name");
-		$arr[0]=array('序号','银行','地区(省)','地区(市/区)','支行名','开户行','卡号','金额','电话号码','备注(用户ID)');
-		$arr[$k+1]=array($v['id'],$v['bank_name'],$v['region_lv2_name'],$v['region_lv3_name'],$v['bank_name'],$v['real_name'],$v['bankcard'],$v['money'],$v['phone'],$v['user_id']);
+		$arr[0]=array('序号','银行','地区(省)','地区(市/区)','支行名','开户名','卡号','金额','电话号码','备注');
+		$arr[$k+1]=array($k+1,$v['bank_name'],$v['region_lv2_name'],$v['region_lv3_name'],$v['bankzone'],$v['real_name'],"'".$v['bankcard'],$v['money'],$v['phone'],$v['user_name']);
 		}
+		
 		
 		//var_dump($arr);exit;
 		
-		$this->outputXlsHeader($arr,'提现名单');
+		$this->outputXlsHeader($arr,'提现名单'.time());
 		
 		
 	}
