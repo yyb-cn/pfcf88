@@ -193,6 +193,33 @@ function del(id)
 			}
 	});
 }
+function daochu(id)
+{
+	if(!id)
+	{
+		idBox = $(".key:checked");
+		if(idBox.length == 0)
+		{
+			alert('请选择要导出的选项');
+			return;
+		}
+		idArray = new Array();
+		$.each( idBox, function(i, n){
+			idArray.push($(n).val());
+		});
+		id = idArray.join(",");
+	}
+	if(confirm('确认导出'))
+	
+	window.location = ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=export_csv&id="+id
+	
+}
+
+
+
+
+
+
 //完全删除
 function foreverdel(id)
 {

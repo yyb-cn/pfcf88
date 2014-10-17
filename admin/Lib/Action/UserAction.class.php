@@ -244,6 +244,7 @@ class UserAction extends CommonAction{
 		//删除指定记录
 		$ajax = intval($_REQUEST['ajax']);
 		$id = $_REQUEST ['id'];
+		
 		if (isset ( $id )) {
 				//删除验证
 				if(M("DealOrder")->where(array ('user_id' => array ('in', explode ( ',', $id ) ) ))->count()>0)
@@ -768,6 +769,9 @@ class UserAction extends CommonAction{
 	public function export_csv($page = 1)
 	{
 		set_time_limit(0);
+		
+		
+		
 		$limit = (($page - 1)*intval(app_conf("BATCH_PAGE_SIZE"))).",".(intval(app_conf("BATCH_PAGE_SIZE")));
 		
 		//定义条件
@@ -802,6 +806,9 @@ class UserAction extends CommonAction{
 				->field(DB_PREFIX.'user.*,'.DB_PREFIX.'user_group.name')
 				->limit($limit)->findAll();
 
+		
+			
+				
 
 		if($list)
 		{
@@ -849,8 +856,6 @@ class UserAction extends CommonAction{
 			
 				$content .= implode(",", $user_value) . "\n";
 			}	
-			
-			
 			header("Content-Disposition: attachment; filename=user_list.csv");
 	    	echo $content;  
 		}
