@@ -266,6 +266,59 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     
 </div>
 
+<div id="sidebar" style="width:220px; margin-right:500px; position:fixed; right:50%; top:52.7%; height:277px;">
+	<div id="caculator_show" onclick="show_c()" class="f_r" style="width:30px; line-height:20px; font-size:16px; text-align:center; border:1px #999999 solid; border-top-left-radius:6px; border-bottom-left-radius:6px; background:#FFF; cursor:pointer; box-shadow:-1px 2px 5px #999; -moz-box-shadow:-1px 2px 5px #999; -webkit-box-shadow:-1px 2px 5px #999;;"><span>理财计算器</span></div>
+    <div id="caculator_hide" class="bddf clearfix white box_shadow" style="width:211px; border-top:0; float:left; height:267px; display:none">
+        <div class="gray_title">
+            <div class="f_l f_dgray b">理财计算器</div>
+            <div class="f_r f_dgray b">
+            	<span style="cursor:pointer;" onclick="hide_c()">X</span>
+            </div>
+        </div>
+        
+        <div class="clearfix pt5 pb5" id="calculate" style="width: 169px;">
+            <div class="f_l clearfix lh24" style="width: 160px;height: 35px;">
+                <span class="b f_l">初始投资</span>
+                <span class="f_l" style="padding-left: 5px;">
+                    <input type="text" name="amount" id="calculateAmount" class="f_l" style="width: 70px;"><span class="f_l pl5">元</span>
+                </span>
+            </div>
+            <div class="f_l clearfix lh24" style="padding-left: 12px; width: 160px;height: 35px;">
+                <span class="b f_l">年利率</span>
+                <span class="f_l" style="padding-left: 5px;">
+                    <input type="text" name="interest" id="calculateInterest" class="f_l" style="width: 70px;"><span class="f_l pl5">%</span>
+                </span>
+            </div>
+            <div class="f_l clearfix lh24" style="width: 160px;height: 35px;">
+                <span class="b f_l">投资期限</span>
+                <span class="f_l" style="padding-left: 5px;">
+                    <input type="text" name="year" id="calculateMonth" class="f_l" style="width: 70px;"><span class="f_l pl5">月</span>
+                </span>
+            </div>
+            <div class="f_l clearfix lh24" style="width: 160px;height: 30px;">
+                <span class="b f_l">还款方式</span>
+                <span class="f_l" style="padding-left: 5px;">
+                    <select id="repayType" >
+                        <option value="0">等额本息</option>
+                        <option value="1">付息还本</option>
+                        <option value="2">到期本息</option>
+                    </select>
+                </span>
+            </div>
+            <div class="f_l">
+                <div style="text-align:center; margin:5px 0;height:30px;width: 150px;">
+                    <img src="{$TMPL}/images/calculate.png" alt="" style="cursor: pointer; margin-left:45px" onclick="calculate()">
+                </div>
+            </div>
+            <div class="f_l clearfix lh24 mt5 pt5" style=" border-top:1px solid #ccc;width: 160px;height: 35px;">
+                <span class="f_l">本息合计</span>
+                <span class="f_l f_red" id="lastValue" style="padding-left: 5px;"></span>
+            </div>
+        </div>
+    </div>
+</div>
+            
+
 <script type="text/javascript">
 $(document).ready(function(e) {
 	$('body').css('background-color','#E6E6E6');
@@ -303,7 +356,95 @@ $(function() {
 			$(this).find('.left').css('transform', "rotate(" + (num - 180) + "deg)");
 		};
 	});
+	
+	<!--首页计算器固定位置-->
+	$(window).scroll(function(){
+		var scroH = $(this).scrollTop();
+		if(scroH >= 98){
+			$("#sidebar").css('top','47%');
+		}
+		else{
+			$("#sidebar").css('top','52.7%');
+		}
+	})
+
 });
+
+function show_c() {
+	$('#caculator_show').hide();
+	$('#caculator_hide').show();
+}
+
+function hide_c() {
+	$('#caculator_hide').hide();
+	$('#caculator_show').show();
+}
+
+function calculate(){
+	var amount=$("#calculateAmount").val();
+	var interest=$("#calculateInterest").val();
+	var month=$("#calculateMonth").val();
+	var repayType = $("#repayType").val();
+
+	if((amount.replace(/[ ]/g, "")) == "" || (amount.replace(/[ ]/g, "")) == null||amount==""||amount==null){
+		$.showErr("请输入初始投资");
+		return;
+	}else{
+		amount=$.trim(amount);
+		if(/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/.test(amount)==false){
+			$.showErr("初始投资只能为整数或者小数且最多只能有两位小数");
+			return;
+		}else{
+			if(amount>1000000){
+				$.showErr("初始投资为100万以下");
+				return;
+			}
+		}
+	}
+	if((interest.replace(/[ ]/g, "")) == "" || (interest.replace(/[ ]/g, "")) == null||interest==""||interest==null){
+		$.showErr("请输入年利率");
+		return;
+	}else{
+		interest=$.trim(interest);
+		if(/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/.test(interest)==false){
+			$.showErr("年利率只能为整数或者小数且最多只能有两位小数");
+			return;
+		}else{
+			if(interest>=100){
+				$.showErr("年利率必须在100%以下");
+				return false;
+			}
+		}
+	}
+	if((month.replace(/[ ]/g, "")) == "" || (month.replace(/[ ]/g, "")) == null||month==""||month==null){
+		$.showErr("请输入投资期限");
+		return;
+	}else{
+		month=$.trim(month);
+		if(/^(([1-9]{1}\d*)|([0]{1}))(\.(\d){1,2})?$/.test(month)==false){
+			$.showErr("投资期限只能为整数或者小数且最多只能有两位小数");
+			return;
+		}else{
+			if(month>100){
+				$.showErr("投资期限为100月以内");
+				return;
+			}
+		}
+	}
+	var value = 0;
+	var inters= interest /(100*12);
+	if(repayType==0){
+		value= month*amount*(inters*Math.pow((1+inters), month) / (Math.pow((1+inters),month)-1));
+	}
+	else if(repayType==1){
+		value = parseFloat(amount) + parseFloat(inters*amount*month);
+	}
+	else if(repayType==2){
+		value = parseFloat(amount) + parseFloat(inters*amount*month);
+	}
+	
+	$("#lastValue").html(formatNum(value));
+}
 
 </script>
 
