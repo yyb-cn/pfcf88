@@ -694,7 +694,6 @@ function validate(theform) {
     if (document.getElementById('name').value != "") {  
         if (document.getElementById('name').value.length == 1) {  
             alert('真实姓名必须是一个字以上！');
-            document.getElementById('name').focus();  
             return false;  
         }  
         var nnname = document.getElementById('name').value;  
@@ -702,12 +701,10 @@ function validate(theform) {
         if (arr = nnname.match(reg)) {  
             if (!check_surname(nnname)) {  
               //alert('  真实姓名格式错误！');
-                document.getElementById('name').focus();  
                 return false;  
             }  
         } else {  // www.jbxue.com
           alert('真实姓名必须全部为中文');
-            document.getElementById('name').focus();  
             return false;  
         }  
         document.getElementById('_name').innerHTML ="姓名格式正确！";  
