@@ -188,7 +188,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
         <ul>
        		{foreach from=$deal_list item="deal" key=key name="deal"}
            	<?php $i+=1; $d+=1; ?>
-        	<li class="invest_main" <?php if($d > 3):?> style="display:none" <?php endif; ?> >
+        	<li class="invest_main" <?php if($d == 6):?> style="border-bottom:none;" <?php endif; ?> >
             	{if $deal.deal_status eq 1}<a href="{$deal.url}" class="invest_current"></a>{/if}
                 
            		<p class="invest_title"   ><a href="{$deal.url}" <?php if($i==1) :?> style="color:#f97c5e;"<?php elseif($i == 2):?> style="color:#ba5a76;"<?php elseif($i == 3):$i =0 ?> style="color:#789855;"<?php endif;?> >{$deal.color_name}</a></p>
@@ -212,7 +212,6 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
           	</li>
             {/foreach}
         </ul>
-        <div class="invest_bottom">更多理财产品...</div>
     </div>
 	<!--14年6月18日修改投资列表结束-->
 
@@ -266,8 +265,8 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
     
 </div>
 
-<div id="sidebar" style="width:220px; margin-right:500px; position:fixed; right:50%; top:52.7%; height:277px;">
-	<div id="caculator_show" onclick="show_c()" class="f_r" style="width:30px; line-height:20px; font-size:16px; text-align:center; border:1px #999999 solid; border-top-left-radius:6px; border-bottom-left-radius:6px; background:#FFF; cursor:pointer; box-shadow:-1px 2px 5px #999; -moz-box-shadow:-1px 2px 5px #999; -webkit-box-shadow:-1px 2px 5px #999;;"><span>理财计算器</span></div>
+<div id="sidebar" style="width:220px; margin-right:510px; position:fixed; right:50%; bottom:1%; height:277px;">
+	<div id="caculator_show" onclick="show_c()" class="f_r" style="width:40px; height:40px; cursor:pointer; margin-top:237px;"><img src="{$TMPL}/images/caculator.png" /></div>
     <div id="caculator_hide" class="bddf clearfix white box_shadow" style="width:211px; border-top:0; float:left; height:267px; display:none">
         <div class="gray_title">
             <div class="f_l f_dgray b">理财计算器</div>
@@ -357,17 +356,6 @@ $(function() {
 		};
 	});
 	
-	<!--首页计算器固定位置-->
-	$(window).scroll(function(){
-		var scroH = $(this).scrollTop();
-		if(scroH >= 98){
-			$("#sidebar").css('top','47%');
-		}
-		else{
-			$("#sidebar").css('top','52.7%');
-		}
-	})
-
 });
 
 function show_c() {
