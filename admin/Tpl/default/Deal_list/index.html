@@ -7,6 +7,19 @@
 <load href='__TMPL__Common/style/weebox.css' />
 
 <script type="text/javascript">
+
+	function send(id)
+	{
+		$.ajax({ 
+				url: ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=send&id="+id, 
+				data: "ajax=1",
+				success: function(msg){
+					alert(msg);
+				}
+		});
+	}
+
+
 	function show_detail(id)
 	{
 		$.weeboxs.open(ROOT+'?m=Deal&a=show_detail&id='+id, {contentType:'ajax',showButton:false,title:LANG['COUNT_TOTAL_DEAL'],width:600,height:330});
@@ -28,15 +41,7 @@
 		}
 	}
 	
-	function get_send_type_name($send_type)
-	{
-		if($send_type==1){
-			return "可积分兑换";
-		}
-		else{
-			return '不可积分兑换';
-		}
-	}
+	
 	function date_int($time)
 	{
 		
@@ -144,7 +149,7 @@
 				<a >已经录入</a>
 				<a href="http://rg.jlpefund.com?code=<?php echo base64_encode((md5('jlpe').$v['deal_load_id']))?>">查看</a>
 		<?php  endif;?>
-		
+		<a href="javascript:send({$v.user_id})">发送邮件</a>
 	</td>
 </tr>
 <?php endforeach;?>

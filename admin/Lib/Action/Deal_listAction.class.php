@@ -65,7 +65,7 @@ class Deal_listAction extends CommonAction{
 		{
 			$order=	"order  by dl.deal_load_check_yn ".$sort;
 		}
-    	$sql = "select d.name,d.repay_time,d.repay_time_type,dl.user_name,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time , dl.deal_load_check_yn from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=d.user_id where ".$condition .' '. $order;
+    	$sql = "select d.name,d.repay_time,d.repay_time_type,dl.user_name,dl.user_id,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time , dl.deal_load_check_yn from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=d.user_id where ".$condition .' '. $order;
 		
 		
 		$list = $GLOBALS['db']->getAll($sql);
@@ -84,7 +84,10 @@ class Deal_listAction extends CommonAction{
 		
 		redirect('?m=Deal_list&a=index');
 	}
-	
+	public function send()
+	{
+		echo  'heihei，还没做好';
+	}
 	
 }
 ?>
