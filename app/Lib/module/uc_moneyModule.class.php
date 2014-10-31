@@ -355,13 +355,13 @@ class uc_moneyModule extends SiteBaseModule
 			}
 			$fee = 0;
 			if($data['money']>0&&$data['money'] < 20000){
-				$fee = 1;
+				$fee = 0;
 			}
 			if($data['money']>=20000&&$data['money'] < 50000){
-				$fee = 3;
+				$fee = 0;
 			}
 			if($data['money'] >= 50000){
-				$fee = 5;
+				$fee = 0;
 			}
 			
 			if(($data['money'] + $fee) > floatval($GLOBALS['user_info']['money'])){
