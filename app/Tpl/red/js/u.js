@@ -133,13 +133,13 @@ function setCarryResult(){
 	}
 	var fee = 0;
 	if(carry_amount>0&&carry_amount < 20000){
-		fee = 1;
+		fee = 0;
 	}
 	if(carry_amount>=20000&&carry_amount < 50000){
-		fee = 3;
+		fee = 0;
 	}
 	if(carry_amount >= 50000){
-		fee = 5;
+		fee = 0;
 	}
 	
 	if(carry_amount + fee > total_amount){
