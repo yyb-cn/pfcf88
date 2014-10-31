@@ -143,6 +143,9 @@ class uc_dealModule extends SiteBaseModule
 		$GLOBALS['tmpl']->display("page/uc.html");	
 	}
 	
+	
+	
+	
 	//正常还款执行界面
 	public function repay_borrow_money(){
 		$id = intval($_REQUEST['id']);
@@ -321,6 +324,7 @@ class uc_dealModule extends SiteBaseModule
 			$v['u_key'] = $k;
 			$user_loan_list = get_deal_user_load_list($v,$deal['loantype'],$deal['repay_time_type']);
 			$loan_user_info = array();
+
 			foreach($user_loan_list as $kk=>$vv){
 				if($vv['has_repay']==0){//借入者已还款，但是没打款到借出用户中心
 					$user_load_data['deal_id'] = $v['deal_id'];
@@ -352,6 +356,9 @@ class uc_dealModule extends SiteBaseModule
 								$user_load_data['self_money'] = 0;
 							}
 						}
+						
+						
+						
 						$user_load_data['repay_money'] = $vv['month_repay_money'];
 						$user_load_data['manage_money'] = $vv['month_manage_money'];
 						$user_load_data['impose_money'] = $vv['impose_money'];
@@ -517,6 +524,10 @@ class uc_dealModule extends SiteBaseModule
 		//月利率
 		$rate = $deal['rate']/12/100;
 		
+		if($deal['repay_time_type']==0){
+			$rate=$deal['rate']/365/100* $deal['repay_time'];   //七天！！！！！！！！！！！！
+		}
+		
 		//计算剩多少本金
 		$benjin = $deal['borrow_amount'];
 		if($deal['loantype']==0){//等额本息的时候才通过公式计算剩余多少本金
@@ -623,6 +634,12 @@ class uc_dealModule extends SiteBaseModule
 				}
 			}
 		}
+		if($deal['repay_time_type']==0){
+		$total_repay_money=$benjin+
+			$deal['borrow_amount'] * $deal['rate']/365/100 * $deal['repay_time'];
+		}
+		
+		
 		
 		$GLOBALS['tmpl']->assign("impose_money",$impose_money);
 		$GLOBALS['tmpl']->assign("total_repay_money",$total_repay_money);
@@ -774,7 +791,7 @@ class uc_dealModule extends SiteBaseModule
 			$v['rate'] = $deal['rate'];
 			$v['u_key'] = $k;
 			
-			$user_loan_list = get_deal_user_load_list($v,$deal['loantype']);
+			$user_loan_list = get_deal_user_load_list($v,$deal['loantype'],$deal['repay_time_type']);
 			$loan_user_info = array();
 			foreach($user_loan_list as $kk=>$vv){
 				//借入者已还款，但是没打款到借出用户中心
@@ -896,6 +913,12 @@ class uc_dealModule extends SiteBaseModule
 								if($user_self_money == 0){
 									$user_self_money = $user_load_data['self_money'] = $v['money'];
 									$user_load_data['repay_money'] = $vv['month_repay_money'] + $v['money'];
+									
+									if($deal['repay_time_type']==0){
+										$user_load_data['repay_money'] = $vv['month_repay_money'];
+									}
+									
+									
 									$user_load_data['impose_money'] = $v['money'] * (int)trim(app_conf('COMPENSATE_FEE'))/100;
 									$user_load_data['manage_money'] = $vv['money'] * trim(app_conf('USER_LOAN_MANAGE_FEE')) /100 * ($kk +1) ;
 								}

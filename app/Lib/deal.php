@@ -79,10 +79,6 @@ function get_deal($id=0,$cate_id=0)
     计算金额
 */     
     
-            //按天算收益
-            if($deal['repay_time_type'] == 0){
-                $deal['month_repay_money'] = $deal['borrow_amount'] * $deal['rate']/365/100 * $deal['repay_time'];
-            }    
 
 			//本息还款金额
 			if($deal['loantype'] == 0){
@@ -95,6 +91,10 @@ function get_deal($id=0,$cate_id=0)
 			elseif($deal['loantype'] == 2)
 				$deal['month_repay_money'] = $deal['borrow_amount'] * $deal['rate']/12/100 * $true_repay_time;
 				
+            //按天算收益
+            if($deal['repay_time_type'] == 0){
+                $deal['month_repay_money'] = $deal['borrow_amount'] * $deal['rate']/365/100 * $deal['repay_time'];
+            }    
 			$deal['month_repay_money_format'] = format_price($deal['month_repay_money']);
 			
 			//到期还本息管理费
@@ -636,6 +636,13 @@ function get_deal_user_load_list($user_load_info,$loantype,$repay_time_type = 1,
 			if($i+1 == $true_repay_time){
 				$lixi = $loan_list[$i]['month_repay_money'] = $user_load_info['money'] + $user_load_info['money']*$user_load_info['rate']/12/100*$true_repay_time;
 			}
+			
+			if($repay_time_type==0){
+				$lixi = $loan_list[$i]['month_repay_money'] = $user_load_info['money'] + $user_load_info['money']*$user_load_info['rate']/365/100*$true_repay_time*7;
+			};
+			
+			
+			
 		}
 		
 		
