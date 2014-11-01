@@ -28,7 +28,7 @@ $this->_var['cujs'][] = $this->_var['TMPL_REAL']."/js/u.js";
 			<div class="blank20"></div>
 			<div class="clearfix" style="width:736px;border:1px solid #ccc;line-height:30px;"> 
 	     		 <div class="f_l" style="line-height:30px;background:#F2F2F2;padding:0 20px;border-right:1px solid #ccc">累计提现金额：</div>
-	      		<div class="f_l pl10"> {function name="number_format" v=$carry_total_money f=2} 元 （备注：不含手续费，为实际到帐金额。）</div>
+	      		<div class="f_l pl10"> {function name="number_format" v=$carry_total_money f=2} 元 </div>
 			</div>
 			<div class="blank20"></div>
 			<div class="item_group" style="width: 716px">请输入你的提款金额：</div>
@@ -71,7 +71,8 @@ $this->_var['cujs'][] = $this->_var['TMPL_REAL']."/js/u.js";
 	            </div>
 	            <div class="field">
 	                <label>开户名：</label>
-	                <span><input type="text" readonly="readonly" name="real_name" id="Jcarry_real_name" class="f-input readonly" style="width:100px;" value="{$user_info.real_name}"></span>
+	                <!--<span><input type="text" readonly="readonly" name="real_name" id="Jcarry_real_name" class="f-input readonly" style="width:100px;" value="{$user_info.real_name}"></span>-->
+					<span><input type="text" name="real_name" id="Jcarry_real_name" class="f-input readonly" style="width:100px;" value="{$user_info.real_name}"></span>
 	            </div>
 	             <div class="field">
 	                <label> 帐户类型：</label>
@@ -100,10 +101,10 @@ $this->_var['cujs'][] = $this->_var['TMPL_REAL']."/js/u.js";
 	                </span>
 	            </div>
 				
-	           <div class="field">
+	          <!--   <div class="field">
 	               <label>&nbsp;</label>
-	              <!-- <span class="f_gray" id="Jcarry_bankSuggestNote">提现时间约为3个工作日。</span>-->
-	           </div>
+	             <span class="f_gray" id="Jcarry_bankSuggestNote">提现时间约为3个工作日。</span>
+	           </div>-->
 			   <script type="text/javascript" src="{$APP_ROOT}/public/runtime/app/region.js"></script>		
 				<div class="field" style="width:710px">
 																
