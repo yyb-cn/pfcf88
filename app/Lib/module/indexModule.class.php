@@ -121,9 +121,9 @@ class indexModule extends SiteBaseModule
 		//lu 马上购买 
 		// 广西城建三期
 		/**产品发布**********************经常要修改的地方*********************/
-		$credit= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=3  "," id DESC");//左边
+		$credit= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=10  "," id DESC");//左边
 		//print_r($credit);exit;
-		$chengjian= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=7  "," id DESC");//中
+		$chengjian= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=11  "," id DESC");//中
 		
 		$wenfeng= get_deal_list(1,0,"publish_wait =0 AND deal_status=1 AND cate_id=9  "," id DESC");//右边
 		
