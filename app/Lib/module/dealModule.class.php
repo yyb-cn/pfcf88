@@ -229,6 +229,7 @@ class dealModule extends SiteBaseModule
 	}
 	
 //成为贷款人
+
 	function dobidstepone(){
 		if(!$GLOBALS['user_info'])
 			showErr($GLOBALS['lang']['PLEASE_LOGIN_FIRST'],1);
@@ -242,9 +243,16 @@ class dealModule extends SiteBaseModule
 			}
 			$data['idno'] = trim($_REQUEST['idno']);
 			$data['idcardpassed'] = 1;
+			$data['real_name']=$_REQUEST['name'];//实名认证；姓名
+			
+			
+			
+			
 		}
 		
 		if($GLOBALS['user_info']['mobilepassed'] == 0){
+			
+
 			if(trim($_REQUEST['phone'])==""){
 				showErr($GLOBALS['lang']['MOBILE_EMPTY_TIP'],1);
 			}
@@ -265,6 +273,8 @@ class dealModule extends SiteBaseModule
 		
 		showSuccess($GLOBALS['lang']['SUCCESS_TITLE'],1);
 	}
+	
+	//确认投资
 	
 	function dobid(){
 				
