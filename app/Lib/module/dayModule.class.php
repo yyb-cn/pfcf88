@@ -50,7 +50,7 @@ class dayModule extends SiteBaseModule
 	{	
 	
 		
-		$day_list=$GLOBALS['db']->getAll("select * from ".DB_PREFIX."day" );
+		$day_list=$GLOBALS['db']->getAll("select * from ".DB_PREFIX."day" )->order('id desc');
 		//var_dump($day_list);
 		echo  '时间&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序列';
 		echo '<hr >';
