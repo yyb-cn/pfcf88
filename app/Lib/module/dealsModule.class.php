@@ -221,6 +221,8 @@ class dealsModule extends SiteBaseModule
 				//echo json_encode($orderby);exit;
 				//echo  $condtion=json_encode($condition);exit;
 				//默认的orderby 是 update_time DESC , sort DESC , id DESC
+				$condition.=' AND cate_id !=0';//过滤特殊标
+				
 				 $result = get_deal_list($limit,$n_cate_id,$condition,$orderby);
 				//echo json_encode($result);exit;
 				 $page_args['cid'] =  $cate_id;
@@ -374,6 +376,7 @@ class dealsModule extends SiteBaseModule
 		{
 			unset($_SESSION['order']);
 		}
+		$condition.=' AND cate_id !=0';//过滤特殊标
 		$result = get_deal_list($limit,$n_cate_id,$condition,$orderby);
 		//print_r($result);exit;
 		

@@ -34,12 +34,13 @@ class indexModule extends SiteBaseModule
 				unset($f_link_group[$k]);
 			}
 			//最新借款列表**产品发布**********************经常要修改的地方*********************
-			$deal_list =  get_deal_list(6,0,"publish_wait =0 AND deal_status in(1,2,4,5) "," id DESC");
+			$deal_list =  get_deal_list(6,0,"publish_wait =0 AND deal_status in(1,2,4,5) AND cate_id != 0 "," id DESC");//在$where中过滤掉cate_id等于特殊标的
+			
 			foreach($deal_list['list'] as $ke => $vel){
 				$deal_list['list'][$ke]['repay_start_time'] = date('Y-m-d',$vel['repay_start_time']);
+				
 			}
 			
-			//var_dump($deal_list['list']);exit;
 			$GLOBALS['tmpl']->assign("deal_list",$deal_list['list']);
 						
 			//输出公告
@@ -121,27 +122,17 @@ class indexModule extends SiteBaseModule
 		//lu 马上购买 
 		// 广西城建三期
 		/**产品发布**********************经常要修改的地方*********************/
-		
-		
 		//获取分类
-		
 		$cate=$GLOBALS['db']->getAll("select id,sort from ".DB_PREFIX."deal_cate order by sort desc limit 3");
-		
 		//print_r($cate);exit;
 		//echo $cate[2]['id'];exit;
-		
 		$credit= get_deal_list(1,0,"publish_wait =0  AND cate_id=".$cate[0]['id']," id DESC");//左边
-		
-		
-		
 		$credit['list'][0]['longtime']=$credit['list'][0]['repay_time_type']?$credit['list'][0]['repay_time']*30:$credit['list'][0]['repay_time'];
 		$credit['list'][0]['rate']=round($credit['list'][0]['rate'],1);
 		
 		$chengjian= get_deal_list(1,0,"publish_wait =0 AND  cate_id= ".$cate[1]['id']," id DESC");//中
-		
 		$chengjian['list'][0]['longtime']=$chengjian['list'][0]['repay_time_type']?$chengjian['list'][0]['repay_time']*30:$chengjian['list'][0]['repay_time'];
 		$chengjian['list'][0]['rate']=round($chengjian['list'][0]['rate'],1);
-		
 		
 		$wenfeng= get_deal_list(1,0,"publish_wait =0 AND cate_id=  ".$cate[2]['id']," id DESC");//右边
 		$wenfeng['list'][0]['longtime']=$wenfeng['list'][0]['repay_time_type']?$wenfeng['list'][0]['repay_time']*30:$wenfeng['list'][0]['repay_time'];
@@ -216,5 +207,6 @@ class indexModule extends SiteBaseModule
 		
 		$GLOBALS['tmpl']->display("page/index.html",$cache_id);
 	}
+
 }	
 ?>
