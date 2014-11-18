@@ -14,10 +14,8 @@ class dealsModule extends SiteBaseModule
 	//判断是否为ajax提交
 	if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
 	{	
-		
-				
-					//把提交上来的条件保留到session中
-					//这个是condition
+		//把提交上来的条件保留到session中
+		//这个是condition
 					if($_POST['type']==1)//condition类型
 					{
 						
@@ -221,7 +219,7 @@ class dealsModule extends SiteBaseModule
 				//echo json_encode($orderby);exit;
 				//echo  $condtion=json_encode($condition);exit;
 				//默认的orderby 是 update_time DESC , sort DESC , id DESC
-				$condition.=' AND cate_id !=0';//过滤特殊标
+				$condition.=' AND cate_id !=13';//过滤特殊标
 				
 				 $result = get_deal_list($limit,$n_cate_id,$condition,$orderby);
 				//echo json_encode($result);exit;
@@ -376,7 +374,7 @@ class dealsModule extends SiteBaseModule
 		{
 			unset($_SESSION['order']);
 		}
-		$condition.=' AND cate_id !=0';//过滤特殊标
+		$condition.=' AND cate_id !=13';//过滤特殊标
 		$result = get_deal_list($limit,$n_cate_id,$condition,$orderby);
 		
 		$GLOBALS['tmpl']->assign("deal_list",$result['list']);
@@ -630,7 +628,7 @@ class dealsModule extends SiteBaseModule
 					}
 						
 			
-				$condition.=' AND cate_id =12';//显示特殊标
+				$condition.=' AND cate_id =13';//显示特殊标
 				
 				 $result = get_deal_list($limit,$n_cate_id,$condition,$orderby);
 				//echo json_encode($result);exit;
@@ -773,7 +771,7 @@ class dealsModule extends SiteBaseModule
 		{
 			unset($_SESSION['order']);
 		}
-		$condition.=' AND cate_id =12';//显示特殊标
+		$condition.=' AND cate_id =13';//显示特殊标
 		$result = get_deal_list($limit,$n_cate_id,$condition,$orderby);
 		$GLOBALS['tmpl']->assign("deal_list",$result['list']);
 		$GLOBALS['tmpl']->assign("total_money",$total_money);
