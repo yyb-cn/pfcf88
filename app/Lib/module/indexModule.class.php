@@ -33,38 +33,38 @@ class indexModule extends SiteBaseModule
 				else
 				unset($f_link_group[$k]);
 			}
-			//最新借款列表**产品发布**********************经常要修改的地方*!!!!!!!!!!!!!!!!!!********************
-			$deal_list =  get_deal_list(6,0,"publish_wait =0 AND deal_status in(1,2,4,5) AND cate_id != 12 "," id DESC");//在$where中过滤掉cate_id等于特殊标的
+			
+			//最新借款列表
+			
+			/**++++++++++++++++++++++++经常要修改的地方++++++++++++++++++++++++++++++++++++*/
+			
+			$deal_list =  get_deal_list(6,0,"publish_wait =0 AND deal_status in(1,2,4,5) AND cate_id != 0 "," id DESC");//在$where中过滤掉cate_id等于特殊标的
 			
 			foreach($deal_list['list'] as $ke => $vel){
 				$deal_list['list'][$ke]['repay_start_time'] = date('Y-m-d',$vel['repay_start_time']);
-				
 			}
-			
 			$GLOBALS['tmpl']->assign("deal_list",$deal_list['list']);
-						
 			//输出公告
 			$notice_list = get_notice(0);
 			foreach($notice_list as $kkd=>$vxd){
 				$notice_list[$kkd]['update_time'] = date('m月d日',$vxd['create_time']);
 				}
 			$GLOBALS['tmpl']->assign("notice_list",$notice_list);
-			
-			//lu 成交数据
-		$deal_data = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal where deal_status in(1,2,4,5) and is_delete=0  ");
+			// 成交数据
+			$deal_data = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."deal where deal_status in(1,2,4,5) and is_delete=0  ");
 			foreach($deal_data as $kd=>$vd){
-				//lu 累计总交易金额
+				// 累计总交易金额
 				$tatal_money+=$vd['borrow_amount'];
 				//is_delete=0
 				$deal_id[]=$vd['id'];
 				}
-			//lu 已按期还本金额
+			//已按期还本金额
 			$deal_benjin = $GLOBALS['db']->getAll("select borrow_amount from ".DB_PREFIX."deal where deal_status=5 ");
 			foreach($deal_benjin as $kbj=>$vbj){
 				 	
 				$done_money+=$vbj['borrow_amount'];
 				}
-			//lu 为用户带来的 收益  
+			// 为用户带来的 收益  
 
 			$deal_success_money=$GLOBALS['db']->getAll("select rate ,repay_time,repay_money,repay_time_type from ".DB_PREFIX."deal  where deal_status=5 ");
 			
@@ -81,12 +81,9 @@ class indexModule extends SiteBaseModule
 			}
 			//共有多少人投资
 			$seven_nums=count(array_unique($peo));//数组中值不相同的个数  
-			
-				$GLOBALS['tmpl']->assign("seven_nums",$seven_nums);//投资人数 
-				$GLOBALS['tmpl']->assign("seven_money_totle",$seven_money_totle);   //投资金额 
+			$GLOBALS['tmpl']->assign("seven_nums",$seven_nums);//投资人数 
+			$GLOBALS['tmpl']->assign("seven_money_totle",$seven_money_totle);   //投资金额 
 			/**七天投资总额**/
-		
-			
 			$income_totle=0;
 			foreach($deal_success_money as $k=>$v){
 				if($v['repay_time_type']){//月份
@@ -121,7 +118,7 @@ class indexModule extends SiteBaseModule
 		}
 		//lu 马上购买 
 		// 广西城建三期
-		/**产品发布**********************经常要修改的地方*********************/
+		
 		//获取分类
 		$cate=$GLOBALS['db']->getAll("select id,sort from ".DB_PREFIX."deal_cate order by sort desc limit 3");
 		//print_r($cate);exit;
