@@ -70,8 +70,6 @@ class Deal_listAction extends CommonAction{
 		
 		$list = $GLOBALS['db']->getAll($sql);
 		//deal_load_check_yn
-		//print_r($list);exit;
-		
 		$this->assign('list',$list);
 		$this->display();
 		

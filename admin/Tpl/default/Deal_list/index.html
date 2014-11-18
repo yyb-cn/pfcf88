@@ -137,7 +137,7 @@
 		&nbsp;{$v.repay_time}&nbsp;<?php echo  $v['repay_time_type']?'个月':'天'?>
 	</td>
 	<td>
-		&nbsp;<?php echo date("Y-m-d H:i:s",$v['deal_time'])?>
+		&nbsp;<?php echo to_date($v['deal_time'],"Y-m-d H:i:s")?>
 	</td>
 	
 	
