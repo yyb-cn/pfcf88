@@ -63,6 +63,11 @@
 		</td>
 	</tr>
 	</if>
+	<if condition="$deal_info.deal_status eq 1">
+		<tr>
+			<td colspan=2 ><a style="float:right;color:#F00;cursor:pointer" onclick="if(confirm('一键满标')){ window.location.href='__APP__?m=Deal&a=manbiao&id={$deal_info.id}'}">一键满标</a></td>
+		</tr>
+	</if>
 	<tr>
 		<td colspan=2 class="bottomTd"></td>
 	</tr>

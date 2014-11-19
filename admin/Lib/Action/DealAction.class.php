@@ -553,7 +553,6 @@ class DealAction extends CommonAction{
 	public function update() {
 		B('FilterString');
 		$data = M(MODULE_NAME)->create ();
-		
 		$log_info = M(MODULE_NAME)->where("id=".intval($data['id']))->getField("name");
 		//开始验证有效性
 		$this->assign("jumpUrl",u(MODULE_NAME."/edit",array("id"=>$data['id'])));
@@ -597,8 +596,7 @@ class DealAction extends CommonAction{
 				}
 			}
 		}
-		
-		
+	
 		// 更新数据
 		$list=M(MODULE_NAME)->save ($data);
 		if (false !== $list) {
@@ -752,16 +750,45 @@ class DealAction extends CommonAction{
 		syn_deal_status($id);
 		$deal_info = M("Deal")->getById($id);
 		$this->assign("deal_info",$deal_info);
-		
 		$true_repay_money  =  M("DealLoadRepay")->where("deal_id=".$id)->sum("repay_money");
-		
 		$this->assign("true_repay_money",$true_repay_money);
-		
 		$loan_list = D("DealLoad")->where('deal_id='.$id)->order("id ASC")->findall();
 		$this->assign("loan_list",$loan_list);
 		
 		$this->display();
 	}
+	//意见满标
+	public function manbiao()
+	{
+		$id = intval($_REQUEST['id']);
+		syn_deal_status($id);
+		$deal_info = M("Deal")->getById($id);
+		$data['id']=$id ;
+		$data['borrow_amount']=$deal_info['load_money'];
+		//总借款borrow_amount
+		//筹款load_money
+		$list=M(MODULE_NAME)->save ($data);
+		if (false !== $list) {
+			require_once(APP_ROOT_PATH."app/Lib/common.php");
+			//成功提示
+			syn_deal_status($data['id']);
+			syn_deal_match($data['id']);
+			//发送电子协议邮件
+			require_once(APP_ROOT_PATH."app/Lib/deal.php");
+			send_deal_contract_email($data['id'],array(),$data['user_id']);
+			//成功提示
+			save_log($log_info.L("UPDATE_SUCCESS"),1);
+			$this->success(L("UPDATE_SUCCESS"));
+		} else {
+			//错误提示
+			$dbErr = M()->getDbError();
+			save_log($log_info.L("UPDATE_FAILED").$dbErr,0);
+			$this->error(L("UPDATE_FAILED").$dbErr,0);
+		}
+		
+	
+	}
+	
 	
 	public function filter_html()
 	{
