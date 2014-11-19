@@ -2,50 +2,8 @@
 	
 <link  rel="stylesheet"  href="{$TMPL}/css/deals.css">
 <div style=" margin:0 auto;width:1000px; position:relative;">
-<div style=" float:left;width:730px;">
-<div class="deals_css white box_shadow">
-			<div>
-					<ul  class="condition" >
-                    <li class="li_f">投资起步:</li>
-					<li><a  href="javascript:;" class="li_current"     name="min_loan_money" value=0 type=1>全部</a></li>
-					<li><a  href="javascript:;"    name="min_loan_money" value=100 type=1>100元</a></li>
-					<li><a  href="javascript:;"    name="min_loan_money" value=1000 type=1>1000元</a></li>
-					</ul>
-					
-					<ul  class="condition" >
-                    <li class="li_f">产品分类:</li>
-					<li><a  href="javascript:;" class="li_current" name="cate_id" value=0 type=1>全部</a></li>
-					<li><a  href="javascript:;"    name="cate_id" value=5 type=1>广西城建三期</a></li>
-					<li><a  href="javascript:;"    name="cate_id" value=3 type=1>信贷赢</a></li>
-                    <li><a  href="javascript:;"    name="cate_id" value=6 type=1>文峰市场</a></li>
-					</ul>
-					
-					<ul  class="condition" >
-                    <li class="li_f">投资利率：</li>
-					<li><a  href="javascript:;" class="li_current"     name="rate" value=0 type=1>全部</a></li>
-					<li><a  href="javascript:;"    name="rate" value=7.5 type=1>7.5%以上</a></li>
-					<li><a  href="javascript:;"    name="rate" value=9 type=1>9%以上</a></li>
-					<li><a  href="javascript:;"   name="rate" value=12 type=1>12%以上</a></li>
 
-					</ul>
-					
-					<ul  class="condition">
-                    <li   class="li_f">投资期限：</li>
-					<li><a  href="javascript:;"  class="li_current"  class="tcur"  value="0"  name="repay_time" type=1>全部</a></li>
-					<li><a  href="javascript:;"  data-max="12" value=3  name="repay_time" type=1>3个月</a></li>
-					<li><a  href="javascript:;"  data-min="12" value=6  name="repay_time" type=1>6个月</a></li>
-					<li><a  href="javascript:;"  data-min="12" value=9 name="repay_time" type=1>9个月</a></li>
-					<li><a  href="javascript:;"  data-min="12" value=12  name="repay_time" type=1>12个月</a></li>
-					</ul>
-					<ul  class="condition">
-                    <li   class="li_f">项目状态：</li>
-					<li><a  href="javascript:;"  class="li_current"  class="tcur"  value="0"  name="deal_status" type=1>全部</a></li>
-					<li><a  href="javascript:;"  data-max="12" value=1  name="deal_status" type=1>投标中</a></li>
-					<li><a  href="javascript:;"  data-min="12" value=2  name="deal_status" type=1>投标完成</a></li>
-					<li><a  href="javascript:;"  data-min="12" value=4 name="deal_status" type=1>还款中</a></li>
-					<li><a  href="javascript:;"  data-min="12" value=5  name="deal_status" type=1>还款完成</a></li>
-					</ul>
-			</div>
+<div class="deals_css white box_shadow" style="width:960px; margin-top:10px;">
 		
 		<script type="text/javascript">
 		
@@ -91,8 +49,8 @@
 								{
 									l+='  item_1'
 									}
-								l+='  tc" style="width:730px; position:relative; height:85px; padding-top:25px;" onmousemove=\'this.style.background="#e2e6e9"\' onMouseOut=\'this.style.background="#FFF"\'><div class="clearfix" style="padding-top:8px;"><div class="pt10"><div class="f_l tl w170">'
-						l+='<div class="b">';
+								l+='  tc" style="width:960px; position:relative; height:85px; padding-top:25px;" onmousemove=\'this.style.background="#e2e6e9"\' onMouseOut=\'this.style.background="#FFF"\'><div class="clearfix" style="padding-top:8px;"><div class="pt10"><div class="f_l tl w171">'
+						l+='<div class="b w171">';
 						l+='<a href="'+data[i].url+'" '
 						l+='target="_blank" id="deal_my_name">';
 						l+=data[i].name +'</a></div>'
@@ -133,7 +91,7 @@
 			                  l+='</div>'  
 							  l+='</div> '
 			            
-					l+='<div style="float:right; width:96px; height:36px;position:absolute;left:600px;top:2px;">'
+					l+='<div style="float:right; width:96px; height:36px;position:absolute;left:800px;top:2px;">'
 						if(data[i].deal_status==1){
 						l+='<a style="background:none; border:none; padding:0px" href="'+data[i].url+'" class="btn-orange"><img style=" width:80px; height:80px; margin-top:15px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>'
 							}
@@ -299,22 +257,23 @@
 
    </div>
   <div id="content" class="clearfix">
-		<div class="long f_l white box_shadow">
+		<div class="long f_l white box_shadow" style="width:960px;">
 			<div class="clearfix bddf">
 				{if $cate_id gt 0}
 				<div class="clearfix"><img src="{$TMPL}/images/cate_top_{$cate_id}.jpg"></div>
 				{/if}
 				
 				{if $total_money}
-				<div class="biao_top_countbox clearfix">
-					<!--<div class="f_l">总成交金额：<span class="f_red">{function name="format_price" v="$total_money"}</span></div>-->
+				<div class="biao_top_countbox clearfix" style="color:#F00; height:auto; text-align:center; font-size:14px; font-weight:bold; padding-bottom:10px;">
+					返佣专区<br />
+                    <p style="text-align:left; line-height:18px; text-indent:2em;">此活动专区专为新客户而设计,新注册的客户,无论是使用1000元购买7天的,还是1个月或者3个月的理财产品,都只能获得一次性的40元赠送金,赠送资金会在产品到期当天赠送到账户内,返佣点数直接算进收益拨付.</p>
 				</div>
 				{/if}
 				
 				{if $deal_list}
 				{if $cate_id eq "-1"}
 				<div class="f_dgray b tc" style="height:40px;line-height:40px;">
-			          <div class="f_l tl w170"> 标题  / 借款人 </div>
+			          <div class="f_l tl w172" style="width:340px;"> 标题  / 借款人 </div>
 			          <div class="f_l w90">金额</div> 
 			          <div class="f_l w80">利率</div>
 			          <div class="f_l w80">期限</div>
@@ -322,7 +281,7 @@
 			     </div>
 				{else}
 				<div class="f_dgray b tc" style="height:40px;line-height:40px; padding-left:20px;">
-			          <div class="f_l tl w170"> 标题  / 借款人 </div>
+			          <div class="f_l tl w172"> 标题  / 借款人 </div>
 					
 			          <div class="f_l w90">
 			             <a  href="javascript:;"  class="myselect bgdown" name="borrow_amount" type=2 check="asc" >金额</a>
@@ -343,12 +302,12 @@
 				 {/if}
 				<div class="biao-list clearfix" id="J_biao_list" style="position:relative; overflow:hidden;">
 					{foreach from=$deal_list item="deal" key=key}
-					<div class="item {if $key mod 2 eq 1}item_1{/if} tc" style="width:730px; position:relative; height:85px; padding-top:25px;" onmousemove='this.style.background="#e2e6e9"' onMouseOut='this.style.background="#FFF"'>
+					<div class="item {if $key mod 2 eq 1}item_1{/if} tc" style="width:960px; position:relative; height:85px; padding-top:25px;" onmousemove='this.style.background="#e2e6e9"' onMouseOut='this.style.background="#FFF"'>
 			              <div class="clearfix" style="padding-top:8px;">
 			                  
 			                  <div class="pt10">
-			                  <div class="f_l tl w170">
-									<div class="b">
+			                  <div class="f_l tl w171">
+									<div class="b w171 f_l">
 									<a href="{$deal.url}" target="_blank" id="deal_my_name">{$deal.color_name}</a>
 									</div>
 									<div class="f_gray" style="display:none">单位类别：{$deal.type_match_row}</div>
@@ -399,7 +358,7 @@
 			                  </div>
                               
 			              
-			</div><div style="float:right; width:96px; height:36px;  position:absolute;left:600px;top:2px;">
+			</div><div style="float:right; width:96px; height:36px;  position:absolute;left:800px;top:2px;">
 				{if $deal.deal_status eq 1}
             <a style="background:none; border:none; padding:0px" href="{$deal.url}" class="btn-orange"><img style=" width:80px; height:80px; margin-top:15px;" src="{$TMPL}/images/load.png" alt="" width="111px" height="34px"></a>
             {elseif $deal.deal_status eq 2}<!--满标-->
@@ -425,12 +384,12 @@
 			</div>
 		</div>
          </div>
-        <div style=" float:right;width:0px; position:absolute;left:740px;top:0;">
+        <div style=" float:right;width:0px; position:absolute;left:960px;top:0;">
 		
 	</div>
 	</div>
 </div>
-</div>
+
 <script type="text/javascript" language="JavaScript">
 	$(document).ready(function() {
 	
