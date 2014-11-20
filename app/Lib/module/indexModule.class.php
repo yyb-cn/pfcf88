@@ -37,8 +37,10 @@ class indexModule extends SiteBaseModule
 			//最新借款列表
 			
 			/**++++++++++++++++++++++++经常要修改的地方++++++++++++++++++++++++++++++++++++*/
-			
-			$deal_list =  get_deal_list(6,0,"publish_wait =0 AND deal_status in(1,2,4,5) AND cate_id != 13 "," id DESC");//在$where中过滤掉cate_id等于特殊标的
+			/**++++++++++++++++++++++++经常要修改的地方++++++++++++++++++++++++++++++++++++*/
+			/**++++++++++++++++++++++++经常要修改的地方++++++++++++++++++++++++++++++++++++*/
+			/**++++++++++++++++++++++++经常要修改的地方++++++++++++++++++++++++++++++++++++*/
+			$deal_list =  get_deal_list(6,0,"publish_wait =0 AND deal_status in(1,2,4,5) AND cate_id != 13  AND  cate_id != 14 "," id DESC");//在$where中过滤掉cate_id等于特殊标的
 			
 			foreach($deal_list['list'] as $ke => $vel){
 				$deal_list['list'][$ke]['repay_start_time'] = date('Y-m-d',$vel['repay_start_time']);
