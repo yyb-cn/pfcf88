@@ -267,7 +267,26 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
         </ul>
    	</div>
     <!--14年6月18日修改行业新闻结束-->
-    
+
+    <div class="blank10"></div><div class="blank10"></div>
+	<div class="news white box_shadow">
+        <ul>
+        {foreach from=$deal_help item=help_cate name="help_cate"}
+            {if $smarty.foreach.help_cate.iteration <= app_conf('HELP_CATE_LIMIT')}
+            <li style="height:auto; border:none;">
+                <h3>{$help_cate.title}</h3>
+                <ul style="margin:0; margin-left:1em;">
+                    {foreach from=$help_cate.help_list item=help_item name="help_item"}
+                    {if $smarty.foreach.help_item.iteration <= app_conf('HELP_ITEM_LIMIT')}
+                    <li><a href="{$help_item.url}" title="{$help_item.title}" {if $help_item.new eq 1}target="_blank"{/if}>{$help_item.title}</a></li>
+                    {/if}
+                    {/foreach}             
+                </ul>
+            </li> 
+            {/if}
+            {/foreach}
+        </ul>
+   	</div>
 </div>
 
 <div id="sidebar" style="width:220px; margin-right:510px; position:fixed; right:50%; bottom:1%; height:277px;">

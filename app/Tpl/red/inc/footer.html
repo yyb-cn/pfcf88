@@ -1,27 +1,7 @@
 	</div>
 	<div class="blank"></div>
 	<div id="ftw" style="height:auto;">
-        <div id="ft">
-        	<div class="wrap">
-	            <ul class="cf">
-	            	{foreach from=$deal_help item=help_cate name="help_cate"}
-					{if $smarty.foreach.help_cate.iteration <= app_conf('HELP_CATE_LIMIT')}
-					<li class="col hp{$smarty.foreach.help_cate.iteration}{if $smarty.foreach.help_cate.last} end{/if}" style="height:auto; border:none;">
-	                    <h3>{$help_cate.title}</h3>
-	                    <ul class="sub-list">
-							{foreach from=$help_cate.help_list item=help_item name="help_item"}
-							{if $smarty.foreach.help_item.iteration <= app_conf('HELP_ITEM_LIMIT')}
-							<li><a href="{$help_item.url}" {if $help_item.new eq 1}target="_blank"{/if}>{$help_item.title}</a></li>
-							{/if}
-							{/foreach}             
-						</ul>
-	                </li> 
-					{/if}
-					{/foreach}
-	            </ul>
-				<div class="blank"></div>
-			</div>
-			<div class="footer_line"></div>   
+        <div id="ft"> 
 <div class="ass" style="height:110px;"> 
 		<div class="wrap">
 				{if $f_link_data}
