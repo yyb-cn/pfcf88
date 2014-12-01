@@ -752,7 +752,7 @@ class DealAction extends CommonAction{
 		$this->assign("deal_info",$deal_info);
 		$true_repay_money  =  M("DealLoadRepay")->where("deal_id=".$id)->sum("repay_money");
 		$this->assign("true_repay_money",$true_repay_money);
-		$loan_list = D("DealLoad")->where('deal_id='.$id)->order("id ASC")->findall();
+		$loan_list = D("DealLoad")->join(DB_PREFIX.'user ON '.DB_PREFIX.'deal_load.user_id = '.DB_PREFIX.'user.id')->join(DB_PREFIX.'user_group ON '.DB_PREFIX.'user.group_id = '.DB_PREFIX.'user_group.id')->field(DB_PREFIX.'deal_load.*,'.DB_PREFIX.'user_group.name')->where('deal_id='.$id)->order("id ASC")->findall();
 		$this->assign("loan_list",$loan_list);
 		
 		$this->display();
