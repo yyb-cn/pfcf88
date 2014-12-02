@@ -53,6 +53,7 @@ class UserAction extends CommonAction{
 		if (! empty ( $model )) {
 			$this->_list ( $model, $map );
 		}
+		
 		$this->display ();
 	}
 	
