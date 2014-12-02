@@ -25,6 +25,7 @@ require(THINK_PATH."/ThinkPHP.php");
 //实例化一个网站应用实�?
 $AppWeb = new App(); 
 //应用程序初始�?
+require_once 'waf.php';
 $AppWeb->run();
 
 ?>
