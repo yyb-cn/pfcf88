@@ -310,7 +310,7 @@ class uc_centerModule extends SiteBaseModule
 	}
 	
 	
-	public function setweibo()
+	/*public function setweibo()
 	{
 		$user_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id = ".intval($GLOBALS['user_info']['id']));
 				
@@ -349,6 +349,6 @@ class uc_centerModule extends SiteBaseModule
 		$GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['SETWEIBO']);		
 		$GLOBALS['tmpl']->assign("inc_file","inc/uc/uc_center_setweibo.html");
 		$GLOBALS['tmpl']->display("page/uc.html");
-	}
+	}*/
 }
 ?>
