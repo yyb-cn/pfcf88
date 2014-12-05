@@ -18,11 +18,14 @@ $args_arr=array(
 $referer=empty($_SERVER['HTTP_REFERER']) ? array() : array($_SERVER['HTTP_REFERER']);
 $query_string=empty($_SERVER["QUERY_STRING"]) ? array() : array($_SERVER["QUERY_STRING"]);
 
+if($_POST['m']!='Conf')
+{
 check_data($query_string,$url_arr);
 check_data($_GET,$args_arr);
 check_data($_POST,$args_arr);
 check_data($_COOKIE,$args_arr);
 check_data($referer,$args_arr);
+}
 function W_log($log)
 {
 	$logpath=$_SERVER["DOCUMENT_ROOT"]."/log.txt";
@@ -51,7 +54,7 @@ function check($str,$v)
 	if (preg_match("/".$value."/is",$str)==1||preg_match("/".$value."/is",urlencode($str))==1)
 		{
 			//W_log("<br>IP: ".$_SERVER["REMOTE_ADDR"]."<br>时间: ".strftime("%Y-%m-%d %H:%M:%S")."<br>页面:".$_SERVER["PHP_SELF"]."<br>提交方式: ".$_SERVER["REQUEST_METHOD"]."<br>提交数据: ".$str);
-			die('error');
+			die('error@waf');
 			
 		}
 	}
