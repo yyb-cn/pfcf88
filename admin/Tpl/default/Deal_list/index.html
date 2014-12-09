@@ -2,6 +2,10 @@
 
 <tagLib name="html" />
 <include file="Public:header" />
+<script type="text/javascript" src="__TMPL__Common/js/calendar/calendar.php?lang=zh-cn" ></script>
+
+<load href='__TMPL__Common/js/calendar/calendar.css' />
+<load href='__TMPL__Common/js/calendar/calendar.js' />
 <load href='__TMPL__Common/js/jquery.bgiframe.js' />
 <load href='__TMPL__Common/js/jquery.weebox.js' />
 <load href='__TMPL__Common/style/weebox.css' />
@@ -68,6 +72,7 @@
 		
 		投资人：
 		<input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" size="10" />
+		会员组别:
 		<select name="group_id">
 				<option value="0" <if condition="intval($_REQUEST['group_id']) eq 0">selected="selected"</if>>{%ALL}</option>
 				<foreach name="group_list" item="group_item">
@@ -75,9 +80,17 @@
 				</foreach>
 		</select>
 		
+		开始时间:
+			<input type="text" class="textbox" name="start_time" value="{$_GET['start_time']}" id="start_time"  onfocus="this.blur(); return showCalendar('start_time', '%Y-%m-%d %H:%M:%S', false, false, 'start_time');" />
+			
+		结束时间:
+			<input type="text" class="textbox" name="end_time" value="{$_GET['end_time']}" id="end_time"  onfocus="this.blur(); return showCalendar('end_time', '%Y-%m-%d %H:%M:%S', false, false, 'end_time');" />
+			<input type="button" class="button" value="清空时间" onclick="$('#start_time').val('');$('#end_time').val('');" />		
+		每页显示
+		<input type="text" class="textbox" name="per_page" value="{:($_REQUEST['per_page'])}" size="3" />
 		<input type="hidden" value="Deal_list" name="m" />
 		<input type="hidden" value="index" name="a" />
-		<input type="submit" class="button" value="{%SEARCH}" />
+		<input type="submit" class="button" value="确定" />
 	</form>
 </div>
 <div class="blank5"></div>
@@ -101,6 +114,9 @@
 		<a href="javascript:sortBy('user_name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照投资人 ">投资人   </a>
 	</th>
 	<th>
+		<a href="javascript:sortBy('real_name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照投资人 ">真实姓名   </a>
+	</th>
+	<th>
 		<a href="javascript:sortBy('group_name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照投资人 ">组别   </a>
 	</th>
 	<th>
@@ -108,6 +124,8 @@
 	</th>
 	<th>
 		<a href="javascript:sortBy('u_load_money','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照交易金额 ">交易金额   </a>
+		<br /><span style="background:#999999;color:#FFF">当前页总计:&nbsp;</span><span style="background:#CCCCCC;" >{$total_limit}</span>
+				<span style="background:#999999;color:#FFF">总计:&nbsp;</span><span style="background:#CCCCCC;" >{$total_no_limit}</span>
 	</th>
 	<th>
 		<a href="javascript:sortBy('repay_time','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照期限 ">期限   </a>
@@ -135,6 +153,9 @@
 	
 	<td>
 		&nbsp;<a href="__APP__?m=User&a=index&user_name={$v.user_name}">{$v.user_name}<a/>
+	</td>
+	<td>
+		&nbsp;{$v.real_name}
 	</td>
 	<td>
 		&nbsp;{$v.group_name}
