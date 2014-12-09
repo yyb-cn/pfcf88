@@ -164,7 +164,7 @@
 		&nbsp;<a href="javascript:;" onclick="preview({$v.deal_id})">{$v.name}<a/>
 	</td>
 	<td>
-		&nbsp;{$v.u_load_money}
+		&nbsp;{$v.u_load_money|number_format}
 	</td>
 	<td>
 		&nbsp;{$v.repay_time}&nbsp;<?php echo  $v['repay_time_type']?'个月':'天'?>
