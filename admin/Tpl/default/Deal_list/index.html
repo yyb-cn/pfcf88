@@ -26,7 +26,7 @@
 	}
 	function preview(id)
 	{
-		window.open("__ROOT__/index.php?ctl=Deal_list&id="+id+"&preview=1");
+		window.open("__ROOT__/index.php?ctl=deal&id="+id+"&preview=1");
 	}
 </script>
 <php>
@@ -68,6 +68,12 @@
 		
 		投资人：
 		<input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" size="10" />
+		<select name="group_id">
+				<option value="0" <if condition="intval($_REQUEST['group_id']) eq 0">selected="selected"</if>>{%ALL}</option>
+				<foreach name="group_list" item="group_item">
+					<option value="{$group_item.id}" <if condition="intval($_REQUEST['group_id']) eq $group_item['id']">selected="selected"</if>>{$group_item.name}</option>
+				</foreach>
+		</select>
 		
 		<input type="hidden" value="Deal_list" name="m" />
 		<input type="hidden" value="index" name="a" />
@@ -128,13 +134,13 @@
 	</td>
 	
 	<td>
-		&nbsp;<a href="manageryyb.php?m=User&a=index&user_name={$v.user_name}">{$v.user_name}<a/>
+		&nbsp;<a href="__APP__?m=User&a=index&user_name={$v.user_name}">{$v.user_name}<a/>
 	</td>
 	<td>
-		&nbsp;<a href="manageryyb.php?m=User&a=index&user_name={$v.user_name}">{$v.group_name}<a/>
+		&nbsp;{$v.group_name}
 	</td>
 	<td>
-		&nbsp;{$v.name}
+		&nbsp;<a href="javascript:;" onclick="preview({$v.deal_id})">{$v.name}<a/>
 	</td>
 	<td>
 		&nbsp;{$v.u_load_money}
