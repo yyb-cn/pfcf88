@@ -35,8 +35,6 @@ class Deal_listAction extends CommonAction{
 			$order=	"order  by deal_time desc";
 			
 		}
-		
-		
 		if(trim($_REQUEST['_order'])=='name')
 		{
 			$order=	"order  by  d.name  ".$sort;
@@ -65,11 +63,19 @@ class Deal_listAction extends CommonAction{
 		{
 			$order=	"order  by dl.deal_load_check_yn ".$sort;
 		}
-    	$sql = "select d.name,d.repay_time,d.repay_time_type,dl.user_name,dl.user_id,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time , dl.deal_load_check_yn from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=d.user_id where ".$condition .' '. $order;
-		
-		
+		elseif(trim($_REQUEST['_order'])=='group_name')
+		{
+			$order=	"order  by group_name ".$sort;
+		}
+    	$sql = "select g.name as group_name, d.name,d.repay_time,d.repay_time_type,dl.user_name,dl.user_id,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time , dl.deal_load_check_yn from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=dl.user_id  left join ".DB_PREFIX."user_group as g on u.group_id = g.id  where ".$condition .' '. $order;
+		/*
+		d   是  deal
+		dl  是  deal_load
+		u   是  user
+		*/
 		$list = $GLOBALS['db']->getAll($sql);
 		//deal_load_check_yn
+		//print_r($list);exit;
 		$this->assign('list',$list);
 		$this->display();
 		

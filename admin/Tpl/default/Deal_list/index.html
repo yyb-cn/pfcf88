@@ -95,6 +95,9 @@
 		<a href="javascript:sortBy('user_name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照投资人 ">投资人   </a>
 	</th>
 	<th>
+		<a href="javascript:sortBy('group_name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照投资人 ">组别   </a>
+	</th>
+	<th>
 		<a href="javascript:sortBy('name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照项目名称 ">项目名称   </a>
 	</th>
 	<th>
@@ -126,6 +129,9 @@
 	
 	<td>
 		&nbsp;<a href="manageryyb.php?m=User&a=index&user_name={$v.user_name}">{$v.user_name}<a/>
+	</td>
+	<td>
+		&nbsp;<a href="manageryyb.php?m=User&a=index&user_name={$v.user_name}">{$v.group_name}<a/>
 	</td>
 	<td>
 		&nbsp;{$v.name}
