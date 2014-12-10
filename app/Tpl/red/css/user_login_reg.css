@@ -32,9 +32,9 @@ background: url(../images/user_rl.gif) no-repeat -118px 0;}
 .register_box .user_inc_tip{ color:#989898; line-height:26px;}
 .register_box { background:url(../images/register_bg.jpg) repeat-y 0 0}
 .register_box .user-lr-box-left  .field{ overflow:visible;}
-.register_box .user-lr-box-left  .field label{ width:120px;padding-right:10px; line-height:30px}
-.register_box .user-lr-box-left .field .hint{padding-left: 130px;}
-.register_box .user-lr-box-left .field input.ipttxt{background:url(../images/reg_ipt.jpg) repeat-y 0 0; padding:4px 10px; width:310px; border:none}
+.register_box .user-lr-box-left  .field label{}
+.register_box .user-lr-box-left .field .hint{}
+.register_box .user-lr-box-left .field input .ipttxt{background:url(../images/reg_ipt.jpg) repeat-y 0 0; padding:4px 10px; width:310px; border:none}
 .register_box .user-lr-box-left .field .f-input-tip{ height:26px;width:300px; top:32px; position:absolute;left:130px;}
 .register_box .user-lr-box-left .field .f-input-tip span{ float:left;}
 .register_box .user-lr-box-left .act{ margin-left:130px}
