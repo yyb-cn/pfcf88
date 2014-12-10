@@ -128,6 +128,14 @@
 				<span style="background:#999999;color:#FFF">总计:&nbsp;</span><span style="background:#CCCCCC;" >{$total_no_limit}</span>
 	</th>
 	<th>
+		<a href="javascript:sortBy('name','<?php echo $_GET[_sort]?0:1?>','rate','index')" title="按照项目名称 ">利率  </a>(%)
+	</th>
+	<th>
+		收益
+		<br /><span style="background:#999999;color:#FFF">当前页总计:&nbsp;</span><span style="background:#CCCCCC;" >{$total_rate_money}</span>
+				<span style="background:#999999;color:#FFF">总计:&nbsp;</span><span style="background:#CCCCCC;" >{$total_rate_money_nolimit}</span>
+	</th>
+	<th>
 		<a href="javascript:sortBy('repay_time','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照期限 ">期限   </a>
 	</th>
 	<th>
@@ -165,6 +173,12 @@
 	</td>
 	<td>
 		&nbsp;{$v.u_load_money|number_format}
+	</td>
+	<td>
+		&nbsp;{$v.rate}
+	</td>
+	<td>
+		&nbsp;{$v.get_money}
 	</td>
 	<td>
 		&nbsp;{$v.repay_time}&nbsp;<?php echo  $v['repay_time_type']?'个月':'天'?>
