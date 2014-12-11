@@ -22,6 +22,7 @@ class UserCarryAction extends CommonAction{
 		if (! empty ( $model )) {
 			$this->_list ( $model, $map );
 		}
+		
 		$this->display ();
 	}
 	//提现申请列表

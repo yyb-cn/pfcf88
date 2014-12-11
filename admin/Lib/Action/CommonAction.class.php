@@ -121,6 +121,7 @@ class CommonAction extends AuthAction{
 			$sortAlt = $sort == 'desc' ? l("ASC_SORT") : l("DESC_SORT"); //排序提示
 			$sort = $sort == 'desc' ? 1 : 0; //排序方式
 			//模板赋值显示
+			
 			$this->assign ( 'list', $voList );
 			$this->assign ( 'sort', $sort );
 			$this->assign ( 'order', $order );

@@ -17,17 +17,17 @@ class Deal_listAction extends CommonAction{
 		if(trim($_REQUEST['user_name'])!='')
 		{
 			
-			$condition .= " and  dl.user_name ="."'".$_REQUEST['user_name']."'";
+			$condition .= " and  dl.user_name like"."'%".trim($_REQUEST['user_name'])."%'";
 		}
 		
 		if(trim($_REQUEST['name'])!='')
 		{
 			
-			$condition .= "and   d.name ="."'".$_REQUEST['name']."'";
+			$condition .= "and   d.name like"."'%".trim($_REQUEST['name'])."%'";
 		}
 		if(trim($_REQUEST['deal_load_id']!=''))
 		{
-			$condition .= "and   dl.id ="."'".$_REQUEST['deal_load_id']."'";
+			$condition .= "and   dl.id ="."'".trim($_REQUEST['deal_load_id'])."'";
 		}
 		if(trim($_REQUEST['group_id']!=0))
 		{
