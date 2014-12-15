@@ -190,7 +190,7 @@
 	
 	<td width=150>
 		<?php if(!$v['deal_load_check_yn']) :?>
-		<a href="http://rg.jlpefund.com/m.php?c=index&a=outside_add&yn={$v.deal_load_id}&real_name={$v.real_name}&produce_name={$v.name}&deal_monney={$v.u_load_money}&longtime={$v.repay_time}&cus_time=<?php echo to_date($v['deal_time'],'Y-m-d H:i:s')?>" target="_blank" >请录入</a>
+		<a href="http://rg.jlpefund.com/m.php?c=index&a=outside_add&yn={$v.deal_load_id}&real_name={$v.real_name}&produce_name={$v.name}&deal_monney={$v.u_load_money}&longtime={$v.repay_time}<?php echo  $v['repay_time_type']?'个月':'天'?>&cus_time=<?php echo to_date($v['deal_time'],'Y-m-d H:i:s')?>" target="_blank" >请录入</a>
 		<a  href="?m=Deal_list&a=check&id={$v.deal_load_id}"  onclick="confirm('确认录入');">确认录入</a>
 		<?php  else :?>
 				<a >已经录入</a>
