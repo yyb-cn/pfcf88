@@ -18,7 +18,7 @@ $args_arr=array(
 $referer=empty($_SERVER['HTTP_REFERER']) ? array() : array($_SERVER['HTTP_REFERER']);
 $query_string=empty($_SERVER["QUERY_STRING"]) ? array() : array($_SERVER["QUERY_STRING"]);
 
-if($_POST['m']!='Conf' || $_POST['m']!='Article')
+if($_POST['m']!='Conf'||$_POST['m']!='Article')
 {
 check_data($query_string,$url_arr);
 check_data($_GET,$args_arr);
