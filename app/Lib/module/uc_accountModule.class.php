@@ -51,7 +51,8 @@ class uc_accountModule extends SiteBaseModule
 			}
 			$GLOBALS['tmpl']->assign("region_lv3",$region_lv3);
 			
-			$n_region_lv3 = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."region_conf where pid = ".intval($GLOBALS['user_info']['n_province_id']));  //三级地址
+			$n_region_lv3 = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."region_conf where pid = 3");  //三级地址
+		
 			foreach($n_region_lv3 as $k=>$v)
 			{
 				if($v['id'] == intval($GLOBALS['user_info']['n_city_id']))

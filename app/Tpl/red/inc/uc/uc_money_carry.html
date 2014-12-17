@@ -177,6 +177,7 @@ $this->_var['cujs'][] = $this->_var['TMPL_REAL']."/js/u.js";
 	
 	function load_select(lv)
 	{
+		
 		var name = "region_lv"+lv;
 		var next_name = "region_lv"+(parseInt(lv)+1);
 		var id = $("select[name='"+name+"']").val();
@@ -197,8 +198,10 @@ $this->_var['cujs'][] = $this->_var['TMPL_REAL']."/js/u.js";
 			var regionConfs=eval(evalStr);
 			evalStr+=".";
 			var html = "<option value='0'>="+LANG['SELECT_PLEASE']+"=</option>";
+			
 			for(var key in regionConfs)
 			{
+				
 				html+="<option value='"+eval(evalStr+key+".i")+"'>"+eval(evalStr+key+".n")+"</option>";
 			}
 		}

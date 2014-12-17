@@ -920,6 +920,7 @@ function get_article_buy_uname($uname)
  */
 function send_user_msg($title,$content,$from_user_id,$to_user_id,$create_time,$sys_msg_id=0,$only_send=false,$is_notice = false,$fav_id = 0)
 {
+
 	$group_arr = array($from_user_id,$to_user_id);
 	sort($group_arr);
 	if($sys_msg_id>0){

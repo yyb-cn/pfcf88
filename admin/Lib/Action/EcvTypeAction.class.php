@@ -128,8 +128,6 @@ class EcvTypeAction extends CommonAction{
 			$this->error(L("UPDATE_FAILED"),0,$log_info.L("UPDATE_FAILED"));
 		}
 	}
-	
-	
 	public function delete() {
 		//彻底删除指定记录
 		$ajax = intval($_REQUEST['ajax']);
@@ -160,97 +158,84 @@ class EcvTypeAction extends CommonAction{
 		}
 	}
 	
-	public function send()   //给会员发送代金券的页面
+	public function send_list()
 	{
-		$id = intval($_REQUEST['id']);
-		$ecv_type = M("EcvType")->getById($id);
-		if(!$ecv_type)
-		{
-			$this->error(l("INVALID_ECV_TYPE"));
-		}
-		$user_group = M("UserGroup")->findAll();
-		$this->assign("user_group",$user_group);
-		$this->assign("ecv_type",$ecv_type);
-		$this->display();
-	}	
-	
-	public function doSend()   //按提交内容不同执行发送代金券，
-	{
+		$group_list = M("UserGroup")->findAll();
+		$this->assign("group_list",$group_list);
 		
-		require_once APP_ROOT_PATH."system/libs/voucher.php";
-		$ecv_type_id = intval($_REQUEST['ecv_type_id']);
-		$need_password = intval($_REQUEST['need_password']);
-		$send_type = intval($_REQUEST['send_type']);
-		$user_group = intval($_REQUEST['user_group']);
-		$user_ids = trim($_REQUEST['user_id']);
-		$gen_count = intval($_REQUEST['gen_count']);
-		$page = intval($_REQUEST['page'])==0?1:intval($_REQUEST['page']);  //大数据量时的载入的页数
-		$page_size = app_conf("BATCH_PAGE_SIZE"); //每次运行的次数， 开发时可根据实际环境改变此大小
-		$page_limit = ($page-1)*$page_size.",".$page_size;
-		switch($send_type)
+		//定义条件
+		$map[DB_PREFIX.'user.is_delete'] = 0;
+
+		if(intval($_REQUEST['group_id'])>0)
 		{
-			case 0:
-				//按会员组
-				$user_list = M("User")->where("group_id=".$user_group)->order("id asc")->limit($page_limit)->findAll();
-				if($user_list)
-				{
-					foreach($user_list as $v)
-					{
-						send_voucher($ecv_type_id,$v['id'],$need_password);
-					}
-					$this->assign("jumpUrl",u("EcvType/doSend",array("ecv_type_id"=>$ecv_type_id,'need_password'=>$need_password,'send_type'=>$send_type,'user_group'=>$user_group,'user_id'=>$user_ids,'gen_count'=>$gen_count,'page'=>($page+1))));
-					$msg = sprintf(l("SEND_VOUCHER_PAGE_SUCCESS"),($page-1)*$page_size,$page*$page_size);
-					$this->success($msg);
-				}
-				else
-				{
-					save_log("ID".$ecv_type_id.l("VOUCHER_SEND_SUCCESS"),1);
-					$this->assign("jumpUrl",u("EcvType/index"));
-					$this->success(l("VOUCHER_SEND_SUCCESS"));
-				}
-				break;
-			case 1:
-				//按会员ID
-				$user_list = M("User")->where("id in(".$user_ids.")")->order("id asc")->limit($page_limit)->findAll();
-				if($user_list)
-				{
-					foreach($user_list as $v)
-					{
-						send_voucher($ecv_type_id,$v['id'],$need_password);
-					}
-					$this->assign("jumpUrl",u("EcvType/doSend",array("ecv_type_id"=>$ecv_type_id,'need_password'=>$need_password,'send_type'=>$send_type,'user_group'=>$user_group,'user_id'=>$user_ids,'gen_count'=>$gen_count,'page'=>($page+1))));
-					$msg = sprintf(l("SEND_VOUCHER_PAGE_SUCCESS"),($page-1)*$page_size,$page*$page_size);
-					$this->success($msg);
-				}
-				else
-				{
-					save_log("ID".$ecv_type_id.l("VOUCHER_SEND_SUCCESS"),1);
-					$this->assign("jumpUrl",u("EcvType/index"));
-					$this->success(l("VOUCHER_SEND_SUCCESS"));
-				}
-				break;
-			case 2:
-				//线下
-				for($i=0;$i<$page_size;$i++)
-				{					
-					if(($page-1)*$page_size+$i==$gen_count)
-					{
-						save_log("ID".$ecv_type_id.l("VOUCHER_SEND_SUCCESS"),1);
-						$this->assign("jumpUrl",u("EcvType/index"));
-						$this->success(l("VOUCHER_SEND_SUCCESS"));
-						break;
-					}
-					send_voucher($ecv_type_id,0,$need_password);	
-				}
-				$this->assign("jumpUrl",u("EcvType/doSend",array("ecv_type_id"=>$ecv_type_id,'need_password'=>$need_password,'send_type'=>$send_type,'user_group'=>$user_group,'user_id'=>$user_ids,'gen_count'=>$gen_count,'page'=>($page+1))));
-				$msg = sprintf(l("SEND_VOUCHER_PAGE_SUCCESS"),($page-1)*$page_size,$page*$page_size);
-				$this->success($msg);
-				break;
+			$map[DB_PREFIX.'user.group_id'] = intval($_REQUEST['group_id']);
 		}
 		
+		if(trim($_REQUEST['user_name'])!='')
+		{
+			$map[DB_PREFIX.'user.user_name'] = array('like','%'.trim($_REQUEST['user_name']).'%');
+		}
+		if(trim($_REQUEST['email'])!='')
+		{
+			$map[DB_PREFIX.'user.email'] = array('like','%'.trim($_REQUEST['email']).'%');
+		}
+		if(trim($_REQUEST['mobile'])!='')
+		{
+			$map[DB_PREFIX.'user.mobile'] = array('like','%'.trim($_REQUEST['mobile']).'%');
+		}
+		if(trim($_REQUEST['pid_name'])!='')
+		{
+			$pid = M("User")->where("user_name='".trim($_REQUEST['pid_name'])."'")->getField("id");
+			$map[DB_PREFIX.'user.pid'] = $pid;
+		}
+		
+		
+		if (method_exists ( $this, '_filter' )) {
+			$this->_filter ( $map );
+		}
+		$name=$this->getActionName();
+		$model = D (User);
+		if (! empty ( $model )) {
+			$this->_list ( $model, $map );
+		}
+		
+		$this->display ();
 	}
 	
 	
+	
+	public function doSend()   //按提交内容不同执行发送代金券，
+	{
+		include('app/Lib/common.php');
+		$user_id = intval($_REQUEST['id']);
+		//echo $user_id;exit;
+		$voucher_info=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."ecv_type where `reg_send` = 1");
+		//var_dump($voucher_info);exit;
+		if(!empty($voucher_info))
+			{
+			//或者是没有时间限制
+				if($voucher_info['end_time']>time()||$voucher_info['end_time']==0){
+				//echo 1;exit;
+					require_once APP_ROOT_PATH."system/libs/voucher.php";   
+					$rs = send_voucher($voucher_info['id'],$user_id,1);   //返回ID
+					if($rs){
+					
+					//发送站内信
+					//send_voucher(代金券ID,用户ID,'是否需要密码')
+					$voucher_info['end_time']=$voucher_info['end_time']?date("Y-m-d H:i:s",$voucher_info['end_time']):'没有限制';
+					$title="获得代金券";
+					$content="恭喜你,获得代金券".$voucher_info['name']."到期时间为:".$voucher_info['end_time'];
+					
+					 send_user_msg($title,$content,0,$user_id,time(),0,true,true);
+					
+					$msg = sprintf(l("SEND_VOUCHER_PAGE_SUCCESS"));
+					$this->success($msg);
+					}
+				}
+			}
+		
+		
+	}
 	
 	
 }

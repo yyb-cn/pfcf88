@@ -58,6 +58,8 @@ function edit(id)
 {
 	location.href = ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=edit&id="+id;
 }
+
+
 //添加跳转
 function add_goods()
 {
