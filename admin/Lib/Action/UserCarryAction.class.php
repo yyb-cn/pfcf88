@@ -125,7 +125,6 @@ class UserCarryAction extends CommonAction{
 		
 		$vo = M(MODULE_NAME)->where($condition)->select();
 		
-		
 		foreach($vo as $k=>$v)
 		{
 		
@@ -136,8 +135,8 @@ class UserCarryAction extends CommonAction{
 		$v['phone']=M("User")->where("id=".$v['user_id'])->getField("mobile");
 		$v['user_name']=M("User")->where("id=".$v['user_id'])->getField("user_name");
 		$v['bank_name'] =  M("bank")->where("id=".$v['bank_id'])->getField("name");
-		$arr[0]=array('序号','银行','地区(省)','地区(市/区)','支行名','开户名','卡号','金额','电话号码','操作备注','备注');
-		$arr[$k+1]=array($k+1,$v['bank_name'],$v['region_lv2_name'],$v['region_lv3_name'],$v['bankzone'],$v['real_name'],"'".$v['bankcard'],$v['money'],$v['phone'],"'".$v['desc'],$v['user_name']);
+		$arr[0]=array('序号','银行','地区(省)','地区(市/区)','支行名','开户名','卡号','金额','电话号码','操作备注','申请时间','备注');
+		$arr[$k+1]=array($k+1,$v['bank_name'],$v['region_lv2_name'],$v['region_lv3_name'],$v['bankzone'],$v['real_name'],"'".$v['bankcard'],$v['money'],$v['phone'],"'".$v['desc'],to_date($v['create_time'],'Y-m-d'),$v['user_name']);
 		}
 		
 		
