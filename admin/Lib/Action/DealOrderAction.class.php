@@ -175,139 +175,50 @@ public function deal_index()
 	
 	public function export_csv($page = 1)
 	{
-		set_time_limit(0);
-		$limit = (($page - 1)*intval(app_conf("BATCH_PAGE_SIZE"))).",".(intval(app_conf("BATCH_PAGE_SIZE")));
+		$id = $_REQUEST ['id'];
+		//where(array ('user_id' => array ('in', explode ( ',', $id ) ) ));
+		$condition = array (DB_PREFIX.'deal_order.id' => array ('in', explode ( ',', $id ) ) );
 		
-		//处理-1情况的select
-		if(!isset($_REQUEST['pay_status']))
+		$vo = M(MODULE_NAME)->join(DB_PREFIX.'user ON '.DB_PREFIX.'deal_order.user_id = '.DB_PREFIX.'user.id')->field(array(DB_PREFIX.'user.user_name'=>'real_name',DB_PREFIX.'deal_order.*'))->where($condition)->select();
+		
+		foreach($vo as $k=>$v)
 		{
-			$_REQUEST['pay_status'] = -1;
-		}
-		if(!isset($_REQUEST['delivery_status']))
-		{
-			$_REQUEST['delivery_status'] = -1;
-		}
-		if(!isset($_REQUEST['extra_status']))
-		{
-			$_REQUEST['extra_status'] = -1;
-		}
-		if(!isset($_REQUEST['after_sale']))
-		{
-			$_REQUEST['after_sale'] = -1;
+		
+		$v['payment_name']= get_payment_name ($v[' payment_id']);
+		$v['pay_status']=get_pay_status($v['pay_status']);
+		$arr[0]=array('编号','订单号','会员名称','已收金额','应付总额','支付方式','支付状态');
+		$arr[$k+1]=array($v['id'],"'".$v['order_sn'],$v['real_name'],$v['deal_total_price'],$v['total_price'],$v['payment_name'],$v['pay_status']);
 		}
 		
-		$where = " 1=1 ";
-		//定义条件
-		if(isset($_REQUEST['referer'])&&trim($_REQUEST['referer'])!='')
-		{
-			$where.=" and ".DB_PREFIX."deal_order.referer = '".trim($_REQUEST['referer'])."'";
-		}
-		if(trim($_REQUEST['user_name'])!='')
-		$where.=" and ".DB_PREFIX."deal_order.user_name like '%".trim($_REQUEST['user_name'])."%'";
-		if(intval($_REQUEST['deal_id'])>0)		
-		$where.=" and (".DB_PREFIX."deal_order.deal_ids = ".intval($_REQUEST['deal_id'])." or deal_ids like '%".intval($_REQUEST['deal_id']).",%' or deal_ids like '%,".intval($_REQUEST['deal_id'])."' or deal_ids like '%,".intval($_REQUEST['deal_id']).",%')";
+		$this->outputXlsHeader($arr,'充值列表'.time());
 		
-		
-		$where.= " and ".DB_PREFIX."deal_order.is_delete = 0 ";
-		$where.= " and ".DB_PREFIX."deal_order.type = 0 ";
-
-		if(trim($_REQUEST['order_sn'])!='')
-		{
-			$where.= " and ".DB_PREFIX."deal_order.order_sn like '%".trim($_REQUEST['order_sn'])."%' ";
-		}
-		if(intval($_REQUEST['pay_status'])>=0)
-		{
-			$where.= " and ".DB_PREFIX."deal_order.pay_status = ".intval($_REQUEST['pay_status']);
-		}
-		if(intval($_REQUEST['delivery_status'])>=0)
-		{
-			$where.= " and ".DB_PREFIX."deal_order.delivery_status = ".intval($_REQUEST['delivery_status']);
-		}
-		if(intval($_REQUEST['extra_status'])>=0)
-		{
-			$where.= " and ".DB_PREFIX."deal_order.extra_status = ".intval($_REQUEST['extra_status']);
-		}
-		if(intval($_REQUEST['after_sale'])>=0)
-		{
-			$where.= " and ".DB_PREFIX."deal_order.after_sale = ".intval($_REQUEST['after_sale']);
-		}
-
-	
-		
-		$list = M("DealOrder")
-				->where($where)
-				->field(DB_PREFIX.'deal_order.*')
-				->limit($limit)->findAll ( );
-			
-		if($list)
-		{
-			register_shutdown_function(array(&$this, 'export_csv'), $page+1);
-			
-			$order_value = array('sn'=>'""', 'user_name'=>'""', 'deal_name'=>'""','number'=>'""', 'pay_status'=>'""', 'delivery_status'=>'""','extra_status'=>'""','after_sale'=>'""', 'create_time'=>'""', 'total_price'=>'""', 'pay_amount'=>'""', 'consignee'=>'""', 'address'=>'""','zip'=>'""','email'=>'""', 'mobile'=>'""', 'memo'=>'""');
-	    	if($page == 1)
-	    	{
-		    	$content = iconv("utf-8","gbk","订单编号,用户名,团购名称,订购数量,支付状态,发货状态,额外状态,售后,下单时间,订单总额,已收金额,收货人,发货地址,邮编,用户邮件,手机号码,订单留言");	    		    	
-		    	$content = $content . "\n";
-	    	}
-	    	
-			foreach($list as $k=>$v)
-			{
-				
-				$order_value['sn'] = '"' . "sn:".iconv('utf-8','gbk',$v['order_sn']) . '"';
-				$user_info = M("User")->getById($v['user_id']);
-				$order_value['user_name'] = '"' . iconv('utf-8','gbk',$user_info['user_name']) . '"';
-				$order_items = M("DealOrderItem")->where("order_id=".$v['id'])->findAll();
-				$names = "";
-				foreach($order_items as $key => $row)
-				{
-					$names.=  addslashes($row['name'])."[".$row['number']."]";
-					if($key<count($order_items)-1)
-					$names.="\n";
-				}
-			
-				$order_value['deal_name'] = '"' . iconv('utf-8','gbk',$names) . '"';
-				$number = M("DealOrderItem")->where("order_id=".$v['id'])->sum("number");
-				$order_value['number'] = '"' . iconv('utf-8','gbk',$number) . '"';
-				$order_value['pay_status'] = '"' . iconv('utf-8','gbk',l("PAY_STATUS_".$v['pay_status'])) . '"';
-				$order_value['delivery_status'] = '"' . iconv('utf-8','gbk',l("ORDER_DELIVERY_STATUS_".$v['delivery_status'])) . '"';
-				$order_value['extra_status'] = '"' . iconv('utf-8','gbk',l("EXTRA_STATUS_".$v['extra_status'])) . '"';
-				$order_value['after_sale'] = '"' . iconv('utf-8','gbk',l("AFTER_SALE_".$v['after_sale'])) . '"';
-				$order_value['create_time'] = '"' . iconv('utf-8','gbk',to_date($v['create_time'])) . '"';
-				$order_value['total_price'] = '"' . iconv('utf-8','gbk',format_price($v['total_price'])) . '"';
-				$order_value['pay_amount'] = '"' . iconv('utf-8','gbk',format_price($v['pay_amount'])) . '"';
-				$order_value['consignee'] = '"' . iconv('utf-8','gbk',$v['consignee']) . '"';
-				
-				$region_lv1_name = $GLOBALS['db']->getOne("select name from ".DB_PREFIX."delivery_region where id = ".$v['region_lv1']);
-				$region_lv2_name = $GLOBALS['db']->getOne("select name from ".DB_PREFIX."delivery_region where id = ".$v['region_lv2']);
-				$region_lv3_name = $GLOBALS['db']->getOne("select name from ".DB_PREFIX."delivery_region where id = ".$v['region_lv3']);
-				$region_lv4_name = $GLOBALS['db']->getOne("select name from ".DB_PREFIX."delivery_region where id = ".$v['region_lv4']);
-				$address = $region_lv1_name.$region_lv2_name.$region_lv3_name.$region_lv4_name.$v['address'];
-				$order_value['address'] = '"' . iconv('utf-8','gbk',$address) . '"';
-				$order_value['zip'] = '"' . iconv('utf-8','gbk',$v['zip']) . '"';
-				$order_value['email'] = '"' . iconv('utf-8','gbk',$user_info['email']) . '"';
-				if($v['mobile']!='')
-				$mobile = $v['mobile'];
-				else
-				$mobile = $user_info['mobile'];
-				$order_value['mobile'] = '"' . iconv('utf-8','gbk',$mobile) . '"';
-				$order_value['memo'] = '"' . iconv('utf-8','gbk',$v['memo']) . '"';
-				
-				
-				$content .= implode(",", $order_value) . "\n";
-			}	
-			
-			
-			header("Content-Disposition: attachment; filename=order_list.csv");
-	    	echo $content;  
-		}
-		else
-		{
-			if($page==1)
-			$this->error(L("NO_RESULT"));
-		}	
 		
 	}
-	
+		public function outputXlsHeader($data,$file_name = 'export')
+{
+ header('Content-Type: text/xls'); 
+ header ( "Content-type:application/vnd.ms-excel;charset=utf-8" );
+ $str = mb_convert_encoding($file_name, 'gbk', 'utf-8');   
+ header('Content-Disposition: attachment;filename="' .$str . '.xls"');      
+ header('Cache-Control:must-revalidate,post-check=0,pre-check=0');        
+ header('Expires:0');         
+ header('Pragma:public');
+ 
+ $table_data = '<table border="1">'; 
+ foreach ($data as $line)         
+ {
+  $table_data .= '<tr>';
+  foreach ($line as $key => &$item)
+  {
+   $item = mb_convert_encoding($item, 'gbk', 'utf-8'); 
+   $table_data .= '<td>' . $item . '</td>';
+  }
+  $table_data .= '</tr>';
+ }
+ $table_data .='</table>';
+ echo $table_data;    
+ die();
+}
 	public function deal_trash()
 	{
 		$condition['is_delete'] = 1;
