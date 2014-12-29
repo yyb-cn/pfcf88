@@ -3,6 +3,9 @@
 class Deal_listAction extends CommonAction{
 	public function index()
 	{
+	
+	
+	
 		$condition=' d.deal_status in(1,2,4,5) ';
 		$group_list = M("UserGroup")->findAll();
 		$this->assign("group_list",$group_list);
@@ -10,6 +13,12 @@ class Deal_listAction extends CommonAction{
 			$_REQUEST['start_time']=strtotime($_REQUEST['start_time']);
 			$condition .= " and  dl.create_time  >"."'".$_REQUEST['start_time']."'";
 		};
+		
+			if($_REQUEST['deal_load_check_yn']!=3){
+		
+		$condition .="and dl.deal_load_check_yn=".$_REQUEST['deal_load_check_yn'];
+		}
+		
 		if($_REQUEST['end_time']!=''){
 			$_REQUEST['end_time']=strtotime($_REQUEST['end_time']);
 			$condition .= " and  dl.create_time  <"."'".$_REQUEST['end_time']."'";
@@ -141,7 +150,7 @@ class Deal_listAction extends CommonAction{
 		$this->assign('total_no_limit',$total_no_limit);
 		
 		$this->assign('list',$list);
-		$this->display();
+		$this->display('index');
 		
 	}
 	public function check(){
