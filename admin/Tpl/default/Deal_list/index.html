@@ -90,7 +90,7 @@
 		<input type="text" class="textbox" name="per_page" value="{:($_REQUEST['per_page'])}" size="3" />
 		录入
 		<select name="deal_load_check_yn">
-			<option value='0'  <if condition="intval($_REQUEST['deal_load_check_yn']) eq 0">selected="selected"</if>>所有</option>
+			<option value=''  <if condition="intval($_REQUEST['deal_load_check_yn']) eq ''">selected="selected"</if>>所有</option>
 			<option value="1"   <if condition="intval($_REQUEST['deal_load_check_yn']) eq 1">selected="selected"</if>>已录入</option>
 			<option value="2"   <if condition="intval($_REQUEST['deal_load_check_yn']) eq 2">selected="selected"</if>>未录入</option>
 		</select>

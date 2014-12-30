@@ -16,8 +16,8 @@ class Deal_listAction extends CommonAction{
 		
 			if($_REQUEST['deal_load_check_yn']!=''){
 			
-			$_REQUEST['deal_load_check_yn']=($_REQUEST['deal_load_check_yn']==2)?0:$_REQUEST['deal_load_check_yn'];
-			$condition .="and dl.deal_load_check_yn=".$_REQUEST['deal_load_check_yn'];
+			$a=($_REQUEST['deal_load_check_yn']==2)?0:$_REQUEST['deal_load_check_yn'];
+			$condition .="  and dl.deal_load_check_yn=" .$a;
 
 		}
 		
@@ -34,15 +34,15 @@ class Deal_listAction extends CommonAction{
 		if(trim($_REQUEST['name'])!='')
 		{
 			
-			$condition .= "and   d.name like"."'%".trim($_REQUEST['name'])."%'";
+			$condition .= "  and   d.name like"."'%".trim($_REQUEST['name'])."%'";
 		}
 		if(trim($_REQUEST['deal_load_id']!=''))
 		{
-			$condition .= "and   dl.id ="."'".trim($_REQUEST['deal_load_id'])."'";
+			$condition .= "  and   dl.id ="."'".trim($_REQUEST['deal_load_id'])."'";
 		}
 		if(trim($_REQUEST['group_id']!=0))
 		{
-			$condition .= "and   u.group_id ="."'".$_REQUEST['group_id']."'";
+			$condition .= "  and   u.group_id ="."'".$_REQUEST['group_id']."'";
 		}
 		if(trim($_REQUEST['_sort'])==0){
 			$sort='desc';
