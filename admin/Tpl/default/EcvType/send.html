@@ -10,7 +10,7 @@
 <div class="main">
 
 	<p>会员名：<strong>{$user.user_name}</strong></p>
-	<form    action="m.php?m=EcvType&a=dosend&id=<?php echo  $_GET['id']?>" method="post">
+	<form    action="?m=EcvType&a=dosend&id=<?php echo  $_GET['id']?>" method="post">
 		<select name="ecv_id">
 			<foreach name='ecv_type_list' item="vv">
 			<option value="{$vv.id}">{$vv.name}</option>
