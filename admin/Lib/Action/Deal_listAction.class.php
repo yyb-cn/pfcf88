@@ -14,9 +14,11 @@ class Deal_listAction extends CommonAction{
 			$condition .= " and  dl.create_time  >"."'".$_REQUEST['start_time']."'";
 		};
 		
-			if($_REQUEST['deal_load_check_yn']!=3){
-		
-		$condition .="and dl.deal_load_check_yn=".$_REQUEST['deal_load_check_yn'];
+			if($_REQUEST['deal_load_check_yn']!=''){
+			
+			$_REQUEST['deal_load_check_yn']=($_REQUEST['deal_load_check_yn']==2)?0:$_REQUEST['deal_load_check_yn'];
+			$condition .="and dl.deal_load_check_yn=".$_REQUEST['deal_load_check_yn'];
+
 		}
 		
 		if($_REQUEST['end_time']!=''){
