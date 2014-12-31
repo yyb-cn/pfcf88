@@ -4,7 +4,7 @@ var MyTime=false;
 var fot=500;
 var fin=400;
 var amt=300;
-var speed=3000;
+var speed=5000;
 var maxpic=$("#banner ul li").length;
 var autostar=true;
 $("#banner").find("li").each(function(i){
