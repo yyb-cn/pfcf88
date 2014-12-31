@@ -64,7 +64,7 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 					</td>
 				</tr>
 				<!--代金券-->
-				{if  $deal.repay_time==1}
+				{if  (($deal.repay_time eq 1) and ($deal.repay_time_type eq 1)) }  <!--1个月-->
 					{if $voucher}
 						{foreach from="$voucher" item="v" key="k"}
 						<tr>
@@ -82,7 +82,7 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 								</li>
 								<li style="float:left">
 								使用代金券
-								<input type="checkbox" checked="checked" value="{$v.money}" name="v_money[{$v.password}]"  height="50" />
+								<input type="checkbox"  value="{$v.money}" name="v_money[{$v.password}]"   height="50" />
 								</li>
 								</ul>
 							</td>
@@ -95,7 +95,7 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 				<tr>
 					<td class="tit tr w100 btm">投标金额：</td>
 					<td class="f_red bg btm">
-						<input class="f-input w70" name="bid_money" id="J_BIDMONEY" value="{$deal.min_loan_money}" /> 元&nbsp;&nbsp;
+						<input class="f-input w70" name="bid_money" id="J_BIDMONEY"  /> 元&nbsp;&nbsp;
 						<span class="f_dgray">(最低投标金额为{function name="round" v=$deal.min_loan_money f=2}元
 						{if $voucher},不包含代金券金额数{/if}
 						{if (int)app_conf('DEAL_BID_MULTIPLE') gt 0},并且是{function name='app_conf' v='DEAL_BID_MULTIPLE'}的倍数{/if})
@@ -136,19 +136,25 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 				
 			} 
 		}); 
+		
 		return v_money
 		}
 		
 		function count_money(){
 			var real_total=Number($("#J_BIDMONEY").val())
 			var v_money=get_v_money()
+			
 			//totle=Number(real_total)+Number(v_money)
 			$("#tmoney").attr('value',real_total)//真是币
 			$("#virtual_money").attr('value',v_money)//代金券的值
 			$("#totle").html(real_total)
 			{if $voucher}
 			if(v_money !=0){
+			
 			$("#v_money").html('+'+v_money+'&nbsp;元代金券')
+			}
+			else{
+			$("#v_money").html('')
 			}
 			{/if}
 		
@@ -161,9 +167,22 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 			count_money()
 		})
 		
-	$("input:checkbox").change(function(){	
-		count_money()
-	})
+		$("input:checkbox").change(function(){	
+				var v_money=get_v_money();
+				
+				if(v_money>=3200)
+				{
+						$("input:checkbox").each(function(){ 
+						if (false == $(this).attr("checked")) { 
+							$(this).attr("disabled",'disabled')
+							
+						} 
+						});
+					$("#v_money").after("<b>&nbsp;(代金券3200封顶)<b>")		//标签后面添加内容
+				}
+				count_money()
+		
+		})
 	
 	
 	

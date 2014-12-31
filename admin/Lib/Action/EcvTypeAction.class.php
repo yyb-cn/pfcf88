@@ -206,7 +206,7 @@ class EcvTypeAction extends CommonAction{
 				$voList = $model->where($map)->order( "`" . $order . "` " . $sort)->limit($p->firstRow . ',' . $p->listRows)->findAll ( );
 				//var_dump($voList);exit;
 				$ecv_moduel=D('ecv');
-				$ecv_list=$ecv_moduel->join(DB_PREFIX.'ecv_type ON '.DB_PREFIX.'ecv_type.id = '.DB_PREFIX.'ecv.ecv_type_id')->where(array('used_yn'=>0))->select();
+				$ecv_list=$ecv_moduel->join(DB_PREFIX.'ecv_type ON '.DB_PREFIX.'ecv_type.id = '.DB_PREFIX.'ecv.ecv_type_id')->select();
 				
 				
 				//var_dump($ecv_type_list);exit;
@@ -215,7 +215,8 @@ class EcvTypeAction extends CommonAction{
 				
 					foreach($ecv_list as $kk=>$vv){
 						if($vv['user_id']==$v['id']){
-							$voList[$k]['ecvs'].=trim('类型：'.$vv['name'].',&nbsp;&nbsp;面额:'.$vv['money'].'<br />');
+						$use=$vv['used_yn']?'已用':'未用';
+							$voList[$k]['ecvs'].=trim('类型：'.$vv['name'].',&nbsp;&nbsp;面额:'.$vv['money'].'【'.$use.'】<br />');
 						}
 						
 					}

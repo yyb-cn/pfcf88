@@ -325,9 +325,14 @@ class dealModule extends SiteBaseModule
 		$data['create_time'] = get_gmtime();
 		
 		//以下为代金券判断操作
-		if($deal['repay_time']==1){  //一个月的标
+	
 			if($_REQUEST['virtual_money']!=0)//判断复选框是否为勾选
 			{
+		
+			if($_REQUEST['virtual_money']>3200){
+				showErr('单笔投资代金券不能超过3200',$ajax);
+			}
+			if($deal['repay_time']==1&&$deal['repay_time_type']==1){  //一个月的标
 				$i=0;
 				foreach ($_REQUEST['v_money'] as $k=>$v){
 				
@@ -347,6 +352,7 @@ class dealModule extends SiteBaseModule
 				}
 				//showErr('代金券'.$id_str,$ajax);
 				if($virtual_money!=$_REQUEST['virtual_money']){
+					showErr('单笔投资代金券不能超过'.$_REQUEST['v_money'],$ajax);
 				showErr('代金券金额出错',$ajax);
 				}
 				else{
@@ -356,7 +362,11 @@ class dealModule extends SiteBaseModule
 					}
 				require APP_ROOT_PATH.'app/Lib/uc.php';
 			}
+			else{
+			showErr('只能用于投资1个月的标',$ajax);
+			}
 		}
+		
 		$GLOBALS['db']->autoExecute(DB_PREFIX."deal_load",$data,"INSERT");//插入一条投资目录
 		$load_id = $GLOBALS['db']->insert_id();//获取插入的ID
 		if($load_id > 0){
