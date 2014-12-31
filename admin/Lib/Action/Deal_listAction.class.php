@@ -94,6 +94,10 @@ class Deal_listAction extends CommonAction{
 		{
 			$order=	"order  by group_name ".$sort;
 		}
+		elseif(trim($_REQUEST['_order'])=='mobile')
+		{
+			$order=	"order  by u.mobile ".$sort;
+		}
 		
 		$module=m('deal');		
 		import('ORG.Util.Page');// 导入分页类
@@ -107,7 +111,7 @@ class Deal_listAction extends CommonAction{
 		$show   = $Page->show();// 分页显示输出
 		$this->assign('page',$show);// 赋值分页输出
 		
-    	$sql = "select u.real_name,g.name as group_name, d.name,d.rate,d.repay_time,d.repay_time_type,d.id as deal_id,dl.user_name,dl.user_id,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time , dl.deal_load_check_yn,dl.virtual_money from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=dl.user_id  left join ".DB_PREFIX."user_group as g on u.group_id = g.id  where ".$condition .' '. $order . ' limit '.$Page->firstRow.','.$Page->listRows ;
+    	$sql = "select u.real_name,u.mobile,g.name as group_name, d.name,d.rate,d.repay_time,d.repay_time_type,d.id as deal_id,dl.user_name,dl.user_id,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time , dl.deal_load_check_yn,dl.virtual_money from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=dl.user_id  left join ".DB_PREFIX."user_group as g on u.group_id = g.id  where ".$condition .' '. $order . ' limit '.$Page->firstRow.','.$Page->listRows ;
 		/*
 		d   是  deal
 		dl  是  deal_load

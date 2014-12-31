@@ -123,6 +123,9 @@
 		<a href="javascript:sortBy('real_name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照投资人 ">真实姓名   </a>
 	</th>
 	<th>
+		<a href="javascript:sortBy('mobile','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照投资人 ">电话号码   </a>
+	</th>
+	<th>
 		<a href="javascript:sortBy('group_name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照投资人 ">组别   </a>
 	</th>
 	<th>
@@ -170,6 +173,9 @@
 	</td>
 	<td>
 		&nbsp;{$v.real_name}
+	</td>
+	<td>
+		&nbsp;{$v.mobile}
 	</td>
 	<td>
 		&nbsp;{$v.group_name}
