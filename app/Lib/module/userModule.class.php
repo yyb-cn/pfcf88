@@ -108,6 +108,7 @@ class userModule extends SiteBaseModule
 			$user_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id = ".$user_id);
 			
 			//注册发送代金券
+			/*
 			$voucher_info=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."ecv_type where `reg_send` = 1");
 			if(!empty($voucher_info))
 			{
@@ -125,7 +126,7 @@ class userModule extends SiteBaseModule
 				}
 			}
 			
-			
+			*/
 			
 			if($user_info['is_effect']==1)
 			{
