@@ -74,10 +74,17 @@
 		<input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" size="10" />
 		会员组别:
 		<select name="group_id">
-				<option value="0" <if condition="intval($_REQUEST['group_id']) eq 0">selected="selected"</if>>{%ALL}</option>
+				
 				<foreach name="group_list" item="group_item">
-					<option value="{$group_item.id}" <if condition="intval($_REQUEST['group_id']) eq $group_item['id']">selected="selected"</if>>{$group_item.name}</option>
+					<option value="{$group_item.id}" 
+					<if condition="intval($_REQUEST['group_id']) eq $group_item['id']">selected="selected"
+						
+					</if>
+					>
+					{$group_item.name}
+					</option>
 				</foreach>
+				<option value="0" <if condition="intval($_REQUEST['group_id']) eq 0">selected="selected"</if>>{%ALL}</option>
 		</select>
 		
 		开始时间:
