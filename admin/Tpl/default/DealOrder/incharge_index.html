@@ -150,6 +150,13 @@ function get_bank($bank_id){
 	<form name="search" action="__APP__" method="get">	
 		{%ORDER_SN}：<input type="text" class="textbox" name="order_sn" value="{:trim($_REQUEST['order_sn'])}" />
 		{%USER_NAME}：<input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" />
+		支付状态：
+		<select name="pay_status">
+		<option value=""  selected="selected">所有</option>
+		<option value="2" <if condition="intval($_REQUEST['pay_status']) eq 2"> selected="selected"</if>>支付</option>
+		<option value="0" <if condition="$_REQUEST['pay_status'] eq 0"> selected="selected"</if>>未付</option>
+	
+		</select>
 		<input type="hidden" value="DealOrder" name="m" />
 		<input type="hidden" value="incharge_index" name="a" />
 		<input type="submit" class="button" value="{%SEARCH}" />

@@ -8,6 +8,7 @@
 class DealOrderAction extends CommonAction{
 	public function incharge_index()
 	{
+		
 		$reminder = M("RemindCount")->find();
 		$reminder['incharge_count_time'] = get_gmtime();
 		M("RemindCount")->save($reminder);
