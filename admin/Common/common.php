@@ -36,8 +36,6 @@ function conf($name,$value = false)
 	}
 }
 
-
-
 function write_timezone($zone='')
 {
 	if($zone=='')
@@ -212,17 +210,7 @@ function get_user_name($user_id)
 	
 	
 }
-function get_user_name_js($user_id)
-{
-	$user_name =  M("User")->where("id=".$user_id." and is_delete = 0")->getField("user_name");
-	
-	if(!$user_name)
-	return l("NO_USER");
-	else
-	return "<a href='javascript:void(0);' onclick='account(".$user_id.")'>".$user_name."</a>";
-	
-	
-}
+
 function get_pay_status($status)
 {
 	return L("PAY_STATUS_".$status);

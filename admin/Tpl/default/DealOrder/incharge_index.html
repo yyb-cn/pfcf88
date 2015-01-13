@@ -170,7 +170,7 @@ function get_bank($bank_id){
 	checkbox="true" 
 	action="true" 
 	datasource="list" 
-	show="id:{%ID}|50px,order_sn:{%ORDER_SN},user_id|get_user_name:{%USER_NAME},deal_total_price|format_price:{%INCHARGE_AMOUNT},total_price|format_price:{%PAY_AMOUNT},payment_id|get_payment_name:{%PAYMENT_TYPE},bank_id|get_bank:银行,pay_status|get_pay_status:{%PAYMENT_STATUS},create_time|to_date:创建时间,memo:支付备注" 
+	show="id:{%ID}|50px,order_sn:{%ORDER_SN},user_id|get_user_name:{%USER_NAME},deal_total_price|format_price:{%INCHARGE_AMOUNT},total_price|format_price:{%PAY_AMOUNT},payment_id|get_payment_name:{%PAYMENT_TYPE},bank_id|get_bank:银行,user_id|get_user_name:{%USER_NAME},pay_status|get_pay_status:{%PAYMENT_STATUS},create_time|to_date:创建时间,memo:支付备注" 
 	actionlist="id|get_pay_incharge_link,id|get_baofoo_query_link=$incharge['payment_id'],id|get_sqepay_query_link=$incharge['payment_id'], del:{%DEL}" /> 
 
 <div class="blank5"></div>
