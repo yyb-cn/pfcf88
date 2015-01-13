@@ -210,7 +210,17 @@ function get_user_name($user_id)
 	
 	
 }
-
+function get_real_name($user_id)
+{
+	$real_name =  M("User")->where("id=".$user_id." and is_delete = 0")->getField("real_name");
+	
+	if(!$real_name)
+	return l("NO_USER");
+	else
+	return "$real_name";
+	
+	
+}
 function get_pay_status($status)
 {
 	return L("PAY_STATUS_".$status);
