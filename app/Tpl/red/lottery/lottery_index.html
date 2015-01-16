@@ -11,8 +11,9 @@
 .lottery{width:325px; height:325px; position:relative;}
 .box_right{background:url({$TMPL}/lottery/award_3.png) no-repeat;width:300px;float:right;padding-left:190px;height:400px;margin-top:30px;position:relative;}
 .userlist{ position:absolute; top:220px; left:40px;height:100px;}
-.time{padding-left:40px;}
+
 .userlist ul li{float:left; list-style:none;margin-right:30px;width:100px;text-align:center}
+li.time{padding-left:20px;}
 .u_name{text-align:left;}
 .you{margin:15px 0;font-size:16px;color:#FFF;}
 #disk{width:465px; height:465px; background:url({$TMPL}/lottery/award_1.png) no-repeat}
@@ -98,10 +99,11 @@
 		<div class="box_right">
 			<div class="userlist">
 			{foreach from="$award_log" item="v" key="k"}
+			
 				<ul>
 					<li>{$v.user_name}</li>
 				 <li>{$v.prize_name}</li>
-				<li class="time">{function name="to_date" v="$v.log_time" f="Y-m-d "} {function name="to_date" v="$v.log_time" f="H:i"}</li>
+				<li class="time" style="width:120px;">{function name="to_date" v="$v.log_time" f="Y-m-d "} {function name="to_date" v="$v.log_time" f="H:i"}</li>
 			 </ul>
 			{/foreach}
 			</div>
