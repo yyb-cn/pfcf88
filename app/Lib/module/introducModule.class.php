@@ -27,5 +27,11 @@ class introducModule extends SiteBaseModule
 		$GLOBALS['tmpl']->display("page/info_xindai.html",$cache_id);
 		
 	}
+	public function newyear()
+	{
+		//2015新年活动
+		$GLOBALS['tmpl']->display("page/info_newyear.html");
+		
+	}
 }
 ?>
