@@ -8,40 +8,47 @@
 				<div class="user-lr-box-left f_l" style="width:810px; padding-left:150px;">
 									<!--注册表单-->
 									<form action="{url x="shop" r="user#doregister"}" method="post" id="signup-user-form" style="margin-top:38px;">
+                                    
 									<div class="field email pr">
-                                            <input type="text" class="f-input ipttxt" id="signup-email-address" name="email" size="30" style="background:url('{$TMPL}/images/reg_mail.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请输入您的邮箱">
+                                    		<div style="width:70px; height:36px; text-align:center; line-height:36px; float:left; font-size:14px;">注册邮箱</div>
+                                            <input type="text" class="f-input ipttxt" id="signup-email-address" name="email" size="30" style=" float:left; background:url('{$TMPL}/images/reg_mail.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请输入您的邮箱">
                                             <span class="f-input-tip"></span> 
-                                            <span class="hint" style="padding:0;">{$LANG.USER_TITLE_EMAIL_TIP}</span> 
+                                            <span class="hint" style="padding:0; text-indent:6em;">{$LANG.USER_TITLE_EMAIL_TIP}</span> 
 									</div>
 									<div class="blank1"></div>
 									<div class="field username pr">
-										<input type="text" class="f-input ipttxt" id="signup-username" name="user_name" size="30" style="background:url('{$TMPL}/images/reg_uname.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请输入您的用户名">
+                                    	<div style="width:70px; height:36px; text-align:center; line-height:36px; float:left; font-size:14px;">用户名</div>
+										<input type="text" class="f-input ipttxt" id="signup-username" name="user_name" size="30" style="float:left; background:url('{$TMPL}/images/reg_uname.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请输入您的用户名">
 										<span class="f-input-tip"></span> 
-										<span class="hint" style="padding:0;">{$LANG.USER_TITLE_USER_NAME_TIP}</span> 
+										<span class="hint" style="padding:0; text-indent:6em;">{$LANG.USER_TITLE_USER_NAME_TIP}</span> 
 									</div>
 									<div class="blank1"></div>
 									<div class="field password pr">
-										<input type="password" class="f-input ipttxt" id="signup-password" name="user_pwd" size="30" style="background:url('{$TMPL}/images/reg_password.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请输入密码">
+                                    	<div style="width:70px; height:36px; text-align:center; line-height:36px; float:left; font-size:14px;">密码</div>
+										<input type="password" class="f-input ipttxt" id="signup-password" name="user_pwd" size="30" style="float:left; background:url('{$TMPL}/images/reg_password.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请输入密码">
 										<span class="f-input-tip"></span> 
-										<span class="hint" style="padding:0;">{$LANG.USER_TITLE_USER_PWD_TIP}</span> 
+										<span class="hint" style="padding:0; text-indent:6em;">{$LANG.USER_TITLE_USER_PWD_TIP}</span> 
 									</div>
 									<div class="blank1"></div>
 									<div class="field password pr">
-										<input type="password" class="f-input ipttxt" id="signup-password-confirm" name="user_pwd_confirm" size="30" style="background:url('{$TMPL}/images/reg_password.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请再次输入密码">
+                                    	<div style="width:70px; height:36px; text-align:center; line-height:36px; float:left; font-size:14px;">确认密码</div>
+										<input type="password" class="f-input ipttxt" id="signup-password-confirm" name="user_pwd_confirm" size="30" style="float:left; background:url('{$TMPL}/images/reg_password.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请再次输入密码">
 										<span class="f-input-tip"></span>
-										<span class="hint" style="padding:0;">请再次填写密码</span>
+										<span class="hint" style="padding:0; text-indent:6em;">请再次填写密码</span>
 									</div>
 									<div class="blank1"></div>
 									<div class="field mobile pr">
-										<input type="text" value="" class="f-input ipttxt" id="settings-mobile" name="mobile" size="30" style="background:url('{$TMPL}/images/reg_tel.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请输入您的手机号码">
+                                    	<div style="width:70px; height:36px; text-align:center; line-height:36px; float:left; font-size:14px;">手机号码</div>
+										<input type="text" value="" class="f-input ipttxt" id="settings-mobile" name="mobile" size="30" style="float:left; background:url('{$TMPL}/images/reg_tel.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请输入您的手机号码">
 										<span class="f-input-tip"></span> 
-										<span class="hint" style="padding:0;">{$LANG.USER_TITLE_MOBILE_TIP}</span>
+										<span class="hint" style="padding:0; text-indent:6em;">{$LANG.USER_TITLE_MOBILE_TIP}</span>
 									</div>	
 									<div class="blank1"></div>
                                     <div class="field mobile pr">
-										<input type="text" value="" class="f-input ipttxt" id="referral" name="referral" size="30" style="background:url('{$TMPL}/images/reg_pepole.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="您可以填写您的推荐人">
+                                    	<div style="width:70px; height:36px; text-align:center; line-height:36px; float:left; font-size:14px;">推荐人</div>
+										<input type="text" value="" class="f-input ipttxt" id="referral" name="referral" size="30" style="float:left; background:url('{$TMPL}/images/reg_pepole.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="您可以填写您的推荐人">
 										<span class="f-input-tip"></span> 
-										<span class="hint" style="padding:0;">已存在的用户才可以成为推荐人</span>
+										<span class="hint" style="padding:0; text-indent:6em;">已存在的用户才可以成为推荐人</span>
 									</div>	
 									<div class="blank1"></div>
 								
@@ -69,7 +76,7 @@
 									{if app_conf("VERIFY_IMAGE") eq 1}
 									<div class="field mobile pr">
 										<div class="verify_row">	
-										<label style="width:auto;">验证码</label>		
+										<div style="width:70px; height:36px; text-align:center; line-height:36px; float:left; font-size:14px;">验证码</div>	
 										<input type="text" value="" class="f-input" name="verify" />
 								
 										<img src="{$APP_ROOT}/verify.php?rand={function name="rand"}" onclick="this.src='{$APP_ROOT}/verify.php?rand='+ Math.random();" title="看不清楚？换一张" />			
