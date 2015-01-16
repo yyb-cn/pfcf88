@@ -6,8 +6,9 @@ class indexModule extends SiteBaseModule
 {
 	public function index()
 	{	
-		$GLOBALS['tmpl']->caching = true;
-		$GLOBALS['tmpl']->cache_lifetime = 600;  //首页缓存10分钟
+	//抽奖期间暂时关闭缓存
+		//$GLOBALS['tmpl']->caching = true;
+		//$GLOBALS['tmpl']->cache_lifetime = 600;  //首页缓存10分钟
 		$cache_id  = md5(MODULE_NAME.ACTION_NAME);	
 		if (!$GLOBALS['tmpl']->is_cached("page/index.html", $cache_id))
 		{	
@@ -202,8 +203,28 @@ class indexModule extends SiteBaseModule
 				$charts_user[$kai]=$charts_use[$kai-1];
 				}
 			$GLOBALS['tmpl']->assign("charts_user",$charts_user);
-
+		//抽奖环节
+		//1.获奖名单  ,最新的10条
 		
+			$award_log = $GLOBALS['db']->getAll("select a.*,u.user_name,p.name as prize_name from ".DB_PREFIX."award_log as a left join ".DB_PREFIX."user as u on a.user_id=u.id   left join ".DB_PREFIX."prize as p on a.prize_id=p.id order by a.log_time desc limit 10");
+			//姓名加***
+			foreach($award_log as $k=>$v){
+			
+			$award_log[$k]['user_name']=cut_str($v['user_name'], 1, 0).'***'.cut_str($v['user_name'], 1, -1);
+			
+			}
+			
+			$GLOBALS['tmpl']->assign("award_log",$award_log);
+			
+			//2.当前会员抽奖次数
+		$user_id=$GLOBALS['user_info']['id'];
+		if($user_id){
+		$user_award = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."lottery where uid=".$user_id);//改会员抽奖次数
+		//var_dump($user_award);exit;
+		$award_sec=$user_award['draw_sec']; 
+		
+		$GLOBALS['tmpl']->assign("award_sec",$award_sec);
+		}
 		$GLOBALS['tmpl']->display("page/index.html",$cache_id);
 	}
 

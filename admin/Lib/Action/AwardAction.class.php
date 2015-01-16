@@ -95,28 +95,78 @@ class AwardAction extends CommonAction{
 		$this->display ();
 	}
 	
-	public function send()
-	{
-		$id=intval($_REQUEST['id']);
-		//增加一次抽奖机会
-		$module=M('lottery');
-		$list = $module->where(array('uid'=>$id))->select();
-		//新增
-		if(empty($list)){
-		
-			$id= $module->add(array('uid'=>$id,draw_sec=>1));
-			if($id){
-				$this->success('新增成功');
+/*抽奖记录*/	
+	function award_log(){
+		$group_list = M("UserGroup")->findAll();
+		$this->assign("group_list",$group_list);
+		$condition=1;
+		if(trim($_REQUEST['user_name'])!='')
+		{
+			$condition = "and u.user_name like"."'%".trim($_REQUEST['user_name'])."%'";
+		}
+		if(trim($_REQUEST['user_name'])!='')
+		{
+			$condition = " u.user_name like"."'%".trim($_REQUEST['user_name'])."%'";
+		}
+		if(trim($_REQUEST['group_id']!=''))
+			{
+				if($_REQUEST['group_id']==0){
+				$condition .='';
+				}
+			else{
+			$condition .= "  and   u.group_id ="."'".$_REQUEST['group_id']."'";
 			}
 		}
-		else{
-			$one=$module->where(array('uid'=>$id))->setInc('draw_sec'); 
-			if($one){
-			$this->success('新增成功');
-			}
+		//排序
+		if(trim($_REQUEST['_sort'])==0){
+			$sort='desc';
+		
+		}
+		elseif(trim($_REQUEST['_sort'])==1){
+			$sort='asc';
+		
+		}
+		if(trim($_REQUEST['_order'])=='user_name')
+		{
+			$order=	"order  by  u.user_name  ".$sort;
+		}
+		if(trim($_REQUEST['_order'])=='group_id')
+		{
+			$order=	"order  by  u.group_id  ".$sort;
+		}
+		if(trim($_REQUEST['_order'])=='log_time')
+		{
+			$order=	"order  by  a.log_time  ".$sort;
 		}
 		
+		$module=m('award_log');		
+		import('ORG.Util.Page');// 导入分页类
+		$count  = $module->query( "select  count(*) as count from ".DB_PREFIX."award_log a left join ".DB_PREFIX."user as u on a.user_id = u.id   where ".$condition);
+		$count=$count[0]['count'];
+		// 查询满足要求的总记录数
+		$per_page=$_REQUEST['per_page']?$_REQUEST['per_page']:30;
 		
+		$Page   = new Page($count,$per_page);// 实例化分页类 传入总记录数和每页显示的记录数
+		$show   = $Page->show();// 分页显示输出
+		$this->assign('page',$show);// 赋值分页输出
+		$sql = "select u.user_name,u.group_id,u.real_name,p.name as prize_name,a.*  from ".DB_PREFIX."award_log a left join ".DB_PREFIX."user as u on a.user_id = u.id  left join ".DB_PREFIX."prize as p on p.id = a.prize_id  where ".$condition .' '. $order . ' limit '.$Page->firstRow.','.$Page->listRows ;
+		$list = $GLOBALS['db']->getAll($sql);
+		$this->assign('list',$list);
+		$this->display ();
+	}
+	//这个是添加一次抽奖机会
+	function send(){
+		$user_id=$_REQUEST['id'];
+		$one=D (lottery)->where(array('uid'=>$user_id))->setInc('draw_sec');
+		//+1
+		if($one)
+		$this->success(L("增加一次抽奖机会"));
+	}
+	//这个是奖品的目录
+	function prize(){
+		$list=D(prize)->select();
+		$this->assign('list',$list);
+		$this->display ();
 	}
 	
 }

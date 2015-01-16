@@ -187,5 +187,33 @@ class Deal_listAction extends CommonAction{
 		echo  'heihei，还没做好';
 	}
 	
+	
+	//首次投资列表奖励
+	public function first_load(){
+	
+	
+		//$list=m("user_log")->where(array("money"=>40))->select();
+		$list=m("user_log")->select();
+		//var_dump($list);exit;
+		$this->assign('list',$list);
+		$this->display('first_load');
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 ?>

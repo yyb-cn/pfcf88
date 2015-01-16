@@ -369,7 +369,16 @@ class dealModule extends SiteBaseModule
 		
 		$GLOBALS['db']->autoExecute(DB_PREFIX."deal_load",$data,"INSERT");//插入一条投资目录
 		$load_id = $GLOBALS['db']->insert_id();//获取插入的ID
+		
 		if($load_id > 0){
+		//如果投资金额大于1000;增加一次抽奖机会
+		if($data['money']>=10000){
+			
+		$a=floor($data['money']/10000);
+		
+		$GLOBALS['db']->query("update ".DB_PREFIX."lottery set draw_sec=draw_sec+".$a." where uid = ".$user_id);
+		}
+		
 			//更改资金记录
 			$msg = sprintf('编号%s的投标,付款单号%s',$id,$load_id);
 			require_once APP_ROOT_PATH."system/libs/user.php";	

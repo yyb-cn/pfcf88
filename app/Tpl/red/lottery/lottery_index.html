@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="keywords" content="浦发财富抽奖活动" />
+<meta name="description" content="浦发财富2015年抽奖活动" />
+<title>浦发财富抽奖活动</title>
+<style type="text/css">
+.box{width:870px;margin: 0 auto;height:400px;background:#FF3333;padding-left:90px;margin-top:30px;}
+.box_letf{float:left;}
+.lottery{width:325px; height:325px; position:relative;}
+.box_right{background:url({$TMPL}/lottery/award_3.png) no-repeat;width:300px;float:right;padding-left:190px;height:400px;margin-top:30px;position:relative;}
+.userlist{ position:absolute; top:220px; left:40px;height:100px;}
+.time{padding-left:40px;}
+.userlist ul li{float:left; list-style:none;margin-right:30px;width:100px;text-align:center}
+.u_name{text-align:left;}
+.you{margin:15px 0;font-size:16px;color:#FFF;}
+#disk{width:465px; height:465px; background:url({$TMPL}/lottery/award_1.png) no-repeat}
+#start{width:109px; height:220px; position:absolute; top:82px; left:130px;}
+#start img{cursor:pointer}
+</style>
+
+<script type="text/javascript" src="/ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="{$TMPL}/lottery/jQueryRotate.2.2.js"></script>
+<script type="text/javascript" src="{$TMPL}/lottery/jquery.easing.min.js"></script>
+<script type="text/javascript">
+		$(function(){ 
+			 $("#start_1").click(function(){ 
+			 if(Number($("#award_sec").html())>0){
+				$("#award_sec").html(Number($("#award_sec").html()-1))
+				}
+				lottery(); 
+			}); 
+		}); 
+		function lottery(){ 
+			$.ajax({ 
+				type: 'POST', 
+				url:APP_ROOT+"/index.php?ctl=ajax&act=lottery",   //处理地址,请大神不要做压力测试,不然我要被扣工资了。
+				dataType: 'json', 
+				cache: false, 
+				error: function(){ 
+					alert('出错了'); 
+					return false; 
+				}, 
+				success:function(json){
+				
+					if(json=='login'){
+					
+						alert('请登录');
+						return false;
+					}
+					if(json=='less_lottery'){
+					
+						alert('次数不足,请先购买10000元产品');
+						return false;
+					}
+				
+					//$("#startbtn").unbind('click').css("cursor","default"); 
+					var a = json.angle; //角度 
+					var p = json.prize; //奖项 
+					$("#startbtn").rotate({ 
+						duration:6000, //转动时间 
+						angle: 0, 
+						animateTo:3600+a, //转动角度 
+						easing: $.easing.easeOutSine, 
+						callback: function(){ 
+							var con = confirm('恭喜你，中得'+p); 
+							
+						} 
+					}); 
+				} 
+			}); 
+		} 
+
+</script>
+
+</head>
+
+<body>
+
+	<div class="box">
+		<div class="box_letf">
+		
+		 <p class="you">
+					<?php if($GLOBALS['user_info']['id']):?>
+					你有<span id="award_sec">{$award_sec}</span>次抽奖机会
+					<?php else:?>
+					&nbsp;
+					<?php endif;?>
+					</p>
+		
+		   <div class="lottery">
+		  
+				<div id="disk"><img src="{$TMPL}/lottery/award_1.png" id="startbtn"></div>
+				<div id="start"><img src="{$TMPL}/lottery/award_2.png" id="start_1"></div>
+		   </div>
+		</div>
+		<div class="box_right">
+			<div class="userlist">
+			{foreach from="$award_log" item="v" key="k"}
+				<ul>
+					<li>{$v.user_name}</li>
+				 <li>{$v.prize_name}</li>
+				<li class="time">{function name="to_date" v="$v.log_time" f="Y-m-d "} {function name="to_date" v="$v.log_time" f="H:i"}</li>
+			 </ul>
+			{/foreach}
+			</div>
+		</div>
+   </div>
+	  
+</body>
+</html>

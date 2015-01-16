@@ -18,6 +18,7 @@ function insert_load_today_deal()
 	$GLOBALS['tmpl']->assign("today_deal",$today_deal);
 	return $GLOBALS['tmpl']->fetch("inc/insert/load_today_deal.html");
 }
+
 //动态加载用户提示
 function insert_load_user_tip()
 {

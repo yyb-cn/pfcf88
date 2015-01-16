@@ -1129,7 +1129,121 @@ class ajaxModule extends SiteBaseModule
 		
 		$GLOBALS['tmpl']->display("inc/ajax/reportguy.html");
 	}
+/*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓抽奖↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/	
+	public function lottery(){
 	
+		if(!$GLOBALS['user_info']){
+			set_gopreview();
+			echo json_encode('login');exit;//未登录
+		}
+		//查询抽奖次数
+		$user_id = intval($GLOBALS['user_info']['id']);
+		$user= $GLOBALS['db']->getRow("select * from ".DB_PREFIX."lottery where uid = '".$user_id."' ");
+		if(!$user['draw_sec']){
+		
+		echo json_encode('less_lottery');exit;//次数不足
+		}
+		
+				/*$prize_arr = array( 
+			'0' => array('id'=>1,'min'=>1,'max'=>29,'prize'=>'一等奖','v'=>1), 
+			'1' => array('id'=>2,'min'=>302,'max'=>328,'prize'=>'二等奖','v'=>2), 
+			'2' => array('id'=>3,'min'=>242,'max'=>268,'prize'=>'三等奖','v'=>5), 
+			'3' => array('id'=>4,'min'=>182,'max'=>208,'prize'=>'四等奖','v'=>7), 
+			'4' => array('id'=>5,'min'=>122,'max'=>148,'prize'=>'五等奖','v'=>10), 
+			'5' => array('id'=>6,'min'=>62,'max'=>88,'prize'=>'六等奖','v'=>25), 
+			'6' => array('id'=>7,'min'=>array(32,92,152,212,272,332), 
+		'max'=>array(58,118,178,238,298,358),'prize'=>'七等奖','v'=>50) 
+		); */
+		
+		$count= $GLOBALS['db']->getRow("select count(*) as c from ".DB_PREFIX."award_log where prize_id = 1 ");
+		if($count['c']>4){
+		
+			$a=0;
+		}
+		else{
+			$a=4;
+		};
+		$abc= $GLOBALS['db']->getRow("select count(*) as c from ".DB_PREFIX."award_log where prize_id = 2 ");
+		if($abc['c']>6){
+		
+			$b=0;
+		}
+		else{
+			$b=6;
+		};
+			$prize_arr = array( 
+			'0' => array('id'=>1,
+						'min'=>array(2,182), 
+						'max'=>array(43,223),
+						'prize'=>'8888代金券',
+						'v'=>$a), 
+			'1' => array('id'=>2,
+						'min'=>array(137,312), 
+						'max'=>array(178,358),
+						'prize'=>'3200代金券',
+						'v'=>$b), 
+			'2' => array('id'=>3,
+						'min'=>array(92,313), 
+						'max'=>array(132,272),
+						'prize'=>'1600代金券',
+						'v'=>20),
+			'3' => array('id'=>4,
+						'min'=>array(47,223), 
+						'max'=>array(88,268),
+						'prize'=>'800代金券',
+						'v'=>70) 			
+						);					
+		
+	foreach ($prize_arr as $key => $val) { 
+		$arr[$val['id']] = $val['v']; 
+	} 
+	 
+	$rid = $this->getRand($arr); //根据概率获取奖项id 
+	 
+	$res = $prize_arr[$rid-1]; //中奖项 
+	$min = $res['min']; 
+	$max = $res['max']; 
+	
+		$i = mt_rand(0,1); 
+		$result['angle'] = mt_rand($min[$i],$max[$i]); 
+	
+	$result['prize'] = $res['prize']; 
+	//抽奖结束,保存抽奖结果,然后抽奖次数减1
+	//1.抽奖次数减1
+	$GLOBALS['db']->query("update ".DB_PREFIX."lottery set draw_sec=draw_sec-1 where uid = ".$user_id); 
+	//2.记录抽奖结果
+	$award_data['log_time']=get_gmtime();
+	$award_data['user_id']=$user_id;
+	$award_data['prize_id']=$res['id'];
+	$GLOBALS['db']->autoExecute(DB_PREFIX."award_log",$award_data); //插入
+	
+		ajax_return($result); 	
+	}
+	
+/**------抽奖part2-------------**/	
+	public function getRand($proArr){
+	
+	 
+    $result = ''; 
+ 
+    //概率数组的总概率精度 
+    $proSum = array_sum($proArr); 
+ 
+    //概率数组循环 
+    foreach ($proArr as $key => $proCur) { 
+        $randNum = mt_rand(1, $proSum); 
+        if ($randNum <= $proCur) { 
+            $result = $key; 
+            break; 
+        } else { 
+            $proSum -= $proCur; 
+        } 
+    } 
+    unset ($proArr); 
+ 
+    return $result; 
+	}
+/*↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑抽奖↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/		
 	public function savereportguy(){
 		$result  = array("status"=>0,"message"=>"");
 		if(!$GLOBALS['user_info']){
