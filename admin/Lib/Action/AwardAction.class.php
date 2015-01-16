@@ -157,8 +157,14 @@ class AwardAction extends CommonAction{
 	//这个是添加一次抽奖机会
 	function send(){
 		$user_id=$_REQUEST['id'];
-		echo $user_id;exit;
+		
+		$gg=D(lottery)->where(array('uid'=>$user_id))->find();
+		if($gg){
 		$one=D(lottery)->where(array('uid'=>$user_id))->setInc('draw_sec');
+		}
+		else{
+		$one=D(lottery)->add(array('uid'=>$user_id,'draw_sec'=>1));
+		}
 		if($one)
 		$this->success(L("增加一次抽奖机会"));
 	}
