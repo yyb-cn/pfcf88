@@ -145,7 +145,7 @@ class AwardAction extends CommonAction{
 		$count=$count[0]['count'];
 		// 查询满足要求的总记录数
 		$per_page=$_REQUEST['per_page']?$_REQUEST['per_page']:30;
-		
+			
 		$Page   = new Page($count,$per_page);// 实例化分页类 传入总记录数和每页显示的记录数
 		$show   = $Page->show();// 分页显示输出
 		$this->assign('page',$show);// 赋值分页输出
@@ -157,8 +157,8 @@ class AwardAction extends CommonAction{
 	//这个是添加一次抽奖机会
 	function send(){
 		$user_id=$_REQUEST['id'];
-		$one=D (lottery)->where(array('uid'=>$user_id))->setInc('draw_sec');
-		//+1
+		echo $user_id;exit;
+		$one=D(lottery)->where(array('uid'=>$user_id))->setInc('draw_sec');
 		if($one)
 		$this->success(L("增加一次抽奖机会"));
 	}
