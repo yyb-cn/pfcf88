@@ -375,9 +375,12 @@ class dealModule extends SiteBaseModule
 		if($data['money']>=10000){
 			
 		$a=floor($data['money']/10000);
+		 $lottery=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."lottery where uid = ".$user_id);
+		if($lottery){
+		$GLOBALS['db']->query("update ".DB_PREFIX."lottery set draw_sec=draw_sec+".$a." where uid = ".$user_id);
+		}
 		
-		$one=$GLOBALS['db']->query("update ".DB_PREFIX."lottery set draw_sec=draw_sec+".$a." where uid = ".$user_id);
-		 if(!$one){
+		else{
 			    	$lottery_data=array('draw_sec'=>$a,'uid'=>$user_id);//插入抽奖数组
 				$GLOBALS['db']->autoExecute(DB_PREFIX."lottery",$lottery_data);//执行插入
 			}
