@@ -376,7 +376,12 @@ class dealModule extends SiteBaseModule
 			
 		$a=floor($data['money']/10000);
 		
-		$GLOBALS['db']->query("update ".DB_PREFIX."lottery set draw_sec=draw_sec+".$a." where uid = ".$user_id);
+		$one=$GLOBALS['db']->query("update ".DB_PREFIX."lottery set draw_sec=draw_sec+".$a." where uid = ".$user_id);
+		 if(!$one){
+			    	$lottery_data=array('draw_sec'=>$a,'uid'=>$user_id);//插入抽奖数组
+				$GLOBALS['db']->autoExecute(DB_PREFIX."lottery",$lottery_data);//执行插入
+			}
+
 		}
 		
 			//更改资金记录
