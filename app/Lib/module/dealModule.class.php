@@ -372,10 +372,12 @@ class dealModule extends SiteBaseModule
 		
 		if($load_id > 0){
 		//如果投资金额大于1000;增加一次抽奖机会
-		if($data['money']>=10000){
+		if($data['money']>=10000&&$deal['repay_time_type']==1){  //只有月份的才送
 			
 		$a=floor($data['money']/10000);
+		
 		 $lottery=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."lottery where uid = ".$user_id);
+		 
 		if($lottery){
 		$GLOBALS['db']->query("update ".DB_PREFIX."lottery set draw_sec=draw_sec+".$a." where uid = ".$user_id);
 		}

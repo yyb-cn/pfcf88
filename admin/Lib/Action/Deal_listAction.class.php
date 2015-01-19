@@ -4,8 +4,6 @@ class Deal_listAction extends CommonAction{
 	public function index()
 	{
 	
-	
-	
 		$condition=' d.deal_status in(1,2,4,5) ';
 		$group_list = M("UserGroup")->findAll();
 		$this->assign("group_list",$group_list);
@@ -190,11 +188,52 @@ class Deal_listAction extends CommonAction{
 	
 	//首次投资列表奖励
 	public function first_load(){
+		$condition='l.money=40 ';
+		$group_list = M("UserGroup")->findAll();
+		$this->assign("group_list",$group_list);
+		if($_REQUEST['end_time']!=''){
+			$_REQUEST['end_time']=strtotime($_REQUEST['end_time']);
+			$condition .= " and  dl.create_time  <"."'".$_REQUEST['end_time']."'";
+		};
+		if(trim($_REQUEST['user_name'])!='')
+		{
+			$condition .= " and  dl.user_name like"."'%".trim($_REQUEST['user_name'])."%'";
+		}
+		
+		if(trim($_REQUEST['name'])!='')
+		{
+			$condition .= "  and   d.name like"."'%".trim($_REQUEST['name'])."%'";
+		}
+		if(trim($_REQUEST['deal_load_id']!=''))
+		{
+			$condition .= "  and   dl.id ="."'".trim($_REQUEST['deal_load_id'])."'";
+		}
+		
+		if(trim($_REQUEST['_sort'])==0){
+			$sort='desc';
+		}
+		elseif(trim($_REQUEST['_sort'])==1){
+			$sort='asc';
+		}
+		if(trim($_REQUEST['_order'])=='')
+		{
+			$order=	"order  by l.id desc";
+		}
+		
+		$module=m('user_log');		
+		import('ORG.Util.Page');// 导入分页类
+		$count  = $module->query( "select  count(*) as count from ".DB_PREFIX."user_log l left join ".DB_PREFIX."user as u on u.id = l.user_id LEFT JOIN ".DB_PREFIX."admin a ON a.id=l.log_admin_id   where ".$condition);
+		$count=$count[0]['count'];
+		// 查询满足要求的总记录数
+		$per_page=$_REQUEST['per_page']?$_REQUEST['per_page']:30;
+		$Page   = new Page($count,$per_page);// 实例化分页类 传入总记录数和每页显示的记录数
+		$show   = $Page->show();// 分页显示输出
+		$this->assign('page',$show);// 赋值分页输出
+		
+    	$sql = "select u.user_name,l.*,a.adm_name  from ".DB_PREFIX."user_log l left join ".DB_PREFIX."user as u on u.id = l.user_id LEFT JOIN ".DB_PREFIX."admin a ON a.id=l.log_admin_id    where ".$condition .' '. $order . ' limit '.$Page->firstRow.','.$Page->listRows ;
+		
 	
-	
-		//$list=m("user_log")->where(array("money"=>40))->select();
-		$list=m("user_log")->select();
-		//var_dump($list);exit;
+		$list = $GLOBALS['db']->getAll($sql);
 		$this->assign('list',$list);
 		$this->display('first_load');
 	

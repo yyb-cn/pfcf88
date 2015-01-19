@@ -68,8 +68,8 @@
 				</foreach>
 		</select>
 		
-		<input type="hidden" value="User" name="m" />
-		<input type="hidden" value="index" name="a" />
+		<input type="hidden" value="Deal_list" name="m" />
+		<input type="hidden" value="first_load" name="a" />
 		<input type="submit" class="button" value="{%SEARCH}" />
 		<input type="button" class="button" value="{%EXPORT}" onclick="export_csv();" />
 	</form>
@@ -80,21 +80,12 @@
 	style="dataTable" 
 	name="user" 
 	checkbox="true" 
-	
 	datasource="list" 
 	
-	show="id:{%ID}|50px,
-	user_id|get_user_name:{%USER_NAME},
-	user_id|get_real_name:真实姓名,
-	money|format_price:{%USER_MONEY},
-	lock_money|lock_money_func=$user['id']:{%USER_LOCK_MONEY},
-	group_id|get_user_group:会员组别,
-	pid|get_referrals_name:{%REFERRALS_NAME},
-	log_info:操作记录,
-	money|format_price:{%USER_MONEY},
+	show="id:{%ID}|50px,user_name:{%USER_NAME},log_info:操作备注,adm_name:操作人,log_time|to_date:操作时间
 	
 	" /> 
-
+	
 <div class="blank5"></div>
 <div class="page">{$page}</div>
 </div>
