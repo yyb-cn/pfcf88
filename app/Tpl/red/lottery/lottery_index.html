@@ -1,21 +1,14 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="keywords" content="浦发财富抽奖活动" />
-<meta name="description" content="浦发财富2015年抽奖活动" />
-<title>浦发财富抽奖活动</title>
 <style type="text/css">
-.box{width:870px;margin: 0 auto;height:400px;background:#ba1533;padding-left:90px;margin-top:30px;}
+.box{width:960px; height:400px; background:#ba1533; margin-top:20px;}
 .box_letf{float:left;}
-.lottery{width:325px; height:325px; position:relative;}
-.box_right{background:url({$TMPL}/lottery/award_3.png) no-repeat;width:300px;float:right;padding-left:190px;height:400px;margin-top:30px;position:relative;}
-.userlist{ position:absolute; top:220px; left:40px;height:100px;}
+.lottery{width:325px; height:325px; position:relative; float:left; margin-left:50px;}
 
-.userlist ul li{float:left; list-style:none;margin-right:30px;width:100px;text-align:center}
-li.time{padding-left:20px;}
+.box_right{background:url({$TMPL}/lottery/award_3.png) no-repeat; width:490px; margin-left:50px; float:left; height:400px; margin-top:30px; position:relative;}
+.userlist{ position:absolute; top:220px; left:20px;height:100px;}
+
 .u_name{text-align:left;}
 .you{margin:15px 0;font-size:16px;color:#FFF;}
+
 #disk{width:465px; height:465px; background:url({$TMPL}/lottery/award_1.png) no-repeat}
 #start{width:109px; height:220px; position:absolute; top:82px; left:130px;}
 #start img{cursor:pointer}
@@ -75,14 +68,12 @@ li.time{padding-left:20px;}
 
 </script>
 
-</head>
 
-<body>
 
 	<div class="box">
 		<div class="box_letf">
 		
-		 <p class="you">
+		 			<p class="you">
 					<?php if($GLOBALS['user_info']['id']):?>
 					你有<span id="award_sec">{$award_sec}</span>次抽奖机会
 					<?php else:?>
@@ -98,17 +89,15 @@ li.time{padding-left:20px;}
 		</div>
 		<div class="box_right">
 			<div class="userlist">
-			{foreach from="$award_log" item="v" key="k"}
-			
-				<ul>
-					<li>{$v.user_name}</li>
-				 <li>{$v.prize_name}</li>
-				<li class="time" style="width:120px;">{function name="to_date" v="$v.log_time" f="Y-m-d "} {function name="to_date" v="$v.log_time" f="H:i"}</li>
-			 </ul>
-			{/foreach}
+                <ul>
+                    {foreach from="$award_log" item="v" key="k"}
+                    <li style="width:460px;">
+                        <div style="width:140px; text-align:center; float:left;">{$v.user_name}</div>
+                        <div style="width:165px; text-align:center; float:left;">{$v.prize_name}</div>
+                        <div style="width:155px; text-align:center; float:left;">{function name="to_date" v="$v.log_time" f="Y-m-d "} {function name="to_date" v="$v.log_time" f="H:i"}</div>
+                    </li>
+                    {/foreach}
+                </ul>
 			</div>
 		</div>
    </div>
-	  
-</body>
-</html>
