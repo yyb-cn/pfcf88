@@ -744,7 +744,9 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 			$res['data'] = $field_item;
 			return $res;
 		}
-		if($field_name=='user_name'&&$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."user where user_name = '".trim($user_data['user_name'])."' and id <> ".intval($user_data['id']))>0)
+		if($field_name=='user_name'&&
+		$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."user where user_name = '".trim($user_data['user_name'])."' and id <> ".intval($user_data['id']))
+		>0)
 		{
 			$field_item['field_name'] = 'user_name';
 			$field_item['error']	=	EXIST_ERROR;
@@ -796,6 +798,14 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 		if($field_name=='mobile'&&$user_data['mobile']!=''&&$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."user where mobile = '".trim($user_data['mobile'])."' and id <> ".intval($user_data['id']))>0)
 		{
 			$field_item['field_name'] = 'mobile';
+			$field_item['error']	=	EXIST_ERROR;
+			$res['status'] = 0;
+			$res['data'] = $field_item;
+			return $res;
+		}
+		if($field_name=='real_name'&&$user_data['real_name']!=''&&$GLOBALS['db']->getOne("select count(*) from ".DB_PREFIX."user where real_name = '".trim($user_data['real_name'])."' and id <> ".intval($user_data['id']))>0)
+		{
+			$field_item['field_name'] = 'real_name';
 			$field_item['error']	=	EXIST_ERROR;
 			$res['status'] = 0;
 			$res['data'] = $field_item;

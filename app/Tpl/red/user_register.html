@@ -32,23 +32,23 @@
 									<div class="blank1"></div>
 									<div class="field password pr">
                                     	<div style="width:70px; height:36px; text-align:center; line-height:36px; float:left; font-size:14px;">确认密码</div>
-										<input type="password" class="f-input ipttxt" id="signup-password-confirm" name="user_pwd_confirm" size="30" style="float:left; background:url('{$TMPL}/images/reg_password.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请再次输入密码">
+										<input type="password" class="f-input ipttxt" id="signup-password-confirm" name="user_pwd_confirm" size="30" style="float:left; background:url('{$TMPL}/images/reg_password.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请再次输入密码"/>
 										<span class="f-input-tip"></span>
 										<span class="hint" style="padding:0; text-indent:6em;">请再次填写密码</span>
 									</div>
 									<div class="blank1"></div>
 									<div class="field mobile pr">
                                     	<div style="width:70px; height:36px; text-align:center; line-height:36px; float:left; font-size:14px;">手机号码</div>
-										<input type="text" value="" class="f-input ipttxt" id="settings-mobile" name="mobile" size="30" style="float:left; background:url('{$TMPL}/images/reg_tel.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请输入您的手机号码">
+										<input type="text" value="" class="f-input ipttxt" id="settings-mobile" name="mobile" size="30" style="float:left; background:url('{$TMPL}/images/reg_tel.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请输入您的手机号码"/>
 										<span class="f-input-tip"></span> 
 										<span class="hint" style="padding:0; text-indent:6em;">{$LANG.USER_TITLE_MOBILE_TIP}</span>
 									</div>	
 									<div class="blank1"></div>
                                     <div class="field mobile pr">
                                     	<div style="width:70px; height:36px; text-align:center; line-height:36px; float:left; font-size:14px;">推荐人</div>
-										<input type="text" value="" class="f-input ipttxt" id="referral" name="referral" size="30" style="float:left; background:url('{$TMPL}/images/reg_pepole.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="您可以填写您的推荐人">
+										<input type="text" value="" class="f-input ipttxt" id="referral" name="referral" size="30" style="float:left; background:url('{$TMPL}/images/reg_pepole.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="您可以填写您的推荐人"/>
 										<span class="f-input-tip"></span> 
-										<span class="hint" style="padding:0; text-indent:6em;">已存在的用户才可以成为推荐人</span>
+										<span class="hint" style="padding:0; text-indent:6em;">请填写会员号或者真实姓名</span>
 									</div>	
 									<div class="blank1"></div>
 								
@@ -330,7 +330,7 @@ $(document).ready(function(){
 	//lu 判断推荐人
 	
 	$("#referral").bind("blur",function(){
-		
+	
 		var ajaxurl = APP_ROOT+"/index.php?ctl=ajax&act=check_field";
 		var query = new Object();
 		query.field_name = "user_name";
@@ -341,7 +341,6 @@ $(document).ready(function(){
 			type: "POST",
 			dataType: "json",
 			success: function(data){
-				//status==1 没有该推荐人
 				if(data.status==0)
 				{
 					formSuccess($("#referral"),"可用推荐人");
@@ -349,13 +348,43 @@ $(document).ready(function(){
 					return false;
 				}
 				else
-				{					
+				{	
+					
+				var ajaxurl = APP_ROOT+"/index.php?ctl=ajax&act=check_field";
+				var query = new Object();
+				query.field_name = "real_name";
+			
+					query.field_data = $.trim($("#referral").val());
+			
+				$.ajax({ 
+					url: ajaxurl,
+					data:query,
+					type: "POST",
+					dataType: "json",
+					success: function(data){
+						if(data.status==0)
+					{
+					formSuccess($("#referral"),"可用推荐人");
+					$("#referral_status").val(data.status);
+					return false;
+					}
+					else
+					{	
+						
 					formError($("#referral"),"推荐人不存在");
 					$("#referral_status").val(data.status);
 					return false;
+					}
+					}
+					});		
+					
 				}
+				
 			}
-		});	
+			});	
+		
+		
+		
 	});
 	
 	

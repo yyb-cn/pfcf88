@@ -67,7 +67,10 @@ class userModule extends SiteBaseModule
 		// 判断是否ajax 提交
 		if($_POST['referral'])
 		{
-			$user_pid=$GLOBALS['db']->getOne("select `id` from ".DB_PREFIX."user where `user_name` = '".$_POST['referral']."' ");
+			
+			$user_pid=$GLOBALS['db']->
+			getOne("select `id` from ".DB_PREFIX."user where `user_name` = '".$_POST['referral']."' "."or `real_name`= '".$_POST['referral']."' " );
+			
 			if($user_pid>0&&!empty($user_pid)){
 				$user_data['pid']=$user_pid;
 				}
