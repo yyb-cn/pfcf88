@@ -206,7 +206,7 @@ class indexModule extends SiteBaseModule
 		//抽奖环节
 		//1.获奖名单  ,最新的10条
 		
-			$award_log = $GLOBALS['db']->getAll("select a.*,u.user_name,p.name as prize_name from ".DB_PREFIX."award_log as a left join ".DB_PREFIX."user as u on a.user_id=u.id   left join ".DB_PREFIX."prize as p on a.prize_id=p.id order by a.log_time desc limit 5");
+			$award_log = $GLOBALS['db']->getAll("select a.*,u.user_name,p.name as prize_name from ".DB_PREFIX."award_log as a left join ".DB_PREFIX."user as u on a.user_id=u.id   left join ".DB_PREFIX."prize as p on a.prize_id=p.id order by a.log_time desc");
 			//姓名加***
 			foreach($award_log as $k=>$v){
 			
