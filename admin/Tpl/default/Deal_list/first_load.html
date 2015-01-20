@@ -49,29 +49,18 @@
 <div class="main_title">{$main_title}</div>
 <div class="blank5"></div>
 <div class="button_row">
-	<input type="button" class="button" value="{%ADD}" onclick="add();" />
-	<input type="button" class="button" value="{%DEL}" onclick="del();" />
+	
 </div>
 
 <div class="blank5"></div>
 <div class="search_row">
 	<form name="search" action="__APP__" method="get">	
 		{%USER_NAME}：<input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" style="width:100px;" />
-		{%USER_EMAIL}：<input type="text" class="textbox" name="email" value="{:trim($_REQUEST['email'])}" style="width:100px;" />
-		{%USER_MOBILE}：<input type="text" class="textbox" name="mobile" value="{:trim($_REQUEST['mobile'])}" style="width:100px;" />
-		{%REFERRALS_NAME}：<input type="text" class="textbox" name="pid_name" value="{:trim($_REQUEST['pid_name'])}" style="width:100px;" />
-		{%USER_GROUP}: 
-		<select name="group_id">
-				<option value="0" <if condition="intval($_REQUEST['group_id']) eq 0">selected="selected"</if>>{%ALL}</option>
-				<foreach name="group_list" item="group_item">
-					<option value="{$group_item.id}" <if condition="intval($_REQUEST['group_id']) eq $group_item['id']">selected="selected"</if>>{$group_item.name}</option>
-				</foreach>
-		</select>
-		
+	
 		<input type="hidden" value="Deal_list" name="m" />
 		<input type="hidden" value="first_load" name="a" />
 		<input type="submit" class="button" value="{%SEARCH}" />
-		<input type="button" class="button" value="{%EXPORT}" onclick="export_csv();" />
+		
 	</form>
 </div>
 <div class="blank5"></div>

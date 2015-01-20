@@ -191,24 +191,11 @@ class Deal_listAction extends CommonAction{
 		$condition='l.money=40 ';
 		$group_list = M("UserGroup")->findAll();
 		$this->assign("group_list",$group_list);
-		if($_REQUEST['end_time']!=''){
-			$_REQUEST['end_time']=strtotime($_REQUEST['end_time']);
-			$condition .= " and  dl.create_time  <"."'".$_REQUEST['end_time']."'";
-		};
+		$this->assign("sort",1);
 		if(trim($_REQUEST['user_name'])!='')
 		{
-			$condition .= " and  dl.user_name like"."'%".trim($_REQUEST['user_name'])."%'";
+			$condition .= " and  u.user_name like"."'%".trim($_REQUEST['user_name'])."%'";
 		}
-		
-		if(trim($_REQUEST['name'])!='')
-		{
-			$condition .= "  and   d.name like"."'%".trim($_REQUEST['name'])."%'";
-		}
-		if(trim($_REQUEST['deal_load_id']!=''))
-		{
-			$condition .= "  and   dl.id ="."'".trim($_REQUEST['deal_load_id'])."'";
-		}
-		
 		if(trim($_REQUEST['_sort'])==0){
 			$sort='desc';
 		}
@@ -219,7 +206,22 @@ class Deal_listAction extends CommonAction{
 		{
 			$order=	"order  by l.id desc";
 		}
-		
+		if(trim($_REQUEST['_order'])=='user_name')
+		{
+			$order=	"order  by u.user_name desc";
+		}
+		if(trim($_REQUEST['_order'])=='log_info')
+		{
+			$order=	"order  by l.log_info desc";
+		}
+		if(trim($_REQUEST['_order'])=='adm_name')
+		{
+			$order=	"order  by a.adm_name desc";
+		}
+		if(trim($_REQUEST['_order'])=='log_time')
+		{
+			$order=	"order  by l.log_time desc";
+		}
 		$module=m('user_log');		
 		import('ORG.Util.Page');// 导入分页类
 		$count  = $module->query( "select  count(*) as count from ".DB_PREFIX."user_log l left join ".DB_PREFIX."user as u on u.id = l.user_id LEFT JOIN ".DB_PREFIX."admin a ON a.id=l.log_admin_id   where ".$condition);
