@@ -221,7 +221,7 @@ class indexModule extends SiteBaseModule
 		if($user_id){
 		$user_award = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."lottery where uid=".$user_id);//改会员抽奖次数
 		//var_dump($user_award);exit;
-		$award_sec=$user_award['draw_sec']; 
+		$award_sec=$user_award['draw_sec']?$user_award['draw_sec']:0; 
 		
 		$GLOBALS['tmpl']->assign("award_sec",$award_sec);
 		}
