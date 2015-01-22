@@ -4,7 +4,9 @@
 .lottery{width:325px; height:325px; position:relative; float:left; margin-left:50px;}
 
 .box_right{background:url({$TMPL}/lottery/award_3.png) no-repeat; width:490px; margin-left:50px; float:left; height:400px; margin-top:30px; position:relative;}
-.userlist{ position:absolute; top:220px; left:20px;height:100px; width:450px; overflow-x:hidden; overflow-y:auto;}
+.userlist{ position:absolute; top:220px; left:20px;height:100px; width:450px; overflow:hidden;}
+	.userlist ul li { width:450px; height:20px;}
+		.userlist ul li div { text-align:center; float:left;}
 
 .u_name{text-align:left;}
 .you{margin:15px 0;font-size:16px;color:#FFF;}
@@ -26,6 +28,43 @@
 				lottery(); 
 			}); 
 		}); 
+		$(function(){
+
+		  var $this=$(".scrollNews");
+		
+		  $this.hover(function(){
+		
+			   clearInterval(scrollTimer);
+		
+		   },function(){
+		
+			  scrollTimer=setInterval(function(){
+		
+				   scrollNews($this);
+		
+			  },3000);
+		
+		   });
+		
+		  var scrollTimer=setInterval(function(){
+		
+			   scrollNews($this);
+		
+		  },3000);
+		
+		})
+		
+		function scrollNews(obj){
+		
+		  var $self=obj;
+		
+		  var height=$self.find("li").height();
+		
+		  $self.animate({"marginTop":-height+"px"},600,function(){
+		
+			  $self.css("marginTop",0).find("li:first").appendTo($self);
+		
+		})}
 		function lottery(){ 
 			$.ajax({ 
 				type: 'POST', 
@@ -89,12 +128,12 @@
 		</div>
 		<div class="box_right">
 			<div class="userlist">
-                <ul>
+                <ul class="scrollNews">
                     {foreach from="$award_log" item="v" key="k"}
-                    <li style="width:450px;">
-                        <div style="width:140px; text-align:center; float:left;">{$v.user_name}</div>
-                        <div style="width:165px; text-align:center; float:left;">{$v.prize_name}</div>
-                        <div style="width:145px; text-align:center; float:left;">{function name="to_date" v="$v.log_time" f="Y-m-d "} {function name="to_date" v="$v.log_time" f="H:i"}</div>
+                    <li>
+                        <div style="width:140px;">{$v.user_name}</div>
+                        <div style="width:165px;">{$v.prize_name}</div>
+                        <div style="width:145px;">{function name="to_date" v="$v.log_time" f="Y-m-d "} {function name="to_date" v="$v.log_time" f="H:i"}</div>
                     </li>
                     {/foreach}
                 </ul>
