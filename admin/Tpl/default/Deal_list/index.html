@@ -208,15 +208,17 @@
 	</td>
 	
 	
-	<td width=150>
+	<td width=200>
+	<a  style="text-decoration:none;color:#FFFFFF;font-weight:bold;background:#CC6633;padding:2px;"  href="http://rg.jlpefund.com/m.php?c=index&a=outside_add&yn={$v.deal_load_id}&real_name={$v.real_name}&produce_name={$v.name}&deal_monney={$v.u_load_money}&longtime={$v.repay_time}<?php echo  $v['repay_time_type']?'个月':'天'?>&cus_time=<?php echo to_date($v['deal_time'],'Y-m-d H:i:s')?>" target="_blank" >录入</a>
+	
 		<?php if(!$v['deal_load_check_yn']) :?>
-		<a href="http://rg.jlpefund.com/m.php?c=index&a=outside_add&yn={$v.deal_load_id}&real_name={$v.real_name}&produce_name={$v.name}&deal_monney={$v.u_load_money}&longtime={$v.repay_time}<?php echo  $v['repay_time_type']?'个月':'天'?>&cus_time=<?php echo to_date($v['deal_time'],'Y-m-d H:i:s')?>" target="_blank" >请录入</a>
-		<a  href="?m=Deal_list&a=check&id={$v.deal_load_id}"  onclick="confirm('确认录入');">确认录入</a>
+		
+		<a style="text-decoration:none;color:#FFFFFF;font-weight:bold;background:#3366CC;padding:2px;"  href="?m=Deal_list&a=check&id={$v.deal_load_id}"  onclick="confirm('确认录入');">确认录入</a>
 		<?php  else :?>
-				<a >已经录入</a>
+				<a style="text-decoration:none;color:#FFFFFF;font-weight:bold;background:#009966;padding:2px;">已录入</a>
 				<a href="http://rg.jlpefund.com?code=<?php echo base64_encode((md5('jlpe').$v['deal_load_id']))?>">查看</a>
 		<?php  endif;?>
-		<a href="javascript:send({$v.user_id})">发送邮件</a>
+		<!--<a href="javascript:send({$v.user_id})">发送邮件</a>-->
 	</td>
 </tr>
 <?php endforeach;?>
