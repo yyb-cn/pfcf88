@@ -1140,22 +1140,10 @@ class ajaxModule extends SiteBaseModule
 		$user_id = intval($GLOBALS['user_info']['id']);
 		$user= $GLOBALS['db']->getRow("select * from ".DB_PREFIX."lottery where uid = '".$user_id."' ");
 		if(!$user['draw_sec']){
-		
 		echo json_encode('less_lottery');exit;//次数不足
 		}
-		
-				/*$prize_arr = array( 
-			'0' => array('id'=>1,'min'=>1,'max'=>29,'prize'=>'一等奖','v'=>1), 
-			'1' => array('id'=>2,'min'=>302,'max'=>328,'prize'=>'二等奖','v'=>2), 
-			'2' => array('id'=>3,'min'=>242,'max'=>268,'prize'=>'三等奖','v'=>5), 
-			'3' => array('id'=>4,'min'=>182,'max'=>208,'prize'=>'四等奖','v'=>7), 
-			'4' => array('id'=>5,'min'=>122,'max'=>148,'prize'=>'五等奖','v'=>10), 
-			'5' => array('id'=>6,'min'=>62,'max'=>88,'prize'=>'六等奖','v'=>25), 
-			'6' => array('id'=>7,'min'=>array(32,92,152,212,272,332), 
-		'max'=>array(58,118,178,238,298,358),'prize'=>'七等奖','v'=>50) 
-		); */
-		
 		$count= $GLOBALS['db']->getRow("select count(*) as c from ".DB_PREFIX."award_log where prize_id = 1 ");
+		
 		if($count['c']>4){
 		
 			$a=0;
@@ -1163,6 +1151,7 @@ class ajaxModule extends SiteBaseModule
 		else{
 			$a=4;
 		};
+		
 		$abc= $GLOBALS['db']->getRow("select count(*) as c from ".DB_PREFIX."award_log where prize_id = 2 ");
 		if($abc['c']>6){
 		
@@ -1215,7 +1204,50 @@ class ajaxModule extends SiteBaseModule
 	$award_data['log_time']=get_gmtime();
 	$award_data['user_id']=$user_id;
 	$award_data['prize_id']=$res['id'];
+	
 	$GLOBALS['db']->autoExecute(DB_PREFIX."award_log",$award_data); //插入
+	//发送代金券
+	//$res['id'];
+	//1 		 8888      8 
+	//2			 3200       7 
+	//3 		 1600         5    
+	//4 		 800            6
+	if($res['id']==1){
+	$ecv_id=8;
+	}
+	elseif($res['id']==2){
+	$ecv_id=7;
+	}
+	elseif($res['id']==3){
+	$ecv_id=5;
+	}
+	elseif($res['id']==4){
+	$ecv_id=6;
+	}
+	$voucher_info=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."ecv_type where `id` = ".$ecv_id);
+	if(!empty($voucher_info))
+			{
+				if($voucher_info['end_time']>time()||$voucher_info['end_time']==0){
+					require_once APP_ROOT_PATH."system/libs/voucher.php";   
+					$rs = send_voucher($voucher_info['id'],$user_id,1);   //返回ID
+					if($rs){
+					//发送站内信
+					//send_voucher(代金券ID,用户ID,'是否需要密码')
+					$voucher_info['end_time']=$voucher_info['end_time']?date("Y-m-d H:i:s",$voucher_info['end_time']):'没有限制';
+					$title="获得新年活动代金券";
+					$content='恭喜你,获得代金券"'.$voucher_info['name'].'",到期时间为:'.$voucher_info['end_time']."请及时使用";
+					 send_user_msg($title,$content,0,$user_id,time(),0,true,true);
+					}
+				}
+				
+			}
+	
+	
+	
+	
+	
+	
+	
 	
 		ajax_return($result); 	
 	}
