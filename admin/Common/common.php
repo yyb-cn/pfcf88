@@ -208,7 +208,15 @@ function get_user_name($user_id)
 	else
 	return "<a href='".u("User/index",array("user_name"=>$user_name))."' target='_blank'>".$user_name."</a>";
 	
+}
+function get_user_name_nolink($user_id)
+{
+	$user_name =  M("User")->where("id=".$user_id." and is_delete = 0")->getField("user_name");
 	
+	if(!$user_name)
+	return '';
+	else
+	return $user_name;
 }
 function get_real_name($user_id)
 {

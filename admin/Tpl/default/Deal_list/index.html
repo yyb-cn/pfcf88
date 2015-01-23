@@ -65,33 +65,33 @@
 
 <div class="main_title">交易列表</div>
 <div class="blank5"></div>
+
 <div class="search_row">
 	<form name="search" action="__APP__" method="get">	
-		编号：<input type="text" class="textbox" name="deal_load_id" value="{:trim($_REQUEST['deal_load_id'])}" size="10" />
+		编号：<input type="text" class="textbox" name="deal_load_id" value="{:trim($_REQUEST['deal_load_id'])}" size="5" />
 		{%DEAL_NAME}：<input type="text" class="textbox" name="name" value="{:trim($_REQUEST['name'])}" />
 		
 		投资人：
 		<input type="text" class="textbox" name="user_name" value="{:trim($_REQUEST['user_name'])}" size="10" />
+		推荐人：
+		<input type="text" class="textbox" name="pid_name" value="{:trim($_REQUEST['pid_name'])}" size="10" />
 		会员组别:
 		<select name="group_id">
 				
 				<foreach name="group_list" item="group_item">
-					<option value="{$group_item.id}" 
-					<if condition="intval($_REQUEST['group_id']) eq $group_item['id']">selected="selected"
-						
-					</if>
-					>
+					<option value="{$group_item.id}" <if condition="intval($_REQUEST['group_id']) eq $group_item['id']">selected="selected"</if>>
 					{$group_item.name}
 					</option>
 				</foreach>
 				<option value="0" <if condition="intval($_REQUEST['group_id']) eq 0">selected="selected"</if>>{%ALL}</option>
 		</select>
-		
+		<br />
+		<br />
 		开始时间:
-			<input type="text" class="textbox" name="start_time" value="{$_GET['start_time']}" id="start_time"  onfocus="this.blur(); return showCalendar('start_time', '%Y-%m-%d %H:%M:%S', false, false, 'start_time');" />
+			<input type="text" class="textbox" name="start_time" value="{$_GET['start_time']}" id="start_time"  onfocus="this.blur(); return showCalendar('start_time', '%Y-%m-%d %H:%M:%S', false, false, 'start_time');" size="15" />
 			
 		结束时间:
-			<input type="text" class="textbox" name="end_time" value="{$_GET['end_time']}" id="end_time"  onfocus="this.blur(); return showCalendar('end_time', '%Y-%m-%d %H:%M:%S', false, false, 'end_time');" />
+			<input type="text" class="textbox" name="end_time" value="{$_GET['end_time']}" id="end_time"  onfocus="this.blur(); return showCalendar('end_time', '%Y-%m-%d %H:%M:%S', false, false, 'end_time');" size="15"/>
 			<input type="button" class="button" value="清空时间" onclick="$('#start_time').val('');$('#end_time').val('');" />		
 		每页显示
 		<input type="text" class="textbox" name="per_page" value="{:($_REQUEST['per_page'])}" size="3" />
@@ -105,6 +105,9 @@
 		<input type="hidden" value="index" name="a" />
 		<input type="submit" class="button" value="确定" />
 	</form>
+</div>
+<div class="button_row">
+	<input type="button" class="button" value="导出" onclick="daochu();" />
 </div>
 <div class="blank5"></div>
 
@@ -120,8 +123,8 @@
 	<th width="8">
 		<input type="checkbox" id="check" onclick="CheckAll('dataTable')">
 	</th>
-	<th width="100px ">
-		<a  class="cai"  href="javascript:sortBy('deal_load_id','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照编号(重要) ">编号(重要)</a>
+	<th width="10 ">
+		<a  class="cai"  href="javascript:sortBy('deal_load_id','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照编号(重要)">编号</a>
 	</th>
 	<th>
 		<a href="javascript:sortBy('user_name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照投资人 ">投资人   </a>
@@ -134,6 +137,9 @@
 	</th>
 	<th>
 		<a href="javascript:sortBy('group_name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照投资人 ">组别   </a>
+	</th>
+	<th>
+		<a href="javascript:sortBy('group_name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照投资人 ">推荐人   </a>
 	</th>
 	<th>
 		<a href="javascript:sortBy('name','<?php echo $_GET[_sort]?0:1?>','Deal_list','index')" title="按照项目名称 ">项目名称   </a>
@@ -169,7 +175,7 @@
 <?php foreach($list as $k=>$v) :?>
 <tr class="row">
 	<td>
-		<input type="checkbox" name="key" class="key" value="">
+		<input type="checkbox" name="key" class="key" value="{$v.deal_load_id}">
 	</td>
 	<td>
 		&nbsp;{$v.deal_load_id}
@@ -186,6 +192,9 @@
 	</td>
 	<td>
 		&nbsp;{$v.group_name}
+	</td>
+	<td>
+		&nbsp;{$v.pid|get_user_name}
 	</td>
 	<td>
 		&nbsp;<a href="javascript:;" onclick="preview({$v.deal_id})">{$v.name}<a/>

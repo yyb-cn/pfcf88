@@ -11,7 +11,14 @@ class Deal_listAction extends CommonAction{
 			$_REQUEST['start_time']=strtotime($_REQUEST['start_time']);
 			$condition .= " and  dl.create_time  >"."'".$_REQUEST['start_time']."'";
 		};
+		if(trim($_REQUEST['pid_name'])!=''){
+	       $pid=$GLOBALS['db']->getOne("select id from ".DB_PREFIX."user where user_name= '".$_REQUEST['pid_name']."'");
+		   if(!$pid){
+			die('推荐人不存在');
+		   }
+			$condition .= " and  u.pid  ="."'".$pid."'";
 		
+		};
 			if($_REQUEST['deal_load_check_yn']!=''){
 			
 			$a=($_REQUEST['deal_load_check_yn']==2)?0:$_REQUEST['deal_load_check_yn'];
@@ -124,7 +131,7 @@ class Deal_listAction extends CommonAction{
 		$show   = $Page->show();// 分页显示输出
 		$this->assign('page',$show);// 赋值分页输出
 		
-    	$sql = "select u.real_name,u.mobile,g.name as group_name, d.name,d.rate,d.repay_time,d.repay_time_type,d.id as deal_id,dl.user_name,dl.user_id,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time , dl.deal_load_check_yn,dl.virtual_money from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=dl.user_id  left join ".DB_PREFIX."user_group as g on u.group_id = g.id  where ".$condition .' '. $order . ' limit '.$Page->firstRow.','.$Page->listRows ;
+    	$sql = "select u.real_name,u.mobile,u.pid,g.name as group_name, d.name,d.rate,d.repay_time,d.repay_time_type,d.id as deal_id,dl.user_name,dl.user_id,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time , dl.deal_load_check_yn,dl.virtual_money from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=dl.user_id  left join ".DB_PREFIX."user_group as g on u.group_id = g.id  where ".$condition .' '. $order . ' limit '.$Page->firstRow.','.$Page->listRows ;
 		/*
 		d   是  deal
 		dl  是  deal_load
@@ -241,20 +248,76 @@ class Deal_listAction extends CommonAction{
 	
 	}
 	
+	public function export_csv($page = 1)
+	{
+		$id = $_REQUEST ['id'];
+		
+		//where(array ('user_id' => array ('in', explode ( ',', $id ) ) ));
+		$condition ="dl.id in ($id) " ;
+		$order="order by dl.id desc";
+		
+		
+		
+		$sql = "select u.real_name,u.pid,u.mobile,g.name as group_name, d.name,d.rate,d.repay_time,d.repay_time_type,d.id as deal_id,dl.user_name,dl.user_id,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time , dl.deal_load_check_yn,dl.virtual_money from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=dl.user_id  left join ".DB_PREFIX."user_group as g on u.group_id = g.id  where ".$condition .' '. $order ;
+		
+		$list = $GLOBALS['db']->getAll($sql);
+		foreach($list as $k=>$v)
+		{
+		
+		$v['pid_name']= $this->get_user_name_nolink($v['pid']);
+		if($v['repay_time_type']==1){ //1表示月0表示日
+			$v['get_money']=number_format((($v['u_load_money']+$v['virtual_money'])*$v['rate']/12)*$v['repay_time']*0.01,2);
+			//计算利率
+			}
+			else{
+			$v['get_money']=number_format((($v['u_load_money']+$v['virtual_money'])*$v['rate']/365)*$v['repay_time']*0.01,2);
+			}
+		$v['repay_time_type']=$v['repay_time_type']?'月':'日';
+		$arr[0]=array('编号','投资人','真实姓名','电话号码','组别','推荐人','项目名称','交易金额','利率','收益','期限','交易时间');
+		$arr[$k+1]=array($v['deal_load_id'],$v['user_name'],$v['real_name'],$v['mobile'],$v['group_name'],$v['pid_name'],$v['name'],$v['u_load_money'],$v['rate'],$v['get_money'],$v['repay_time'].$v['repay_time_type'],date("Y-m-d H:i:s",$v['deal_time']));
+		}
+		
+		$this->outputXlsHeader($arr,'交易列表'.time());
+		
+		
+	}
 	
+	public function outputXlsHeader($data,$file_name = 'export')
+{
+ header('Content-Type: text/xls'); 
+ header ( "Content-type:application/vnd.ms-excel;charset=utf-8" );
+ $str = mb_convert_encoding($file_name, 'gbk', 'utf-8');   
+ header('Content-Disposition: attachment;filename="' .$str . '.xls"');      
+ header('Cache-Control:must-revalidate,post-check=0,pre-check=0');        
+ header('Expires:0');         
+ header('Pragma:public');
+ 
+ $table_data = '<table border="1">'; 
+ foreach ($data as $line)         
+ {
+  $table_data .= '<tr>';
+  foreach ($line as $key => &$item)
+  {
+   $item = mb_convert_encoding($item, 'gbk', 'utf-8'); 
+   $table_data .= '<td>' . $item . '</td>';
+  }
+  $table_data .= '</tr>';
+ }
+ $table_data .='</table>';
+ echo $table_data;    
+ die();
+}	
 	
+public function get_user_name_nolink($user_id)
+{
+	$user_name =  M("User")->where("id=".$user_id." and is_delete = 0")->getField("user_name");
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	if(!$user_name)
+	return '';
+	else
+	return $user_name;
+}	
+
+		
 }
 ?>
