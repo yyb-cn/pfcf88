@@ -15,7 +15,6 @@ class uc_accountModule extends SiteBaseModule
 	{
 
 		$GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['UC_ACCOUNT']);
-		
 		//扩展字段
 		$field_list = load_auto_cache("user_field_list");
 		
@@ -25,10 +24,7 @@ class uc_accountModule extends SiteBaseModule
 		}
 		
 		$GLOBALS['tmpl']->assign("field_list",$field_list);
-		
-		
 		//地区列表
-		
 			$region_lv2 = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."region_conf where region_level = 2");  //二级地址
 			foreach($region_lv2 as $k=>$v)
 			{
@@ -62,9 +58,6 @@ class uc_accountModule extends SiteBaseModule
 				}
 			}
 			$GLOBALS['tmpl']->assign("n_region_lv3",$n_region_lv3);
-			
-			
-		
 		$GLOBALS['tmpl']->assign("inc_file","inc/uc/uc_account_index.html");
 		$GLOBALS['tmpl']->display("page/uc.html");
 	}
@@ -85,7 +78,6 @@ class uc_accountModule extends SiteBaseModule
 			}
 		}
 		$GLOBALS['tmpl']->assign("region_lv2",$region_lv2);
-		
 		$region_lv3 = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."region_conf where pid = ".intval($GLOBALS['user_info']['province_id']));  //三级地址
 		foreach($region_lv3 as $k=>$v)
 		{
@@ -96,7 +88,6 @@ class uc_accountModule extends SiteBaseModule
 			}
 		}
 		$GLOBALS['tmpl']->assign("region_lv3",$region_lv3);
-		
 		$GLOBALS['tmpl']->assign("inc_file","inc/uc/uc_work_index.html");
 		$GLOBALS['tmpl']->display("page/uc.html");
 	}
@@ -109,6 +100,7 @@ class uc_accountModule extends SiteBaseModule
 	
 	public function save()
 	{
+	
 		require_once APP_ROOT_PATH.'system/libs/user.php';
 		
 		
@@ -127,7 +119,8 @@ class uc_accountModule extends SiteBaseModule
 			if(intval($_REQUEST['is_ajax'])==1)
 				showSuccess($GLOBALS['lang']['SUCCESS_TITLE'],1);
 			else{
-				app_redirect(url("index","uc_account#work"));
+				//app_redirect(url("index","uc_account#work"));
+				app_redirect(url("index","uc_account#savework"));/*直接跳到保存*/
 			}		
 		}
 		else
@@ -198,7 +191,6 @@ class uc_accountModule extends SiteBaseModule
 			//编辑
 			$GLOBALS['db']->autoExecute(DB_PREFIX."user_work",$data,"UPDATE","user_id=".$data['user_id']);
 		}
-		
 		showSuccess($GLOBALS['lang']['SAVE_USER_SUCCESS'],intval($_REQUEST['is_ajax']));
 	}
 }
