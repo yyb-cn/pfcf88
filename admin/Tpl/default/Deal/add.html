@@ -101,7 +101,7 @@
 		<select name="cate_id" class="require">
 			<option value="0">=={%NO_SELECT_CATE}==</option>
 			<foreach name="deal_cate_tree" item="cate_item">
-				<option value="{$cate_item.id}">{$cate_item.title_show}</option>
+				<option value="{$cate_item.id}" selected="selected">{$cate_item.title_show}</option>   <!--默认选中最后一个-->
 			</foreach>
 		</select>
 		</td>
@@ -113,7 +113,7 @@
 		<select name="agency_id " >
 			<option value="0">=={%NO_SELECT_AGENCY}==</option>
 			<foreach name="deal_agency" item="agency_item">
-				<option value="{$agency_item.id}"><if condition="$agency_item['short_name'] neq ''">{$agency_item.short_name}<else/>{$agency_item.name}</if></option>
+				<option value="{$agency_item.id}" selected="selected"><if condition="$agency_item['short_name'] neq ''">{$agency_item.short_name}<else/>{$agency_item.name}</if></option>
 			</foreach>
 		</select>
 		<span class="tip_span">机构担保标时可选择</span>
@@ -126,7 +126,7 @@
 		<select name="warrant">
 			<option value="0">无</option>
 			<option value="1">本金</option>
-			<option value="2">本金及利息</option>
+			<option value="2" selected="selected">本金及利息</option>
 		</select>
 		</td>
 	</tr>
@@ -144,7 +144,7 @@
 		<select name="type_id" class="require">
 			<option value="0">=={%NO_SELECT_TYPE}==</option>
 			<foreach name="deal_type_tree" item="type_item">
-				<option value="{$type_item.id}">{$type_item.name}</option>
+				<option value="{$type_item.id}" selected="selected">{$type_item.name}</option>
 			</foreach>
 		</select>
 		</td>
@@ -176,7 +176,7 @@
 	<tr>
 		<td class="item_title">{%REPAY_TIME}:</td>
 		<td class="item_input">
-			<input type="text" id="repay_time" class="textbox require" SIZE="5"  name="repay_time" value="3" />
+			<input type="text" id="repay_time" class="textbox require" SIZE="5"  name="repay_time" value="" />
 			<select id="repay_time_type" name="repay_time_type">
 				<option value="0">天</option>
 				<option value="1" selected="selected">月</option>
@@ -198,7 +198,7 @@
 	<tr>
 		<td class="item_title">成交服务费:</td>
 		<td class="item_input">
-			<input type="text" class="textbox" SIZE="5" name="services_fee" value=""  />%
+			<input type="text" class="textbox" SIZE="5" name="services_fee" value="0"  />%
 			<span class="tip_span">按发布时的会员等级</span>
 		</td>
 	</tr>

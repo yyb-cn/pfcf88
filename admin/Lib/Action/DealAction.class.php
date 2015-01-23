@@ -452,6 +452,7 @@ class DealAction extends CommonAction{
 		
 		$deal_type_tree = M("DealLoanType")->findAll();
 		$deal_type_tree = D("DealLoanType")->toFormatTree($deal_type_tree,'name');
+		
 		$this->assign("deal_type_tree",$deal_type_tree);
 
 		$this->display();
