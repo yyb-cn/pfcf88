@@ -372,7 +372,7 @@ class dealModule extends SiteBaseModule
 		
 		if($load_id > 0){
 		//如果投资金额大于1000;增加一次抽奖机会
-		/*
+		
 		if($data['money']>=10000&&$deal['repay_time_type']==1){  //只有月份的才送
 			
 		$a=floor($data['money']/10000);
@@ -389,7 +389,7 @@ class dealModule extends SiteBaseModule
 			}
 
 		}
-		*/
+		
 			//更改资金记录
 			$msg = sprintf('编号%s的投标,付款单号%s',$id,$load_id);
 			require_once APP_ROOT_PATH."system/libs/user.php";	
