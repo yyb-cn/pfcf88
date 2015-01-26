@@ -11,6 +11,11 @@
 class PublicAction extends BaseAction{
 	public function login()
 	{		
+	
+	$detect=new Mobile_Detect();
+	$deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
+	
+	
 		//验证是否已登录
 		//管理员的SESSION
 		$adm_session = es_session::get(md5(conf("AUTH_KEY")));
@@ -24,6 +29,10 @@ class PublicAction extends BaseAction{
 		}
 		else
 		{
+			if($deviceType!='computer'){
+				$this->display('mobile/login');
+				exit;
+			}
 			$this->display();
 		}
 	}
@@ -35,6 +44,8 @@ class PublicAction extends BaseAction{
     //登录函数
     public function do_login()
     {		
+	
+		
     	$adm_name = trim($_REQUEST['adm_name']);
     	$adm_password = trim($_REQUEST['adm_password']);
     	$ajax = intval($_REQUEST['ajax']);  //是否ajax提交
