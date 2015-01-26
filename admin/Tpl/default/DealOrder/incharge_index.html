@@ -107,30 +107,7 @@ function get_bank($bank_id){
 	}
 	function checkSqOrder(id){
 		window.open(ROOT_PATH + "/95epay_adminquery.php?id="+id);
-		/*
-		$.ajax({
-			url:ROOT_PATH + "/95epay_adminquery.php?id="+id,
-			dataType:"json",
-			cache : true,
-			success:function(result){
-				if(result.status ==  1){
-					if (result.SuccTime!="") {
-						var msg = "订单号：" + result.TransID + "\n";
-						msg += "金额：" + result.factMoney + "\n";
-						msg += "交易时间：" + result.SuccTime + "\n";
-						msg += "交易状态：" + result.CheckResult;
-						alert(msg);
-					}
-					else{
-						alert("查询失败或未支付的订单");
-					}
-				}
-				else{
-					alert("查询失败");;
-				}
-			}
-		});
-		*/
+		
 	}
 	
 	
@@ -141,10 +118,7 @@ function get_bank($bank_id){
 <div class="main">
 <div class="main_title">{%INCHARGE_ORDER}</div>
 <div class="blank5"></div>
-<div class="button_row">
-	<input type="button" class="button" value="{%DEL}" onclick="del();" />
-	<input type="button" class="button" value="导出" onclick="daochu();" />
-</div>
+
 <div class="blank5"></div>
 <div class="search_row">
 	<form name="search" action="__APP__" method="get">	
@@ -167,10 +141,10 @@ function get_bank($bank_id){
 	id="dataTable" 
 	style="dataTable" 
 	name="incharge" 
-	checkbox="true" 
+	
 	action="true" 
 	datasource="list" 
-	show="id:{%ID}|50px,order_sn:{%ORDER_SN},user_id|get_user_name:{%USER_NAME},user_id|get_real_name:真实姓名,deal_total_price|format_price:{%INCHARGE_AMOUNT},total_price|format_price:{%PAY_AMOUNT},payment_id|get_payment_name:{%PAYMENT_TYPE},bank_id|get_bank:银行,pay_status|get_pay_status:{%PAYMENT_STATUS},create_time|to_date:创建时间,memo:支付备注" 
+	show="id:{%ID}|50px,order_sn:{%ORDER_SN},user_id|get_user_name:{%USER_NAME},user_id|get_real_name:真实姓名,deal_total_price|format_price:{%INCHARGE_AMOUNT},bank_id|get_bank:银行,pay_status|get_pay_status:{%PAYMENT_STATUS},create_time|to_date:创建时间|150px,memo:支付备注" 
 	actionlist="id|get_pay_incharge_link,id|get_baofoo_query_link=$incharge['payment_id'],id|get_sqepay_query_link=$incharge['payment_id'], del:{%DEL}" /> 
 
 <div class="blank5"></div>
