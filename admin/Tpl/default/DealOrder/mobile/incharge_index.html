@@ -89,15 +89,15 @@ function get_pay_incharge_link($id)
 	}
 }
 
-function get_baofoo_query_link($id,$pid)
+
+
+function get_sqepay_query_link($id,$pid)
 {
-	if($GLOBALS['db']->getOneCached("SELECT `class_name` FROM ".DB_PREFIX."payment WHERE id=".$pid)=="Baofoo"){
+	if($GLOBALS['db']->getOneCached("SELECT `class_name` FROM ".DB_PREFIX."payment WHERE id=".$pid)=="Sqepay"){
 		$payment_notice_id = $GLOBALS['db']->getOne("SELECT id FROM ".DB_PREFIX."payment_notice WHERE order_id=".$id);
-		return '<a class="goto_main" href="javascript:checkBaofooOrder('.$payment_notice_id.');">查询</a>';
+		return '<a class="goto_main"  href="javascript:checkSqOrder('.$payment_notice_id.');" >查询</a>';
 	}
 }
-
-
 
 ?>
 <body>
@@ -133,7 +133,7 @@ function get_baofoo_query_link($id,$pid)
 							</div>
 						</div>
 						<div class="main_r f_l">
-							{$v['id']|get_baofoo_query_link=$v['payment_id']} <!--查询-->
+							{$v['id']|get_sqepay_query_link=$v['payment_id']} <!--查询-->
 							{$v['id']|get_pay_incharge_link}        <!--收款-->
 						</div>
 					</li>
