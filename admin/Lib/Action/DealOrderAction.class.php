@@ -9,6 +9,9 @@ class DealOrderAction extends CommonAction{
 	public function incharge_index()
 	{
 		
+		$detect=new Mobile_Detect();
+		$deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
+	
 		$reminder = M("RemindCount")->find();
 		$reminder['incharge_count_time'] = get_gmtime();
 		M("RemindCount")->save($reminder);
@@ -27,7 +30,120 @@ class DealOrderAction extends CommonAction{
 		}
 		
 		$this->assign("default_map",$condition);
-		parent::index();
+		//列表过滤器，生成查询Map对象
+		$map = $this->_search ();
+		
+		//追加默认参数
+		if($this->get("default_map"))
+		$map = array_merge($map,$this->get("default_map"));
+		
+		if (method_exists ( $this, '_filter' )) {
+			$this->_filter ( $map );
+		}
+		$name=$this->getActionName();
+		$model = D ($name);
+		
+		if (! empty ( $model )) {
+		//排序字段 默认为主键名
+		if (isset ( $_REQUEST ['_order'] )) {
+			$order = $_REQUEST ['_order'];
+		} else {
+			$order = ! empty ( $sortBy ) ? $sortBy : $model->getPk ();
+		}
+		//排序方式默认按照倒序排列
+		//接受 sost参数 0 表示倒序 非0都 表示正序
+		if (isset ( $_REQUEST ['_sort'] )) {
+			$sort = $_REQUEST ['_sort'] ? 'asc' : 'desc';
+		} else {
+			$sort = $asc ? 'asc' : 'desc';
+		}
+		//取得满足条件的记录数
+		$count = $model->where ( $map )->count ( 'id' );
+		
+		if ($count > 0) {
+			//创建分页对象
+			if (! empty ( $_REQUEST ['listRows'] )) {
+				$listRows = $_REQUEST ['listRows'];
+			} else {
+				$listRows = '';
+			}
+			if($deviceType!='computer'){
+				$listRows = 10;
+			}
+			$p = new Page ( $count, $listRows );
+			//分页查询数据
+
+			$voList = $model->where($map)->order( "`" . $order . "` " . $sort)->limit($p->firstRow . ',' . $p->listRows)->findAll ( );
+			/*↓手机ajax翻页*/
+		 if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
+			
+			$p=$_REQUEST['p'];
+		
+			$voList = $model->where($map)->order( "`" . $order . "` " . $sort)->limit("$p,2")->findAll ( );
+			foreach($voList as $k=>$v){
+			
+				$voList[$k]['deal_total_price']=format_price($voList[$k]['deal_total_price']);
+				$voList[$k]['user_id']=get_user_name_nolink($v['user_id']);
+			}
+			echo json_encode($voList);exit;
+			}
+		/*↓手机ajax翻页*/
+		
+			//分页跳转的时候保证查询条件
+			foreach ( $map as $key => $val ) {
+				if (! is_array ( $val )) {
+					$p->parameter .= "$key=" . urlencode ( $val ) . "&";
+				}
+			}
+			//分页显示
+
+			$page = $p->pre_nex ();
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			//列表排序显示
+			$sortImg = $sort; //排序图标
+			$sortAlt = $sort == 'desc' ? l("ASC_SORT") : l("DESC_SORT"); //排序提示
+			$sort = $sort == 'desc' ? 1 : 0; //排序方式
+			//模板赋值显示
+			
+			$this->assign ( 'list', $voList );
+			$this->assign ( 'sort', $sort );
+			$this->assign ( 'order', $order );
+			$this->assign ( 'sortImg', $sortImg );
+			$this->assign ( 'sortType', $sortAlt );
+			$this->assign ( "page", $page );
+			$this->assign ( "nowPage",$p->nowPage);
+		}
+			//$this->_list ( $model, $map );
+		}
+		/*↓↓↓↓↓判断手机端↓↓↓↓↓*/
+		
+		if($deviceType!='computer'){
+				$this->display('mobile/incharge_index');
+				exit;
+			}
+		/*↑↑↑↑↑判断手机端↑↑↑↑↑*/
+			$this->display();
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	public function incharge_trash()
 	{

@@ -11,10 +11,8 @@
 class PublicAction extends BaseAction{
 	public function login()
 	{		
-	
 	$detect=new Mobile_Detect();
 	$deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
-	
 	
 		//验证是否已登录
 		//管理员的SESSION
@@ -24,8 +22,13 @@ class PublicAction extends BaseAction{
 		
 		if($adm_id != 0)
 		{
+		
+				if($deviceType!='computer'){
+				$this->redirect(u("DealOrder/incharge_index"));	
+			}
+			else{
 			//已登录
-			$this->redirect(u("Index/index"));			
+			$this->redirect(u("Index/index"));	}		
 		}
 		else
 		{
@@ -43,7 +46,7 @@ class PublicAction extends BaseAction{
     
     //登录函数
     public function do_login()
-    {		
+    {	
 	
 		
     	$adm_name = trim($_REQUEST['adm_name']);
@@ -78,15 +81,13 @@ class PublicAction extends BaseAction{
 				//登录成功
 				$adm_session['adm_name'] = $adm_data['adm_name'];
 				$adm_session['adm_id'] = $adm_data['id'];
-				
-				
 				es_session::set(md5(conf("AUTH_KEY")),$adm_session);
-				
 				//重新保存记录
 				$adm_data['login_ip'] = get_client_ip();
 				$adm_data['login_time'] = get_gmtime();
 				M("Admin")->save($adm_data);
 				save_log($adm_data['adm_name'].L("LOGIN_SUCCESS"),1);
+			
 				$this->success(L("LOGIN_SUCCESS"),$ajax);
 			}
 		}

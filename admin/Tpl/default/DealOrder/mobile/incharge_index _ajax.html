@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+<head>
+<title>{:app_conf("SHOP_TITLE")} - {:l("SYSTEM_LOGIN")} </title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0;">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<style>
+*{ padding:0; margin:0; font-size:12px;}
+ul{list-style:none;}
+img{border:0px;}
+a{ text-decoration:none;}
+
+.f_l { float:left;}
+.f_r { float:right;}
+.c_l { clear:both;}
+.blue { color:#4E6A81; font-weight:bold;}
+.grey_bg { background:#ddd;}
+
+.header { width:100%; height:40px; background:#125778; color:#FFF; font-weight:bold; text-align:center; line-height:40px; margin-bottom:15px; font-size:16px;}
+
+.wraper { width:100%;}
+	.main { width:100%;}
+		.main ul li { width:94%; height:100px; margin:5px 3%; border-bottom:1px solid #999;}
+			.main ul li .main_l { width:80%; height:90px; margin-top:10px;}
+				.main_l .main_3 { width:100%; height:40px;}
+					.main_3 .main_3_1 { width:49%; height:40px; text-align:center;}
+						.main_3_1 p { line-height:20px;}
+			
+			.main ul li .main_r { width:20%; height:100px;}
+				.main_r .goto_main { display:block; margin:5px; height:40px; background:#06F; text-align:center; font-weight:bold; font-size:14px; line-height:40px; color:#FFF;}
+				.main_r .rad_bg { background:#F00;}
+				.next_list { display:block;}
+				
+	.next_page { width:94%; margin-left:3%; height:20px; border:1px #aaa solid; background:#CCC; border-radius:3px; line-height:20px; text-align:center;}
+
+.footer { width:100%; height:40px; background:#111; text-align:center; font-size:12px; padding-top:10px; line-height:16px; margin-top:10px;}
+	.footer p { color:#FFF;}
+	
+</style>
+<load href='__TMPL__Common/js/jquery.js' />
+</head>
+<script type="text/javascript">
+	function pay_incharge(id)
+	{
+		if(confirm("{%CONFIRM_PAY_INCHARGE}"))
+		location.href = ROOT+"?"+VAR_MODULE+"=DealOrder&"+VAR_ACTION+"=pay_incharge&id="+id;
+	}
+	function checkBaofooOrder(id){
+		$.ajax({
+			url:ROOT_PATH + "/baofoo_query.php?id="+id,
+			dataType:"json",
+			cache : true,
+			success:function(result){
+				if(result.status ==  1){
+					if (result.SuccTime!="") {
+						var msg = "订单号：" + result.TransID + "\n";
+						msg += "金额：" + result.factMoney + "\n";
+						msg += "交易时间：" + result.SuccTime + "\n";
+						msg += "交易状态：" + result.CheckResult;
+						alert(msg);
+					}
+					else{
+						alert("查询失败或未支付的订单");
+					}
+				}
+				else{
+					alert("查询失败");
+				}
+			}
+		});
+	}
+	function checkSqOrder(id){
+		window.open(ROOT_PATH + "/95epay_adminquery.php?id="+id);
+		
+	}
+	
+	
+	$(document).ready(function(e) {
+		var page = 10;
+		$('#next_page').click(function(){
+		   $.ajax({
+			type: "GET",
+			url:"m.php?m=DealOrder&a=incharge_index&p="+page, //取得a标签链接地址
+			success:function(data){
+				page=page+2;
+				var html = '';
+				var dataObj = eval("("+data+")");
+					  $.each(dataObj,function(idx,item){
+					html += '<li><div class="main_l f_l"><div class="main_3"><div class="main_3_1 grey_bg f_l"><p class="blue">订单号</p>'+item.order_sn+'<p>';
+					html += '';	//订单号
+					html += '</p></div><div class="main_3_1 f_l"><p class="blue">会员名称</p>'+item.user_id+'<p>';
+					html += '';	//会员名称
+					html += '</p></div></div><div class="main_3"><div class="main_3_1 f_l"><p class="blue">已收金额</p>'+
+					item.deal_total_price
+					+'<p>';
+					html += '';	//已收金额
+					html += '</p></div><div class="main_3_1 grey_bg f_l"><p class="blue">支付状态</p><p>';
+					html += '<a>ddd</a>';	//支付状态
+					html += '</p></div></div></div><div class="main_r f_l">';
+					html += '';	//查询收款
+					html += '</div></li>';
+					html += '<div class="next_list"></div>';					  
+		   //输出  
+				
+				})
+					
+					
+					$('.next_list').replaceWith(html);
+			   }
+				});
+		
+			
+		});
+    });
+</script>
+<?php
+
+function get_pay_incharge_link($id)
+{
+	if(M("DealOrder")->where("id=".$id)->getField("pay_status")!=2)
+	{
+		return "<a class='goto_main rad_bg' href='javascript:void(0);' onclick='pay_incharge(".$id.");'>".'收款'."</a>";
+	}
+}
+
+function get_baofoo_query_link($id,$pid)
+{
+	if($GLOBALS['db']->getOneCached("SELECT `class_name` FROM ".DB_PREFIX."payment WHERE id=".$pid)=="Baofoo"){
+		$payment_notice_id = $GLOBALS['db']->getOne("SELECT id FROM ".DB_PREFIX."payment_notice WHERE order_id=".$id);
+		return '<a class="goto_main" href="javascript:checkBaofooOrder('.$payment_notice_id.');">查询</a>';
+	}
+}
+
+
+
+?>
+<body>
+
+<div class="header">投资列表</div>
+
+<div class="wraper">
+    <div class="main">
+    	<ul>
+			<foreach name="list" item="v">
+					<li>
+					
+						<div class="main_l f_l">
+							<div class="main_3">
+								<div class="main_3_1 grey_bg f_l">
+									<p class="blue">订单号{$v['id']}</p>
+									<p>{$v['order_sn']}</p>
+								</div>
+								<div class="main_3_1 f_l">
+									<p class="blue">会员名称</p>
+									<p>{$v['user_id']|get_user_name}</p>
+								</div>
+							</div>
+							<div class="main_3">
+								<div class="main_3_1 f_l">
+									<p class="blue">已收金额</p>
+									<p>{$v['deal_total_price']|format_price}</p>
+								</div>
+								<div class="main_3_1 grey_bg f_l">
+									<p class="blue">支付状态</p>
+									<p>{$v['pay_status']|get_pay_status}</p>
+								</div>
+							</div>
+						</div>
+						<div class="main_r f_l">
+							{$v['id']|get_baofoo_query_link=$v['payment_id']} <!--查询-->
+							{$v['id']|get_pay_incharge_link}        <!--收款-->
+						</div>
+					</li>
+                    <div class="next_list"></div>
+			</foreach>
+        </ul>
+		<div class="next_page" id="next_page">下一页</div>
+    </div>
+</div>
+
+<div class="footer">
+	<p>深圳浦发财富管理有限公司 版权所有 2015</p>
+    <p>粤ICP备14022713号-1</p>
+</div>
+
+</body>
+</html>
