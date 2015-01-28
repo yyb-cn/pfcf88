@@ -16,7 +16,6 @@ class userModule extends SiteBaseModule
 		$cache_id  = md5(MODULE_NAME.ACTION_NAME.$GLOBALS['deal_city']['id']);		
 		if (!$GLOBALS['tmpl']->is_cached('user_register.html', $cache_id))	
 		{
-			 
 			$GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['USER_REGISTER']);
 			
 			$field_list =load_auto_cache("user_field_list");
@@ -262,7 +261,7 @@ class userModule extends SiteBaseModule
 	}	
 	public function dologin()
 	{
-		
+	
 		if(!$_POST)
 		{
 			 app_redirect("404.html");
