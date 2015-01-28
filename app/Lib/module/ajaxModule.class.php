@@ -1164,22 +1164,22 @@ class ajaxModule extends SiteBaseModule
 			'0' => array('id'=>1,
 						'min'=>array(4,190), 
 						'max'=>array(40,220),
-						'prize'=>'8888代金券',
+						'prize'=>'8888',
 						'v'=>$a), 
 			'1' => array('id'=>2,
 						'min'=>array(140,320), 
 						'max'=>array(170,350),
-						'prize'=>'3200代金券',
+						'prize'=>'3200',
 						'v'=>$b), 
 			'2' => array('id'=>3,
 						'min'=>array(95,277), 
 						'max'=>array(130,300),
-						'prize'=>'1600代金券',
+						'prize'=>'1600',
 						'v'=>20),
 			'3' => array('id'=>4,
 						'min'=>array(50,230), 
 						'max'=>array(80,260),
-						'prize'=>'800代金券',
+						'prize'=>'800',
 						'v'=>70) 			
 						);					
 		
@@ -1205,25 +1205,35 @@ class ajaxModule extends SiteBaseModule
 	$award_data['user_id']=$user_id;
 	$award_data['prize_id']=$res['id'];
 	
-	$GLOBALS['db']->autoExecute(DB_PREFIX."award_log",$award_data); //插入
-	//发送代金券
+	$GLOBALS['db']->autoExecute(DB_PREFIX."award_log",$award_data); //插入抽奖记录
+		//查询投资记录，当前会员的投资记录
+		$sql = "select dl.id,dl.money as u_load_money,dl.id as deal_load_id from ".DB_PREFIX."deal_load dl left join ".DB_PREFIX."deal as d on d.id = dl.deal_id  where dl.user_id = ".$user_id." and d.deal_status=1 and dl.money>=10000 order by dl.create_time desc";
+		$list = $GLOBALS['db']->getRow($sql);
+		$deal_id=$list['id'];
+		$money=trim($result['prize']);
+		$sql="update ".DB_PREFIX."deal_load set virtual_money=virtual_money+   ".  $money ."   where id=".$deal_id;
+		
+		$list = $GLOBALS['db']->query($sql);
+
+	//发送代金券,现在又TM不送代金券，而是算入直接投递到最近一次投资中
 	//$res['id'];
 	//1 		 8888      8 
 	//2			 3200       7 
 	//3 		 1600         5    
 	//4 		 800            6
-	if($res['id']==1){
-	$ecv_id=8;
-	}
-	elseif($res['id']==2){
-	$ecv_id=7;
-	}
-	elseif($res['id']==3){
-	$ecv_id=5;
-	}
-	elseif($res['id']==4){
-	$ecv_id=6;
-	}
+	/*
+		if($res['id']==1){
+		$ecv_id=8;
+		}
+		elseif($res['id']==2){
+		$ecv_id=7;
+		}
+		elseif($res['id']==3){
+		$ecv_id=5;
+		}
+		elseif($res['id']==4){
+		$ecv_id=6;
+		}
 	$voucher_info=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."ecv_type where `id` = ".$ecv_id);
 	if(!empty($voucher_info))
 			{
@@ -1242,11 +1252,7 @@ class ajaxModule extends SiteBaseModule
 				
 			}
 	
-	
-	
-	
-	
-	
+	*/
 	
 	
 		ajax_return($result); 	
