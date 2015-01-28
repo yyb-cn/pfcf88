@@ -156,13 +156,13 @@ class Page extends Think {
         if ($upRow>0){
             $upPage="<a href='".$url."&".$p."=$upRow'>".$this->config['prev']."</a>";
         }else{
-            $upPage="";
+            $upPage="<a></a>";
         }
 
         if ($downRow <= $this->totalPages){
             $downPage="<a href='".$url."&".$p."=$downRow'>".$this->config['next']."</a>";
         }else{
-            $downPage="";
+            $downPage="<a></a>";
         }
         // << < > >>
         if($nowCoolPage == 1){

@@ -15,7 +15,7 @@ class UserAction extends CommonAction{
 	}
 	public function index()
 	{
-		$group_list = M("UserGroup")->findAll();
+     	$group_list = M("UserGroup")->findAll();
 		$this->assign("group_list",$group_list);
 		
 		//定义条件
@@ -47,6 +47,7 @@ class UserAction extends CommonAction{
 		
 		if (method_exists ( $this, '_filter' )) {
 			$this->_filter ( $map );
+			
 		}
 		$name=$this->getActionName();
 		$model = D ($name);
@@ -56,6 +57,9 @@ class UserAction extends CommonAction{
 		
 		$this->display ();
 	}
+	
+	
+	
 	
 	public function trash()
 	{
@@ -174,13 +178,31 @@ class UserAction extends CommonAction{
 		$this->success(L("INSERT_SUCCESS"));
 		
 	}
-	public function edit() {		
+	public function edit() {	
+       
+		
 		$id = intval($_REQUEST ['id']);
 		$condition['is_delete'] = 0;
 		$condition['id'] = $id;		
 		$vo = M(MODULE_NAME)->where($condition)->find();
 		$this->assign ( 'vo', $vo );
-
+		//推荐人、
+	
+          if($vo['pid']==0){  
+		    $referral=$vo['user_name'];
+		    $this->assign ( 'referral',$referral);
+		   }
+		 if($vo['pid']!=0){  
+		   $pid=M(MODULE_NAME)->find($vo['pid']);
+		   $this->assign ('referral',$pid['user_name']);
+		  
+		  
+		   }
+		 
+        
+		
+		
+		
 		$group_list = M("UserGroup")->findAll();
 		$this->assign("group_list",$group_list);
 		

@@ -441,7 +441,10 @@ class dealModule extends SiteBaseModule
 				//更新
 				$GLOBALS['db']->autoExecute(DB_PREFIX."deal",array("is_send_half_msg"=>1),"UPDATE","id=".$id);
 			}
-			
+			//如果有抽奖机会
+			if($a>=1){
+			showSuccess($GLOBALS['lang']['DEAL_BID_SUCCESS'].'获得'.$a.'次抽奖机会',$ajax,url("index","index"));
+			}
 			showSuccess($GLOBALS['lang']['DEAL_BID_SUCCESS'],$ajax,url("index","deal",array("id"=>$id)));
 		}
 		else{

@@ -6,6 +6,10 @@ class indexModule extends SiteBaseModule
 {
 	public function index()
 	{	
+	
+	
+	
+	
 	//抽奖期间暂时关闭缓存
 		//$GLOBALS['tmpl']->caching = true;
 		//$GLOBALS['tmpl']->cache_lifetime = 600;  //首页缓存10分钟

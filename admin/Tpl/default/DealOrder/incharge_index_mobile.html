@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0;">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <style>
-*{ padding:0; margin:0; font-size:12px;}
+*{ padding:0; margin:0; font-size:10px;}
 ul{list-style:none;}
 img{border:0px;}
 a{ text-decoration:none;}
@@ -32,13 +32,16 @@ a{ text-decoration:none;}
 				.main_r .goto_main { display:block; margin:5px; height:40px; background:#06F; text-align:center; font-weight:bold; font-size:14px; line-height:40px; color:#FFF;}
 				.main_r .rad_bg { background:#F00;}
 				.next_list { display:block;}
-				
-	.next_page { width:94%; margin-left:3%; height:20px; border:1px #aaa solid; background:#CCC; border-radius:3px; line-height:20px; text-align:center;}
+	
+	.next_page a{ display:block;width:40%;float:left;margin-left:5%; height:30px; border:1px #aaa solid; background:#CCC; border-radius:3px; line-height:30px; text-align:center;}
 
 .footer { width:100%; height:40px; background:#111; text-align:center; font-size:12px; padding-top:10px; line-height:16px; margin-top:10px;}
 	.footer p { color:#FFF;}
 	
 </style>
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
 <load href='__TMPL__Common/js/jquery.js' />
 </head>
 <script type="text/javascript">
@@ -77,43 +80,7 @@ a{ text-decoration:none;}
 	}
 	
 	
-	$(document).ready(function(e) {
-		var page = 10;
-		$('#next_page').click(function(){
-		   $.ajax({
-			type: "GET",
-			url:"m.php?m=DealOrder&a=incharge_index&p="+page, //取得a标签链接地址
-			success:function(data){
-				page=page+2;
-				var html = '';
-				var dataObj = eval("("+data+")");
-					  $.each(dataObj,function(idx,item){
-					html += '<li><div class="main_l f_l"><div class="main_3"><div class="main_3_1 grey_bg f_l"><p class="blue">订单号</p>'+item.order_sn+'<p>';
-					html += '';	//订单号
-					html += '</p></div><div class="main_3_1 f_l"><p class="blue">会员名称</p>'+item.user_id+'<p>';
-					html += '';	//会员名称
-					html += '</p></div></div><div class="main_3"><div class="main_3_1 f_l"><p class="blue">已收金额</p>'+
-					item.deal_total_price
-					+'<p>';
-					html += '';	//已收金额
-					html += '</p></div><div class="main_3_1 grey_bg f_l"><p class="blue">支付状态</p><p>';
-					html += '<a>ddd</a>';	//支付状态
-					html += '</p></div></div></div><div class="main_r f_l">';
-					html += '';	//查询收款
-					html += '</div></li>';
-					html += '<div class="next_list"></div>';					  
-		   //输出  
-				
-				})
-					
-					
-					$('.next_list').replaceWith(html);
-			   }
-				});
-		
-			
-		});
-    });
+	
 </script>
 <?php
 
@@ -125,21 +92,22 @@ function get_pay_incharge_link($id)
 	}
 }
 
-function get_baofoo_query_link($id,$pid)
+
+
+function get_sqepay_query_link($id,$pid)
 {
-	if($GLOBALS['db']->getOneCached("SELECT `class_name` FROM ".DB_PREFIX."payment WHERE id=".$pid)=="Baofoo"){
+	if($GLOBALS['db']->getOneCached("SELECT `class_name` FROM ".DB_PREFIX."payment WHERE id=".$pid)=="Sqepay"){
 		$payment_notice_id = $GLOBALS['db']->getOne("SELECT id FROM ".DB_PREFIX."payment_notice WHERE order_id=".$id);
-		return '<a class="goto_main" href="javascript:checkBaofooOrder('.$payment_notice_id.');">查询</a>';
+		return '<a class="goto_main"  href="javascript:checkSqOrder('.$payment_notice_id.');" >查询</a>';
 	}
 }
-
-
 
 ?>
 <body>
 
 <div class="header">投资列表</div>
-
+<div class="next_page" >{$page}</div>
+		<div style="clear:both"></div>
 <div class="wraper">
     <div class="main">
     	<ul>
@@ -169,14 +137,16 @@ function get_baofoo_query_link($id,$pid)
 							</div>
 						</div>
 						<div class="main_r f_l">
-							{$v['id']|get_baofoo_query_link=$v['payment_id']} <!--查询-->
+							{$v['id']|get_sqepay_query_link=$v['payment_id']} <!--查询-->
 							{$v['id']|get_pay_incharge_link}        <!--收款-->
 						</div>
 					</li>
                     <div class="next_list"></div>
 			</foreach>
         </ul>
-		<div class="next_page" id="next_page">下一页</div>
+		
+		<div class="next_page" >{$page}</div>
+		<div style="clear:both"></div>
     </div>
 </div>
 
