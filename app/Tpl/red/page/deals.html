@@ -578,57 +578,56 @@
 		                </div>
 		            </form>
 		        </div>
-			</div> -->
-			
-            {include file="inc/caculator.html"}
-            
-			<div class="bddf clearfix white box_shadow" style="border-top:0; margin-top:10px;">
-				<div class="gray_title clearfix">
-		            <div class="f_l f_dgray b">理财计算器</div>
-		        </div>
-				
-				<div class="clearfix pt5 pb5" id="calculate" style="width: 169px;">
-		            <div class="f_l clearfix lh24" style="width: 160px;height: 35px;">
-		                <span class="b f_l">初始投资</span>
-		                <span class="f_l" style="padding-left: 5px;">
-		                    <input type="text" name="amount" id="calculateAmount" class="f_l" style="width: 70px;"><span class="f_l pl5">元</span>
-		                </span>
-		            </div>
-		            <div class="f_l clearfix lh24" style="padding-left: 12px; width: 160px;height: 35px;">
-		                <span class="b f_l">年利率</span>
-		                <span class="f_l" style="padding-left: 5px;">
-		                    <input type="text" name="interest" id="calculateInterest" class="f_l" style="width: 70px;"><span class="f_l pl5">%</span>
-		                </span>
-		            </div>
-		            <div class="f_l clearfix lh24" style="width: 160px;height: 35px;">
-		                <span class="b f_l">投资期限</span>
-		                <span class="f_l" style="padding-left: 5px;">
-		                    <input type="text" name="year" id="calculateMonth" class="f_l" style="width: 70px;"><span class="f_l pl5">月</span>
-		                </span>
-		            </div>
-					<div class="f_l clearfix lh24" style="width: 160px;height: 30px;">
-		                <span class="b f_l">还款方式</span>
-		                <span class="f_l" style="padding-left: 5px;">
-		                    <select id="repayType" >
-		                        <option value="0">等额本息</option>
-		                        <option value="1">付息还本</option>
-								<option value="2">到期本息</option>
-		                    </select>
-		                </span>
-		            </div>
-		            <div class="f_l">
-		                <div style="text-align:center; margin:5px 0;height:30px;width: 150px;">
-		                    <img src="{$TMPL}/images/calculate.png" alt="" style="cursor: pointer; margin-left:45px" onclick="calculate()">
-		                </div>
-		            </div>
-		            <div class="f_l clearfix lh24 mt5 pt5" style=" border-top:1px solid #ccc;width: 160px;height: 35px;">
-		                <span class="f_l">本息合计</span>
-		                <span class="f_l f_red" id="lastValue" style="padding-left: 5px;">
-		                </span>
-		            </div>
-		
-		        </div>
 			</div>
+			
+            {include file="inc/caculator.html"} -->
+            <div class="bddf clearfix white box_shadow" style="border-top:0; position:fixed; width:230px; height:270px;">
+                <div class="gray_title clearfix">
+                    <div class="f_l f_dgray b">理财计算器</div>
+                </div>
+                
+                <div class="clearfix pt5 pb5" id="calculate" style="width: 169px;">
+                    <div class="f_l clearfix lh24" style="width: 160px;height: 35px;">
+                        <span class="b f_l">初始投资</span>
+                        <span class="f_l" style="padding-left: 5px;">
+                            <input type="text" name="amount" id="calculateAmount" class="f_l" style="width: 70px;"><span class="f_l pl5">元</span>
+                        </span>
+                    </div>
+                    <div class="f_l clearfix lh24" style="padding-left: 12px; width: 160px;height: 35px;">
+                        <span class="b f_l">年利率</span>
+                        <span class="f_l" style="padding-left: 5px;">
+                            <input type="text" name="interest" id="calculateInterest" class="f_l" style="width: 70px;"><span class="f_l pl5">%</span>
+                        </span>
+                    </div>
+                    <div class="f_l clearfix lh24" style="width: 160px;height: 35px;">
+                        <span class="b f_l">投资期限</span>
+                        <span class="f_l" style="padding-left: 5px;">
+                            <input type="text" name="year" id="calculateMonth" class="f_l" style="width: 70px;"><span class="f_l pl5">月</span>
+                        </span>
+                    </div>
+                    <div class="f_l clearfix lh24" style="width: 160px;height: 30px;">
+                        <span class="b f_l">还款方式</span>
+                        <span class="f_l" style="padding-left: 5px;">
+                            <select id="repayType" >
+                                <!--<option value="0">等额本息</option>
+                                <option value="1">付息还本</option>-->
+                                <option value="2">到期本息</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div class="f_l">
+                        <div style="text-align:center; margin:5px 0;height:30px;width: 150px;">
+                            <img src="{$TMPL}/images/calculate.png" alt="" style="cursor: pointer; margin-left:45px" onclick="calculate()">
+                        </div>
+                    </div>
+                    <div class="f_l clearfix lh24 mt5 pt5" style=" border-top:1px solid #ccc;width: 160px;height: 35px;">
+                        <span class="f_l">本息合计</span>
+                        <span class="f_l f_red" id="lastValue" style="padding-left: 5px;">
+                        </span>
+                    </div>
+        
+                </div>
+            </div>
 			<adv adv_id="我要理财列表页右侧底部广告" />
 		</div>
 	</div>
