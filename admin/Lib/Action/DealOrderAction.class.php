@@ -102,13 +102,6 @@ class DealOrderAction extends CommonAction{
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
 			//列表排序显示
 			$sortImg = $sort; //排序图标
 			$sortAlt = $sort == 'desc' ? l("ASC_SORT") : l("DESC_SORT"); //排序提示
@@ -128,20 +121,12 @@ class DealOrderAction extends CommonAction{
 		/*↓↓↓↓↓判断手机端↓↓↓↓↓*/
 		
 		if($deviceType!='computer'){
-				$this->display('mobile/incharge_index');
+				$this->display('incharge_index_mobile');
 				exit;
 			}
 		/*↑↑↑↑↑判断手机端↑↑↑↑↑*/
-			$this->display();
+		$this->display();
 	
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 	}

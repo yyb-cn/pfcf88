@@ -39,6 +39,9 @@ a{ text-decoration:none;}
 	.footer p { color:#FFF;}
 	
 </style>
+{// 引入标签库 }
+<tagLib name="html" />
+<include file="Public:header" />
 <load href='__TMPL__Common/js/jquery.js' />
 </head>
 <script type="text/javascript">
@@ -103,7 +106,8 @@ function get_sqepay_query_link($id,$pid)
 <body>
 
 <div class="header">投资列表</div>
-
+<div class="next_page" >{$page}</div>
+		<div style="clear:both"></div>
 <div class="wraper">
     <div class="main">
     	<ul>
