@@ -189,14 +189,12 @@ class UserAction extends CommonAction{
 		//推荐人、
 	
           if($vo['pid']==0){  
-		    $referral=$vo['user_name'];
-		    $this->assign ( 'referral',$referral);
+		    $referral='';
+		    $this->assign( 'referral',$referral);
 		   }
 		 if($vo['pid']!=0){  
 		   $pid=M(MODULE_NAME)->find($vo['pid']);
-		   $this->assign ('referral',$pid['user_name']);
-		  
-		  
+		   $this->assign ('referral',$pid['user_name']);	  
 		   }
 		 
         
@@ -356,8 +354,22 @@ class UserAction extends CommonAction{
 		
 	
 	public function update() {
-		B('FilterString');
-		$data = M(MODULE_NAME)->create ();
+	    $referral=$_POST['referral'];
+		$data=M(MODULE_NAME)->create ();
+		$user=M(MODULE_NAME);
+		//修改推荐人
+		 if($referral!=''){ 
+	     $pid_all=$user->where("user_name='$referral'")->find();	 
+		 if(!$pid_all){
+		      echo "<script>alert('推荐人不存在！');window.history.back();</script>";
+		    }
+		$pid=$pid_all['id']	;
+	    $user->find($data['id']);
+        $user->pid=$pid;
+        $user->save(); 
+		
+		 }
+		
 		
 		$log_info = M(MODULE_NAME)->where("id=".intval($data['id']))->getField("user_name");
 		//开始验证有效性
