@@ -354,9 +354,14 @@ class UserAction extends CommonAction{
 		
 	
 	public function update() {
-	    $referral=$_POST['referral'];
-		$data=M(MODULE_NAME)->create ();
+	    $session=$_SESSION['fanwe6714ccb93be0fda4e51f206b91b46358'];
+	    $session_admin=$session['adm_name'];
+		// print_r($session_admin);exit;
+		$referral=$_POST['referral'];//推荐人name名
+		$data=M(MODULE_NAME)->create();
 		$user=M(MODULE_NAME);
+		$user_one=$user->find($data['id']);
+        $user_two=$user->find($user_one['pid']);
 		//修改推荐人
 		 if($referral!=''){ 
 	     $pid_all=$user->where("user_name='$referral'")->find();	 
@@ -366,8 +371,19 @@ class UserAction extends CommonAction{
 		$pid=$pid_all['id']	;
 	    $user->find($data['id']);
         $user->pid=$pid;
-        $user->save(); 
-		
+        $save=$user->save();
+		//添加修改的信息进user_log；
+        if($user_two['user_name']!=trim($referral)){
+		$info="用户id为".$data['id']."的推荐人被做了修改";
+		$admin=M('Admin');
+		$admin_all=$admin->where("adm_name='$session_admin'")->find();	 
+		$user_log=M('UserLog');
+		$user_log->log_info=$info;
+		$user_log->log_time=time();
+		$user_log->log_admin_id=$admin_all['id'];
+		$user_log->log_user_id=$data['id'];
+		$user_log->add();
+		}
 		 }
 		
 		
