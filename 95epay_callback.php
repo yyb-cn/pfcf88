@@ -32,7 +32,9 @@ if ($_REQUEST['act'] == "query") {
 		break;
 	}
 
-	echo "</br>"."订单状态：".$result1."</br>";
+	echo '<p style="background:#0099FF;text-align:center;height:6em;line-height:7em"><span style="font-size:4em;color:#000;">订单状态：'.$result1.'</span></p>';
+	
+	
 
 	switch($_REQUEST['succeed'] )
 	{
@@ -65,8 +67,9 @@ if ($_REQUEST['act'] == "query") {
 		break;	
 	}
 
-	echo "验证状态：".$result2."</br>";
-
+		echo '<p style="background:#FFCCFF;text-align:center;height:6em;line-height:7em"><span style="font-size:32px;font-size:4em;color:#000;">验证状态：'.$result2.'</span></p>';
+	
+	
 } else {
 	include ROOT_PATH."index.php";
 }

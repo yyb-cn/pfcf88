@@ -1144,7 +1144,7 @@ class ajaxModule extends SiteBaseModule
 		}
 		$count= $GLOBALS['db']->getRow("select count(*) as c from ".DB_PREFIX."award_log where prize_id = 1 ");
 		
-		if($count['c']>4){
+		if($count['c']>5){
 		
 			$a=0;
 		}
@@ -1175,7 +1175,7 @@ class ajaxModule extends SiteBaseModule
 						'min'=>array(95,277), 
 						'max'=>array(130,300),
 						'prize'=>'1600',
-						'v'=>20),
+						'v'=>20+$a+$b),
 			'3' => array('id'=>4,
 						'min'=>array(50,230), 
 						'max'=>array(80,260),
