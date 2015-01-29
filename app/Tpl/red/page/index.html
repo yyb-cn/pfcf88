@@ -57,7 +57,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 	
  
 <div class="wrap">
-
+    
 	<!-- 14年6月18日修改"关于我们" -->
     <div class="blank10"></div><div class="blank10"></div>
     <div class="about white box_shadow">
@@ -68,7 +68,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
             <li class="about4"><a href="{url x="index" r="aboutfee" p="act=fengkong"}"><img src="{$TMPL}/images/about_04.png" /></a></li>
         </ul>
     </div>
-    <div class="trading_record white box_shadow">
+    <div class="f_l trading_record white box_shadow">
     	<div class="title_140618">
         	<div class="title_left">成交记录</div>
         </div>
@@ -76,8 +76,9 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
         	<li><p class="trading_title">累计总交易金额</p><p class="trading_money">{$success_deal.tatal_money}元</p></li>
             <li><p class="trading_title">已按期还本金</p><p class="trading_money">{$success_deal.done_money}元</p></li>
         </ul>
+        <div class="f_l guajian1"></div>
     </div>
-   
+   	
 <!--     <div class="blank10"></div><div class="blank10"></div>
 	
    <div class="benefit_comparison white box_shadow">
@@ -92,7 +93,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
  <!--抽奖-->
     <div class="blank10"></div><div class="blank10"></div>
     <div class="buying">
-    	<ul>
+    	<ul class="f_l">
         	<li class="buy1 white box_shadow">
             	<div class="buy1_main">
                 {if $credit.deal_status eq 1}
@@ -195,6 +196,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                 </div>
             </li>
         </ul>
+        <div class="f_l guajian2"></div>
     </div>
     <!--14年6月18日修改直接购买结束-->
     
@@ -249,6 +251,7 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
         	<li><a href="{$notice.url}"><span class="f_l">· {$notice.title}</span><span class="f_r">{$notice.update_time}</span></a></li>
         {/foreach}
         </ul>
+    	<div class="guajian3"></div>
     </div>
     <!--14年6月18日修改公告列表结束-->
     

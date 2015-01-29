@@ -162,7 +162,7 @@ a:hover { text-decoration:none;}
 		.about_main li a:hover { position:absolute; left:-5px; top:-8px; width:180px; height:284px; z-index:10;}
 
 /* 成交记录 */	
-.trading_record { width:260px; height:268px; border:1px solid #d2d2d2; float:right;}
+.trading_record { width:260px; height:268px; border:1px solid #d2d2d2; float:right; position:relative;}
 	.trading_main { height:204px;}
 		.trading_main li { height:74px; padding-top:15px; text-indent:28px;}
 		.trading_title { font-size:18px; font-weight:bold;}
@@ -204,7 +204,7 @@ a:hover { text-decoration:none;}
 		.main_1_line_msg,.main_2_line_msg,.main_3_line_msg,.main_4_line_msg,.main_5_line_msg { height:100px; padding:15px 40px; font-size:16px; font-weight:bold; color:#666; text-indent:2em; display:none;}
 		
 /* 立刻购买 */
-.buying { width:962px; height:340px;}
+.buying { width:962px; height:340px; position:relative;}
 	.buying ul li { float:left; width:310px; height:340px; border:1px solid #d2d2d2;}
 		.buying li .buy_title1 { font-size:22px; font-weight:bold; text-indent:22px; padding-top:35px;}
 		.buying li .buy_title2 { font-size:16px; text-indent:22px; margin-top:15px; color:#848484; white-space:nowrap;}
@@ -254,7 +254,7 @@ a:hover { text-decoration:none;}
 				.invest_msg2 .bar_p { width:120px; height:15px; border:1px solid #d2d2d2; border-radius:4px; margin-top:7px; text-align:center; line-height:15px;}
 	
 /* 公告列表 */
-.affiche_list { width:280px; float:right; border:1px solid #d2d2d2;}
+.affiche_list { width:280px; float:right; border:1px solid #d2d2d2; position:relative;}
 	.affiche_list ul { margin:20px 15px;}
 	.affiche_list ul li { width:250px; height:25px; line-height:25px; white-space:nowrap;}
 		.affiche_list .f_l { width:180px; overflow:hidden; text-overflow: ellipsis;}
@@ -324,3 +324,9 @@ a:hover { text-decoration:none;}
 	color: #F54604;
 }
 /* 14年9月26日修改立刻购买投资 */
+
+/* 15年1月29日改版新年挂件效果 */
+.guajian1 { width:110px; height:220px; background:url(../images/index_bg_1.png) no-repeat right; position:absolute; top:180px; left:260px;}
+.guajian2 { width:100px; height:320px; background:url(../images/index_bg_2.png) no-repeat left; position:absolute; top:-170px; left:-103px;}
+.guajian3 { width:80px; height:530px; background:url(../images/index_bg_3.png) no-repeat right; position:absolute; top:90px; left:284px;}
+/* 15年1月29日改版新年挂件效果结束 */

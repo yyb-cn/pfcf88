@@ -37,15 +37,16 @@ img{border:none;margin:0; padding:0;}
 .head_main img{float:left;padding-top:10px;}
 .head_main ul{float:right;}
 .head_main ul li{float:left;line-height:87px;height:87px;padding:0 20px;z-index:2;}
-.head_main ul li a{font-size:18px;color:#242b33;z-index:2;}
-.head_main ul li a:hover{color:#d90000;}
+.head_main ul li a{font-size:18px;color:#fff3dc;z-index:2;}
+.head_main ul li a:hover{color:#000;}
 .head_main ul li.on{border-bottom:3px solid #e61717;}
 .head_main ul li.onnn{position:relative;}
 .head_main ul li.onn{background:url("../images/nav_bg.png") no-repeat 100px 42px;}
 .head_main ul li.onn1{background:url("../images/nav_bghover.png") no-repeat 101px 42px;}
 .head_main ul li ul{position:absolute;border:1px solid #d6dce1;border-top:3px solid #e61717;z-index:5;top:65px;left:0;background:#fff;display:none;}
 .head_main ul li ul li{height:35px;line-height:35px;float:none;border-top:1px dotted #d6dce1;text-align:center;}
-.head_main ul li ul li a{ width:90px;font-size:14px;}
+.head_main ul li ul li a{ width:90px;font-size:14px; color:#222;}
+.head_main ul li ul li a:hover{ color:#F00;}
 
 .foot{background:#fff;width:100%;}
 .bottom{width:1000px;margin:auto;}
