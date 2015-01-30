@@ -1323,6 +1323,7 @@ KE.util = {
 		html += 'title="' + title + '" alt="flash" />';
 		return html;
 	},
+	/*
 	getMediaEmbed : function(id, type, url, width, height, autostart) {
 		type = this.getMediaType(type, url);
 		if(type=='flv')
@@ -1360,7 +1361,7 @@ KE.util = {
 			}
 		}
 		return html;
-	},
+	},*/
 	execGetHtmlHooks : function(id, html) {
 		var hooks = KE.g[id].getHtmlHooks;
 		for (var i = 0, len = hooks.length; i < len; i++) {
