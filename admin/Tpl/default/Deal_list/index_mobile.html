@@ -17,15 +17,16 @@ a{ text-decoration:none;}
 .c_l { clear:both;}
 .blue { color:#4E6A81; font-weight:bold;}
 .grey_bg { background:#ddd;}
+
 .header { width:100%; height:40px; background:#125778; color:#FFF; font-weight:bold; text-align:center; line-height:40px; margin-bottom:15px; font-size:16px;}
 .header a{ width:50%; height:40px; background:#125778;color:#FFF; font-weight:bold; text-align:center; line-height:40px; margin-bottom:15px; font-size:16px;text-align:center;display:block;float:left;}
 
 .wraper { width:100%;}
 	.main { width:100%;}
 		.main ul li { width:94%; height:100px; margin:5px 3%; border-bottom:1px solid #999;}
-			.main ul li .main_l { width:80%; height:90px; margin-top:10px;}
+			.main ul li .main_l { width:95%; height:90px; margin-top:10px;}
 				.main_l .main_3 { width:100%; height:40px;}
-					.main_3 .main_3_1 { width:49%; height:40px; text-align:center;}
+					.main_3 .main_3_1 { width:50%; height:40px; text-align:center;}
 						.main_3_1 p { line-height:20px;}
 			
 			.main ul li .main_r { width:20%; height:100px;}
@@ -107,6 +108,7 @@ function get_sqepay_query_link($id,$pid)
 
 <div class="header"><a href="?m=DealOrder&a=incharge_index">充值列表</a><a href="?m=Deal_list&a=index&p=1">投资列表</a></div>
 <div class="next_page" >{$page}</div>
+
 		<div style="clear:both"></div>
 <div class="wraper">
     <div class="main">
@@ -117,31 +119,28 @@ function get_sqepay_query_link($id,$pid)
 						<div class="main_l f_l">
 							<div class="main_3">
 								<div class="main_3_1 grey_bg f_l">
-									<p class="blue">订单号{$v['id']}</p>
-									<p>{$v['order_sn']}</p>
+									<p class="blue">真实姓名</p>
+									<p>{$v.real_name}</p>
 								</div>
 								<div class="main_3_1 f_l">
-									<p class="blue">会员名称</p>
-									<p>{$v['user_id']|get_user_name}</p>
+									<p class="blue">标的名字</p>
+									<p>{$v.name}</p>
 								</div>
 							</div>
 							<div class="main_3">
 								<div class="main_3_1 f_l">
-									<p class="blue">已收金额</p>
-									<p>{$v['deal_total_price']|format_price}</p>
+									<p class="blue">交易金额</p>
+									<p>{$v['u_load_money']|format_price}</p>
 								</div>
 								<div class="main_3_1 grey_bg f_l">
-									<p class="blue">支付状态</p>
-									<p>{$v['pay_status']|get_pay_status}</p>
+									<p class="blue">交易时间</p>
+									<p>&nbsp;<?php echo to_date($v['deal_time'],"Y-m-d H:i:s")?></p>
 								</div>
 							</div>
 						</div>
-						<div class="main_r f_l">
-							{$v['id']|get_sqepay_query_link=$v['payment_id']} <!--查询-->
-							{$v['id']|get_pay_incharge_link}        <!--收款-->
-						</div>
+						
 					</li>
-                    <div class="next_list"></div>
+                    
 			</foreach>
         </ul>
 		

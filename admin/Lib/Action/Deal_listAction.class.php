@@ -3,7 +3,9 @@
 class Deal_listAction extends CommonAction{
 	public function index()
 	{
-	
+		$detect=new Mobile_Detect();
+		$deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
+		
 		$condition=' d.deal_status in(1,2,4,5) ';
 		$group_list = M("UserGroup")->findAll();
 		$this->assign("group_list",$group_list);
@@ -125,8 +127,9 @@ class Deal_listAction extends CommonAction{
 		$count=$count[0]['count'];
 		// 查询满足要求的总记录数
 		$per_page=$_REQUEST['per_page']?$_REQUEST['per_page']:30;
-		
-		
+			if($deviceType!='computer'){
+				$per_page = 10;
+			}
 		$Page   = new Page($count,$per_page);// 实例化分页类 传入总记录数和每页显示的记录数
 		$show   = $Page->show();// 分页显示输出
 		$this->assign('page',$show);// 赋值分页输出
@@ -176,7 +179,14 @@ class Deal_listAction extends CommonAction{
 		$this->assign('total_no_limit',$total_no_limit);
 		
 		$this->assign('list',$list);
-		$this->display('index');
+		if($deviceType!='computer'){
+				$show = $Page->pre_nex ();
+				$this->assign ( "page", $show );
+				$this->display('index_mobile');
+				
+			}
+			else{
+		$this->display('index');}
 		
 	}
 	public function check(){
@@ -235,6 +245,7 @@ class Deal_listAction extends CommonAction{
 		$count=$count[0]['count'];
 		// 查询满足要求的总记录数
 		$per_page=$_REQUEST['per_page']?$_REQUEST['per_page']:30;
+	
 		$Page   = new Page($count,$per_page);// 实例化分页类 传入总记录数和每页显示的记录数
 		$show   = $Page->show();// 分页显示输出
 		$this->assign('page',$show);// 赋值分页输出

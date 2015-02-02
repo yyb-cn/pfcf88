@@ -97,7 +97,9 @@ class DealOrderAction extends CommonAction{
 			}
 			//分页显示
 
-			$page = $p->pre_nex ();
+			
+			
+			$show   = $p->show();// 分页显示输出
 			
 			
 			
@@ -113,7 +115,7 @@ class DealOrderAction extends CommonAction{
 			$this->assign ( 'order', $order );
 			$this->assign ( 'sortImg', $sortImg );
 			$this->assign ( 'sortType', $sortAlt );
-			$this->assign ( "page", $page );
+			$this->assign ( "page", $show );
 			$this->assign ( "nowPage",$p->nowPage);
 		}
 			//$this->_list ( $model, $map );
@@ -121,12 +123,15 @@ class DealOrderAction extends CommonAction{
 		/*↓↓↓↓↓判断手机端↓↓↓↓↓*/
 		
 		if($deviceType!='computer'){
+				$show = $p->pre_nex ();
+				$this->assign ( "page", $show );
 				$this->display('incharge_index_mobile');
-				exit;
+				
 			}
+			else{
 		/*↑↑↑↑↑判断手机端↑↑↑↑↑*/
 		$this->display();
-	
+	}
 		
 		
 	}
