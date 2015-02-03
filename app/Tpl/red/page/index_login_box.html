@@ -22,8 +22,15 @@
 		</div>	 
    {else}
 	<div  class="denglu">
-		<div  class="denglu_main"></div>
-			<form method="post" action="{url x="shop" r="user#dologin"}" name="ajax_login_form" >
+		<div  class="denglu_main">
+       		<div style="margin-top:35px; margin-left:17px; color:#FFF; width:246px; height:21px; line-height:21px;"><img src="{$TMPL}/images/tiaozi1.png" /> 浦发财富13%</div>
+            <div style="margin-top:16px; margin-left:17px; color:#FFF; width:246px; height:21px; line-height:21px;"><img src="{$TMPL}/images/tiaozi2.png" /> 余额宝4.18%</div>
+            <div style="margin-top:16px; margin-left:17px; color:#FFF; width:246px; height:21px; line-height:21px;"><img src="{$TMPL}/images/tiaozi3.png" /> 银行定期3.3%</div>
+            <div style="width:218px; height:47px; border:3px solid #333; border-radius:4px; margin:0 auto; margin-top:27px;"><a href="index.php?ctl=user&act=register"><img src="{$TMPL}/images/zhuce1.png" /></a></div>
+            <div style="color:#FFF; float:right; margin-top:12px; margin-right:23px;">已有账号？ <a href="index.php?ctl=user&act=login" style="color:#f9a00b; text-decoration:underline;">立即登录</a></div>
+        </div>
+			<!--
+            <form method="post" action="{url x="shop" r="user#dologin"}" name="ajax_login_form" >
 				<input  type="hidden"  name="failNum"  value=""> <input  type="hidden"  id="username"  name="j_username">
 				<div  class="denglu_main1">
 					
@@ -53,11 +60,11 @@
 								<?php endif;?>
 
 							<li><input  type="submit" id="ajax-login-submit" name="commit" value="{$LANG.LOGIN}" class="denglu"></li>
-							<!--<li><a  href=""  title=""  class="w">微博登录</a><a  href=""  title="QQ登陆"  class="q">QQ登录</a></li>-->
+							//<li><a  href=""  title=""  class="w">微博登录</a><a  href=""  title="QQ登陆"  class="q">QQ登录</a></li>
 						</ul>
 						
 				</div>
-			</form>
+			</form>-->
 		</div>
         <script type="text/javascript">		
 		$(document).ready(function(){
