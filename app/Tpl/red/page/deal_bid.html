@@ -95,7 +95,7 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 				<tr>
 					<td class="tit tr w100 btm">投标金额：</td>
 					<td class="f_red bg btm">
-						<input class="f-input w70" name="bid_money" id="J_BIDMONEY"  /> 元&nbsp;&nbsp;
+						<input class="f-input w70" name="bid_money" id="J_BIDMONEY" value="<?php if($_GET['moneny']){echo $_GET['moneny'];} ?>"  /> 元&nbsp;&nbsp;
 						<span class="f_dgray">(最低投标金额为{function name="round" v=$deal.min_loan_money f=2}元
 						{if $voucher},不包含代金券金额数{/if}
 						{if (int)app_conf('DEAL_BID_MULTIPLE') gt 0},并且是{function name='app_conf' v='DEAL_BID_MULTIPLE'}的倍数{/if})

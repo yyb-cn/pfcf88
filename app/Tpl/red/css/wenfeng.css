@@ -196,3 +196,67 @@ li.yshop2b_ca{margin-left:20px;}
 .jiushop{width:980px;margin-left:-15px;height:1472px;margin-bottom:30px;}
 
 .box_shadow { box-shadow:2px 3px 5px #999; -moz-box-shadow:2px 3px 5px #999; -webkit-box-shadow:2px 3px 5px #999; border-bottom:2px\9; border-bottom:#bbb\9; border-right:2px\9; border-right:#bbb\9;}
+
+.new_shop { clear:both; width:950px; margin:20px auto; margin-left:5px; margin-right:5px;}
+	.new_shop .new_shop_l { width:607px; height:420px;}
+		.new_shop_l .new_shop_l_tit { width:607px; height:54px; background:#e4e4e4; line-height:54px; text-indent:1em;}
+			.new_shop_l .new_shop_l_tit img { float:left; margin-left:-10px;}
+			.new_shop_l .new_shop_l_tit h1 { font-size:16px; color:#718b97;}
+			
+		.new_shop_l .new_shop_l_main { width:607px; height:366px;}
+			.new_shop_l_main1 { width:527px; height:150px; margin-left:40px; border-bottom:1px solid #dee3e6;}
+				.new_shop_l_main1 li { width:140px; height:150px;}
+					.new_shop_l_main1 li .n_m1 { font-size:18px; color:#989898; line-height:66px;}
+					.new_shop_l_main1 li .n_m2 { font-size:30px; color:#718b97; font-weight:bold;}
+				.new_shop_l_main1 .new_shop_l_main_money { width:247px; height:150px;}
+				
+			.new_shop_l_main .no_border_t { border-top:none;}	
+			.new_shop_l_main2 { width:527px; height:95px; margin-left:40px; border-top:1px solid #e8ebed;}
+				.new_shop_l_main2 li { float:left; width:174px; height:46px; margin-top:19px; border-right:1px solid #e8ebed; text-align:center;}
+				.new_shop_l_main2 .no_border_r { border-right:none;}
+					
+					.new_shop_l_main2 .tiao { width:140px; height:26px; margin-left:30px; line-height:26px;}
+						.new_shop_l_main2 .tiao .tiao_bian { float:left; width:100px; height:12px; border:1px solid #2f82c6; margin-top:6px;}
+							.new_shop_l_main2 .tiao .tiao_bian .tiao_now { float:left; background:#2f82c6; height:12px;}
+							
+	.new_shop .new_shop_r { width:300px; height:270px; margin-left:35px;}
+		.new_shop_r .new_shop_r_tit { width:300px; height:54px; background:#e4e4e4; line-height:54px; text-indent:1em;}
+			.new_shop_r .new_shop_r_tit img { float:left; margin-left:-10px;}
+			.new_shop_r .new_shop_r_tit h1 { font-size:16px; color:#718b97;}
+			.new_shop_r .new_shop_r_tit span { line-height:54px; color:#b3b3b3;}
+			
+	.new_shop_r .new_shop_r_main { width:273px; padding-left:27px; height:216px;}
+		.new_shop_r_main .new_shop_r_moneny { width:245px; height:40px; border:1px solid #e4e4e4; margin-top:32px;}
+			.new_shop_r_moneny div { width:38px; height:40px; line-height:40px; text-align:center; font-weight:bold; font-size:30px; cursor:pointer;}
+			.new_shop_r_moneny .jian { border-right:1px solid #e4e4e4;}
+			.new_shop_r_moneny .jia { border-left:1px solid #e4e4e4;}
+				.new_shop_r_moneny div:hover { color:#F00;}
+			
+			.new_shop_r_moneny .how_much { width:158px; height:38px; border:none; text-indent:1em; font-size:18px; font-weight:bold;}
+			
+		.new_shop_r_main p { clear:both; padding-top:10px;}
+		
+		.new_shop_r_main .goto_touzi { width:245px; height:45px; clear:both; float:left; margin-top:12px; font-size:20px; font-weight:bold; text-align:center; line-height:45px; color:#FFF;}
+		
+	.new_shop .my_money { width:300px; height:130px; margin-left:35px; margin-top:19px;}
+		.my_money .my_money_tit { width:300px; height:54px; background:#e4e4e4; line-height:54px; text-indent:1em;}
+			.my_money .my_money_tit img { float:left; margin-left:-10px;}
+			.my_money .my_money_tit h1 { font-size:16px; color:#718b97;}
+			
+		.my_money .my_money_main { width:260pox; height:50px; margin:0 auto; text-align:center; font-size:24px; font-weight:bold; line-height:50px;}
+		
+.new_shop2 { clear:both; width:950px; margin:0 auto; margin-left:5px; margin-right:5px; padding:20px 0;}
+	.new_shop2 .new_shop_introduce_tit { float:left; width:170px; height:40px; font-size:20px; color:#718b97; line-height:40px; text-align:center; background:#FFF; border-top-left-radius:6px; border-top-right-radius:6px; cursor:pointer; margin-top:20px; border:1px solid #D9DFE3; margin-left:-1px;}
+	.new_shop2 .new_shop_list_tit { float:left; margin-left:10px; width:170px; height:40px; font-size:20px; color:#718b97; line-height:40px; text-align:center; background:#e4e4e4; border-top-left-radius:6px; border-top-right-radius:6px; cursor:pointer; margin-top:20px; border:1px solid #D9DFE3;}
+	.new_shop2 .no_border_b { border-bottom:none;}
+	
+	.new_shop2 .new_shop_introduce { width:950px; clear:both;}
+		.new_shop_introduce_main_tit { text-align:center; font-size:22px; font-weight:bold; padding:10px 0;}
+		.new_shop_introduce_main_tit2 { font-size:18px; color:#851220; padding:20px 0; font-weight:bold; text-indent:1em;}
+		.new_shop_introduce_main_msg { padding:0 20px; text-indent:2em;}
+		
+		.new_shop_introduce .tab1 { margin:20px 30px; font-size:14px; line-height:16px; text-indent:2em;}
+			.new_shop_introduce .tab1 p { line-height:30px;}
+	
+	.new_shop2 .new_shop_list { width:950px; clear:both;}
+		.new_shop2 .new_shop_list .jshop2 p { width:280px; float:left; text-align:center; padding-top:10px;}
