@@ -11,6 +11,7 @@ class DirectoryAction extends CommonAction{
 	public function Directory_index()
 	{
 	
+	//echo 	urlencode('你麻痹+妮妮');exit;
 		$list1=M('Role_nav')->order('sort asc')->select();
 		$list2=M('Role_group')->order('nav_id asc,sort ')->select();
 		$list3=M('Role_module')->select();
@@ -32,7 +33,7 @@ class DirectoryAction extends CommonAction{
 		
 		}
 	
-		print_r($arr);
+		//print_r($arr);
 		
 		
 		
