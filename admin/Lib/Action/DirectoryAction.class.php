@@ -10,6 +10,34 @@
 class DirectoryAction extends CommonAction{
 	public function Directory_index()
 	{
+	
+		$list1=M('Role_nav')->order('sort asc')->select();
+		$list2=M('Role_group')->order('nav_id asc,sort ')->select();
+		$list3=M('Role_module')->select();
+		$list4=M('Role_node')->order('group_id')->select();
+		
+		foreach($list1 as $k=>$v){
+			
+			$group=M('Role_group')->where('nav_id='.$v['id'])->select();
+		//echo	M('Role_group')->getlastsql();
+			$arr[$v['name']]=$group;
+			foreach($arr[$v['name']] as $kk=>$vv){
+			
+			$list=M('Role_node')->where('group_id ='.$vv['id'])->select();
+			array_unshift($list,$arr[$v['name']][$kk]['name']);
+			$arr[$v['name']][$kk]['name']=$list;
+			
+			}
+		
+		
+		}
+	
+		print_r($arr);
+		
+		
+		
+	
+	
 		echo '<p style="background:#aaFa00">首页目录role_nav表</p>';
 		echo '<a href="?m=Directory&a=add&type=Role_nav">新增</a>';
 		echo '<hr/>';
