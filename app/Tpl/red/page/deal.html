@@ -106,7 +106,7 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
                 {elseif $deal.deal_status eq 0}
                     <div style=" background:#F00;">等待材料</div>
                 {elseif $deal.deal_status eq 1 && $deal.remain_time gt 0}
-                    <a style="width:245px; height:45px; background:F59C00; display:block; border:none; border-radius:0; padding:0; font-size:20px; font-weight:bold; color:#FFF;" href="{url x="index" r="deal#bid" p="id=$deal.id"}" onclick="goto_touzi(this.href);return false;" class="btn-orange" style="background:none; border:none; padding:0px">马上投资</a>
+                    <a style="width:245px; height:45px; background:F59C00; display:block; border:none; border-radius:0; padding:0; font-size:20px; font-weight:bold; color:#FFF;" href="{url x="index" r="deal#bid" p="id=$deal.id"}" onclick="goto_touzi(this.href);return false;" class="btn-orange">马上投资</a>
                 {elseif $deal.deal_status eq 2}
                     <div style=" background:#9F2D3D;">投标已满</div>
                 {elseif $deal.deal_status eq 3 || $deal.remain_time lte 0}
@@ -217,16 +217,13 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
                 </td>
               </tr>
               <tr>
-                <td width="890" height="36" bgcolor="#f6f6f6">
+                <td width="890" height="36">
                   <p style="  font-size:14px; font-weight:bold;">贷后检查：及时对借款人执行借款合同情况、借款人的经营情况、保证人和抵（质）押物的情况进行持续的监控和分析，及时发现早期预警信号，并积极采取应补救措施和授信管理过程。 </p>
                 </td>
               </tr>
             </table>
             
             <p class="new_shop_introduce_main_tit"><img src="{$TMPL}/images/tou_z_11.png" /> 项目安全</p>
-            
-            <p class="new_shop_introduce_main_tit2">内部增信措施</p>
-            <p class="new_shop_introduce_main_msg">本计划设置次级收益人，金发小贷公司为本次的次级投资人，通过收益分配顺序进行分级，优先级份额和次级份额比例为9:1，优先级优先获得收益分配，优先级资产损失先由次级承担。</p>
             
             <p class="new_shop_introduce_main_tit2">无条件承诺回购</p>
             <p class="new_shop_introduce_main_msg">具有品牌实力的小贷公司作为出让信贷资产收益权的主体，其承诺在投资者的投资到期后，无条件回购信贷资产收益权的行为，并为此承担连带责任。</p>
@@ -239,8 +236,6 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
             
             <p class="new_shop_introduce_main_tit2">外部担保及补充支付</p>
             <p class="new_shop_introduce_main_msg">广西金发行融资性担保有限公司为自治区金融办严格审核通过的融资性担保公司，注册成立于2010年，注册资本为1.08亿元。作为本投资计划的担保及补充支付承诺人，在计划期限内信贷资产不良率超过10%（不含）的情况下触发清偿事件，在补充支付额度内为优先级的本金及收益进行担保及补充支付，进一步提高优先级的安全性。</p>
-            
-            <p class="new_shop_introduce_main_tit2">深圳嘉良基金管理有限公司对上述主体的不能行使回购的行为承担连带责任。</p>
         </div>
         
         <div class="new_shop_list white box_shadow" style="display:none;">
@@ -263,10 +258,10 @@ else{
 }
 $(window).ready(function() {
     var fristMoney = $('.how_much').val()*1;
-	if(day){
+	if(typeof(moon) == 'undefined' && typeof(day) != 'undefined'){
 		var lastMoney = fristMoney+fristMoney*lixi/365*day;
 	}
-	else if(moon){
+	else if(typeof(day) == 'undefined' && typeof(moon) != 'undefined'){
 		var lastMoney = fristMoney+fristMoney*lixi/12*moon;
 	}
 	lastMoney = lastMoney.toFixed(2);
@@ -277,10 +272,10 @@ $('.jian').click(function(){
 	if( nowMoney >= (minMoney*2) ){
 		nowMoney = nowMoney*1 - minMoney*1;
 		$('.how_much').val(nowMoney);
-		if(day){
+		if(typeof(moon) == 'undefined' && typeof(day) != 'undefined'){
 			var lastMoney = nowMoney+nowMoney*lixi/365*day;
 		}
-		else if(moon){
+		else if(typeof(day) == 'undefined' && typeof(moon) != 'undefined'){
 			var lastMoney = nowMoney+nowMoney*lixi/12*moon;
 		}
 		lastMoney = lastMoney.toFixed(2);
@@ -291,10 +286,10 @@ $('.jia').click(function(){
 	var nowMoney = $('.how_much').val()*1;
 	nowMoney = nowMoney*1 + minMoney*1;
 	$('.how_much').val(nowMoney);
-	if(day){
+	if(typeof(moon) == 'undefined' && typeof(day) != 'undefined'){
 		var lastMoney = nowMoney+nowMoney*lixi/365*day;
 	}
-	else if(moon){
+	else if(typeof(day) == 'undefined' && typeof(moon) != 'undefined'){
 		var lastMoney = nowMoney+nowMoney*lixi/12*moon;
 	}
 	lastMoney = lastMoney.toFixed(2);
@@ -316,10 +311,10 @@ $('.new_shop_list_tit').click(function(){
 function lastMoneny(thisMoneny){
 	thisMoneny = thisMoneny*1;
 	if(thisMoneny >= minMoney){
-		if(day){
+		if(typeof(moon) == 'undefined' && typeof(day) != 'undefined'){
 			var lastMoney = thisMoneny+thisMoneny*lixi/365*day;
 		}
-		else if(moon){
+		else if(typeof(day) == 'undefined' && typeof(moon) != 'undefined'){
 			var lastMoney = thisMoneny+thisMoneny*lixi/12*moon;
 		}
 		lastMoney = lastMoney.toFixed(2);
