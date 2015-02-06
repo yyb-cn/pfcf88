@@ -171,9 +171,10 @@ class Deal_listAction extends CommonAction{
 			$list[$k]['get_money']=number_format((($v['u_load_money']+$v['virtual_money'])*$v['rate']/365)*$v['repay_time']*0.01,2);
 			}
 			$total_rate_money+=$list[$k]['get_money'];//当页累计效益
-			$list[$k]['urlencode_name']=urlencode($v['name']);
+			$list[$k]['urlencode_name']=str_replace('+','%2b',$v['name']);
 		}
-		//var_dump($list);exit;
+		
+		
 			$this->assign('total_rate_money',$total_rate_money);
 		$total_limit=number_format($total_limit);
 		$this->assign('total_limit',$total_limit);
