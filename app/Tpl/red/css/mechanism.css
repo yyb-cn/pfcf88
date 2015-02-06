@@ -1,23 +1,17 @@
 @charset "utf-8";
 /* CSS Document */
 
-.wraper_mechanism { width:993px; margin:0 auto; overflow:hidden;}
-.clear { clear:both; margin:4px 0;}
-
-.header_mechanism { width:993px; height:120px; background:url(../images/mechanism-bg1.png) 0 40px no-repeat;}
-
-.main_mechanism { width:993px; height:845px; color:#FFF; font-family:"微软雅黑", "黑体", "仿宋"; font-weight:bold;}
-
-	.main_mechanism .main_mechanism1 { width:993px; height:215px; background:url(../images/mechanism-bg2.png) no-repeat;}
-		.main_mechanism1 .msg1 { float:right; margin:20px 50px 0 0; font-size:18px; line-height:30px; }
+.m_wraper { width:100%; margin-top:30px;}
+	.zyjg_logo { width:630px; height:36px; margin:0 auto; background:url(../images/zyjg_logo.png) no-repeat;}
+	
+		.zyjg_bg01 { background:url(../images/zyjg_bg01.png) no-repeat;}
+		.zyjg_bg02 { background:url(../images/zyjg_bg02.png) no-repeat;}
+		.zyjg_bg03 { background:url(../images/zyjg_bg03.png) no-repeat;}
+		.zyjg_bg04 { background:url(../images/zyjg_bg04.png) no-repeat;}
 		
-	.main_mechanism .main_mechanism2 { width:993px; height:216px; background:url(../images/mechanism-bg3.png) no-repeat;}
-		.main_mechanism2 .msg2 { float:left; margin:10px 0 0 42px; font-size:16px; line-height:30px;}
-		
-	.main_mechanism .main_mechanism3 { width:993px; height:216px; background:url(../images/mechanism-bg4.png) no-repeat;}
-		.main_mechanism3 .msg3 { float:right; margin:16px 40px 0 0; font-size:16px; line-height:30px; }
-		
-	.main_mechanism .main_mechanism4 { width:790px; height:156px; margin:0 auto; margin-top:30px;}
-		.main_mechanism4 .msg4 { color:#333; font-size:16px; line-height:30px; }
-		
-.footer_mechanism { width:993px; height:218px; background:url(../images/mechanism-bg5.png) no-repeat;}
+	/* 公共部分 */
+	.zyjg_m1 { width:100%; height:320px; background:#e4eff5; clear:both;}
+	.zyjg_m2 { width:100%; height:320px; background:#fff; clear:both;}
+	.zyjg_mm { width:800px; height:265px; margin:0 auto;}
+	.zyjg_msg { text-indent:2em; font-size:16px; line-height:24px;}
+	.zyjg_bg { width:200px; height:200px; margin-top:55px;}
