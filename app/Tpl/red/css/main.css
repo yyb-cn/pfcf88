@@ -214,7 +214,7 @@ a:hover { text-decoration:none;}
 			.buy_over { display:block; width:310px; height:80px; background:#c0bcbb; font-size:26px; text-align:center; line-height:80px; color:#FFF;}
 				.buy_over:hover { text-decoration:none; color:#FFF;}
 		
-		.buy1_main { height:128px; position:relative;}
+		.buy1_main { height:128px; position:relative; overflow:hidden;}
 		.buy1_img { height:133px; border-bottom:1px solid #d2d2d2;}
 		
 	.buy2 { margin:0 13px;}
