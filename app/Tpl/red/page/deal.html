@@ -258,10 +258,10 @@ else{
 }
 $(window).ready(function() {
     var fristMoney = $('.how_much').val()*1;
-	if(typeof(moon) == 'undefined' && typeof(day) != 'undefined'){
+	if(day){
 		var lastMoney = fristMoney+fristMoney*lixi/365*day;
 	}
-	else if(typeof(day) == 'undefined' && typeof(moon) != 'undefined'){
+	else{
 		var lastMoney = fristMoney+fristMoney*lixi/12*moon;
 	}
 	lastMoney = lastMoney.toFixed(2);
@@ -272,10 +272,10 @@ $('.jian').click(function(){
 	if( nowMoney >= (minMoney*2) ){
 		nowMoney = nowMoney*1 - minMoney*1;
 		$('.how_much').val(nowMoney);
-		if(typeof(moon) == 'undefined' && typeof(day) != 'undefined'){
+		if(day){
 			var lastMoney = nowMoney+nowMoney*lixi/365*day;
 		}
-		else if(typeof(day) == 'undefined' && typeof(moon) != 'undefined'){
+		else{
 			var lastMoney = nowMoney+nowMoney*lixi/12*moon;
 		}
 		lastMoney = lastMoney.toFixed(2);
@@ -286,10 +286,10 @@ $('.jia').click(function(){
 	var nowMoney = $('.how_much').val()*1;
 	nowMoney = nowMoney*1 + minMoney*1;
 	$('.how_much').val(nowMoney);
-	if(typeof(moon) == 'undefined' && typeof(day) != 'undefined'){
+	if(day){
 		var lastMoney = nowMoney+nowMoney*lixi/365*day;
 	}
-	else if(typeof(day) == 'undefined' && typeof(moon) != 'undefined'){
+	else{
 		var lastMoney = nowMoney+nowMoney*lixi/12*moon;
 	}
 	lastMoney = lastMoney.toFixed(2);
@@ -311,10 +311,10 @@ $('.new_shop_list_tit').click(function(){
 function lastMoneny(thisMoneny){
 	thisMoneny = thisMoneny*1;
 	if(thisMoneny >= minMoney){
-		if(typeof(moon) == 'undefined' && typeof(day) != 'undefined'){
+		if(day){
 			var lastMoney = thisMoneny+thisMoneny*lixi/365*day;
 		}
-		else if(typeof(day) == 'undefined' && typeof(moon) != 'undefined'){
+		else{
 			var lastMoney = thisMoneny+thisMoneny*lixi/12*moon;
 		}
 		lastMoney = lastMoney.toFixed(2);
