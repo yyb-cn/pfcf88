@@ -127,6 +127,7 @@ class ArticleAction extends CommonAction{
 	}
 	
 	public function insert() {
+		//var_dump($_REQUEST);exit;
 		B('FilterString');
 		$ajax = intval($_REQUEST['ajax']);
 		$data = M(MODULE_NAME)->create ();
