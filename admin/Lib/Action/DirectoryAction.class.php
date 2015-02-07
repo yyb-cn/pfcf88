@@ -11,7 +11,6 @@ class DirectoryAction extends CommonAction{
 	public function Directory_index()
 	{
 	
-	//echo 	urlencode('你麻痹+妮妮');exit;
 		$list1=M('Role_nav')->order('sort asc')->select();
 		$list2=M('Role_group')->order('nav_id asc,sort ')->select();
 		$list3=M('Role_module')->select();
@@ -99,31 +98,31 @@ class DirectoryAction extends CommonAction{
 	}
 	public function doadd()
 	{
-		$type=$_POST['type'];
+		$type=trim($_POST['type']);
 		$module=M($type);
 		$data['is_delete']=0;	
 		$data['is_effect']=1;
 		if($type=='Role_nav'){
-		$data['name']=$_POST['name'];
-		$data['sort']=$_POST['sort'];
+		$data['name']=trim($_POST['name']);
+		$data['sort']=trim($_POST['sort']);
 		$module->add($data);
 		}
 		if($type=='Role_group'){
-		$data['name']=$_POST['name'];
-		$data['nav_id']=$_POST['nav_id'];
-		$data['sort']=$_POST['sort'];
+		$data['name']=trim($_POST['name']);
+		$data['nav_id']=trim($_POST['nav_id'];
+		$data['sort']=trim($_POST['sort'];
 		$module->add($data);
 		}
 		if($type=='Role_module'){
-		$data['name']=$_POST['name'];
-		$data['module']=$_POST['module'];
+		$data['name']=trim($_POST['name'];
+		$data['module']=trim($_POST['module'];
 		$module->add($data);
 		}
 		if($type=='Role_node'){
-		$data['name']=$_POST['name'];
-		$data['group_id']=$_POST['group_id'];
-		$data['module_id']=$_POST['module_id'];
-		$data['action']=$_POST['action'];
+		$data['name']=trim($_POST['name'];
+		$data['group_id']=trim($_POST['group_id'];
+		$data['module_id']=trim($_POST['module_id'];
+		$data['action']=trim($_POST['action'];
 		$module->add($data);
 		}
 	$this->success('插入成功');

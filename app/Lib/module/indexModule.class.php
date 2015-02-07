@@ -7,9 +7,6 @@ class indexModule extends SiteBaseModule
 	public function index()
 	{	
 	
-	
-	
-	
 	//抽奖期间暂时关闭缓存
 		//$GLOBALS['tmpl']->caching = true;
 		//$GLOBALS['tmpl']->cache_lifetime = 600;  //首页缓存10分钟
@@ -208,8 +205,7 @@ class indexModule extends SiteBaseModule
 				}
 			$GLOBALS['tmpl']->assign("charts_user",$charts_user);
 		//抽奖环节
-		//1.获奖名单  ,最新的10条
-		
+		//1.获奖名单 
 			$award_log = $GLOBALS['db']->getAll("select a.*,u.user_name,p.name as prize_name from ".DB_PREFIX."award_log as a left join ".DB_PREFIX."user as u on a.user_id=u.id   left join ".DB_PREFIX."prize as p on a.prize_id=p.id order by a.log_time desc");
 			//姓名加***
 			foreach($award_log as $k=>$v){
