@@ -36,11 +36,27 @@ class aboutfeeModule  extends SiteBaseModule {
 	
 		$GLOBALS['tmpl']->display("page/index_mechanism_detail.html");
 	}
+	function about_us_hzhb(){
 	
-	function office(){
-	
-		$GLOBALS['tmpl']->display("page/office.html");
+		$GLOBALS['tmpl']->display("page/about_us_hzhb.html");
 	}
+	function about_us_join(){
+	
+		$GLOBALS['tmpl']->display("page/about_us_join.html");
+	}
+	function about_us_pfcf(){
+	
+		$GLOBALS['tmpl']->display("page/about_us_pfcf.html");
+	}
+	function about_us_tdjs(){
+	
+		$GLOBALS['tmpl']->display("page/about_us_tdjs.html");
+	}
+	function about_us_zzzs(){
+	
+		$GLOBALS['tmpl']->display("page/about_us_zzzs.html");
+	}
+	
 	
 	
 	
