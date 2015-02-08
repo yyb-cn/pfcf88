@@ -127,6 +127,8 @@ class noticeModule extends SiteBaseModule
 			$page = 1;
 			$limit = (($page-1)*app_conf("PAGE_SIZE")).",".app_conf("PAGE_SIZE");
 			
+			
+			
 			$result = get_article_list($limit,0,'ac.type_id = 2','',true);
 			
 			$GLOBALS['tmpl']->assign("list",$result['list']);

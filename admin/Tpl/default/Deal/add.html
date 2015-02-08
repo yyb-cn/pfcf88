@@ -130,14 +130,14 @@
 		</select>
 		</td>
 	</tr>
-
+<!--
 	<tr>
-		<td class="item_title">{%DEAL_ICON}:</td>
+		<td class="item_title">贷款缩略图:</td>
 		<td class="item_input">
 			<html:imgUpload name = 'icon' id='icon' />
 		</td>
 	</tr>
-	
+-->	
 	<tr>
 		<td class="item_title">{%TYPE_TREE}:</td>
 		<td class="item_input">
@@ -154,8 +154,8 @@
 		<td class="item_title">还款方式:</td>
 		<td class="item_input">
 			<select name="loantype">
-				<option value="0">等额本息</option>
-				<option value="1">付息还本</option>
+				<!--<option value="0">等额本息</option>-->
+				<!--<option value="1">付息还本</option>-->
 				<option value="2">到期本息</option>
 			</select>
 		</td>
@@ -195,6 +195,8 @@
 			<input type="text" class="textbox require" SIZE="5" name="enddate" value="{$vo.enddate}"  />
 		</td>
 	</tr>
+	<input type="hidden" class="textbox" SIZE="5" name="services_fee" value="0"  />
+	<!--
 	<tr>
 		<td class="item_title">成交服务费:</td>
 		<td class="item_input">
@@ -202,6 +204,7 @@
 			<span class="tip_span">按发布时的会员等级</span>
 		</td>
 	</tr>
+	-->
 	<tr>
 		<td class="item_title">{%DEAL_DESCRIPTION}:</td>
 		<td class="item_input">

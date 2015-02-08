@@ -745,7 +745,7 @@ function get_notice($limit=0)
 	{
 		$limit_str = "";
 	}
-	$list = $GLOBALS['db']->getAll("select a.*,ac.type_id from ".DB_PREFIX."article as a left join ".DB_PREFIX."article_cate as ac on a.cate_id = ac.id where ac.type_id = 2 and ac.is_effect = 1 and ac.is_delete = 0 and a.is_effect = 1 and a.is_delete = 0 order by a.sort desc ".$limit_str);
+	$list = $GLOBALS['db']->getAll("select a.*,ac.type_id from ".DB_PREFIX."article as a left join ".DB_PREFIX."article_cate as ac on a.cate_id = ac.id where ac.type_id = 2 and ac.is_effect = 1 and ac.is_delete = 0 and a.is_effect = 1 and a.is_delete = 0 order by a.sort desc ,a.id desc ".$limit_str);
 	
 	foreach($list as $k=>$v)
 	{
@@ -853,7 +853,7 @@ function get_article_list($limit, $cate_id=0, $where='',$orderby = '',$cached = 
 			}
 			
 			if($orderby=='')
-			$sql.=" order by a.sort desc limit ".$limit;
+			$sql.=" order by a.sort desc ,a.id desc limit ".$limit;
 			else
 			$sql.=" order by ".$orderby." limit ".$limit;
 	
