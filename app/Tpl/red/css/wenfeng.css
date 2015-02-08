@@ -250,7 +250,7 @@ li.yshop2b_ca{margin-left:20px;}
 	.new_shop2 .new_shop_list_tit { float:left; margin-left:10px; width:170px; height:40px; font-size:20px; color:#718b97; line-height:40px; text-align:center; background:#e4e4e4; border-top-left-radius:6px; border-top-right-radius:6px; cursor:pointer; margin-top:20px; border:1px solid #D9DFE3;}
 	.new_shop2 .no_border_b { border-bottom:none;}
 	
-	.new_shop2 .new_shop_introduce { width:950px; clear:both;}
+	.new_shop2 .new_shop_introduce { width:950px; clear:both; padding:20px 0;}
 		.new_shop_introduce_main_tit { text-align:center; font-size:22px; font-weight:bold; padding:10px 0;}
 		.new_shop_introduce_main_tit2 { font-size:18px; color:#851220; padding:20px 0; font-weight:bold; text-indent:1em;}
 		.new_shop_introduce_main_msg { padding:0 20px; text-indent:2em;}
