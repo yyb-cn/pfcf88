@@ -85,7 +85,9 @@ class mysql_db
             {
                 if (!$quiet)
                 {
-                    $this->ErrorMsg("Can't Connect MySQL Server($dbhost)!");
+                    //$this->ErrorMsg("Can't Connect MySQL Server($dbhost)!");
+					$this->ErrorMsg("网站真正维护中,请稍后刷新即可($dbhost)!");
+					
                 }
 
                 return false;
