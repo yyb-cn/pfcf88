@@ -57,7 +57,10 @@ class aboutfeeModule  extends SiteBaseModule {
 		$GLOBALS['tmpl']->display("page/about_us_zzzs.html");
 	}
 	
+	function planebook(){
 	
+		$GLOBALS['tmpl']->display("page/planebook.html");
+	}
 	
 	
 	

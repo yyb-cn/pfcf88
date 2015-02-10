@@ -394,6 +394,21 @@ class uc_dealModule extends SiteBaseModule
 						$load_repay_id = $GLOBALS['db']->insert_id();
 						
 						if($load_repay_id > 0){
+						/*
+							//发布还款公告↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓：
+							$data_a['cate_id']= 5;
+							$data_a['title']=$deal['name'].'完成还款';
+							$data_a['content']='"'.$deal['name'].'",请各位有参与本标的投资者注意查看账户,祝大家投资愉快,欢迎继续投资其他的标,如有问题请咨询客服';
+							$article=M('article')->order('sort desc')->find();
+							$sort=$article['sort'];
+							$data_a['sort']=$sort-1;
+							$data_a['is_effect']=1;
+							$data_a['create_time'] = get_gmtime();
+							$data_a['update_time'] = get_gmtime();
+							clear_auto_cache("get_help_cache");
+							$list=M('article')->add($data_a);
+							//发布还款公告↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+						*/
 						
 							$content = "您好，您在".app_conf("SHOP_TITLE")."的投标 “<a href=\"".$deal['url']."\">".$deal['name']."</a>”成功还款".($vv['month_repay_money']+$vv['impose_money'])."元，";
 							$unext_loan = $user_loan_list[$kk+1];
