@@ -95,7 +95,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
             {foreach from=$nav_list item=nav_item key=key}
 			<li  class="onnn {if $nav_item.sub_nav}onn{/if}"><a  title=""  style="padding: 25px 0; cursor: pointer;"  href="{$nav_item.url}" target="{if $nav_item.blank eq 1}_blank{/if}">{$nav_item.name}</a>
             {if $nav_item.sub_nav}
-				<ul  style="display: none;">
+				<ul>
                     {foreach from=$nav_item.sub_nav item=sub_item}
 					<li><a  href="{$sub_item.url}"  title="" target="{if $sub_item.blank eq 1}_blank{/if}">{$sub_item.name}</a></li>
                     {/foreach}
