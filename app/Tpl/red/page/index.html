@@ -107,7 +107,8 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                     	<div class="circle">
                             <div class="pie_left"><div class="left"></div></div>
                             <div class="pie_right"><div class="right"></div></div>
-                            <div class="mask"><span>{$credit.longtime}</span>天</div>
+                            <div class="mask"><span style="display:none">{$credit.longtime}</span>{$credit.repay_time}
+							{if $credit.repay_time_type==0}天{else}个月{/if}</div>
                         </div>
                     </div>
                     <div class="buy_img_r f_l">
@@ -140,7 +141,8 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                     	<div class="circle">
                             <div class="pie_left"><div class="left"></div></div>
                             <div class="pie_right"><div class="right"></div></div>
-                            <div class="mask"><span>{$chengjian.longtime}</span>天</div>
+                            <div class="mask"><span style="display:none">{$chengjian.longtime}</span>{$chengjian.repay_time}
+							{if $chengjian.repay_time_type==0}天{else}个月{/if}</div>
                         </div>
                     </div>
                     <div class="buy_img_r f_l">
@@ -175,7 +177,8 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                     	<div class="circle">
                             <div class="pie_left"><div class="left"></div></div>
                             <div class="pie_right"><div class="right"></div></div>
-                            <div class="mask"><span>{$wenfeng.longtime}</span>天</div>
+                            <div class="mask"><span style="display:none">{$wenfeng.longtime}</span>{$wenfeng.repay_time}
+							{if $wenfeng.repay_time_type==0}天{else}个月{/if}</div>
                         </div>
                     </div>
                     <div class="buy_img_r f_l">
