@@ -1165,22 +1165,22 @@ class ajaxModule extends SiteBaseModule
 						'min'=>array(4,190), 
 						'max'=>array(40,220),
 						'prize'=>'8888',
-						'v'=>0), 
+						'v'=>$a), 
 			'1' => array('id'=>2,
 						'min'=>array(140,320), 
 						'max'=>array(170,350),
 						'prize'=>'3200',
-						'v'=>0), 
+						'v'=>$b), 
 			'2' => array('id'=>3,
 						'min'=>array(95,277), 
 						'max'=>array(130,300),
 						'prize'=>'1600',
-						'v'=>10),
+						'v'=>20+$a+$b),
 			'3' => array('id'=>4,
 						'min'=>array(50,230), 
 						'max'=>array(80,260),
 						'prize'=>'800',
-						'v'=>90) 			
+						'v'=>70) 			
 						);					
 		
 	foreach ($prize_arr as $key => $val) { 
