@@ -493,7 +493,7 @@ class DealAction extends CommonAction{
 		$data['start_time'] = trim($data['start_time'])==''?0:to_timespan($data['start_time']);
 		$data['bad_time'] = trim($data['bad_time'])==''?0:to_timespan($data['bad_time']);
 		$data['repay_time_type']=$data['repay_time_type']?'1':'0';
-		
+			
 		$list=M(MODULE_NAME)->add($data);
 		
 		if (false !== $list) {
