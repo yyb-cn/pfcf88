@@ -336,7 +336,31 @@ class uc_dealModule extends SiteBaseModule
 		
 		syn_deal_status($id);
 		sys_user_status($GLOBALS['user_info']['id'],false,true);
+				
+/*以上全部都是费炒作,不有在意还款人还了多少钱,获得多少信用,我们TM又不是P2P平台*/
+/*把用户回款做好就好了,付息还本,每月付息的钱改为本金+代金券。2015-3-3*/		
+		//用户回款
+		/*
+		deal_load表保存的是客户投资标地信息的记录
+		$id是标的ID
+		$deal = get_deal($id);获取标地的具体信息
+		repay_start_time还款日  4月1日
+		repay_time时长			3个月	，15天
+		repay_time_type			是天还是月
 		
+		rate利息				8%	
+		loantype				还款方式
+		*/
+		/*
+		function get_deal_user_load_list!!!!!!!!!!!!!!!!!!!!在此处函数修改+入虚拟金额virtual_money的计算
+				用户还款列表
+				impose_money  逾期罚息
+		month_repay_money	
+		-》		
+		repay_money
+		-》
+		modify_account()函数：作用是修改用户账户金额
+		*/
 		
 		//用户回款
 		$user_load_ids = $GLOBALS['db']->getAll("SELECT deal_id,user_id,money,virtual_money FROM ".DB_PREFIX."deal_load WHERE deal_id=".$id);
@@ -387,7 +411,7 @@ class uc_dealModule extends SiteBaseModule
 						$user_load_data['manage_money'] = $vv['month_manage_money'];
 						$user_load_data['impose_money'] = $vv['impose_money'];
 						if($vv['status']>0)
-							$user_load_data['status'] = $vv['status'] - 1;
+						$user_load_data['status'] = $vv['status'] - 1;
 						$user_load_data['l_key'] = $kk;
 						$user_load_data['u_key'] = $k;
 						$GLOBALS['db']->autoExecute(DB_PREFIX."deal_load_repay",$user_load_data,"INSERT","","SILENT");
@@ -436,7 +460,7 @@ class uc_dealModule extends SiteBaseModule
 								
 							}
 							if($user_load_data['impose_money'] !=0 || $user_load_data['manage_money'] !=0 || $user_load_data['repay_money']!=0){
-								//更新用户账户资金记录
+								//更新用户账户资金记录!!!!!!!!!!!!!!!!
 								modify_account(array("money"=>$user_load_data['impose_money']),$v['user_id'],"标:".$deal['id'].",期:".($kk+1).",逾期罚息");
 								
 								modify_account(array("money"=>-$user_load_data['manage_money']),$v['user_id'],"标:".$deal['id'].",期:".($kk+1).",投标管理费");

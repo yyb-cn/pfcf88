@@ -1192,10 +1192,8 @@ class ajaxModule extends SiteBaseModule
 	$res = $prize_arr[$rid-1]; //中奖项 
 	$min = $res['min']; 
 	$max = $res['max']; 
-	
 		$i = mt_rand(0,1); 
 		$result['angle'] = mt_rand($min[$i],$max[$i]); 
-	
 	$result['prize'] = $res['prize']; 
 	//抽奖结束,保存抽奖结果,然后抽奖次数减1
 	//1.抽奖次数减1
@@ -1207,54 +1205,12 @@ class ajaxModule extends SiteBaseModule
 	
 	$GLOBALS['db']->autoExecute(DB_PREFIX."award_log",$award_data); //插入抽奖记录
 		//查询投资记录，当前会员的投资记录
-		$sql = "select dl.id,dl.money as u_load_money,dl.id as deal_load_id from ".DB_PREFIX."deal_load dl left join ".DB_PREFIX."deal as d on d.id = dl.deal_id  where dl.user_id = ".$user_id." and d.deal_status=1 and dl.money>=10000 order by dl.create_time desc";
+		$sql = "select dl.id,dl.money as u_load_money,dl.id as deal_load_id from ".DB_PREFIX."deal_load dl left join ".DB_PREFIX."deal as d on d.id = dl.deal_id  where dl.user_id = ".$user_id." and (d.deal_status=1  or d.deal_status=2 or d.deal_status=4)and dl.money>=10000 order by dl.id desc";
 		$list = $GLOBALS['db']->getRow($sql);
 		$deal_id=$list['id'];
 		$money=trim($result['prize']);
 		$sql="update ".DB_PREFIX."deal_load set virtual_money=virtual_money+   ".  $money ."   where id=".$deal_id;
-		
 		$list = $GLOBALS['db']->query($sql);
-
-	//发送代金券,现在又TM不送代金券，而是算入直接投递到最近一次投资中
-	//$res['id'];
-	//1 		 8888      8 
-	//2			 3200       7 
-	//3 		 1600         5    
-	//4 		 800            6
-	/*
-		if($res['id']==1){
-		$ecv_id=8;
-		}
-		elseif($res['id']==2){
-		$ecv_id=7;
-		}
-		elseif($res['id']==3){
-		$ecv_id=5;
-		}
-		elseif($res['id']==4){
-		$ecv_id=6;
-		}
-	$voucher_info=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."ecv_type where `id` = ".$ecv_id);
-	if(!empty($voucher_info))
-			{
-				if($voucher_info['end_time']>time()||$voucher_info['end_time']==0){
-					require_once APP_ROOT_PATH."system/libs/voucher.php";   
-					$rs = send_voucher($voucher_info['id'],$user_id,1);   //返回ID
-					if($rs){
-					//发送站内信
-					//send_voucher(代金券ID,用户ID,'是否需要密码')
-					$voucher_info['end_time']=$voucher_info['end_time']?date("Y-m-d H:i:s",$voucher_info['end_time']):'没有限制';
-					$title="获得新年活动代金券";
-					$content='恭喜你,获得代金券"'.$voucher_info['name'].'",到期时间为:'.$voucher_info['end_time']."请及时使用";
-					 send_user_msg($title,$content,0,$user_id,time(),0,true,true);
-					}
-				}
-				
-			}
-	
-	*/
-	
-	
 		ajax_return($result); 	
 	}
 	
