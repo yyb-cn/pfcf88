@@ -622,7 +622,6 @@ function get_deal_user_load_list($user_load_info,$loantype,$repay_time_type = 1,
 		}
 		//付息还款
 		elseif($loantype == 1){
-		
 			$lixi = $loan_list[$i]['month_repay_money'] = av_it_formula(($user_load_info['money']+$user_load_info['virtual_money']),$user_load_info['rate']/12/100);
 			//最后一个月还本息
 			if($i+1 == $true_repay_time){
