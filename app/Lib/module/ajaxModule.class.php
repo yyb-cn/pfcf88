@@ -1143,7 +1143,7 @@ class ajaxModule extends SiteBaseModule
 		echo json_encode('less_lottery');exit;//次数不足
 		}
 		$count= $GLOBALS['db']->getRow("select count(*) as c from ".DB_PREFIX."award_log where prize_id = 1 ");
-		
+		/*
 		if($count['c']>5){
 		
 			$a=0;
@@ -1151,7 +1151,8 @@ class ajaxModule extends SiteBaseModule
 		else{
 			$a=4;
 		};
-		
+		*/
+			$a=4;
 		$abc= $GLOBALS['db']->getRow("select count(*) as c from ".DB_PREFIX."award_log where prize_id = 2 ");
 		if($abc['c']>6){
 		
