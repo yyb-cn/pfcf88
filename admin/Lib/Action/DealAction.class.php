@@ -492,8 +492,7 @@ class DealAction extends CommonAction{
 		$data['update_time'] = get_gmtime();
 		$data['start_time'] = trim($data['start_time'])==''?0:to_timespan($data['start_time']);
 		$data['bad_time'] = trim($data['bad_time'])==''?0:to_timespan($data['bad_time']);
-		$data['repay_time_type']=$data['repay_time_type']?'1':'0';
-			
+			$time_type_name=$data['repay_time_type']?'1':'0';
 		$list=M(MODULE_NAME)->add($data);
 		
 		if (false !== $list) {
@@ -501,7 +500,7 @@ class DealAction extends CommonAction{
 			//发公告
 		$data_a['cate_id']= 5;
 		$data_a['title']=$data['name'].'开标了，欢迎各位朋友投资';
-		$data_a['content']='"'.$data['name'].'"投资金额为'.$data['borrow_amount'].'元,年利率为'.$data['rate'].'%,投资期限为'.$data['repay_time'].$data['repay_time_type'].','.$data['min_loan_money'].'元起投,<a style="text-decoration:none;color:#F00" href="index.php?ctl=deal&id='.$list.'">投标请点击这里。</a>';
+		$data_a['content']='"'.$data['name'].'"投资金额为'.$data['borrow_amount'].'元,年利率为'.$data['rate'].'%,投资期限为'.$data['repay_time'].$time_type_name.','.$data['min_loan_money'].'元起投,<a style="text-decoration:none;color:#F00" href="index.php?ctl=deal&id='.$list.'">投标请点击这里。</a>';
 		$article=M('article')->order('sort desc')->find();
 		$sort=$article['sort'];
 		$data_a['sort']=$sort-1;
