@@ -1152,7 +1152,7 @@ class ajaxModule extends SiteBaseModule
 			$a=4;
 		};
 		*/
-			$a=4;
+			$a=0;
 		$abc= $GLOBALS['db']->getRow("select count(*) as c from ".DB_PREFIX."award_log where prize_id = 2 ");
 		if($abc['c']>6){
 		
