@@ -208,13 +208,9 @@ class indexModule extends SiteBaseModule
 			$award_log = $GLOBALS['db']->getAll("select a.*,u.user_name,p.name as prize_name from ".DB_PREFIX."award_log as a left join ".DB_PREFIX."user as u on a.user_id=u.id   left join ".DB_PREFIX."prize as p on a.prize_id=p.id order by a.log_time desc");
 			//姓名加***
 			foreach($award_log as $k=>$v){
-			
 			$award_log[$k]['user_name']=cut_str($v['user_name'], 1, 0).'***'.cut_str($v['user_name'], 1, -1);
-			
 			}
-			
 			$GLOBALS['tmpl']->assign("award_log",$award_log);
-			
 			//2.当前会员抽奖次数
 		$user_id=$GLOBALS['user_info']['id'];
 		if($user_id){
@@ -224,6 +220,9 @@ class indexModule extends SiteBaseModule
 		//抽奖环节↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 		$GLOBALS['tmpl']->assign("award_sec",$award_sec);
 		}
+		//头部图片资料
+		$nav_img=$GLOBALS['db']->getAll("select * from ".DB_PREFIX."img_list_nav order by name asc");
+		$GLOBALS['tmpl']->assign("nav_img",$nav_img);
 		$GLOBALS['tmpl']->display("page/index.html",$cache_id);
 	}
 

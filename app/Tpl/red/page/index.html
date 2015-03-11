@@ -13,7 +13,12 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
 		<div  id="banner">
 		
 			<div  id="bannerpic">
-					
+			{foreach from=$nav_img item=nav_img}
+				<div  style="display: block; background-image: url({$nav_img.url}); height: 350px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
+						<a target="{if $nav_img.target eq 1}_blank{/if}"  href="{$nav_img.nav_url}"  title=""></a>
+					</div>
+			{/foreach}		
+					<!--
                     <div  style="display: block; background-image: url({$TMPL}/images/001.jpg); height: 350px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
 						<a target="_blank"  href="index.php?ctl=introduc&act=newyear"  title=""></a>
 					</div>
@@ -37,17 +42,14 @@ $this->_var['indexcss'][] = $this->_var['TMPL_REAL']."/css/index.css";
                     <div  style="display: none; background-image: url({$TMPL}/images/006.jpg); height: 350px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
 						<a target=""  title=""></a>
 					</div>
-
+-->
 			</div>
 			<div  class="yuandian">
 				<ul>
-							<li  class="cur"></li>
-							<li  class=""></li>
-							<li  class=""></li>				
-							<li  class=""></li>	
-                            <li  class=""></li>	
-                            <li  class=""></li>
-					
+				
+				{foreach from=$nav_img item=nav_img key=key}
+				<li  {if $key eq 0}class="cur"{/if}></li>
+						{/foreach}		
 				</ul>
 			</div>
 		</div>

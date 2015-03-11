@@ -59,7 +59,9 @@ text-decoration:none;
 .item_input{ text-align:left;}
 .back_list{ font-size:12px; font-weight:normal; }
 #set_sort{ border:#ccc solid 1px; font-size:12px; padding:4px; color:#666; width:20px;}
-
+#photo_li{float:left;width:350px; border:solid 3px #666; height:100px; }
+#photo_li  a{font-size:14px; color:#666; }
+#photo_img{ width:300px;}
 /* 提示消息 */
 .message{ width:400px; padding-top:100px; }
 .message table{ width:100%;}

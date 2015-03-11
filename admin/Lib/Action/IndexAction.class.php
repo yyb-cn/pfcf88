@@ -40,6 +40,10 @@ class IndexAction extends AuthAction{
 			
 			$nav_group[$k]['nodes']= M()->query($sql);//二级分类
 		}
+		//判断新添加的导航图片添加列表在前端设置；
+		$photo_more=$nav_group[0];
+		$photo_id=$photo_more['id'];
+		$this->assign("photo_id",$photo_id);
 		
 		$this->assign("menus",$nav_group);
 		
