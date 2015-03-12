@@ -200,8 +200,8 @@
 		&nbsp;<a href="javascript:;" onclick="preview({$v.deal_id})">{$v.name}<a/>
 	</td>
 	<td>
-		&nbsp;{$v.u_load_money|number_format}
-		<?php if($v['virtual_money']!=0) :?>代金券:{$v.virtual_money|number_format}<?php endif;?>
+		&nbsp;{$v.u_load_money|number_format=2}
+		<?php if($v['virtual_money']!=0) :?>代金券:{$v.virtual_money|number_format=2}<?php endif;?>
 	</td>
 	<td>
 		&nbsp;{$v.rate}

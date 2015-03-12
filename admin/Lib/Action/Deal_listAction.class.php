@@ -158,7 +158,7 @@ class Deal_listAction extends CommonAction{
 		}
 		$this->assign('total_rate_money_nolimit',$total_rate_money_nolimit);
 		$list = $GLOBALS['db']->getAll($sql);
-		//var_dump($list);exit;
+		
 		//deal_load_check_yn
 		foreach($list as $k=>$v)
 		{
@@ -174,8 +174,8 @@ class Deal_listAction extends CommonAction{
 			$list[$k]['urlencode_name']=str_replace('+','%2b',$v['name']);
 		}
 		
-		
 			$this->assign('total_rate_money',$total_rate_money);
+		
 		$total_limit=number_format($total_limit);
 		$this->assign('total_limit',$total_limit);
 		$total_no_limit=number_format($total_no_limit);
