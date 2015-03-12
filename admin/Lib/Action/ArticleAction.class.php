@@ -258,7 +258,7 @@ class ArticleAction extends CommonAction{
 		if($_FILES['file']['name']!=''){
 				$File = $this -> uploadfile($ARG=array(
 				'File'     => array('name'=>$_FILES['file']['name'],'tmp_name' => $_FILES['file']['tmp_name']),
-				'Dir'=>'app/TPl/red/images/',
+				'Dir'=>'app/Tpl/red/images/',
 				'newname'=> '00'.($c+1)
 				));
 				$img=$File['uploadfile'];//路径
@@ -302,15 +302,15 @@ class ArticleAction extends CommonAction{
 			$one=$img_list_nav->find($_POST['id']);
 			$tmp = explode('.',$one['name']);
 			$name = $tmp[0];
-			rename($one['url'],	'app/TPl/red/images/'.$_POST['name']);
-			$data['url']='app/TPl/red/images/'.$_POST['name'];
+			rename($one['url'],	'app/Tpl/red/images/'.$_POST['name']);
+			$data['url']='app/Tpl/red/images/'.$_POST['name'];
 			$data['nav_url']=$_POST['nav_url'];
 			$data['target']=$_POST['target'];
 			$data['name']=$_POST['name'];
 			if($_FILES['file']['name']!=''){
 				$File = $this -> uploadfile($ARG=array(
 				'File'     => array('name'=>$_FILES['file']['name'],'tmp_name' => $_FILES['file']['tmp_name']),
-				'Dir'=>'app/TPl/red/images/',
+				'Dir'=>'app/Tpl/red/images/',
 				'newname'=> $name
 				));
 				$img=$File['uploadfile'];//路径
