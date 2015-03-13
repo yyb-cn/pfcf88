@@ -210,6 +210,7 @@ class uc_moneyModule extends SiteBaseModule
 				unset($payment_list[$k]);
 			}
 		}
+		
 		$GLOBALS['tmpl']->assign("payment_list",$payment_list);
 		
 		//判断是否有线下支付

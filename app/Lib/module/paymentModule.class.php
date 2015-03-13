@@ -12,7 +12,21 @@ class paymentModule extends SiteBaseModule
 	public function pay()
 	{
 		$payment_notice = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."payment_notice where id = ".intval($_REQUEST['id']));
-		
+		var_dump($payment_notice);exit;
+		/*
+		array
+  'id' => string '142' (length=3)
+  'notice_sn' => string '2015031301265523' (length=16)
+  'create_time' => string '1426181215' (length=10)
+  'pay_time' => string '0' (length=1)
+  'order_id' => string '982' (length=3)
+  'is_paid' => string '0' (length=1)
+  'user_id' => string '6' (length=1)
+  'payment_id' => string '5' (length=1)
+  'memo' => string '' (length=0)
+  'money' => string '1.0000' (length=6)
+  'outer_notice_sn' => string '' (length=0)
+  */
 		if($payment_notice)
 		{
 			if($payment_notice['is_paid'] == 0)
@@ -49,7 +63,7 @@ class paymentModule extends SiteBaseModule
 					if ($payment_info['class_name']=="Sqepay") {
 						app_redirect(url("95epay_query","",array("id"=>intval($_REQUEST['id'])))); //如果是双乾接口，去到查询订单入口,added by nix
 					}else {
-						showErr($GLOBALS['lang']['PAYMENT_NOT_PAID_RENOTICE']);
+						showErr($GLOBALS['lang']['PAYMENT_NOT_PAID_RENOTICE']);//付款未完成，如果您已经支付请进入相应支付平台重新通知
 					}
 				}
 				
@@ -159,7 +173,7 @@ class paymentModule extends SiteBaseModule
 		}
 		else
 		{
-			showErr($GLOBALS['lang']['PAYMENT_NOT_EXIST']);
+			showErr($GLOBALS['lang']['PAYMENT_NOT_EXIST']);//'支付接口不存在，或被站点管理员删除',
 		}
 	}
 	

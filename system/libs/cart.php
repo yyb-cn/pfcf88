@@ -496,6 +496,7 @@ function order_paid_done($order_id)
 	$order_id = intval($order_id);
 	$stock_status = true;  //团购状态
 	$order_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."deal_order where id = ".$order_id);
+	//线上产品的type全部等于1
 	if($order_info['type'] == 0)
 	{	
 		//首先验证所有的规格库存
@@ -785,8 +786,20 @@ function order_paid_done($order_id)
 		//订单充值
 		$GLOBALS['db']->query("update ".DB_PREFIX."deal_order set order_status = 1 where id = ".$order_info['id']); //充值单自动结单
 		require_once APP_ROOT_PATH."system/libs/user.php";
-		$msg = sprintf($GLOBALS['lang']['USER_INCHARGE_DONE'],$order_info['order_sn']);			
-		modify_account(array('money'=>$order_info['total_price']-$order_info['payment_fee'],'score'=>0),$order_info['user_id'],$msg);	
+		$msg = sprintf($GLOBALS['lang']['USER_INCHARGE_DONE'],$order_info['order_sn']);//充值单+++支付成功	
+		/*
+		modify_account(array('money'=>$order_info['total_price']-$order_info['payment_fee'],'score'=>0),$order_info['user_id'],$msg);*/
+		//充值多少送多少积分
+		modify_account(array('money'=>$order_info['total_price']-$order_info['payment_fee'],'score'=>$order_info['total_price']),$order_info['user_id'],$msg);
+		/**
+		用户积分改动
+		用户充的钱是：$order_info['total_price']
+		
+		**/	
+		
+
+
+		
 	}
 }
 
