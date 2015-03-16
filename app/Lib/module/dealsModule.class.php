@@ -10,7 +10,7 @@ require APP_ROOT_PATH.'app/Lib/deal.php';
 class dealsModule extends SiteBaseModule
 {
 	public function index(){
-	
+
 	//判断是否为ajax提交
 	if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
 	{	
@@ -1168,6 +1168,7 @@ class dealsModule extends SiteBaseModule
 		$GLOBALS['tmpl']->display("page/deals_new_bie.html");
 		}
 }
+
 
 
 }

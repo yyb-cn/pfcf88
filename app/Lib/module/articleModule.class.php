@@ -12,6 +12,7 @@ class articleModule extends SiteBaseModule
 {
 	public function index()
 	{			
+	
 		$GLOBALS['tmpl']->caching = true;
 		$cache_id  = md5(MODULE_NAME.ACTION_NAME.trim($_REQUEST['id']).$GLOBALS['deal_city']['id']);		
 		if (!$GLOBALS['tmpl']->is_cached('page/article_index.html', $cache_id))	

@@ -47,6 +47,11 @@ function sortBy(field,sortType,module_name,action_name)
 {
 	location.href = CURRENT_URL+"&_sort="+sortType+"&_order="+field+"&";
 }
+
+function pre_view(id){
+
+	location.href = "index.php?ctl=news&id="+id;
+}
 //添加跳转
 
 function add()

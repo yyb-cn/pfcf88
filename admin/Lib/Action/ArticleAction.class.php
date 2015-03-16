@@ -149,6 +149,9 @@ class ArticleAction extends CommonAction{
 		$log_info = $data['title'];
 		$data['create_time'] = get_gmtime();
 		$data['update_time'] = get_gmtime();
+		
+		//var_dump($data);exit;
+		
 		$list=M(MODULE_NAME)->add($data);
 		if (false !== $list) {
 			//成功提示

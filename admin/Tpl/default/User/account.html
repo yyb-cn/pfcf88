@@ -3,7 +3,7 @@
 <script type="text/javascript">
 	function check_incharge_form()
 	{
-		if($("input[name='money']").val()==''&&$("input[name='point']").val()==''&&$("input[name='quota']").val()=='')
+		if($("input[name='money']").val()==''&&$("input[name='point']").val()==''&&$("input[name='quota']").val()==''&&$("input[name='score']").val()=='')
 		{
 			alert("资金，信用积分，信用额度至少要填一项");
 			return false;
@@ -53,6 +53,12 @@
 		<td class="item_title">信用额度:</td>
 		<td class="item_input"><input type="text" class="textbox require" name="quota" />
 		<span class='tip_span'>[正数为增加额度，负数为减少额度]</span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">会员积分:</td>
+		<td class="item_input"><input type="text" class="textbox require" name="score" />
+		<span class='tip_span'>[用户个人积分]</span>
 		</td>
 	</tr>
 	

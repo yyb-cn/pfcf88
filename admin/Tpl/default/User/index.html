@@ -82,10 +82,19 @@
 	checkbox="true" 
 	action="true" 
 	datasource="list" 
-	show="id:{%ID}|50px,user_name:{%USER_NAME}:edit,real_name:真名,email:{%USER_EMAIL},mobile:{%USER_MOBILE},money|format_price:{%USER_MONEY},lock_money|lock_money_func=$user['id']:{%USER_LOCK_MONEY},group_id|get_user_group:会员组别,pid|get_referrals_name:{%REFERRALS_NAME},login_ip:{%LOGIN_IP},login_time|f_to_date:{%LOGIN_TIME},is_effect|get_is_effect=$user['id']:{%IS_EFFECT}" 
+	show="id:{%ID}|50px,user_name:{%USER_NAME}:edit,email:{%USER_EMAIL},score:积分,mobile:{%USER_MOBILE},money|format_price:{%USER_MONEY},lock_money|lock_money_func=$user['id']:{%USER_LOCK_MONEY},group_id|get_user_group:会员组别,pid|get_referrals_name:{%REFERRALS_NAME},login_ip:{%LOGIN_IP},login_time|f_to_date:{%LOGIN_TIME},is_effect|get_is_effect=$user['id']:{%IS_EFFECT}" 
 	actionlist="edit:{%EDIT}, del:{%DEL},user_work:{%USER_WORK_SHORT}, account:{%USER_ACCOUNT_SHORT},user_passed:{%USER_PASSED_SHORT},account_detail:{%USER_ACCOUNT_DETAIL_SHORT},info_down:资料,login_site:登录" /> 
 
 <div class="blank5"></div>
 <div class="page">{$page}</div>
 </div>
 <include file="Public:footer" />
+
+
+
+
+
+
+
+
+
