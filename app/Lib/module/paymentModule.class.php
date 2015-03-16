@@ -12,7 +12,7 @@ class paymentModule extends SiteBaseModule
 	public function pay()
 	{
 		$payment_notice = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."payment_notice where id = ".intval($_REQUEST['id']));
-		var_dump($payment_notice);exit;
+		
 		/*
 		array
   'id' => string '142' (length=3)
