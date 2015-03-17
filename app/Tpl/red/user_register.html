@@ -7,8 +7,7 @@
 			<div class="inc_main clearfix">
 				<div class="user-lr-box-left f_l" style="width:810px; padding-left:150px;">
 									<!--注册表单-->
-									<form action="{url x="shop" r="user#doregister"}" method="post" id="signup-user-form" style="margin-top:38px;">
-                                    
+									<form action="index.php?ctl=user&act=doregister" method="post" id="signup-user-form" style="margin-top:38px;">
 									<div class="field email pr">
                                     		<div style="width:70px; height:36px; text-align:center; line-height:36px; float:left; font-size:14px;">注册邮箱</div>
                                             <input type="text" class="f-input ipttxt" id="signup-email-address" name="email" size="30" style=" float:left; background:url('{$TMPL}/images/reg_mail.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="请输入您的邮箱">
@@ -46,10 +45,15 @@
 									<div class="blank1"></div>
                                     <div class="field mobile pr">
                                     	<div style="width:70px; height:36px; text-align:center; line-height:36px; float:left; font-size:14px;">推荐人</div>
-										<input type="text" value="" class="f-input ipttxt" id="referral" name="referral" size="30" style="float:left; background:url('{$TMPL}/images/reg_pepole.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" placeholder="您可以填写您的推荐人"/>
+										
+										<input type="text" value="{$real_name}" class="f-input ipttxt" id="referral" name="referral" size="30" 
+										style="float:left; background:url('{$TMPL}/images/reg_pepole.png') no-repeat; border:1px solid #d9dade; width:341px; height:34px; margin:0; padding:0; text-indent:4em; font-weight:normal; line-height:34px;" 
+										
+										placeholder="您可以填写您的推荐人"/>
+										
 										<span class="f-input-tip"></span> 
 										<span class="hint" style="padding:0; text-indent:6em;">请填写推荐人编号或姓名</span>
-									</div>	
+									</div>
 									<div class="blank1"></div>
 								
 									

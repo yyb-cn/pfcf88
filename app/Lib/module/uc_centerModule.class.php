@@ -154,7 +154,7 @@ class uc_centerModule extends SiteBaseModule
 			$time_type=$v['repay_time_type']?12:365;
 			$result['list'][$k]['lixi']=($v['money']+$v['virtual_money'])*($v['rate']/100)*$v['repay_time']/$time_type;
 		}
-		//var_dump($result['list']);exit;
+		//var_dump($result['list']);exit;  ACTION_NAME
 		$page = new Page($result['total'],app_conf("PAGE_SIZE"));   //初始化分页对象 		
 		$p  =  $page->show();
 		$GLOBALS['tmpl']->assign('pages',$p);
@@ -178,6 +178,19 @@ class uc_centerModule extends SiteBaseModule
 		}
 	}
 	
+	//
+	public function links()
+	{
+	 	//分享注册人id 
+	 $GLOBALS['tmpl']->assign("lpl",$GLOBALS['user_info']['id']);
+	 
+	  $list_html = $GLOBALS['tmpl']->fetch("inc/uc/uc_links.html");	
+	  $GLOBALS['tmpl']->assign("list_html",$list_html);
+	  $GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['UC_CENTER_INDEX']);
+	  $GLOBALS['tmpl']->assign("post_title",$GLOBALS['lang']['UC_CENTER_INDEX']);		
+	  $GLOBALS['tmpl']->assign("inc_file","inc/uc/uc_center_index.html");
+	  $GLOBALS['tmpl']->display("page/uc.html");		
+	}
 	
 	public function deal()
 	{	

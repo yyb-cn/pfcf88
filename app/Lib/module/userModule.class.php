@@ -12,14 +12,21 @@ class userModule extends SiteBaseModule
 	
 	public function register()
 	{		
+		$user_id=intval($_GET['p']);
+			$real_name=$GLOBALS['db']->
+			getOne("select `real_name` from ".DB_PREFIX."user where `id` = '".$user_id."' " );
+		//获取真实姓名
+	
+		$GLOBALS['tmpl']->assign("real_name",$real_name);
+		
 		$GLOBALS['tmpl']->caching = true;
-		$cache_id  = md5(MODULE_NAME.ACTION_NAME.$GLOBALS['deal_city']['id']);		
+		$cache_id  = md5(MODULE_NAME.ACTION_NAME.$GLOBALS['deal_city']['id']);
 		if (!$GLOBALS['tmpl']->is_cached('user_register.html', $cache_id))	
 		{
+			 
 			$GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['USER_REGISTER']);
 			
 			$field_list =load_auto_cache("user_field_list");
-		
 			$api_uinfo = es_session::get("api_user_info");
 			$GLOBALS['tmpl']->assign("reg_name",$api_uinfo['name']);
 			
@@ -29,9 +36,8 @@ class userModule extends SiteBaseModule
 	}
 	
 	public function doregister()
-	{
-			
-		//验证码
+	{   
+	  
 		if(app_conf("VERIFY_IMAGE")==1)
 		{
 			$verify = md5(trim($_REQUEST['verify']));
@@ -43,7 +49,8 @@ class userModule extends SiteBaseModule
 		}
 		
 		require_once APP_ROOT_PATH."system/libs/user.php";
-		$user_data = $_POST;   
+		$user_data = $_POST;
+        
 		if(!$user_data){
 			 app_redirect("404.html");
 			 exit();
@@ -78,11 +85,8 @@ class userModule extends SiteBaseModule
 						
 				}
 		}
-		
-			
-		
 		$res = save_user($user_data);
-		
+
 		if($_REQUEST['subscribe']==1)
 		{
 			//订阅
@@ -129,7 +133,7 @@ class userModule extends SiteBaseModule
 			}
 			
 			*/
-			
+		
 			if($user_info['is_effect']==1)
 			{
 				//在此自动登录
@@ -225,13 +229,13 @@ class userModule extends SiteBaseModule
 	
 	public function login()
 	{	
-	
+	    
 		$login_info = es_session::get("user_info");
 		if($login_info)
 		{
+		 
 			app_redirect(url("index"));		
 		}
-				
 		$GLOBALS['tmpl']->caching = true;
 		$cache_id  = md5(MODULE_NAME.ACTION_NAME.$GLOBALS['deal_city']['id']);		
 		//echo $cache_id;exit;
@@ -242,6 +246,7 @@ class userModule extends SiteBaseModule
 			 
 		}
 		$GLOBALS['tmpl']->display("user_login.html",$cache_id);
+		
 	}
 	public function api_login()
 	{		
@@ -260,8 +265,7 @@ class userModule extends SiteBaseModule
 		}
 	}	
 	public function dologin()
-	{
-	
+	{ 
 		if(!$_POST)
 		{
 			 app_redirect("404.html");
@@ -292,9 +296,8 @@ class userModule extends SiteBaseModule
 		require_once APP_ROOT_PATH."system/libs/user.php";
 		if(check_ipop_limit(get_client_ip(),"user_dologin",intval(app_conf("SUBMIT_DELAY")))){
 			$result = do_login_user($_POST['email'],$_POST['user_pwd']);  //在这里验证用户对不对
-			//print_r($result);exit;
+			// print_r($result);exit;
 		}
-		
 		else
 			showErr($GLOBALS['lang']['SUBMIT_TOO_FAST'],$ajax,url("shop","user#login"));
 		

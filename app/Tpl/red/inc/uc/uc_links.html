@@ -1,0 +1,49 @@
+
+<div class="uc_r_bl_box clearfix">
+<style>
+	.field{ width:520px}
+</style>
+<div class="blank"></div>
+<div class="item_group" style="width: 716px">个人详细信息</div>
+<form method="post" action="{url x="shop" r="uc_account#save"}" name="modify">
+<div class="inc wb">
+	<div class="inc_main">
+			<table width="738px" class="user_info_table">
+				<tr>
+					<td class="pt10" style="width:560px">
+									
+						<div class="blank"></div>
+						<div class="field real_name">
+							<label for="settings-real_name">分享注册链接</label>
+							<input type="text" readonly="readonly"  value="http://www.pfcf88.com/index.php?ctl=user&act=register&p={$lpl}"  onclick="oCopy(this)" class="f-input " name="links"   style="width: 350px" id="links"   size="30">
+
+						</div>
+       
+
+
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div class="blank"></div>
+						<div class="clearfix b" style="padding: 10px 90px">复制以上链接发给客户，客户通过以上链接注册成功成为你的客户</div>
+						<div class="blank"></div>
+					</td>
+				</tr>
+				
+			</table>
+			
+						
+			<div class="blank"></div>
+			<div class="blank"></div>
+	</div>
+	<div class="inc_foot"></div>
+</div>
+</form>
+</div>
+<script> 
+function oCopy(obj){ 
+obj.select(); 
+js=obj.createTextRange(); 
+js.execCommand("Copy") 
+} 
+</script>
