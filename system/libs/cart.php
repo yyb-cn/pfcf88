@@ -789,8 +789,8 @@ function order_paid_done($order_id)
 		$msg = sprintf($GLOBALS['lang']['USER_INCHARGE_DONE'],$order_info['order_sn']);//充值单+++支付成功	
 		/*
 		modify_account(array('money'=>$order_info['total_price']-$order_info['payment_fee'],'score'=>0),$order_info['user_id'],$msg);*/
-		//充值多少送多少积分
-		modify_account(array('money'=>$order_info['total_price']-$order_info['payment_fee'],'score'=>0),$order_info['user_id'],$msg);
+		//充值多少送多少积分   ,抽奖
+		modify_account(array('money'=>$order_info['total_price']-$order_info['payment_fee'],'lottery_score'=>$order_info['total_price']),$order_info['user_id'],$msg);
 		/**
 		用户积分改动
 		用户充的钱是：$order_info['total_price']

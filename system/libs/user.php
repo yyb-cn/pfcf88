@@ -423,6 +423,10 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 	 */
 	function modify_account($data,$user_id,$log_msg='')
 	{
+		if(intval($data['lottery_score'])!=0)
+		{
+			$GLOBALS['db']->query("update ".DB_PREFIX."user set lottery_score = lottery_score + ".intval($data['lottery_score'])." where id =".$user_id);
+		}
 		if(intval($data['score'])!=0)
 		{
 			$GLOBALS['db']->query("update ".DB_PREFIX."user set score = score + ".intval($data['score'])." where id =".$user_id);

@@ -1131,7 +1131,6 @@ class ajaxModule extends SiteBaseModule
 	}
 /*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓抽奖↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/	
 	public function lottery(){
-	
 		if(!$GLOBALS['user_info']){
 			set_gopreview();
 			echo json_encode('login');exit;//未登录
@@ -1143,15 +1142,6 @@ class ajaxModule extends SiteBaseModule
 		echo json_encode('less_lottery');exit;//次数不足
 		}
 		$count= $GLOBALS['db']->getRow("select count(*) as c from ".DB_PREFIX."award_log where prize_id = 1 ");
-		/*
-		if($count['c']>5){
-		
-			$a=0;
-		}
-		else{
-			$a=4;
-		};
-		*/
 			$a=0;
 		$abc= $GLOBALS['db']->getRow("select count(*) as c from ".DB_PREFIX."award_log where prize_id = 2 ");
 		if($abc['c']>6){

@@ -170,9 +170,85 @@ class AwardAction extends CommonAction{
 	}
 	//这个是奖品的目录
 	function prize(){
-		$list=D(prize)->select();
+		$hd_id=intval($_GET['hd_id']);
+		if($hd_id)$data=array('huodong_id'=>$hd_id);
+		$list=D(prize)->where($data)->select();
+		foreach($list as $k=>$v){
+			$hd=D(huodong)->where(array('id'=>$v['huodong_id']))->find();
+			$list[$k]['huodong_name']=$hd['name'];
+		}
+		$huodong_list=D(huodong)->select();
+		$this->assign('huodong_list',$huodong_list);
 		$this->assign('list',$list);
 		$this->display ();
+	}
+	
+	function prize_add(){
+	$huodong=D(huodong)->select();
+	//var_dump($huodong);exit;
+	$this->assign('huodong',$huodong);
+			if($id=$_GET['id']){
+		$one=D(prize)->where(array('id'=>$id))->find();
+			}
+		if($_POST){
+			$data['name']=$_POST['name'];
+			$data['probability']=$_POST['probability'];
+			$data['max']=intval($_POST['max']);
+			$data['huodong_id']=intval($_POST['huodong_id']);
+		if($_POST['id']){
+		
+			$one=D(prize)->where(array('id'=>$_POST['id']))->save($data);
+		}
+		else{	
+			$one=D(prize)->add($data);
+			}
+			if($one)
+			$this->success(L("success"));
+	}
+	$this->assign('one',$one);
+	$this->display ('prize_add');
+		
+	}
+	
+	function prize_del(){
+		$id=intval($_GET['id']);
+		if(D(prize)->where(array(id=>$id))->delete())
+		$this->success(L("success"));
+	}
+	
+	
+	
+	
+	function huodong(){
+		$list=D(huodong)->select();
+		//var_dump($list);exit;
+		$this->assign('list',$list);
+		$this->display ();
+	}
+	function huodong_add(){
+	if($id=$_GET['id']){
+	$one=D(huodong)->where(array('id'=>$id))->find();
+	}
+	if($_POST){
+			$data['endtime']=strtotime($_POST['end_time']);
+			$data['name']=$_POST['name'];
+			$data['content']=$_POST['content'];
+		if($_POST['id']){
+			$one=D(huodong)->where(array('id'=>$_POST['id']))->save($data);
+		}
+		else{	
+			$one=D(huodong)->add($data);
+			}
+			if($one)
+			$this->success(L("success"));
+	}
+	$this->assign('one',$one);
+	$this->display ('huodong_add');
+	}
+	function huodong_del(){
+		$id=intval($_GET['id']);
+		if(D(huodong)->where(array(id=>$id))->delete())
+		$this->success(L("success"));
 	}
 	
 }

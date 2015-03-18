@@ -89,6 +89,7 @@
 <th><a href="javascript:sortBy('group_id','<?php echo $_GET[_sort]?0:1?>','award','award_log')" title=" ">会员组</a></th>
 <th><a href="javascript:sortBy('prize_id','<?php echo $_GET[_sort]?0:1?>','award','award_log')" title=" ">奖品</a></th>
 <th><a href="javascript:sortBy('log_time','<?php echo $_GET[_sort]?0:1?>','award','award_log')" title=" ">抽奖日期</a></th>
+<th><a href="javascript:sortBy('log_time','<?php echo $_GET[_sort]?0:1?>','award','award_log')" title=" ">活动ID</a></th>
 
 
 </tr>
@@ -107,6 +108,7 @@
 	</td>
 	<td>{$v.prize_id}:{$v.prize_name}</td>
 	<td>{$v.log_time|to_date}</td>
+	<td>{$v.huodong_id}</td>
 
 </foreach>
 

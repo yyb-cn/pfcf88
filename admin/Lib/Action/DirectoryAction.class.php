@@ -109,20 +109,20 @@ class DirectoryAction extends CommonAction{
 		}
 		if($type=='Role_group'){
 		$data['name']=trim($_POST['name']);
-		$data['nav_id']=trim($_POST['nav_id'];
-		$data['sort']=trim($_POST['sort'];
+		$data['nav_id']=trim($_POST['nav_id']);
+		$data['sort']=trim($_POST['sort']);
 		$module->add($data);
 		}
 		if($type=='Role_module'){
-		$data['name']=trim($_POST['name'];
-		$data['module']=trim($_POST['module'];
+		$data['name']=trim($_POST['name']);
+		$data['module']=trim($_POST['module']);
 		$module->add($data);
 		}
 		if($type=='Role_node'){
-		$data['name']=trim($_POST['name'];
-		$data['group_id']=trim($_POST['group_id'];
-		$data['module_id']=trim($_POST['module_id'];
-		$data['action']=trim($_POST['action'];
+		$data['name']=trim($_POST['name']);
+		$data['group_id']=trim($_POST['group_id']);
+		$data['module_id']=trim($_POST['module_id']);
+		$data['action']=trim($_POST['action']);
 		$module->add($data);
 		}
 	$this->success('插入成功');
