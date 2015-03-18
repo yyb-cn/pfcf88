@@ -790,7 +790,7 @@ function order_paid_done($order_id)
 		/*
 		modify_account(array('money'=>$order_info['total_price']-$order_info['payment_fee'],'score'=>0),$order_info['user_id'],$msg);*/
 		//充值多少送多少积分
-		modify_account(array('money'=>$order_info['total_price']-$order_info['payment_fee'],'score'=>$order_info['total_price']),$order_info['user_id'],$msg);
+		modify_account(array('money'=>$order_info['total_price']-$order_info['payment_fee'],'score'=>0),$order_info['user_id'],$msg);
 		/**
 		用户积分改动
 		用户充的钱是：$order_info['total_price']
