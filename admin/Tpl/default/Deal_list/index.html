@@ -11,7 +11,6 @@
 <load href='__TMPL__Common/style/weebox.css' />
 
 <script type="text/javascript">
-
 	function send(id)
 	{
 		$.ajax({ 
@@ -22,8 +21,6 @@
 				}
 		});
 	}
-
-
 	function show_detail(id)
 	{
 		$.weeboxs.open(ROOT+'?m=Deal&a=show_detail&id='+id, {contentType:'ajax',showButton:false,title:LANG['COUNT_TOTAL_DEAL'],width:600,height:330});
@@ -44,8 +41,6 @@
 			return l("DEAL_STATUS_".$buy_status);
 		}
 	}
-	
-	
 	function date_int($time)
 	{
 		
@@ -219,7 +214,7 @@
 	
 	<td width=200>
 	<a  style="text-decoration:none;color:#FFFFFF;font-weight:bold;background:#CC6633;padding:2px;"  href="http://rg.jlpefund.com/m.php?c=index&a=outside_add&yn={$v.deal_load_id}&real_name={$v.real_name}&produce_name=
-	{$v.urlencode_name}&deal_monney={$v.u_load_money}&longtime={$v.repay_time}<?php echo  $v['repay_time_type']?'个月':'天'?>&cus_time=<?php echo to_date($v['deal_time'],'Y-m-d H:i:s')?>" target="_blank" >录入</a>
+	{$v.urlencode_name}&deal_monney=<?php echo  number_format($v['u_load_money'], 2, '.', '');?>&longtime={$v.repay_time}<?php echo  $v['repay_time_type']?'个月':'天'?>&cus_time=<?php echo to_date($v['deal_time'],'Y-m-d H:i:s')?>" target="_blank" >录入</a>
 	
 		<?php if(!$v['deal_load_check_yn']) :?>
 		
