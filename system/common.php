@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 
 //前后台加载的函数库
+
 require_once 'system_init.php';
 
 //获取真实路径
@@ -2241,6 +2242,7 @@ function gen_verify_youhui($youhui_id,$mobile,$user_id,$order_count=0,$is_privat
 	$data['youhui_id'] = intval($youhui_id);
 	$data['user_id'] = intval($user_id);
 	$data['user_id'] = intval($user_id);
+
 	$data['mobile'] = $mobile;
 	$data['order_count'] = intval($order_count);
 	$data['order_count'] = intval($order_count);

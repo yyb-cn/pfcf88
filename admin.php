@@ -7,8 +7,9 @@
 // | Author: 
 // +----------------------------------------------------------------------
 //test
+
 if(!defined("ADMIN_ROOT"))
-{
+{ 
 	die("Invalid access");
 }
 require './system/common.php';

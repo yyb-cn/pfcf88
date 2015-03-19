@@ -49,7 +49,8 @@ class uc_moneyModule extends SiteBaseModule
 	
 	public function exchange()
 	{		
-		$user_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id = ".intval($GLOBALS['user_info']['id']));		
+		$user_info = $GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id = ".intval($GLOBALS['user_info']['id']));	
+	
 		$GLOBALS['tmpl']->assign("user_info",$user_info);
 		$GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['UC_EXCHANGE']);
 		$GLOBALS['tmpl']->assign("inc_file","inc/uc/uc_money_exchange.html");
@@ -327,6 +328,7 @@ class uc_moneyModule extends SiteBaseModule
 	
 	public function carry()
 	{
+		
 		make_delivery_region_js();
 		$bank_list = $GLOBALS['db']->getAll("SELECT * FROM ".DB_PREFIX."bank ORDER BY is_rec DESC,sort DESC,id ASC");
 		$GLOBALS['tmpl']->assign("bank_list",$bank_list);
@@ -343,13 +345,20 @@ class uc_moneyModule extends SiteBaseModule
 		
 		$GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['UC_CARRY']);
 		$GLOBALS['tmpl']->assign("inc_file","inc/uc/uc_money_carry.html");
+		
 		$GLOBALS['tmpl']->display("page/uc.html");
 	}
 	public function savecarry(){
 		if($GLOBALS['user_info']['id'] > 0){
+			
 			$data['user_id'] = intval($GLOBALS['user_info']['id']);
 			$data['money'] = floatval($_REQUEST['amount']);
-			
+			//判断可用金额；
+			$data['moneyy'] = number_format(floatval($_REQUEST['moneyy']),2);
+			//print_r($data['moneyy']);exit;
+			if($data['moneyy'] <=10.00){
+				showErr("可用金额少于10元不能提取");
+			}
 			if($data['money'] <=0)
 			{
 				showErr($GLOBALS['lang']['CARRY_MONEY_NOT_TRUE']);

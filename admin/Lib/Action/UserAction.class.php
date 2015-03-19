@@ -26,9 +26,11 @@ class UserAction extends CommonAction{
 			$map[DB_PREFIX.'user.group_id'] = intval($_REQUEST['group_id']);
 		}
 		
+		
 		if(trim($_REQUEST['user_name'])!='')
 		{
 			$map[DB_PREFIX.'user.user_name'] = array('like','%'.trim($_REQUEST['user_name']).'%');
+			print_r($map[DB_PREFIX.'user.user_name']);exit;
 		}
 		if(trim($_REQUEST['email'])!='')
 		{
@@ -38,6 +40,11 @@ class UserAction extends CommonAction{
 		{
 			$map[DB_PREFIX.'user.mobile'] = array('like','%'.trim($_REQUEST['mobile']).'%');
 		}
+			if(trim($_REQUEST['lottery_score'])!='')
+		{
+			$map[DB_PREFIX.'user.lottery_score'] = array('like','%'.trim($_REQUEST['lottery_score']).'%');
+		}
+		
 		if(trim($_REQUEST['pid_name'])!='')
 		{
 			$pid = M("User")->where("user_name='".trim($_REQUEST['pid_name'])."'")->getField("id");
@@ -50,9 +57,13 @@ class UserAction extends CommonAction{
 			
 		}
 		$name=$this->getActionName();
+		//print_r($name);exit;
 		$model = D ($name);
+		
 		if (! empty ( $model )) {
+		
 			$this->_list ( $model, $map );
+			//print_r( $model);exit;
 		}
 		
 		$this->display ();
@@ -485,18 +496,20 @@ class UserAction extends CommonAction{
 		$user_id = intval($_REQUEST['id']);
 		$user_info = M("User")->getById($user_id);
 		$this->assign("user_info",$user_info);
+		
 		$this->display();
 	}
 	
 	public function modify_account()
-	{
+	{ 
+	   
 		$user_id = intval($_REQUEST['id']);
 		$money = floatval($_REQUEST['money']);
-		$score = intval($_REQUEST['score']);
+		$lottery_score = intval($_REQUEST['lottery_score']);
 		$point = intval($_REQUEST['point']);
 		$quota = floatval($_REQUEST['quota']);
 		$lock_money = floatval($_REQUEST['lock_money']);
-		
+		// print_r($lottery_score);exit;
 		if($lock_money!=0){
 			if($lock_money > 0 && $lock_money > D("User")->where('id='.$user_id)->getField("money")){
 				$this->error("输入的冻结资金不得超过账户总余额"); 
@@ -507,7 +520,7 @@ class UserAction extends CommonAction{
 		}
 		
 		$msg = trim($_REQUEST['msg'])==''?l("ADMIN_MODIFY_ACCOUNT"):trim($_REQUEST['msg']);
-		modify_account(array('money'=>$money,'score'=>$score,'point'=>$point,'quota'=>$quota,'lock_money'=>$lock_money),$user_id,$msg);
+		modify_account(array('money'=>$money,'lottery_score'=>$lottery_score,'point'=>$point,'quota'=>$quota,'lock_money'=>$lock_money),$user_id,$msg);
 		if(floatval($_REQUEST['quota'])!=0){
 			$content = "您好，".app_conf("SHOP_TITLE")."审核部门经过综合评估您的信用资料及网站还款记录，将您的信用额度调整为：".D("User")->where("id=".$user_id)->getField('quota')."元";
 			
@@ -685,6 +698,7 @@ class UserAction extends CommonAction{
 					$sortAlt = $sort == 'desc' ? l("ASC_SORT") : l("DESC_SORT"); //排序提示
 					$sort = $sort == 'desc' ? 1 : 0; //排序方式
 					//模板赋值显示
+				
 					$this->assign ( 'list', $voList );
 					$this->assign ( 'sort', $sort );
 					$this->assign ( 'order', $order );

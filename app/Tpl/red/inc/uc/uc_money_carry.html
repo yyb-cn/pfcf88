@@ -46,7 +46,8 @@ $this->_var['cujs'][] = $this->_var['TMPL_REAL']."/js/u.js";
 			<div class="uc_r_bl_box clearfix" style="position:relative;">
 	            <div class="field">
 	                <label>可用资金：</label>
-	                <span>{function name="number_format" v=$user_info.money f="2"} 元</span><span><input id="Jcarry_totalAmount" type="hidden" value="{$user_info.money}"></span>
+                 
+	                <span>{function name="number_format" v=$user_info.money f="2"} 元</span><span><input id="Jcarry_totalAmount" name="moneyy" type="hidden" value="{$user_info.money}"></span>
 	            </div>
 	            <div class="field">
 	                <label><span class="f_red b">*</span> 提取金额：</label>
