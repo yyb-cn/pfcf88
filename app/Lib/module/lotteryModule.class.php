@@ -6,6 +6,7 @@ class lotteryModule extends SiteBaseModule
 {  
 	public function zouma()
 	{
+	
 	//$id=$GLOBALS['user_info']['id'];
  // print_r($GLOBALS['user_info']['user_name']);exit;
 	 $score=$GLOBALS['user_info']['lottery_score'];
@@ -99,7 +100,7 @@ class lotteryModule extends SiteBaseModule
 	foreach($deal_load_all as $k=>$v){
 		$money_deal_load+=$v['u_load_money'];
 	}
-	if($jifen_cost>=$money_deal_load){
+	 if (intval($money_deal_load/20000)<=intval($jifen_cost/20000)){
 		echo json_encode(2);exit;
 	}
 	///*@luo-抽奖、
