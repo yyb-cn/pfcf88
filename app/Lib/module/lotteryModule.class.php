@@ -35,19 +35,24 @@ class lotteryModule extends SiteBaseModule
 	// 获取我的抽奖记录
 	$score_id=$GLOBALS['user_info']['id'];
 	if($score_id){
-	 $my_list= $GLOBALS['db']->getAll("select * from ".DB_PREFIX."award_log where user_id=".$score_id." order by log_time desc");//活动ID
+	 $my_list= $GLOBALS['db']->getAll("select * from ".DB_PREFIX."award_log where user_id=".$score_id."  order by log_time desc");
+	
+	 //活动ID
 		foreach($my_list as $k=>$v){
-				$user=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id ='".$v['user_id']."'");
-				$user['user_name']=cut_str($user['user_name'], 1, 0).'***'.cut_str($user['user_name'], 1, -1);
-				$my_list[$k]['user_name']=$user['user_name'];
-				$prize=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."prize where id =".$v['prize_id']);
-				if($prize==''){
-				$my_list[$k]['prize_name']='暂无';
+				if($v['huodong_id']==1){
+					$prize=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."prize where id =".$v['prize_id']);
+					if($prize==''){
+					$my_list[$k]['prize_name']='暂无';
+					}
+					else{
+					$my_list[$k]['prize_name']=$prize['name'];
+					}
 				}
 				else{
-				$my_list[$k]['prize_name']=$prize['name'];
+					$my_list[$k]['prize_name']=$v['prize_name'].'元';
 				}
 		}
+		
 	$GLOBALS['tmpl']->assign("my_list",$my_list);
 	}
 	 if(get_gmtime()<=$huodong['endtime']){
