@@ -150,6 +150,18 @@ class AwardAction extends CommonAction{
 		$module=m('award_log');		
 		import('ORG.Util.Page');// 导入分页类
 		$count  = $module->query( "select  count(*) as count from ".DB_PREFIX."award_log a left join ".DB_PREFIX."user as u on a.user_id = u.id   where ".$condition);
+		//抽奖 总额
+		if($_REQUEST['huodong_id']==2){
+		
+			$all=m('award_log')->where(array('huodong_id'=>2))->select();
+			
+		}
+		$totle_money=0;
+		foreach($all as $k=>$v){
+		
+			$totle_money+=$v['prize_name'];
+		}
+		$this->assign('totle_money',$totle_money);
 		$count=$count[0]['count'];
 		// 查询满足要求的总记录数
 		$per_page=$_REQUEST['per_page']?$_REQUEST['per_page']:30;
@@ -162,6 +174,47 @@ class AwardAction extends CommonAction{
 		$this->assign('list',$list);
 		$this->display ();
 	}
+	
+	//抽奖记录的增加
+	function award_add(){
+
+		if($_POST){
+			
+			$name=trim($_POST['user_id']);
+			$one=D(user)->where(array('user_name'=>$name))->find();
+			if($id=$one['id'])
+			{
+				$data['user_id']=$id;
+			}
+			else{
+				$this->error('用户名不存在');
+			}
+			$data['log_time']=get_gmtime();
+			$data['prize_id']=$_POST['prize_id'];
+			$data['huodong_id']=$_POST['huodong_id'];	
+			$one=D(award_log)->add($data);
+			if($one){
+				$this->success(L("success"));
+			}
+		}
+	$this->assign('one',$one);
+	$this->display ('award_add');
+	}
+	//删除中奖记录
+	function virtual_del(){
+	  // print_r($_GET['id']);exit;
+	$id=$_GET['id'];
+	if($id){
+	   
+	  $award=M("AwardLog");
+	  // print_r($award);exit;
+      $award->delete($id); 
+	  $this->success(L("success"));
+	  
+	// echo 1;exit;
+	
+	}
+}
 	//这个是添加一次抽奖机会
 	function send(){
 		$user_id=$_REQUEST['id'];
