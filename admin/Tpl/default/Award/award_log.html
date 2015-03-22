@@ -51,6 +51,14 @@
 	function f_to_date($date){
 		return to_date($date,"Y-m-d H:i");
 	}
+	function get_huodong_name($huodong_id){
+		$huodong_name = M("huodong")->where("id=".$huodong_id)->getField("name");
+		if($huodong_name)
+		return $huodong_name;
+		else
+		return $huodong_id;
+	
+	}
 	function lock_money_func($money,$id){
 		return "<a href='javascript:eidt_lock_money(".$id.");'>".format_price($money)."</a>";
 	}
@@ -72,10 +80,13 @@
 					<option value="{$group_item.id}" <if condition="intval($_REQUEST['group_id']) eq $group_item['id']">selected="selected"</if>>{$group_item.name}</option>
 				</foreach>
 		</select>
+		
 		<input type="hidden" value="Award" name="m" />
 		<input type="hidden" value="award_log" name="a" />
+		
 		<input type="submit" class="button" value="{%SEARCH}" />
-	
+	<a href="?m=Award&a=award_log&huodong_id=2">每日抽奖</a>&nbsp;&nbsp;<a href="?m=Award&a=award_log&huodong_id=1">积分抽奖</a>
+	<a href="?m=Award&a=award_log&huodong_id=">所有</a>
 	</form>
 </div>
 <div class="blank5"></div>
@@ -84,12 +95,12 @@
 <tr class="row" >
 <th width="8"><input type="checkbox" id="check" onclick="CheckAll('dataTable')"></th>
 <th width="50px"><a href="javascript:sortBy('id','<?php echo $_GET[_sort]?0:1?>','award','award_log')" title=" ">编号<img src="/pfcf88/admin/Tpl/default/Common/images/desc.gif" width="12" height="17" border="0" align="absmiddle"></a></th>
-<th><a href="javascript:sortBy('user_name','<?php echo $_GET[_sort]?0:1?>','award','award_log')" title=" ">会员名称</a></th>
-<th><a href="javascript:sortBy('real_name','<?php echo $_GET[_sort]?0:1?>','award','award_log')" title=" ">真名</a></th>
-<th><a href="javascript:sortBy('group_id','<?php echo $_GET[_sort]?0:1?>','award','award_log')" title=" ">会员组</a></th>
-<th><a href="javascript:sortBy('prize_id','<?php echo $_GET[_sort]?0:1?>','award','award_log')" title=" ">奖品</a></th>
-<th><a href="javascript:sortBy('log_time','<?php echo $_GET[_sort]?0:1?>','award','award_log')" title=" ">抽奖日期</a></th>
-<th><a href="javascript:sortBy('log_time','<?php echo $_GET[_sort]?0:1?>','award','award_log')" title=" ">活动ID</a></th>
+<th><a href="javascript:sortBy('user_name','<?php echo $_GET[_sort]?0:1?>','user_name','award_log')" title=" ">会员名称</a></th>
+<th><a href="javascript:sortBy('real_name','<?php echo $_GET[_sort]?0:1?>','real_name','award_log')" title=" ">真名</a></th>
+<th><a href="javascript:sortBy('group_id','<?php echo $_GET[_sort]?0:1?>','group_id','award_log')" title=" ">会员组</a></th>
+<th><a href="javascript:sortBy('prize_id','<?php echo $_GET[_sort]?0:1?>','prize_id','award_log')" title=" ">奖品</a></th>
+<th><a href="javascript:sortBy('log_time','<?php echo $_GET[_sort]?0:1?>','log_time','award_log')" title=" ">抽奖日期</a></th>
+<th><a href="javascript:sortBy('log_time','<?php echo $_GET[_sort]?0:1?>','log_time','award_log')" title=" ">活动ID</a></th>
 
 
 </tr>
@@ -108,7 +119,7 @@
 	</td>
 	<td>{$v.prize_id}:{$v.prize_name}</td>
 	<td>{$v.log_time|to_date}</td>
-	<td>{$v.huodong_id}</td>
+	<td>{$v.huodong_id|get_huodong_name}</td>
 
 </foreach>
 

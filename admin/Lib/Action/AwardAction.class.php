@@ -104,6 +104,10 @@ class AwardAction extends CommonAction{
 		{
 			$condition = "and u.user_name like"."'%".trim($_REQUEST['user_name'])."%'";
 		}
+		if(trim($_REQUEST['huodong_id'])!='')
+		{
+			$condition = " a.huodong_id =".$_REQUEST['huodong_id'];
+		}
 		if(trim($_REQUEST['user_name'])!='')
 		{
 			$condition = " u.user_name like"."'%".trim($_REQUEST['user_name'])."%'";
@@ -125,6 +129,10 @@ class AwardAction extends CommonAction{
 		elseif(trim($_REQUEST['_sort'])==1){
 			$sort='asc';
 		
+		}
+		if(trim($_REQUEST['_order'])=='')
+		{
+			$order=	"order  by  a.log_time  ".$sort;
 		}
 		if(trim($_REQUEST['_order'])=='user_name')
 		{
