@@ -30,7 +30,6 @@ class UserAction extends CommonAction{
 		if(trim($_REQUEST['user_name'])!='')
 		{
 			$map[DB_PREFIX.'user.user_name'] = array('like','%'.trim($_REQUEST['user_name']).'%');
-			print_r($map[DB_PREFIX.'user.user_name']);exit;
 		}
 		if(trim($_REQUEST['email'])!='')
 		{

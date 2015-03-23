@@ -50,19 +50,14 @@ class Deal_listAction extends CommonAction{
 		if(trim($_REQUEST['group_id']!=''))
 			{
 				if($_REQUEST['group_id']==0){
-				
 				$condition .='';
-				
 				}
 			else{
-			//echo $_REQUEST['group_id'];exit;
 			$condition .= "  and   u.group_id ="."'".$_REQUEST['group_id']."'";
 			}
 		}
-		
 		else
 		{
-
 			//echo $condition;exit;
 			$condition .= "  and   u.group_id = 1";
 		}
