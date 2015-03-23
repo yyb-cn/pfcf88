@@ -354,7 +354,8 @@ class uc_moneyModule extends SiteBaseModule
 			$data['user_id'] = intval($GLOBALS['user_info']['id']);
 			$data['money'] = floatval($_REQUEST['amount']);
 			//判断可用金额；
-			$data['money'] = number_format(floatval($_REQUEST['moneyy']),2);
+			//$data['money'] = number_format(floatval($_REQUEST['moneyy']),2);
+			
 			//print_r($data['money']);exit;
 			if($data['money'] <=10.00){
 				showErr("可用金额少于10元不能提取");
