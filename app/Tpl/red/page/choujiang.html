@@ -16,7 +16,6 @@
 <!--抽奖js-->
 <script type="text/javascript" src="{$TMPL}/lottery/lottery.js"></script>
 <script type="text/javascript" src="{$TMPL}/lottery/every_lottery.js"></script>
-<script type="text/javascript" src="http://vip.hxlif.com/code/1/202538_291.js" charset="utf-8"></script><!--------------------抓取代码-------------->
 <script type="text/javascript" src="{$TMPL}/js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="{$TMPL}/js/index_.js"></script>
 <?php
@@ -110,38 +109,42 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 </script>
 
 <style>
-.cj { width:100%; height:1320px; margin-top:40px; background:#770d00;}
-	.cj_wraper { width:960px; height:1320px; margin:0 auto; background:url({$TMPL}/images/bg_bg.png) repeat-y;}
+.cj { width:100%; height:2376px; margin-top:40px; background:#770d00;}
+	.cj_wraper { width:960px; height:2376px; margin:0 auto; background:url({$TMPL}/images/bg_bg.png) repeat-y;}
 		
-	.bg_h { width:960px; height:462px; background:url({$TMPL}/images/bg_h.png) no-repeat;}
+	.bg_h { width:960px; height:562px; background:url({$TMPL}/images/bg_h.png) no-repeat;}
 	
-	.hongbao { width:540px; height:90px; margin:0 auto; background:url({$TMPL}/images/bg_hongbao.png) no-repeat;}
-		.hongbao ul li { float:left; width:70px; height:68px; padding-left:7px; margin-top:7px;}
+	.goto_index { width:960px; height:79px;}
+		.goto_index a { display:block; width:282px; height:79px; margin:0 auto;}
+	
+	.hongbao { width:960px; height:300px; background:url({$TMPL}/images/bg_hongbao.png) no-repeat;}
+		.hongbao ul { float:left; margin-left:100px; margin-top:150px;}
+			.hongbao ul li { float:left; width:96px; height:102px; padding-left:13px; margin-top:7px;}
 			
-	.jifen { width:481px; height:188px; margin:0 auto; background:url({$TMPL}/images/bg_jifen.png) no-repeat;}
-		.jifen .my_jifen { float:left; margin-top:95px; width:463px; height:77px; color:#000; font-size:70px; font-weight:bold; text-align:right; line-height:77px; letter-spacing:18px;}
+	.jifen { width:960px; height:295px; background:url({$TMPL}/images/bg_jifen.png) no-repeat;}
+		.jifen .my_jifen { float:left; margin-top:154px; margin-left:163px; width:634px; height:118px; color:#000; font-size:95px; font-weight:bold; text-align:center; line-height:115px; letter-spacing:12px;}
 		
-	.zhuanpan { width:480px; height:203px; margin:0 auto; margin-top:3px; background:url({$TMPL}/images/bg_xuanzhuan.png) no-repeat;}
-		#lottery{width:441px;height:171px;margin:0 auto; padding-top:17px;}
-		#lottery li{ float:left; width:118px; height:53px; border:2px solid #c41f1b;}
-			#lottery .w193 { width:193px;}
+	.zhuanpan { width:733px; height:309px; margin-top:20px; background:url({$TMPL}/images/bg_xuanzhuan.png) no-repeat;}
+		#lottery{width:670px; height:249px; margin:0 auto; padding-top:25px;}
+		#lottery li{ float:left; width:180px; height:81px; border:2px solid #c41f1b;}
+			#lottery .w193 { width:295px;}
 			#lottery .fa4440 { background:#fa4440;}
 			#lottery .f9316d { background:#f9316d;}
 			#lottery .fd7414 { background:#fd7414;}
 			#lottery .ffdf00 { background:#ffdf00;}
 
 	
-	.mingdan { width:481px; height:127px; margin:0 auto; margin-top:3px; position:relative; background:url({$TMPL}/images/bg_mingdan.png) no-repeat;}
-		.mingdan .userlist { width:340px; height:80px; position:absolute; top:40px; left:15px; overflow:hidden;}
-			.userlist .scrollNews .jiangpin { border-bottom:1px solid #b62222; width:340px; height:16px;}
-				.userlist .scrollNews .jiangpin div { float:left; text-align:center; font-size:12px; line-height:16px;}
-		.mingdan .mylist { width:110px; height:80px; position:absolute; top:40px; left:355px; overflow:hidden;}
-			.mylist .scrollNews1 .my_jiangpin { border-bottom:1px solid #b62222; width:110px; height:16px;}
-				.mylist .scrollNews1 .my_jiangpin div { float:left; text-align:center; font-size:12px; line-height:16px;}
+	.mingdan { width:733px; height:194px; margin:0 auto; margin-top:20px; position:relative; background:url({$TMPL}/images/bg_mingdan.png) no-repeat;}
+		.mingdan .userlist { width:540px; height:120px; position:absolute; top:60px; left:30px; overflow:hidden;}
+			.userlist .scrollNews .jiangpin { border-bottom:1px solid #b62222; width:540px; height:20px;}
+				.userlist .scrollNews .jiangpin div { float:left; text-align:center; font-size:12px; line-height:20px;}
+		.mingdan .mylist { width:160px; height:120px; position:absolute; top:60px; left:570px; overflow:hidden;}
+			.mylist .scrollNews1 .my_jiangpin { border-bottom:1px solid #b62222; width:135px; height:20px;}
+				.mylist .scrollNews1 .my_jiangpin div { float:left; text-align:center; font-size:12px; line-height:20px;}
 			
 			
 	
-	.shuoming { width:481px; height:190px; margin:0 auto; margin-top:3px; background:url({$TMPL}/images/bg_shuoming.png) no-repeat;}
+	.shuoming { width:735px; height:528px; margin:0 auto; margin-top:30px; background:url({$TMPL}/images/bg_shuoming.png) no-repeat;}
 	
 	.black_bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100000; overflow:hidden; background:rgb( 0, 0, 0); background:rgba( 0, 0, 0, 0.9); filter:alpha(opacity=90); opacity:0.9rt; display:none;}
 		.prize { width:777px; height:866px; margin:0 auto; background:url({$TMPL}/images/dakai.png) no-repeat; opacity:1;}
@@ -155,6 +158,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 <div class="cj">
 	<div class="cj_wraper">
     	<div class="bg_h"></div>
+        <div class="goto_index"><a href="http://www.pfcf88.com"><img src="{$TMPL}/images/qiekenao.png" /></a></div>
         <div class="hongbao">
 		{if $idcardpassed eq 0 ||  $mobilepassed eq 0}
         	<ul>
@@ -211,9 +215,9 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
                 <ul class="scrollNews">
                 	{foreach from=$zhongjiang_list item=v}
                     <li class="jiangpin">
-                        <div style="width:60px; color:#000000;">{$v.user_name}</div>
-                        <div style="width:140px; color:#ffdf00;">{$v.prize_name}</div>
-                        <div style="width:140px; color:#000000;">{function name="to_date" v="$v.log_time" f="Y-m-d "} {function name="to_date" v="$v.log_time" f="H:i"}</div>
+                        <div style="width:90px; color:#000000;">{$v.user_name}</div>
+                        <div style="width:200px; color:#ffdf00;">{$v.prize_name}</div>
+                        <div style="width:250px; color:#000000;">{function name="to_date" v="$v.log_time" f="Y-m-d "} {function name="to_date" v="$v.log_time" f="H:i"}</div>
                     </li>
                     {/foreach}
                 </ul>
@@ -223,7 +227,7 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 				<ul class="scrollNews1">
 				{foreach from=$my_list item=v}
                     <li class="my_jiangpin">
-                        <div style="width:110px; color:#ffdf00;">{$v.prize_name}</div>
+                        <div style="width:135px; color:#ffdf00;">{$v.prize_name}</div>
                     </li> 
                    {/foreach}  
 				</ul>
