@@ -375,19 +375,23 @@ function get_deal_list($limit,$cate_id=0, $where='',$orderby = '')
 				
 				if($deal['deal_status']==4){
 					
-					if($deal['repay_time_type'] == 0){
-						$r_y = to_date($deal['repay_start_time'],"Y");
-						$r_m = to_date($deal['repay_start_time'],"m");
-						$r_d = to_date($deal['repay_start_time'],"d");
+					if($deal['repay_time_type'] == 0){                 //2015-03-24 02:36:48
+						$r_y = to_date($deal['repay_start_time'],"Y"); //2015
+						$r_m = to_date($deal['repay_start_time'],"m"); //3
+						$r_d = to_date($deal['repay_start_time'],"d"); //24
+						/*
 						if($r_m-1 <=0){
 							$r_m = 12;
-							$r_y = $r_y-1;
+							$r_y = $r_y-1;          //减一个月
 						}
 						else{
-							$r_m = $r_m - 1;
-						}
-						$deal["type_repay_start_time"]  = to_timespan($r_y."-".$r_m."-".$r_d,"Y-m-d") + $deal['repay_time']*24*3600;
-						$deal["type_next_repay_time"] = next_replay_month($deal['type_repay_start_time']);
+							$r_m = $r_m - 1;          //2            2015       2         24  +      15
+						}*/
+					//	$deal["type_repay_start_time"]  = to_timespan($r_y."-".$r_m."-".$r_d,"Y-m-d") + $deal['repay_time']*24*3600;
+					$deal["type_repay_start_time"]=$deal['repay_start_time'];
+						$deal["type_next_repay_time"]=to_timespan($r_y."-".$r_m."-".$r_d,"Y-m-d") + $deal['repay_time']*24*3600;
+						//3月11   减一个月         +15天
+						//$deal["type_next_repay_time"] = next_replay_month($deal['type_repay_start_time']);
 					}
 					
 										

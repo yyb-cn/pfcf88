@@ -69,6 +69,12 @@ class uc_dealModule extends SiteBaseModule
 		
 		$GLOBALS['tmpl']->assign("deal_list",$result['list']);
 		
+		// foreach ($result['list'][0] as $k=>$v){
+		
+		// $result['list'][0][$k]=date("Y-m-d H:i:s",$v);
+		// }
+		// var_dump($result['list'][0]);exit;
+		
 		$page = new Page($result['count'],app_conf("PAGE_SIZE"));   //初始化分页对象 		
 		$p  =  $page->show();
 		$GLOBALS['tmpl']->assign('pages',$p);

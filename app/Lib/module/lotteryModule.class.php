@@ -176,7 +176,7 @@ class lotteryModule extends SiteBaseModule
 		  $sql="select max(sort) from `fanwe_deal` where is_delete=0";
 		  $maxs=$GLOBALS['db']->getRow($sql);
 		  $max=$maxs['max(sort)']+1; 
-		  $name='(抽奖送)投资了'.$tshiwu.'所送15天投资'.$tshiwu.'的利息-'.$GLOBALS['user_info']['user_name'];
+		  $name='(抽奖送"'.$GLOBALS['user_info']['user_name'].'")'.$tshiwu.'元15天产生的利息';
 		   
 		    $deal_data['name']=$name;
             $deal_data['sub_name']=$name;	
