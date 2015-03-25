@@ -602,12 +602,9 @@ function get_deal_user_load_list($user_load_info,$loantype,$repay_time_type = 1,
 		$time = get_gmtime();
 		
 	//当为天的时候
-	if($repay_time_type == 0){
-		$true_repay_time = 1;
-	}
-	else{
-		$true_repay_time = $user_load_info['repay_time'];
-	}
+	
+	$true_repay_time = $user_load_info['repay_time'];
+	
 	$repay_day = $user_load_info['repay_start_time'];
 	for($i=0;$i<$true_repay_time;$i++){
 		$loan_list[$i]['status'] = 0;
@@ -638,7 +635,7 @@ function get_deal_user_load_list($user_load_info,$loantype,$repay_time_type = 1,
 			}
 			
 			if($repay_time_type==0){
-				$lixi = $loan_list[$i]['month_repay_money'] = $user_load_info['money'] + $user_load_info['money']*$user_load_info['rate']/365/100*$true_repay_time*7;
+				$lixi = $loan_list[$i]['month_repay_money'] = $user_load_info['money'] + $user_load_info['money']*$user_load_info['rate']/365/100*$true_repay_time;
 			};
 			
 			
