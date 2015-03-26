@@ -10,7 +10,7 @@
 /**
  * 获取指定的投标
  */
-function get_deal($id=0,$cate_id=0)
+function get_deal($id=0,$cate_id=0) //用户ID
 {		
 
 
@@ -93,7 +93,7 @@ function get_deal($id=0,$cate_id=0)
 				
             //按天算收益
             if($deal['repay_time_type'] == 0){
-                $deal['month_repay_money'] = $deal['borrow_amount'] * $deal['rate']/365/100 * $deal['repay_time'];
+                $deal['month_repay_money'] =$deal['borrow_amount'] * $deal['rate']/365/100 * $deal['repay_time'];
             }    
 			$deal['month_repay_money_format'] = number_format($deal['month_repay_money']);
 			
@@ -607,9 +607,27 @@ function get_deal_user_load_list($user_load_info,$loantype,$repay_time_type = 1,
 		
 	//当为天的时候
 	
-	$true_repay_time = $user_load_info['repay_time'];
+	$true_repay_time = $user_load_info['repay_time']; //15天
+	$repay_day = $user_load_info['repay_start_time']; //4月-11日
 	
-	$repay_day = $user_load_info['repay_start_time'];
+	/*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓新增内容↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
+	if($repay_time_type==0){
+	               //2015-03-24 02:36:48
+						$r_y = to_date($user_load_info['repay_start_time'],"Y"); //2015
+						$r_m = to_date($user_load_info['repay_start_time'],"m"); //3
+						$r_d = to_date($user_load_info['repay_start_time'],"d"); //24
+						$repay_day=to_timespan($r_y."-".$r_m."-".$r_d,"Y-m-d") + $user_load_info['repay_time']*24*3600;  //获取还款日
+						
+		$loan_list[0]['status']=0;
+		$loan_list[0]['repay_day']=$repay_day;
+		$loan_list[0]['month_repay_money']=$user_load_info['money'] +($user_load_info['virtual_money']+ $user_load_info['money'])*$user_load_info['rate']/365/100*$true_repay_time;			
+		$loan_list[0]['month_manage_money']=0;			
+		$loan_list[0]['month_has_repay_money']=0;								
+						
+		return $loan_list;		
+	}
+	/*↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑新增的内容↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
+	
 	for($i=0;$i<$true_repay_time;$i++){
 		$loan_list[$i]['status'] = 0;
 		$repay_day = $loan_list[$i]['repay_day'] = next_replay_month($repay_day);
@@ -640,8 +658,10 @@ function get_deal_user_load_list($user_load_info,$loantype,$repay_time_type = 1,
 				$lixi = $loan_list[$i]['month_repay_money'] = $user_load_info['money'] +($user_load_info['virtual_money']+ $user_load_info['money'])*$user_load_info['rate']/12/100*$true_repay_time;
 			}
 			
+			
+			//进入此处
 			if($repay_time_type==0){
-				$lixi = $loan_list[$i]['month_repay_money'] = $user_load_info['money'] + $user_load_info['money']*$user_load_info['rate']/365/100*$true_repay_time;
+				$lixi = $loan_list[$i]['month_repay_money'] = $user_load_info['money'] +($user_load_info['virtual_money']+ $user_load_info['money'])*$user_load_info['rate']/365/100*$true_repay_time;
 			};
 			
 			
@@ -722,6 +742,9 @@ function get_deal_user_load_list($user_load_info,$loantype,$repay_time_type = 1,
 		
 		
 	}
+	
+	//按天还款
+	
 	return $loan_list;
 }
 

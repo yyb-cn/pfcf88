@@ -73,12 +73,11 @@ class uc_dealModule extends SiteBaseModule
 		
 		// $result['list'][0][$k]=date("Y-m-d H:i:s",$v);
 		// }
-		// var_dump($result['list'][0]);exit;
+		//var_dump($result['list']);exit;
 		
 		$page = new Page($result['count'],app_conf("PAGE_SIZE"));   //初始化分页对象 		
 		$p  =  $page->show();
 		$GLOBALS['tmpl']->assign('pages',$p);
-		
 		$GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['UC_DEAL_REFUND']);
 		$GLOBALS['tmpl']->assign("inc_file","inc/uc/uc_deal_refund.html");
 		$GLOBALS['tmpl']->display("page/uc.html");	
@@ -140,18 +139,24 @@ class uc_dealModule extends SiteBaseModule
 	//正常还款操作界面
 	public function quick_refund(){
 		$id = intval($_REQUEST['id']);
+		
+		
+		
+		
+		
+		
+		
+		
 		if($id == 0){
 			showErr("操作失败！");
 		}
 		$deal = get_deal($id);
-		//var_dump($deal);exit;
-		
 		if(!$deal || $deal['user_id']!=$GLOBALS['user_info']['id'] || $deal['deal_status']!=4){
 			showErr("操作失败！");
 		}
 		$GLOBALS['tmpl']->assign('deal',$deal);
 		
-		//var_dump($deal);exit;
+	//	var_dump($deal);exit;
 		
 		//还款列表
 		$loan_list = get_deal_load_list($deal);
@@ -171,10 +176,8 @@ class uc_dealModule extends SiteBaseModule
 	
 	//正常还款执行动作
 	public function repay_borrow_money(){
+		$id = intval($_REQUEST['id']);  //标的ID
 	
-	
-		$id = intval($_REQUEST['id']);
-		
 		if($id == 0){
 			showErr("操作失败！",1);
 			exit();
@@ -340,10 +343,14 @@ class uc_dealModule extends SiteBaseModule
 			$GLOBALS['db']->autoExecute(DB_PREFIX."deal_msg_list",$msg_data); //插入				
 		}
 		
-		syn_deal_status($id);
+		syn_deal_status($id);//更改标的状态
+		if($deal['money']==0){
+		$GLOBALS['db']->autoExecute(DB_PREFIX."deal",array('deal_status'=>5),"UPDATE","id=".$id);
+		}
+		
 		sys_user_status($GLOBALS['user_info']['id'],false,true);
 				
-/*以上全部都是费炒作,不有在意还款人还了多少钱,获得多少信用,我们TM又不是P2P平台*/
+/*以上全部都是费操作,不有在意还款人还了多少钱,获得多少信用,我们TM又不是P2P平台*/
 /*把用户回款做好就好了,付息还本,每月付息的钱改为本金+代金券。2015-3-3*/		
 		//用户回款
 		/*
@@ -368,7 +375,7 @@ class uc_dealModule extends SiteBaseModule
 		modify_account()函数：作用是修改用户账户金额
 		*/
 		
-		//用户回款
+		//用户回款 ，$id是标的ID
 		$user_load_ids = $GLOBALS['db']->getAll("SELECT deal_id,user_id,money,virtual_money FROM ".DB_PREFIX."deal_load WHERE deal_id=".$id);
 		foreach($user_load_ids as $k=>$v){
 			
@@ -836,7 +843,7 @@ class uc_dealModule extends SiteBaseModule
 			modify_account(array("quota"=>trim(app_conf('USER_REPAY_QUOTA'))),$GLOBALS['user_info']['id'],"标:".$deal['id'].",还清借款获得额度");
 		}
 				
-		syn_deal_status($id);
+		syn_deal_status($id); //更改标的状态
 		sys_user_status($GLOBALS['user_info']['id'],false,true);
 		
 		

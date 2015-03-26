@@ -58,6 +58,7 @@
 						&nbsp;
 						{if $loan.month_need_all_repay_money eq 0}
 						<input type="checkbox" name="periodNumberNo" checked="checked" value="{$key}" style="display:none;" />
+						
 						{/if}
 					{else}
 					<?php ++$idx;?>
@@ -125,9 +126,10 @@
 		getMustPaymoneyTotal();
 		
 		$("#J_repay_borrow_money").click(function(){
+		
 			if($("#refundTab input[name='periodNumber']:checked").length == 0){
-				$.showErr("还款失败,请顺序还款!");
-				return false;
+				//$.showErr("还款失败,请顺序还款!");
+				//return false;
 			}
 			if(confirm("您确定要还款吗？")){
 				if(is_repay_lock){

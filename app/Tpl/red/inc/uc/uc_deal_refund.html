@@ -147,9 +147,11 @@
             </div>
             <div class="info" style="width: 115px; text-align: right;">
                 <input class="refundBnt" type="button" onclick="window.location.href='{url x="index" r="uc_deal#quick_refund" p="id=$deal.id"}';">
+				
                 {if !$deal.exceed_the_time}
-				<input class="inrepayBtn" type="button" onclick="window.location.href='{url x="index" r="uc_deal#inrepay_refund" p="id=$deal.id"}';">
+				<input  {if $deal.borrow_amount_format eq 0} style="display:none" {/if} class="inrepayBtn" type="button" onclick="window.location.href='{url x="index" r="uc_deal#inrepay_refund" p="id=$deal.id"}';">
             	{/if}
+				
 			</div>
         </div>
     </div>
@@ -313,9 +315,16 @@ function userTime(uTime){
            str+='<div class="info" style="width: 115px; text-align: right;">';
                 str+='<input class="refundBnt" type="button" onclick="window.location.href=\'index.php?ctl=uc_deal&act=quick_refund&id='+data[i].id+'\'">'
 				str+=' '
+				{if $deal.borrow_amount_format eq 0} style="display:none" {/if}
              if (!data[i].exceed_the_time)
 			 {
-				str+='<input class="inrepayBtn" type="button" onclick="window.location.href=\'index.php?ctl=uc_deal&act=inrepay_refund&id='+data[i].id+'\'">'
+				str+='<input class="inrepayBtn" type="button"'
+				if (!data[i].borrow_amount_format==0)
+						 {
+							
+						str+='style="display:none"';
+						 }
+				str+='onclick="window.location.href=\'index.php?ctl=uc_deal&act=inrepay_refund&id='+data[i].id+'\'">'
 				}
 			str+='</div>';
        str+='</div>';

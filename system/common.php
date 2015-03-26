@@ -425,7 +425,6 @@ function syn_deal_status($id)
 			$data['deal_status'] = 1;
 		}
 	}
-	
 	//投标人数
 	$sdata = $GLOBALS['db']->getRow("SELECT count(*) as buy_count,sum(money) as load_money FROM ".DB_PREFIX."deal_load WHERE deal_id=$id");
 	$data['buy_count'] = $sdata['buy_count'];

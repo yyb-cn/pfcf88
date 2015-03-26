@@ -21,7 +21,7 @@ Our own p2p-like website
 明朝      ming
 清朝      qing
 1.pfcf88.com是一个p2e平台,类似于余额宝,采用了方维p2p作为基础来进行二次开发的。
-2.pfcf88.com采用了thinkphp框架作为后台开发，双入口，前台却并不是完全的thinkphp
+2.pfcf88.com采用了thinkphp框架作为后台开发，双入口，前台并不是thinkphp数据操作类
 3.产品列表页：无刷新分页,加载loading效果,无刷新条件筛选,ajax,jquery,
 4.代金券，计算利息方法：还款金额=本金+((本金+代金券)*利息)*n个月/12
 如果是按天计算(deal_time_type=0)：还款金额=本金+((本金+代金券)*利息)*n天/365
