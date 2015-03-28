@@ -28,7 +28,7 @@
 									</td>
 									<td>{if $voucher.begin_time eq 0}无限{else}{function name="to_date" value=$voucher.begin_time}{/if} {if $voucher.end_time eq 0}{else}{$LANG.TO} {function name="to_date" value=$voucher.end_time}{/if} </td>
 									
-									<td>{if $voucher.use_count}已用{else}可用{/if}</td>
+									<td>{if $voucher.used_yn}已用{else}可用{/if}</td>
 									
 								</tr>
 								{/foreach}

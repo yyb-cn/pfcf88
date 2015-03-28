@@ -176,6 +176,7 @@ public function deal_index()
 	public function export_csv($page = 1)
 	{
 		$id = $_REQUEST ['id'];
+		
 		//where(array ('user_id' => array ('in', explode ( ',', $id ) ) ));
 		$condition = array (DB_PREFIX.'deal_order.id' => array ('in', explode ( ',', $id ) ) );
 		

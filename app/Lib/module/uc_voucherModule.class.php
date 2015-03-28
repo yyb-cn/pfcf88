@@ -28,6 +28,7 @@ class uc_voucherModule extends SiteBaseModule
 		$result = get_voucher_list($limit,$GLOBALS['user_info']['id']);
 		
 		$GLOBALS['tmpl']->assign("list",$result['list']);
+		//var_dump($result);exit;
 		$page = new Page($result['count'],app_conf("PAGE_SIZE"));   //初始化分页对象 		
 		$p  =  $page->show();
 		$GLOBALS['tmpl']->assign('pages',$p);

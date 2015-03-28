@@ -6,9 +6,12 @@
 <load href='__TMPL__Common/js/user.js' />
 <load href='__TMPL__Common/style/weebox.css' />
 <script>
+	
 	function doSend(id)
 {
-	location.href = ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=doSend&id="+id;
+	$a=$("select option:selected")
+	
+	location.href = ROOT+"?"+VAR_MODULE+"="+MODULE_NAME+"&"+VAR_ACTION+"=send&id="+id;
 }
 
 </script>
@@ -72,22 +75,55 @@
 				</foreach>
 		</select>
 		
-		<input type="hidden" value="User" name="m" />
-		<input type="hidden" value="index" name="a" />
+		<input type="hidden" value="EcvType" name="m" />
+		<input type="hidden" value="send_list" name="a" />
 		<input type="submit" class="button" value="{%SEARCH}" />
 		<input type="button" class="button" value="{%EXPORT}" onclick="export_csv();" />
 	</form>
 </div>
 <div class="blank5"></div>
-<html:list 
-	id="dataTable" 
-	style="dataTable" 
-	name="user" 
-	checkbox="true" 
-	action="true" 
-	datasource="list" 
-	show="id:{%ID}|50px,user_name:{%USER_NAME},email:{%USER_EMAIL},mobile:{%USER_MOBILE},money|format_price:{%USER_MONEY},group_id|get_user_group:会员组别,pid|get_referrals_name:{%REFERRALS_NAME},is_effect|get_is_effect=$user['id']:{%IS_EFFECT}" 
-	actionlist="doSend:发送,login_site:登录" /> 
+<table id="dataTable" class="dataTable" cellpadding=0 cellspacing=0 >
+<tr><td colspan="11" class="topTd" >&nbsp; </td></tr>
+<tr class="row" >
+<th width="8"><input type="checkbox" id="check" onclick="CheckAll('dataTable')"></th>
+<th width="50px"><a href="javascript:sortBy('id','<?php echo $_GET[_sort]?0:1?>','EcvType','send_list')" title="按照编号升序排列 ">编号<img src="/pfcf88/admin/Tpl/default/Common/images/desc.gif" width="12" height="17" border="0" align="absmiddle"></a></th>
+<th><a href="javascript:sortBy('user_name','<?php echo $_GET[_sort]?0:1?>','EcvType','send_list')" title="按照会员名称升序排列 ">会员名称</a></th>
+<th><a href="javascript:sortBy('email','<?php echo $_GET[_sort]?0:1?>','EcvType','send_list')" title="按照会员邮件升序排列 ">会员邮件</a></th>
+<th><a href="javascript:sortBy('mobile','<?php echo $_GET[_sort]?0:1?>','EcvType','send_list')" title="按照手机号升序排列 ">手机号</a></th>
+<th><a href="javascript:sortBy('money','<?php echo $_GET[_sort]?0:1?>','EcvType','send_list')" title="按照会员余额升序排列 ">会员余额</a></th>
+<th><a href="javascript:sortBy('group_id','<?php echo $_GET[_sort]?0:1?>','EcvType','send_list')" title="按照会员组别升序排列 ">会员组别</a></th>
+<th><a href="javascript:sortBy('pid','<?php echo $_GET[_sort]?0:1?>','EcvType','send_list')" title="按照推荐人升序排列 ">推荐人</a></th>
+<th>代金券</th>
+
+<th style="width:">操作</th>
+
+</tr>
+<foreach name="list" item="v">
+	<tr class="row" >
+	<td><input type="checkbox" name="key" class="key" value="{$v.id}"></td>
+	<td>{$v.id}</td>
+	<td>{$v.user_name}</td>
+	<td>{$v.email}</td>
+	<td>{$v.mobile}</td>
+	<td>{$v.money|format_price}</td>
+	<td>{$v.group_id|get_user_group}</td>
+	<td>{$v.pid|get_referrals_name}</td>
+	<td>{$v.ecvs}</td>
+	
+	
+	
+	<td>
+		
+		<a href="javascript:doSend({$v.id})">发送</a>
+		&nbsp;<a href="javascript:login_site({$v.id})">登录</a>&nbsp;</td>
+	</tr>
+</foreach>
+
+
+<tr><td colspan="11" class="bottomTd"> &nbsp;</td></tr></table>
+<!-- Think 系统列表组件结束 -->
+
+
 
 <div class="blank5"></div>
 <div class="page">{$page}</div>

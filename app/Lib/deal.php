@@ -620,6 +620,7 @@ function get_deal_user_load_list($user_load_info,$loantype,$repay_time_type = 1,
 				$loan_list[$i]['month_repay_money'] = $loan_list[$i]['month_repay_money']*$true_repay_time - round($loan_list[$i]['month_repay_money'],2)*($true_repay_time-1);
 			}
 		}
+		//付息还款
 		elseif($loantype == 1){
 			$lixi = $loan_list[$i]['month_repay_money'] = av_it_formula($user_load_info['money'],$user_load_info['rate']/12/100);
 			//最后一个月还本息
@@ -627,11 +628,12 @@ function get_deal_user_load_list($user_load_info,$loantype,$repay_time_type = 1,
 				$loan_list[$i]['month_repay_money'] = ($user_load_info['money'] + $loan_list[$i]['month_repay_money']*$true_repay_time) - round($loan_list[$i]['month_repay_money'],2)*($true_repay_time-1);
 			}
 		}
+		//到期本息
 		elseif($loantype == 2){
 			$lixi = $loan_list[$i]['month_repay_money'] = 0;
 			//最后一个月还本息
-			if($i+1 == $true_repay_time){
-				$lixi = $loan_list[$i]['month_repay_money'] = $user_load_info['money'] + $user_load_info['money']*$user_load_info['rate']/12/100*$true_repay_time;
+			if($i+1 == $true_repay_time){                                                 //加入虚拟金额
+				$lixi = $loan_list[$i]['month_repay_money'] = $user_load_info['money'] +($user_load_info['virtual_money']+ $user_load_info['money'])*$user_load_info['rate']/12/100*$true_repay_time;
 			}
 			
 			if($repay_time_type==0){

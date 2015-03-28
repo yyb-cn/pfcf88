@@ -64,34 +64,48 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 					</td>
 				</tr>
 				<!--代金券-->
-				
-				<tr>
-					<td class="tit tr w100">代金券：</td>
-					
-				<?php if(!empty($voucher)):?>
-					<td class="f_red">
-						{$voucher.name}
-						&nbsp;&nbsp;
-						面额：{$voucher.money}
-						&nbsp;&nbsp;
-						使用代金券
-						<input type="checkbox" value="9" name="ggsmd" />
-					</td>
-				<?php  else :?>
-					<td class="f_red">&nbsp;没有可用代金券</td>
-				<?php endif;?>	
-				</tr>
-			
+				{if  $deal.repay_time==1}
+					{if $voucher}
+						{foreach from="$voucher" item="v" key="k"}
+						<tr>
+							<td class="tit tr w100">
+							{if $k==0}代金券：{/if}
+							</td>
+						
+							<td class="f_red">
+							<ul>
+							<li style="float:left;width:200px;">
+								{$v.name}
+								</li>
+								<li style="float:left;width:100px;">
+								面额：{$v.money} &nbsp;元
+								</li>
+								<li style="float:left">
+								使用代金券
+								<input type="checkbox" checked="checked" value="{$v.money}" name="v_money[{$v.password}]"  height="50" />
+								</li>
+								</ul>
+							</td>
+						
+						
+						</tr>
+						{/foreach}
+					{/if}
+				{/if}
 				<tr>
 					<td class="tit tr w100 btm">投标金额：</td>
 					<td class="f_red bg btm">
-						<input class="f-input w70" name="bid_money" id="J_BIDMONEY" /> 元&nbsp;&nbsp;<span class="f_dgray">(最低投标金额为{function name="round" v=$deal.min_loan_money f=2}元{if (int)app_conf('DEAL_BID_MULTIPLE') gt 0},并且是{function name='app_conf' v='DEAL_BID_MULTIPLE'}的倍数{/if})</span>
+						<input class="f-input w70" name="bid_money" id="J_BIDMONEY" value="{$deal.min_loan_money}" /> 元&nbsp;&nbsp;
+						<span class="f_dgray">(最低投标金额为{function name="round" v=$deal.min_loan_money f=2}元
+						{if $voucher},不包含代金券金额数{/if}
+						{if (int)app_conf('DEAL_BID_MULTIPLE') gt 0},并且是{function name='app_conf' v='DEAL_BID_MULTIPLE'}的倍数{/if})
+						</span>
 					</td>
 				</tr>
 				<tr>
 					<td class="tit tr w100 ">总计：</td><!--后台,资金数据从数据库获取-->
 					<td class="f_red">
-							<span id="totle">0</span>&nbsp元			
+							<span id="totle">0</span>&nbsp;元&nbsp;<span id="v_money"></span>		
 					</td>
 			
 					
@@ -103,51 +117,52 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 		<div class="blank20"></div>
 		<div class="clearfix bbd bid_act_box">
 			<input type="hidden" name="id" value="{$deal.id}" />
-			<input type="hidden" name="check" id="checkbox" value="	23" />
 			<input type="hidden" name="tmoney" id="tmoney">
+			<input type="hidden" name="virtual_money" value=0 id="virtual_money">
 			<input  type="submit" class="bid_submit_button mt20" id="J_bid_submit" value="确认投标" />
 		</div>
 	</form>
 </div>
 <script type="text/javascript">
 	jQuery(function(){
-		if($("input:checkbox").attr("checked")==true){
-			$("#checkbox").attr('value',1)
-		}
-		else
-		{
-			$("#checkbox").attr('value',0)
-		}
-		
-		$("#J_BIDMONEY").change(function(){
-		
-		if($("input:checkbox").attr("checked")==true){
-		var totle=Number($("#J_BIDMONEY").val())+Number({$voucher.money});
-			
-		}
-		else{
-			
-			totle=Number($("#J_BIDMONEY").val())
-		}
-		$("#tmoney").attr('value',totle)//获取总计中的值
-		$("#totle").html(totle)
-		})
-	$("input:checkbox").change(function(){	
-		
+	
+	count_money()
+		//现货取所有checkeck的金额
+		function get_v_money(){
+		var v_money=0
+		$("input:checkbox").each(function(){ 
+			if (true == $(this).attr("checked")) { 
+				v_money+=Number($(this).val())
 				
-		if($("input:checkbox").attr("checked")==true){
+			} 
+		}); 
+		return v_money
+		}
 		
-			$("#checkbox").attr('value',1)
-			
-		var totle=Number($("#J_BIDMONEY").val())+Number({$voucher.money});
+		function count_money(){
+			var real_total=Number($("#J_BIDMONEY").val())
+			var v_money=get_v_money()
+			//totle=Number(real_total)+Number(v_money)
+			$("#tmoney").attr('value',real_total)//真是币
+			$("#virtual_money").attr('value',v_money)//代金券的值
+			$("#totle").html(real_total)
+			{if $voucher}
+			if(v_money !=0){
+			$("#v_money").html('+'+v_money+'&nbsp;元代金券')
+			}
+			{/if}
+		
 		}
-		else{
-		$("#checkbox").attr('value',0)
-			
-			totle=Number($("#J_BIDMONEY").val())
-		}
-		$("#tmoney").attr('value',totle)//获取总计中的值
-		$("#totle").html(totle)
+		
+		$("#J_BIDMONEY").keyup(function(){
+			count_money()
+		})
+		$("#J_BIDMONEY").change(function(){
+			count_money()
+		})
+		
+	$("input:checkbox").change(function(){	
+		count_money()
 	})
 	
 	
@@ -165,9 +180,8 @@ $this->_var['dealcss'][] = $this->_var['TMPL_REAL']."/css/deal.css";
 				data:query, 
 				dataType:"json",
 				success:function(result){
-				
+						//alert(result)
 					if(result.status==1){
-					
 						alert(result.info);
 						window.location.href=result.jump;
 					}

@@ -19,7 +19,7 @@ class dealModule extends SiteBaseModule
 			app_redirect(url("index")); 
 		
 		//借款列表
-		$load_list = $GLOBALS['db']->getAll("SELECT deal_id,user_id,user_name,money,create_time FROM ".DB_PREFIX."deal_load WHERE deal_id = ".$id);
+		$load_list = $GLOBALS['db']->getAll("SELECT deal_id,user_id,user_name,money,virtual_money,create_time FROM ".DB_PREFIX."deal_load WHERE deal_id = ".$id);
 		
 		
 		$u_info = get_user("*",$deal['user_id']);
@@ -140,7 +140,7 @@ class dealModule extends SiteBaseModule
 		{
 			$GLOBALS['tmpl']->assign("message_login_tip",sprintf($GLOBALS['lang']['MESSAGE_LOGIN_TIP'],url("shop","user#login"),url("shop","user#register")));
 		}
-		$deal['create_time']=date("Y-m-d H:i",$deal['create_time']);
+		$deal['create_time']=to_date($deal['create_time'],"Y-m-d H:i");
 		$deal['repay_start_time']=date("Y-m-d",$deal['repay_start_time']);
 		$GLOBALS['tmpl']->assign("deal",$deal);
 		
@@ -208,16 +208,19 @@ class dealModule extends SiteBaseModule
 		
 		$id = intval($_REQUEST['id']);
 		$deal = get_deal($id);
+		
 		if(!$deal)
-			app_redirect(url("index")); 
+			app_redirect(url("index")); //不存在这个标
 		
 		if($deal['user_id'] == $GLOBALS['user_info']['id']){
-			showErr($GLOBALS['lang']['CANT_BID_BY_YOURSELF']);
+			showErr($GLOBALS['lang']['CANT_BID_BY_YOURSELF']);//不能投自己的标
 		}
 		require APP_ROOT_PATH.'app/Lib/uc.php';
-		$result = get_voucher_list_can(1,$GLOBALS['user_info']['id']);
-		//print_r( $result);exit;
-		$GLOBALS['tmpl']->assign("voucher",$result['list'][0]);
+		
+		$result = get_voucher_list_can($GLOBALS['user_info']['id']);//查询代金券
+		//print_r($result);exit;
+		$GLOBALS['tmpl']->assign("voucher",$result['list']);//查询代金券
+		
 		$seo_title = $deal['seo_title']!=''?$deal['seo_title']:$deal['type_match_row'] . " - " . $deal['name'];
 		$GLOBALS['tmpl']->assign("page_title",$seo_title);
 		$seo_keyword = $deal['seo_keyword']!=''?$deal['seo_keyword']:$deal['type_match_row'].",".$deal['name'];
@@ -275,16 +278,13 @@ class dealModule extends SiteBaseModule
 	}
 	
 	//确认投资
-	
 	function dobid(){
-				
 		$ajax = intval($_REQUEST["ajax"]);
 		$id = intval($_REQUEST["id"]);
 		if(!$GLOBALS['user_info'])
-			showErr($GLOBALS['lang']['PLEASE_LOGIN_FIRST'],$ajax);
-			
+		showErr($GLOBALS['lang']['PLEASE_LOGIN_FIRST'],$ajax);
 		$deal = get_deal($id);
-		//echo json_encode($deal)
+		//echo json_encode($deal);
 		if(trim($_REQUEST["bid_money"])=="" || !is_numeric($_REQUEST["bid_money"]) || floatval($_REQUEST["bid_money"])<=0 || floatval($_REQUEST["bid_money"]) < $deal['min_loan_money']){
 			showErr($GLOBALS['lang']['BID_MONEY_NOT_TRUE'],$ajax);
 		}
@@ -318,33 +318,45 @@ class dealModule extends SiteBaseModule
 			showErr(sprintf($GLOBALS['lang']['DEAL_LOAN_NOT_ENOUGHT'],format_price($deal['borrow_amount'] - $deal['load_money'])),$ajax);
 		}
 		
-		$data['user_id'] = $GLOBALS['user_info']['id'];
+		$data['user_id'] = $user_id=$GLOBALS['user_info']['id'];
 		$data['user_name'] = $GLOBALS['user_info']['user_name'];
 		$data['deal_id'] = $id;
 		$data['money'] = trim($_REQUEST["bid_money"]);
 		$data['create_time'] = get_gmtime();
 		
 		//以下为代金券判断操作
-		
-		if($_REQUEST['check'])//判断复选框是否为勾选
-		{
-			require APP_ROOT_PATH.'app/Lib/uc.php';
-			$result = get_voucher_list_can(1,$GLOBALS['user_info']['id']);
-			if(empty($result['list']))
+		if($deal['repay_time']==1){  //一个月的标
+			if($_REQUEST['virtual_money']!=0)//判断复选框是否为勾选
 			{
-				showErr('代金券不存在,请联系客服',$ajax);
-			}
-			$data['money']+=$result['list'][0]['money'];//bid_money=金额+代金券金额;bid_money!=提交过来的tmoney;出错!
-				if(trim($_REQUEST['tmoney'])!=$data['money'])
-				{
-					showErr('代金券金额不符合系统金额,请联系客服',$ajax);
+				$i=0;
+				foreach ($_REQUEST['v_money'] as $k=>$v){
+				
+				 $sql = "select *,e.id as ecv_id from ".DB_PREFIX."ecv as e left join ".DB_PREFIX."ecv_type as et on e.ecv_type_id = et.id where e.user_id = ".$user_id." and e.used_yn=0 and (et.end_time=0 or et.end_time>" .time().  " ) and e.password=".$k." and et.money=".$v;
+				// showErr($sql,$ajax);
+				$one = $GLOBALS['db']->getRow($sql);
+				$virtual_money+=$one['money'];
+					
+				 if(!$one)
+				 {
+				 showErr('代金券不存在,请联系客服',$ajax);
+				 }
+				
+					$id_str.=($i==0)?$one['ecv_id']:','.$one['ecv_id'];
+					$i+=1; 
+				 
 				}
-			////更新代金券数据库使用情况。used_yn 为1,暂时只有一种代金券
-			$GLOBALS['db']->query("update ".DB_PREFIX."ecv set used_yn = 1 where  user_id = '".$data['user_id']."'");
-			
-								
+				//showErr('代金券'.$id_str,$ajax);
+				if($virtual_money!=$_REQUEST['virtual_money']){
+				showErr('代金券金额出错',$ajax);
+				}
+				else{
+					$data['virtual_money']=$_REQUEST['virtual_money'];  //记录data的虚拟金额
+					//修改代金券已用
+					$GLOBALS['db']->query("update ".DB_PREFIX."ecv set used_yn = 1 where id in (".$id_str.")");											
+					}
+				require APP_ROOT_PATH.'app/Lib/uc.php';
+			}
 		}
-		
 		$GLOBALS['db']->autoExecute(DB_PREFIX."deal_load",$data,"INSERT");//插入一条投资目录
 		$load_id = $GLOBALS['db']->insert_id();//获取插入的ID
 		if($load_id > 0){

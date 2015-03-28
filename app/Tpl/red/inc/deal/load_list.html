@@ -26,9 +26,14 @@
 			<td width="20%" class="wb tc">
 				<a href="javascript:;" class="f_red">{$load.user_name}</a>
 			</td>
+			
 			<td width="20%" class="wb tc">
 				{function name="format_price" v="$load.money"}
+				{if $load.virtual_money!=0}
+				+代金券{function name="format_price" v="$load.virtual_money"}
+				{/if}
 			</td>
+			
 			<td width="20%" class="wb tc">
 				{function name="to_date" v="$load.create_time" f="Y-m-d"}
 				{function name="to_date" v="$load.create_time" f="H:i:s"}

@@ -138,13 +138,21 @@ class uc_dealModule extends SiteBaseModule
 			showErr("操作失败！");
 		}
 		$deal = get_deal($id);
+		//var_dump($deal);exit;
+		
 		if(!$deal || $deal['user_id']!=$GLOBALS['user_info']['id'] || $deal['deal_status']!=4){
 			showErr("操作失败！");
 		}
 		$GLOBALS['tmpl']->assign('deal',$deal);
 		
+		//var_dump($deal);exit;
+		
 		//还款列表
 		$loan_list = get_deal_load_list($deal);
+		//var_dump($loan_list);exit;
+		//$loan_list[2]['month_repay_money']=5001;
+		//$loan_list[2]['month_need_all_repay_money']=5000;
+		//var_dump($loan_list);exit;
 		$GLOBALS['tmpl']->assign("loan_list",$loan_list);
 		
 		$GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['UC_DEAL_REFUND']);
@@ -157,7 +165,10 @@ class uc_dealModule extends SiteBaseModule
 	
 	//正常还款执行动作
 	public function repay_borrow_money(){
+	
+	
 		$id = intval($_REQUEST['id']);
+		
 		if($id == 0){
 			showErr("操作失败！",1);
 			exit();
@@ -171,6 +182,8 @@ class uc_dealModule extends SiteBaseModule
 		
 		//还款列表
 		$loan_list = get_deal_load_list($deal);
+		//$loan_list[2]['month_repay_money']=5001;
+		//$loan_list[2]['month_need_all_repay_money']=5000;
 		$first_key = -1;
 		$find_first_key = false;
 		
@@ -202,7 +215,7 @@ class uc_dealModule extends SiteBaseModule
 					$repay_data[$k]['deal_id'] = $id;
 					$repay_data[$k]['user_id'] = $GLOBALS['user_info']['id'];
 					//月还本息
-					$repay_data[$k]['repay_money'] = round($v['month_repay_money'],2);
+					$repay_data[$k]['repay_money'] = round($v['month_repay_money'],2);  //发标者要还的钱
 					$must_repay +=round($v['month_repay_money'],2);
 					
 					//管理费
@@ -245,7 +258,9 @@ class uc_dealModule extends SiteBaseModule
 				exit();
 			}
 		}
-				
+				//showErr('ri'.$must_repay,1);
+	
+	
 		if(($must_repay+$must_fee+$must_impose)>$GLOBALS['user_info']['money']){
 			showErr("对不起，您的余额不足！",1);
 			exit();
@@ -324,7 +339,7 @@ class uc_dealModule extends SiteBaseModule
 		
 		
 		//用户回款
-		$user_load_ids = $GLOBALS['db']->getAll("SELECT deal_id,user_id,money FROM ".DB_PREFIX."deal_load WHERE deal_id=".$id);
+		$user_load_ids = $GLOBALS['db']->getAll("SELECT deal_id,user_id,money,virtual_money FROM ".DB_PREFIX."deal_load WHERE deal_id=".$id);
 		foreach($user_load_ids as $k=>$v){
 			
 			$v['repay_start_time'] = $deal['repay_start_time'];
@@ -367,8 +382,8 @@ class uc_dealModule extends SiteBaseModule
 						}
 						
 						
-						
-						$user_load_data['repay_money'] = $vv['month_repay_money'];
+						$user_load_data['virtual_money'] = $v['virtual_money'];////备注 代金券金额
+						$user_load_data['repay_money'] = $vv['month_repay_money'];////钱钱钱
 						$user_load_data['manage_money'] = $vv['month_manage_money'];
 						$user_load_data['impose_money'] = $vv['impose_money'];
 						if($vv['status']>0)
@@ -411,7 +426,7 @@ class uc_dealModule extends SiteBaseModule
 								
 								modify_account(array("money"=>-$user_load_data['manage_money']),$v['user_id'],"标:".$deal['id'].",期:".($kk+1).",投标管理费");
 								
-								modify_account(array("money"=>$user_load_data['repay_money']),$v['user_id'],"标:".$deal['id'].",期:".($kk+1).",回报本息");
+								modify_account(array("money"=>$user_load_data['repay_money']),$v['user_id'],"标:".$deal['id'].",期:".($kk+1).",回报本息".",代金券金额".$user_load_data['virtual_money']);
 								$msg_conf = get_user_msg_conf($v['user_id']);
 								
 								
@@ -828,7 +843,7 @@ class uc_dealModule extends SiteBaseModule
 							$user_load_data['self_money'] = 0;
 						}
 						
-						$user_load_data['repay_money'] = $vv['month_repay_money'];
+						$user_load_data['repay_money'] = $vv['month_repay_money'];//利息和本金在这里~~~
 						$user_load_data['manage_money'] = $vv['month_manage_money'];
 						$user_load_data['impose_money'] = $vv['impose_money'];
 						if($vv['status']>0)

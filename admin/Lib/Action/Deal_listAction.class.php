@@ -96,25 +96,25 @@ class Deal_listAction extends CommonAction{
 		$show   = $Page->show();// 分页显示输出
 		$this->assign('page',$show);// 赋值分页输出
 		
-    	$sql = "select u.real_name,g.name as group_name, d.name,d.rate,d.repay_time,d.repay_time_type,d.id as deal_id,dl.user_name,dl.user_id,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time , dl.deal_load_check_yn from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=dl.user_id  left join ".DB_PREFIX."user_group as g on u.group_id = g.id  where ".$condition .' '. $order . ' limit '.$Page->firstRow.','.$Page->listRows ;
+    	$sql = "select u.real_name,g.name as group_name, d.name,d.rate,d.repay_time,d.repay_time_type,d.id as deal_id,dl.user_name,dl.user_id,dl.money as u_load_money,dl.id as deal_load_id,dl.create_time as deal_time , dl.deal_load_check_yn,dl.virtual_money from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=dl.user_id  left join ".DB_PREFIX."user_group as g on u.group_id = g.id  where ".$condition .' '. $order . ' limit '.$Page->firstRow.','.$Page->listRows ;
 		/*
 		d   是  deal
 		dl  是  deal_load
 		u   是  user
 		g   是  user_group
 		*/
-		$sql_no_limit = "select d.name,d.rate,d.repay_time,d.repay_time_type, dl.money as u_load_money  from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=dl.user_id  left join ".DB_PREFIX."user_group as g on u.group_id = g.id  where ".$condition ;
+		$sql_no_limit = "select d.name,d.rate,d.repay_time,d.repay_time_type, dl.money as u_load_money,dl.virtual_money  from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=dl.user_id  left join ".DB_PREFIX."user_group as g on u.group_id = g.id  where ".$condition ;
 		
 		$list_no_limit = $GLOBALS['db']->getAll($sql_no_limit);
 		foreach($list_no_limit as $k=>$v)
 		{
 			$total_no_limit+=$v['u_load_money'];
 			if($v['repay_time_type']==1){ //1表示月0表示日
-			$list_no_limit[$k]['get_money']=number_format(($v['u_load_money']*$v['rate']/12)*$v['repay_time']*0.01,2);
+			$list_no_limit[$k]['get_money']=number_format((($v['u_load_money']+$v['virtual_money'])*$v['rate']/12)*$v['repay_time']*0.01,2);
 			//计算利率
 			}
 			else{
-			$list_no_limit[$k]['get_money']=number_format(($v['u_load_money']*$v['rate']/365)*$v['repay_time']*0.01,2);
+			$list_no_limit[$k]['get_money']=number_format((($v['u_load_money']+$v['virtual_money'])*$v['rate']/365)*$v['repay_time']*0.01,2);
 			}
 			$total_rate_money_nolimit+=$list_no_limit[$k]['get_money'];//当页累计效益
 		}
@@ -126,11 +126,11 @@ class Deal_listAction extends CommonAction{
 		{
 			$total_limit+=$v['u_load_money'];//当页累计成交金额
 			if($v['repay_time_type']==1){ //1表示月0表示日
-			$list[$k]['get_money']=number_format(($v['u_load_money']*$v['rate']/12)*$v['repay_time']*0.01,2);
+			$list[$k]['get_money']=number_format((($v['u_load_money']+$v['virtual_money'])*$v['rate']/12)*$v['repay_time']*0.01,2);
 			//计算利率
 			}
 			else{
-			$list[$k]['get_money']=number_format(($v['u_load_money']*$v['rate']/365)*$v['repay_time']*0.01,2);
+			$list[$k]['get_money']=number_format((($v['u_load_money']+$v['virtual_money'])*$v['rate']/365)*$v['repay_time']*0.01,2);
 			}
 			$total_rate_money+=$list[$k]['get_money'];//当页累计效益
 		}

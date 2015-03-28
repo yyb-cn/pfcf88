@@ -36,14 +36,6 @@ class EcvTypeAction extends CommonAction{
 		B('FilterString');
 		$ajax = intval($_REQUEST['ajax']);
 		$data = M(MODULE_NAME)->create ();
-		$reg_num=M(MODULE_NAME)->where(array('reg_send'=>'1'))->count();//为是的数量
-		
-		if($data['reg_send']&&$reg_num)
-		{
-			$this->error( "只能有一个注册就送");
-		}
-		//$data=$_POST;
-		//如果已经有就不要再插入了
 		$this->assign("jumpUrl",u(MODULE_NAME."/add"));
 		if(!check_empty($data['name']))
 		{
@@ -58,8 +50,6 @@ class EcvTypeAction extends CommonAction{
 		$data['end_time'] = trim($data['end_time'])==''?0:to_timespan($data['end_time']);
 		// 更新数据
 		$log_info = $data['name'];
-		//print_r($data);exit;
-		//echo MODULE_NAME;exit;
 		$list=M(MODULE_NAME)->add($data);
 		if (false !== $list) {
 			//成功提示
@@ -88,13 +78,6 @@ class EcvTypeAction extends CommonAction{
 		$data = M(MODULE_NAME)->create ();
 		//print_r($data);exit;
 		$arr=M(MODULE_NAME)->where(array('id'=>$data['id'] ,'reg_send'=>0))->find();//当前数组为是
-		
-		$reg_num=M(MODULE_NAME)->where(array('reg_send'=>'1'))->count();//为是的数量
-		if($data['reg_send']&&!empty($arr)&&$reg_num)//确保唯一性
-		{
-			$this->error("只能有一个注册就送",0,'$log_info.L("UPDATE_FAILED")');
-		}
-		
 				//print_r($data);exit;
 		$log_info = M(MODULE_NAME)->where("id=".intval($data['id']))->getField("name");
 		//开始验证有效性
@@ -196,7 +179,75 @@ class EcvTypeAction extends CommonAction{
 		$name=$this->getActionName();
 		$model = D (User);
 		if (! empty ( $model )) {
-			$this->_list ( $model, $map );
+		if (isset ( $_REQUEST ['_order'] )) {
+			$order = $_REQUEST ['_order'];
+		} else {
+			$order = ! empty ( $sortBy ) ? $sortBy : $model->getPk ();
+		}
+		//排序方式默认按照倒序排列
+		//接受 sost参数 0 表示倒序 非0都 表示正序
+		if (isset ( $_REQUEST ['_sort'] )) {
+			$sort = $_REQUEST ['_sort'] ? 'asc' : 'desc';
+		} else {
+			$sort = $asc ? 'asc' : 'desc';
+		}
+		$count = $model->where ( $map )->count ( 'id' );
+		
+			if ($count > 0) {
+				//创建分页对象
+				if (! empty ( $_REQUEST ['listRows'] )) {
+					$listRows = $_REQUEST ['listRows'];
+				} else {
+					$listRows = '';
+				}
+				$p = new Page ( $count, $listRows );
+				//分页查询数据
+
+				$voList = $model->where($map)->order( "`" . $order . "` " . $sort)->limit($p->firstRow . ',' . $p->listRows)->findAll ( );
+				//var_dump($voList);exit;
+				$ecv_moduel=D('ecv');
+				$ecv_list=$ecv_moduel->join(DB_PREFIX.'ecv_type ON '.DB_PREFIX.'ecv_type.id = '.DB_PREFIX.'ecv.ecv_type_id')->where(array('used_yn'=>0))->select();
+				
+				
+				//var_dump($ecv_type_list);exit;
+				//var_dump($ecv_list);exit;
+				foreach($voList as $k=>$v){
+				
+					foreach($ecv_list as $kk=>$vv){
+						if($vv['user_id']==$v['id']){
+							$voList[$k]['ecvs'].=trim('类型：'.$vv['name'].',&nbsp;&nbsp;面额:'.$vv['money'].'<br />');
+						}
+						
+					}
+				
+				}
+				//var_dump($voList[0]['ecvs'][0]);exit;
+	//			echo $model->getlastsql();
+				//分页跳转的时候保证查询条件
+				foreach ( $map as $key => $val ) {
+					if (! is_array ( $val )) {
+						$p->parameter .= "$key=" . urlencode ( $val ) . "&";
+					}
+				}
+				//分页显示
+
+				$page = $p->show ();
+				//列表排序显示
+				$sortImg = $sort; //排序图标
+				$sortAlt = $sort == 'desc' ? l("ASC_SORT") : l("DESC_SORT"); //排序提示
+				$sort = $sort == 'desc' ? 1 : 0; //排序方式
+				//模板赋值显示
+				
+				
+				$this->assign ( 'list', $voList );
+				$this->assign ( 'sort', $sort );
+				$this->assign ( 'order', $order );
+				$this->assign ( 'sortImg', $sortImg );
+				$this->assign ( 'sortType', $sortAlt );
+				$this->assign ( "page", $page );
+				$this->assign ( "nowPage",$p->nowPage);
+			}
+		
 		}
 		
 		$this->display ();
@@ -204,12 +255,28 @@ class EcvTypeAction extends CommonAction{
 	
 	
 	
+	public function send()   //按提交内容不同执行发送代金券，
+	{
+		$user_id = intval($_REQUEST['id']);
+		$condition['reg_send']=1;
+			
+		$user=D('user')->where(array('id'=>$user_id))->find();
+		
+		$this->assign('user',$user);
+		$ecv_type_list=D('ecv_type')->where($condition)->select();
+			$this->assign ( 'ecv_type_list', $ecv_type_list );
+		$this->display();
+		
+	}
 	public function doSend()   //按提交内容不同执行发送代金券，
 	{
+		if($_POST)
+		{
+		$ecv_id=$_POST['ecv_id'];
+		}
 		include('app/Lib/common.php');
 		$user_id = intval($_REQUEST['id']);
-		//echo $user_id;exit;
-		$voucher_info=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."ecv_type where `reg_send` = 1");
+		$voucher_info=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."ecv_type where `id` = ".$ecv_id);
 		//var_dump($voucher_info);exit;
 		if(!empty($voucher_info))
 			{
@@ -231,6 +298,9 @@ class EcvTypeAction extends CommonAction{
 					$msg = sprintf(l("SEND_VOUCHER_PAGE_SUCCESS"));
 					$this->success($msg);
 					}
+				}
+				else{
+				$this->error ('改代金券已经失效');
 				}
 			}
 		

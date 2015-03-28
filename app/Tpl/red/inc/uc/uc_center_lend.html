@@ -26,10 +26,13 @@
 	<div class="f_l" style="width:120px">
 		借款期限
 	</div>
+	<div class="f_l" style="width:60px">
+		获得利息
+	</div>
 	<div class="f_l" style="width:75px">
 		 状态
 	</div>
-	<div class="f_l" style="width:170px">
+	<div class="f_l" style="width:80px">
 		投标时间
 	</div>
 </div>
@@ -43,10 +46,14 @@
         {function name="round" v=$lend.rate f="2"}%
     </div>
     <div class="f_l tr f_red" style="width:80px">
-       {function name="format_price" v=$lend.money}
+       {function name="format_price" v=$lend.money}<br/>
+	  {if $lend.virtual_money }<em> 代金券 {function name="number_format" v=$lend.virtual_money}</em>{/if}
     </div>
     <div class="f_l f_red" style="width:120px">
         {$lend.repay_time}{if $lend.repay_time_type eq 0}天{else}个月{/if}
+    </div>
+	 <div class="f_l f_red" style="width:60px">
+       {function name="number_format" v=$lend.lixi}
     </div>
     <div class="f_l" style="width:75px">
     	{if $lend.deal_status eq 2 || $lend.deal_status eq 4 || $lend.deal_status eq 5}
@@ -57,10 +64,9 @@
 		<img src="{$TMPL}/images/wait.png">
 		{/if}
     </div>
-    <div class="f_l" style="width:170px">
+    <div class="f_l" style="width:80px">
        {function name="to_date" v=$lend.create_time f="Y-m-d"}
-	   {function name="to_date" v=$lend.create_time f="H:i"}
-    </div>
+	 </div>
 </div>
 <div style="border-bottom:1px dotted #9D9D9D;margin:5px 0"></div>
 {/foreach}
