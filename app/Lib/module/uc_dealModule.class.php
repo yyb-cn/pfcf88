@@ -139,14 +139,6 @@ class uc_dealModule extends SiteBaseModule
 	//正常还款操作界面
 	public function quick_refund(){
 		$id = intval($_REQUEST['id']);
-		
-		
-		
-		
-		
-		
-		
-		
 		if($id == 0){
 			showErr("操作失败！");
 		}
@@ -344,10 +336,11 @@ class uc_dealModule extends SiteBaseModule
 		}
 		
 		syn_deal_status($id);//更改标的状态
+		/*
 		if($deal['money']==0){
 		$GLOBALS['db']->autoExecute(DB_PREFIX."deal",array('deal_status'=>5),"UPDATE","id=".$id);
 		}
-		
+		*/
 		sys_user_status($GLOBALS['user_info']['id'],false,true);
 				
 /*以上全部都是费操作,不有在意还款人还了多少钱,获得多少信用,我们TM又不是P2P平台*/
