@@ -492,7 +492,7 @@ class DealAction extends CommonAction{
 		$data['update_time'] = get_gmtime();
 		$data['start_time'] = trim($data['start_time'])==''?0:to_timespan($data['start_time']);
 		$data['bad_time'] = trim($data['bad_time'])==''?0:to_timespan($data['bad_time']);
-			$time_type_name=$data['repay_time_type']?'1':'0';
+			$time_type_name=$data['repay_time_type']?'个月':'天';
 		$list=M(MODULE_NAME)->add($data);
 		
 		if (false !== $list) {
