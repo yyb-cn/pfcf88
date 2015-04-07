@@ -7,7 +7,7 @@ class lotteryModule extends SiteBaseModule
 	public function zouma()
 	{
 	//$id=$GLOBALS['user_info']['id'];
- // print_r($GLOBALS['user_info']);exit;
+ // print_r($GLOBALS['user_info']['user_name']);exit;
 	 $score=$GLOBALS['user_info']['lottery_score'];
 	 // $GLOBALS['user_info']['score']
 	 $huodong= $GLOBALS['db']->getRow("select * from ".DB_PREFIX."huodong where id=1"); //活动ID
@@ -169,7 +169,7 @@ class lotteryModule extends SiteBaseModule
 		  $sql="select max(sort) from `fanwe_deal` where is_delete=0";
 		  $maxs=$GLOBALS['db']->getRow($sql);
 		  $max=$maxs['max(sort)']+1; 
-		  $name='投资了'.$tshiwu.'所送15天投资'.$tshiwu.'的利息'.$lottery_user_id;
+		  $name='投资了'.$tshiwu.'所送15天投资'.$tshiwu.'的利息-'.$GLOBALS['user_info']['user_name'];
 		   
 		    $deal_data['name']=$name;
             $deal_data['sub_name']=$name;	
@@ -192,7 +192,7 @@ class lotteryModule extends SiteBaseModule
             // $deal_data['type_match']='ux20854ux20182ux20511ux27454';
             // $deal_data['type_match_row']='其他借款';
             $deal_data['buy_count']=1;
-            $deal_data['loantype'] =0 ;
+            $deal_data['loantype'] =2 ;
             $deal_data['warrant'] = 2 ;
             $deal_data['services_fee']=0;
             $deal_data['repay_time_type']=0; 
