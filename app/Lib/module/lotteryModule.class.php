@@ -6,17 +6,15 @@ class lotteryModule extends SiteBaseModule
 {  
 	public function zouma()
 	{
-	
-	  // print_r($GLOBALS['user_info']);exit;
+	//$id=$GLOBALS['user_info']['id'];
+ // print_r($GLOBALS['user_info']);exit;
 	 $score=$GLOBALS['user_info']['lottery_score'];
 	 // $GLOBALS['user_info']['score']
-	 
 	 $huodong= $GLOBALS['db']->getRow("select * from ".DB_PREFIX."huodong where id=1"); //活动ID
 	  $mobilepassed=intval($GLOBALS['user_info']['mobilepassed']);
 	  $GLOBALS['tmpl']->assign("mobilepassed",$mobilepassed);
 	$idcardpassed= intval($GLOBALS['user_info']['idcardpassed']);
 	$GLOBALS['tmpl']->assign("idcardpassed",$idcardpassed);
-	
 	 //获取中奖列表
 	 $zhongjiang_list= $GLOBALS['db']->getAll("select * from ".DB_PREFIX."award_log where huodong_id=1 order by log_time desc");//活动ID
 	
@@ -52,7 +50,7 @@ class lotteryModule extends SiteBaseModule
 		}
 	$GLOBALS['tmpl']->assign("my_list",$my_list);
 	}
-	 if(time()<=$huodong['endtime']){
+	 if(get_gmtime()<=$huodong['endtime']){
 		 $score_id=$GLOBALS['user_info']['id'];
      $GLOBALS['tmpl']->assign("score",$score);
 	 $GLOBALS['tmpl']->assign("score_id",$score_id);
@@ -77,12 +75,26 @@ class lotteryModule extends SiteBaseModule
 	 if($statr_score<20000){
 		echo json_encode(1);exit;
 	  }
-	//2.查询是否在3月22号前买过产品。
+	  
+	//2.查询是否在3月22号前买过1个月以上产品。
 	$id=$GLOBALS['user_info']['id'];
 	$c_time=strtotime("2015-03-22");
-	$sql = "select dl.id,dl.create_time as cl_time,dl.money as u_load_money,d.name as deal_name,dl.id as deal_load_id from ".DB_PREFIX."deal_load dl left join ".DB_PREFIX."deal as d on d.id = dl.deal_id  where dl.create_time>".$c_time." and dl.user_id = ".$id." and (d.deal_status=1  or d.deal_status=2 or d.deal_status=4) and d.repay_time_type=1  order by dl.id desc";
+	$sql = "select dl.id,dl.create_time as cl_time,dl.money as u_load_money,d.name as deal_name,dl.id as deal_load_id from ".DB_PREFIX."deal_load dl left join ".DB_PREFIX."deal as d on d.id = dl.deal_id  where dl.create_time>".$c_time." and dl.user_id = ".$id." and (d.deal_status=1  or d.deal_status=2 or d.deal_status=4 or d.deal_status=5) and d.repay_time_type=1  order by dl.id desc";
 	$list = $GLOBALS['db']->getRow($sql);
 	if(empty($list)){
+		echo json_encode(2);exit;
+	}
+	//积分激活
+	//1.总消耗积分
+	$cost=$GLOBALS['db']->getRow("select count(*) as num from ".DB_PREFIX."award_log where huodong_id=1 and user_id=".$id);//活动ID
+	$jifen_cost=20000*$cost['num'];
+	//2.3月22号后一共买了多少钱
+	$deal_load_all = $GLOBALS['db']->getAll($sql);
+	$money_deal_load=0;
+	foreach($deal_load_all as $k=>$v){
+		$money_deal_load+=$v['u_load_money'];
+	}
+	if($jifen_cost>=$money_deal_load){
 		echo json_encode(2);exit;
 	}
 	///*@luo-抽奖、
@@ -146,7 +158,7 @@ class lotteryModule extends SiteBaseModule
 	  //6.抽奖记录
 	  $lottery_user_id=$id;//用户ID
 	  $lottery_prize_id=$award[$award_id][3];//奖品ID
-	  $lottery_log_time=time();//抽奖时间
+	  $lottery_log_time=get_gmtime();//抽奖时间
 	  $huodong_id=1;//活动ID
 	  $sql="insert into `fanwe_award_log`(`user_id`,`prize_id`,`log_time`,`huodong_id`) values('$lottery_user_id','$lottery_prize_id','$lottery_log_time','$huodong_id')";
 		mysql_query($sql);
@@ -276,10 +288,9 @@ class lotteryModule extends SiteBaseModule
      if($max_id){
 	 $log_time=$GLOBALS['db']->getOne("SELECT `log_time` FROM ".DB_PREFIX."award_log where id=".$max_id);
 	 $log_data=date('Y-m-d',$log_time);
-	 $now_time=date('Y-m-d',time());
+	 $now_time=date('Y-m-d',get_gmtime());
 	 if($log_data==$now_time){
 	    echo 2;exit; 
-		
 	   }
 	   }
 	  	$lottery_rand_statr=mt_rand(18,49);
@@ -302,7 +313,7 @@ class lotteryModule extends SiteBaseModule
 	     }
 	  $lottery_user_id=$id;
 	  $lottery_prize_id=$award[$award_id][2];
-	  $lottery_log_time=time();
+	  $lottery_log_time=get_gmtime();
 	  $prize_name=$award[$award_id][0];
 	  $log_info=$now_time.'每日抽奖';
 	  $sql="insert into `fanwe_award_log`(`user_id`,`prize_id`,`log_time`,`huodong_id`,`prize_name`) values('$lottery_user_id','$lottery_prize_id','$lottery_log_time',2,$prize_name)";
