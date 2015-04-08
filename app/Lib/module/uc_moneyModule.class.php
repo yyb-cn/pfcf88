@@ -182,8 +182,12 @@ class uc_moneyModule extends SiteBaseModule
 	public function incharge()
 	{
 		 
+		if(intval($GLOBALS['user_info']['mobilepassed'])==0 || intval($GLOBALS['user_info']['idcardpassed'])==0){
+			$GLOBALS['tmpl']->assign("page_title","成为理财人");
+			$GLOBALS['tmpl']->display("page/deal_mobilepaseed.html");
+			exit();
+		}
 		$GLOBALS['tmpl']->assign("page_title",$GLOBALS['lang']['UC_MONEY_INCHARGE']);
-	
 		//输出支付方式
 		$payment_list = $GLOBALS['db']->getAll("select * from ".DB_PREFIX."payment where is_effect = 1 and class_name <> 'Account' and class_name <> 'Voucher' and class_name <> 'tenpayc2c' and online_pay = 1 order by sort desc");			
 		foreach($payment_list as $k=>$v)
@@ -349,18 +353,20 @@ class uc_moneyModule extends SiteBaseModule
 		$GLOBALS['tmpl']->display("page/uc.html");
 	}
 	public function savecarry(){
+	
 		if($GLOBALS['user_info']['id'] > 0){
-			
+		
 			$data['user_id'] = intval($GLOBALS['user_info']['id']);
 			$data['money'] = floatval($_REQUEST['amount']);
+			$data['pfcfb'] = floatval($_REQUEST['pfcfb']);
 			//判断可用金额；
 			//$data['money'] = number_format(floatval($_REQUEST['moneyy']),2);
 			
-			//print_r($data['money']);exit;
-			if($data['money'] <=10.00){
+			if(($data['money'] <10.00)&&($data['money']!=0)){
+			
 				showErr("可用金额少于10元不能提取");
 			}
-			if($data['money'] <=0)
+			if(($data['money'] <=0)&&($data['pfcfb']==0))
 			{
 				showErr($GLOBALS['lang']['CARRY_MONEY_NOT_TRUE']);
 			}
@@ -378,6 +384,7 @@ class uc_moneyModule extends SiteBaseModule
 			if(($data['money'] + $fee) > floatval($GLOBALS['user_info']['money'])){
 				showErr($GLOBALS['lang']['CARRY_MONEY_NOT_ENOUGHT']);
 			}
+			
 			$data['fee'] = $fee;
 			
 			$data['bank_id'] = intval($_REQUEST['bank_id']);
@@ -415,11 +422,12 @@ class uc_moneyModule extends SiteBaseModule
 			}
 			
 			$data['create_time'] = get_gmtime();
+			$data['pfcfb'] = $data['pfcfb'];
 			$GLOBALS['db']->autoExecute(DB_PREFIX."user_carry",$data,"INSERT");
 			
 			//更新会员账户信息
 			require APP_ROOT_PATH.'system/libs/user.php';
-			modify_account(array('money'=>0,'lock_money'=>$data['money']+$fee),$data['user_id'],"提现申请");
+			modify_account(array('money'=>0,'lock_money'=>$data['money']+$fee,'lock_pfcfb'=>$data['pfcfb']),$data['user_id'],"提现申请");
 			
 			$content = "您于".to_date($data['create_time'],"Y年m月d日 H:i:s")."提交的".format_price($data['money'])."提现申请我们正在处理，如您填写的账户信息正确无误，您的资金将会于3个工作日内到达您的银行账户.";
 			

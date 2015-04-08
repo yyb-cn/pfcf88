@@ -342,8 +342,16 @@ class dealModule extends SiteBaseModule
 		$data['money'] = trim($_REQUEST["bid_money"]);
 		$data['create_time'] = get_gmtime();
 		
+		//浦发财富b
+		if($_REQUEST['unjh_pfcfb']){
+			if($deal['repay_time']==1&&$deal['repay_time_type']==1){
+			$data['unjh_pfcfb']=$_REQUEST['unjh_pfcfb'];
+			}
+			else{
+				showErr('只能用于投资1个月的标',$ajax);
+			}
+		}
 		//以下为代金券判断操作
-	
 			if($_REQUEST['virtual_money']!=0)//判断复选框是否为勾选
 			{
 		
@@ -412,6 +420,7 @@ class dealModule extends SiteBaseModule
 			$msg = sprintf('编号%s的投标,付款单号%s',$id,$load_id);
 			require_once APP_ROOT_PATH."system/libs/user.php";	
 			modify_account(array('money'=>-trim($_REQUEST["bid_money"]),'score'=>0),$GLOBALS['user_info']['id'],$msg);
+			modify_account(array('unjh_pfcfb'=>-trim($_REQUEST["unjh_pfcfb"])),$GLOBALS['user_info']['id'],$msg.'(浦发财富B:'.$_REQUEST["unjh_pfcfb"].')');
 			$deal = get_deal($id);
 			sys_user_status($GLOBALS['user_info']['id']);
 			//超过一半的时候

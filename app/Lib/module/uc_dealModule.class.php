@@ -139,6 +139,8 @@ class uc_dealModule extends SiteBaseModule
 	//正常还款操作界面
 	public function quick_refund(){
 		$id = intval($_REQUEST['id']);
+		$user_load_ids = $GLOBALS['db']->getAll("SELECT deal_id,user_id,money,virtual_money,unjh_pfcfb FROM ".DB_PREFIX."deal_load WHERE deal_id=".$id);
+		//var_dump($user_load_ids);exit;
 		if($id == 0){
 			showErr("操作失败！");
 		}
@@ -369,7 +371,7 @@ class uc_dealModule extends SiteBaseModule
 		*/
 		
 		//用户回款 ，$id是标的ID
-		$user_load_ids = $GLOBALS['db']->getAll("SELECT deal_id,user_id,money,virtual_money FROM ".DB_PREFIX."deal_load WHERE deal_id=".$id);
+		$user_load_ids = $GLOBALS['db']->getAll("SELECT deal_id,user_id,money,virtual_money,unjh_pfcfb FROM ".DB_PREFIX."deal_load WHERE deal_id=".$id);
 		foreach($user_load_ids as $k=>$v){
 			
 			$v['repay_start_time'] = $deal['repay_start_time'];

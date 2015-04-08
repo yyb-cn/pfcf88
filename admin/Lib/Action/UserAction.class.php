@@ -495,16 +495,18 @@ class UserAction extends CommonAction{
 		$user_id = intval($_REQUEST['id']);
 		$user_info = M("User")->getById($user_id);
 		$this->assign("user_info",$user_info);
-		
 		$this->display();
 	}
 	
 	public function modify_account()
 	{ 
-	   
+	   //var_dump($_REQUEST);exit;
 		$user_id = intval($_REQUEST['id']);
 		$money = floatval($_REQUEST['money']);
 		$lottery_score = intval($_REQUEST['lottery_score']);
+		$pfcfb = intval($_REQUEST['pfcfb']);
+		$unjh_pfcfb = intval($_REQUEST['unjh_pfcfb']);
+		
 		$point = intval($_REQUEST['point']);
 		$quota = floatval($_REQUEST['quota']);
 		$lock_money = floatval($_REQUEST['lock_money']);
@@ -519,21 +521,19 @@ class UserAction extends CommonAction{
 		}
 		
 		$msg = trim($_REQUEST['msg'])==''?l("ADMIN_MODIFY_ACCOUNT"):trim($_REQUEST['msg']);
-		modify_account(array('money'=>$money,'lottery_score'=>$lottery_score,'point'=>$point,'quota'=>$quota,'lock_money'=>$lock_money),$user_id,$msg);
+	
+		modify_account(array('money'=>$money,'lottery_score'=>$lottery_score,'pfcfb'=>$pfcfb,'unjh_pfcfb'=>$unjh_pfcfb,'point'=>$point,'quota'=>$quota,'lock_money'=>$lock_money),$user_id,$msg);
 		if(floatval($_REQUEST['quota'])!=0){
 			$content = "您好，".app_conf("SHOP_TITLE")."审核部门经过综合评估您的信用资料及网站还款记录，将您的信用额度调整为：".D("User")->where("id=".$user_id)->getField('quota')."元";
-			
 			$group_arr = array(0,$user_id);
 			sort($group_arr);
 			$group_arr[] =  4;
-			
 			$msg_data['content'] = $content;
 			$msg_data['to_user_id'] = $user_id;
 			$msg_data['create_time'] = get_gmtime();
 			$msg_data['type'] = 0;
 			$msg_data['group_key'] = implode("_",$group_arr);
 			$msg_data['is_notice'] = 4;
-			
 			$GLOBALS['db']->autoExecute(DB_PREFIX."msg_box",$msg_data);
 			$id = $GLOBALS['db']->insert_id();
 			$GLOBALS['db']->query("update ".DB_PREFIX."msg_box set group_key = '".$msg_data['group_key']."_".$id."' where id = ".$id);

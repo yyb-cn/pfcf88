@@ -427,6 +427,19 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 		{
 			$GLOBALS['db']->query("update ".DB_PREFIX."user set lottery_score = lottery_score + ".intval($data['lottery_score'])." where id =".$user_id);
 		}
+		if(intval($data['pfcfb'])!=0)
+		{
+			$GLOBALS['db']->query("update ".DB_PREFIX."user set pfcfb = pfcfb + ".intval($data['pfcfb'])." where id =".$user_id);
+		}
+		if(intval($data['unjh_pfcfb'])!=0)
+		{
+			$GLOBALS['db']->query("update ".DB_PREFIX."user set unjh_pfcfb = unjh_pfcfb + ".intval($data['unjh_pfcfb'])." where id =".$user_id);
+		}
+		if(floatval($data['lock_pfcfb'])!=0)
+		{
+			$GLOBALS['db']->query("update ".DB_PREFIX."user set pfcfb = pfcfb - ".floatval($data['lock_pfcfb']).",lock_pfcfb = lock_pfcfb + ".floatval($data['lock_pfcfb'])." where id =".$user_id);
+			$data['pfcfb'] = $data['pfcfb'] - $data['lock_pfcfb'];
+		}
 		if(intval($data['score'])!=0)
 		{
 			$GLOBALS['db']->query("update ".DB_PREFIX."user set score = score + ".intval($data['score'])." where id =".$user_id);
@@ -451,7 +464,7 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 			$data['money'] = $data['money'] - $data['lock_money'];
 		}
 		
-		if(intval($data['score'])!=0||floatval($data['money'])!=0||intval($data['point'])!=0||floatval($data['quota'])!=0 || floatval($data['lock_money']) != 0)
+		if(intval($data['score'])!=0||floatval($data['money'])!=0||intval($data['point'])!=0||floatval($data['quota'])!=0 || floatval($data['lock_money']) != 0||intval($data['pfcfb'])!=0||intval($data['unjh_pfcfb'])!=0)
 		{		
 			$log_info['log_info'] = $log_msg;
 			$log_info['log_time'] = get_gmtime();

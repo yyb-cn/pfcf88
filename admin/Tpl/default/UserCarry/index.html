@@ -19,6 +19,10 @@
 	function get_carry_status($status){
 		return l("CARRY_STATUS_".$status);
 	}
+	function t_money($one,$two){
+		$totle=$one+$two;
+		return $totle;
+	}
 </php>
 <div class="blank5"></div>
 <div class="search_row">
@@ -45,7 +49,7 @@
 	checkbox="true" 
 	action="true" 
 	datasource="list" 
-	show="id:{%ID}|50px,user_id|get_user_name:{%USER_NAME},real_name:真实姓名,money|format_price:提现金额,fee|format_price:手续费,create_time|to_date:申请时间,status|get_carry_status:提现状态,update_time|to_date:处理时间" 
+	show="id:{%ID}|50px,user_id|get_user_name:{%USER_NAME},real_name:真实姓名,money|format_price:提现金额,pfcfb|format_price:PFCFB,fee|format_price:手续费,create_time|to_date:申请时间,status|get_carry_status:提现状态,update_time|to_date:处理时间" 
 	actionlist="modify_carry:查看/处理" /> 
 
 <div class="blank5"></div>

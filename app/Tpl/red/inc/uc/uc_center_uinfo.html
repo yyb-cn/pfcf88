@@ -2,8 +2,8 @@
 	<div class="cont homeBg">
 	    <div class="blank5"></div>
 	    <div class="clearfix lh22" style="height: 22px;vertical-align: middle">
-	        <div class="f_r">
-				<input type="button" value="修改我的个人信息" onclick="window.location.href='{url x="index" r="uc_account"}'" class="modify_ac_btn">
+	        <div class="f_r">{url x="index" r="uc_account"}
+				<input type="button" value="修改我的个人信息" onclick="window.location.href=''" class="modify_ac_btn">
 			</div>
 	        <div class="f_blue f14 b tc">
 	            <span>{$user_data.user_name} 的个人信息</span>
@@ -32,6 +32,14 @@
 	                </div>
 	                <div class="f_l"> {function name="format_price" v=$user_info.money}</div>
 	            </div>
+				
+				<div style="height:24px; line-height:24px">
+	                <div class="f_l" style="width:70px;">
+					pfcfb余额：
+	                </div>
+	                <div class="f_l"> {function name="format_price" v=$user_info.pfcfb}</div>
+	            </div>
+				
 	            <div style="height:24px; line-height:24px">
 	                <div class="f_l" style="width:70px;">
 					注册时间：

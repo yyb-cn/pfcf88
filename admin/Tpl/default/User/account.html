@@ -29,7 +29,7 @@
 	}
 </script>
 <div class="main">
-<div class="main_title">{$user_info.user_name} 余额:{$user_info.money|format_price}  <!--{%USER_SCORE}:{$user_info.score|format_score}-->  信用:{$user_info.point} 额度:{$user_info.quota|format_price} </div>
+<div class="main_title">{$user_info.user_name} 余额:{$user_info.money|format_price}  <!--{%USER_SCORE}:{$user_info.score|format_score}-->  信用:{$user_info.point} 额度:{$user_info.quota|format_price}  pfcfb:{$user_info.pfcfb|format_price}   unjh_pfcfb:{$user_info.unjh_pfcfb|format_price}</div>
 <div class="blank5"></div>
 <form name="edit" action="__APP__" method="post" enctype="multipart/form-data" onsubmit="return check_incharge_form();">
 <table class="form" cellpadding=0 cellspacing=0>
@@ -61,7 +61,18 @@
 		<span class='tip_span'>[用户个人积分]</span>
 		</td>
 	</tr>
-	
+	<tr>
+		<td class="item_title">浦发币:</td>
+		<td class="item_input"><input type="text" class="textbox require" name="pfcfb" />
+		<span class='tip_span'>[正数为增加，负数为减少]</span>
+		</td>
+	</tr>
+	<tr>
+		<td class="item_title">未激活的浦发币:</td>
+		<td class="item_input"><input type="text" class="textbox require" name="unjh_pfcfb" />
+		<span class='tip_span'>[正数为增加，负数为减少]</span>
+		</td>
+	</tr>
 	<tr>
 		<td class="item_title">{%INCHARGE_MSG}:</td>
 		<td class="item_input"><input type="text" class="textbox" name="msg" style="width:400px;" />
