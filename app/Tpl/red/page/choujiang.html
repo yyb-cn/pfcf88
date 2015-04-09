@@ -137,6 +137,11 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 				.mingdan .scrollNews li div { float:left; text-align:center; font-size:12px; line-height:16px;}
 	
 	.shuoming { width:481px; height:190px; margin:0 auto; margin-top:3px; background:url({$TMPL}/images/bg_shuoming.png) no-repeat;}
+	
+	.black_bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 100000; overflow:hidden; background:rgb( 0, 0, 0); background:rgba( 0, 0, 0, 0.9); filter:alpha(opacity=90); opacity:0.9rt; display:none;}
+		.prize { width:777px; height:866px; margin:0 auto; background:url({$TMPL}/images/dakai.png) no-repeat; opacity:1;}
+			.prize .gei_out { float:left; margin-left:540px; margin-top:108px;}
+			.prize .award { clear:both; float:left; width:330px; height:150px; color:#F00; font-weight:bold; margin-top:130px; margin-left:220px; text-align:center; line-height:150px; font-size:36px; font-style:italic;}
 </style>
 
 
@@ -217,11 +222,24 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
     </div>
 </div>
 
+
+<div class="black_bg">
+    <div class="prize">
+        <div class="gei_out"><a href="javascript:void(0);"><img src="{$TMPL}/images/get-out.png"/></a></div>
+        <div class="award"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(e) {
+	$(".prize a").click(function(){
+		$(".black_bg").hide();
+	})
+})
+</script>
+
+
 <script>
-	//测试红包
-	function js_hongbao(hbid){
-		alert(hbid);
-	}
 	//滚屏获奖名单
 	$(function(){
 
@@ -277,7 +295,8 @@ function show_lottery(){
         clearTimeout(lottery);
         setTimeout(function(){
             $('#lottery li').css('opacity',1);
-            alert('恭喜您获得：'+award);
+			$('.award').html(award);
+			$('.black_bg').show();
         },1200);
         flag = false;
 		
@@ -387,14 +406,18 @@ function start_lottery2(){
             flag2=false;
         },
         success: function(res){//成功
+		if(res==2){
+		 alert('今天已经抽奖！明天更多丰富礼品等着你来拿');
+		}
             if(typeof(res.award_id)!='undefined'){
                 lucky2 = res.award_id;    //中奖号码
                 award2 = res.award_name;  //奖品名称
-              // show_lottery();
-				    alert('恭喜您获得：'+award2);
+				// show_lottery();
+				$('.award').html(award2+'元开运红包');
+				$('.black_bg').show();
             }else{
                 flag2=false;
-                alert('今天已经抽奖！明天更多丰富礼品等着你来拿');
+              
             }
         }
     });

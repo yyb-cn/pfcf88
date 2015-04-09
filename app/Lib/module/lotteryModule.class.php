@@ -145,12 +145,9 @@ class lotteryModule extends SiteBaseModule
 
 	public function every_lottery()
 	{  
-	
 	 $id=$GLOBALS['user_info']['id'];
-	
-	
-     $max_id=$GLOBALS['db']->getOne("SELECT max(id) FROM ".DB_PREFIX."award_log where user_id=".$id);
-       if($max_id){
+	    $max_id=$GLOBALS['db']->getOne("SELECT max(id) FROM ".DB_PREFIX."award_log where user_id=".$id);
+     if($max_id){
 	 $log_time=$GLOBALS['db']->getOne("SELECT `log_time` FROM ".DB_PREFIX."award_log where id=".$max_id);
 	 $log_data=date('Y-m-d',$log_time);
 	 $now_time=date('Y-m-d',time());
@@ -180,9 +177,9 @@ class lotteryModule extends SiteBaseModule
 	  $lottery_user_id=$id;
 	  $lottery_prize_id=$award[$award_id][2];
 	  $lottery_log_time=time();
-	  $prize_name=$award[$award_id][0]
+	  $prize_name=$award[$award_id][0];
 	  $log_info=$now_time.'每日抽奖';
-	  $sql="insert into `fanwe_award_log`(`user_id`,`prize_id`,`log_time`,`huodong_id`,`prize_name`) values('$lottery_user_id','$lottery_prize_id','$lottery_log_time',2,'')";
+	  $sql="insert into `fanwe_award_log`(`user_id`,`prize_id`,`log_time`,`huodong_id`,`prize_name`) values('$lottery_user_id','$lottery_prize_id','$lottery_log_time',2,$prize_name)";
     	mysql_query($sql);
 	  $lottery_log_id= mysql_affected_rows();		
       $data=array('award_id'=>$award_id,'award_name'=>$award[$award_id][0]);
