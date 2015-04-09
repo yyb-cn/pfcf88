@@ -66,13 +66,12 @@ class lotteryModule extends SiteBaseModule
 	if(empty($list)){
 		echo json_encode(2);exit;
 	}
-	
 	///*@luo-抽奖、
 	//3.开始抽奖奖品配置
 	 
 	 $b=0.001;
-	$abc= $GLOBALS['db']->getRow("select count(*) as c from ".DB_PREFIX."award_log where prize_id = 8 ");
-		if($abc['c']>=35){
+	$abc= $GLOBALS['db']->getRow("select count(*) as c from ".DB_PREFIX."award_log where prize_id = 9 ");
+		if($abc['c']>=5){
 			$b=0;
 		}	  
 			  if($statr_score >=20000){

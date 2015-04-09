@@ -296,7 +296,7 @@ class dealModule extends SiteBaseModule
 		showSuccess($GLOBALS['lang']['SUCCESS_TITLE'],1);
 	}
 	
-	//确认投资
+	//_!确认投资
 	function dobid(){
 		$ajax = intval($_REQUEST["ajax"]);
 		$id = intval($_REQUEST["id"]);
@@ -459,20 +459,23 @@ class dealModule extends SiteBaseModule
 				//更新
 				$GLOBALS['db']->autoExecute(DB_PREFIX."deal",array("is_send_half_msg"=>1),"UPDATE","id=".$id);
 			}
-
-		//附送代金卷投资 
+/*
+		//附送代金卷投资 111111111111111111111111111
+		$panduan_time=strtotime("2015-03-23");
+		//新用户ID查询投标的时间戳，后判断；
+	    $vo= $GLOBALS['db']->getRow("select * from fanwe_deal_load where user_id='".$GLOBALS['user_info']['id']."' and create_time <".$panduan_time);
+	
 		$shiwu=$_REQUEST["bid_money"];
-       if($shiwu>10000){  
 	       $deal_voucher=$GLOBALS['db']->getOne("SELECT `repay_time_type` FROM ".DB_PREFIX."deal where id=".$id); 
 		   $deal_voucher_user_id=$GLOBALS['user_info']['id'];
 		   
-	    if($deal_voucher==1){  //判断是否是投资一个月的标
+	    // if($deal_voucher==1){  //判断是否是投资一个月的标
 		  
 		  $tshiwu=intval($shiwu);
 		  $sql="select max(sort) from `fanwe_deal` where is_delete=0";
 		  $maxs=$GLOBALS['db']->getRow($sql);
 		  $max=$maxs['max(sort)']+1; 
-		  $name='用户id为'.$GLOBALS['user_info']['id'].'所投！所送15天投资'.$tshiwu.'的利息';
+		  $name='投资了'.$tshiwu.'所送15天投资'.$tshiwu.'的利息';
 		   
 		    $deal_data['name']=$name;
             $deal_data['sub_name']=$name;	
@@ -482,7 +485,7 @@ class dealModule extends SiteBaseModule
             $deal_data['is_delete']=0 ;
             $deal_data['sort']=$max;         
             $deal_data['type_id']=10;
-            $deal_data['borrow_amount']=$tshiwu;
+            $deal_data['borrow_amount']=0;
             $deal_data['min_loan_money']=1000;
             $deal_data['repay_time']=15;
             $deal_data['deal_status']=4;
@@ -499,17 +502,23 @@ class dealModule extends SiteBaseModule
             $deal_data['warrant'] = 2 ;
             $deal_data['services_fee']=0;
             $deal_data['repay_time_type']=0; 
-            $deal_data['load_money']=$tshiwu;
+            $deal_data['load_money']=0;
+			$deal_data['presented_virtual'] =$tshiwu;
             $deal_data['enddate']=1;
             $deal_data['start_time']=get_gmtime();
             $deal_data['success_time']=get_gmtime();
             $deal_data['repay_start_time']=get_gmtime();
             $deal_data['next_repay_time']=get_gmtime()+86400;
 			$deal_data['rate']=8;
+			$deal_data['virtual_id']=1;  //判断是否是公司所送的纯代金卷投资、   
 			now_insert('fanwe_deal',$deal_data);
 		   $deal_id= $GLOBALS['db']->insert_id();//获取插入的ID	
-          
-	
+        
+
+
+
+		
+	  
 		  if($deal_id){
 		      $deal=get_deal($deal_id);
 		      $data['user_id'] = $user_id=$deal_voucher_user_id;
@@ -518,6 +527,7 @@ class dealModule extends SiteBaseModule
 			  $data['money'] =0;
 		      $data['virtual_money'] =$tshiwu;
 		      $data['create_time'] = get_gmtime();
+		
 		  now_insert('fanwe_deal_load',$data);
          $deal_load_id = $GLOBALS['db']->insert_id();//获取插入的ID
 		if($deal_load_id > 0){		
@@ -572,9 +582,8 @@ class dealModule extends SiteBaseModule
 			showErr($GLOBALS['lang']['ERROR_TITLE'],3);
 		    }
 	    }
-     
-	}
-  }	 
+    	*/ 
+ 
 		//结束 			
 
 			showSuccess($GLOBALS['lang']['DEAL_BID_SUCCESS'],$ajax,url("index","deal",array("id"=>$id)));
