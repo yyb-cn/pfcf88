@@ -6,7 +6,7 @@ class lotteryModule extends SiteBaseModule
 {  
 	public function zouma()
 	{
-	$score_id=$GLOBALS['user_info']['id'];
+	
 	  // print_r($GLOBALS['user_info']);exit;
 	 $score=$GLOBALS['user_info']['lottery_score'];
 	 // $GLOBALS['user_info']['score']
@@ -35,8 +35,9 @@ class lotteryModule extends SiteBaseModule
 		
 	$GLOBALS['tmpl']->assign("zhongjiang_list",$zhongjiang_list);
 	// 获取我的抽奖记录
+	$score_id=$GLOBALS['user_info']['id'];
+	if($score_id){
 	 $my_list= $GLOBALS['db']->getAll("select * from ".DB_PREFIX."award_log where user_id=".$score_id." order by log_time desc");//活动ID
-	
 		foreach($my_list as $k=>$v){
 				$user=$GLOBALS['db']->getRow("select * from ".DB_PREFIX."user where id ='".$v['user_id']."'");
 				$user['user_name']=cut_str($user['user_name'], 1, 0).'***'.cut_str($user['user_name'], 1, -1);
@@ -49,9 +50,8 @@ class lotteryModule extends SiteBaseModule
 				$my_list[$k]['prize_name']=$prize['name'];
 				}
 		}
-		
 	$GLOBALS['tmpl']->assign("my_list",$my_list);
-	
+	}
 	 if(time()<=$huodong['endtime']){
 		 $score_id=$GLOBALS['user_info']['id'];
      $GLOBALS['tmpl']->assign("score",$score);
