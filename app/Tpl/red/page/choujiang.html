@@ -132,9 +132,14 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 
 	
 	.mingdan { width:481px; height:127px; margin:0 auto; margin-top:3px; position:relative; background:url({$TMPL}/images/bg_mingdan.png) no-repeat;}
-		.mingdan .userlist { width:450px; height:80px; position:absolute; top:40px; left:15px; overflow:hidden;}
-			.mingdan .scrollNews li { border-bottom:1px solid #b62222; width:450px; height:16px;}
-				.mingdan .scrollNews li div { float:left; text-align:center; font-size:12px; line-height:16px;}
+		.mingdan .userlist { width:340px; height:80px; position:absolute; top:40px; left:15px; overflow:hidden;}
+			.userlist .scrollNews .jiangpin { border-bottom:1px solid #b62222; width:340px; height:16px;}
+				.userlist .scrollNews .jiangpin div { float:left; text-align:center; font-size:12px; line-height:16px;}
+		.mingdan .mylist { width:110px; height:80px; position:absolute; top:40px; left:355px; overflow:hidden;}
+			.mylist .scrollNews1 .my_jiangpin { border-bottom:1px solid #b62222; width:110px; height:16px;}
+				.mylist .scrollNews1 .my_jiangpin div { float:left; text-align:center; font-size:12px; line-height:16px;}
+			
+			
 	
 	.shuoming { width:481px; height:190px; margin:0 auto; margin-top:3px; background:url({$TMPL}/images/bg_shuoming.png) no-repeat;}
 	
@@ -204,17 +209,24 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
         	<div class="userlist">
 			
                 <ul class="scrollNews">
-				{foreach from=$zhongjiang_list item=v}
-                    <li>
+                	{foreach from=$zhongjiang_list item=v}
+                    <li class="jiangpin">
                         <div style="width:60px; color:#000000;">{$v.user_name}</div>
                         <div style="width:140px; color:#ffdf00;">{$v.prize_name}</div>
                         <div style="width:140px; color:#000000;">{function name="to_date" v="$v.log_time" f="Y-m-d "} {function name="to_date" v="$v.log_time" f="H:i"}</div>
-                        <div style="width:110px; color:#ffdf00;">独立滚动</div>
                     </li>
-					{/foreach}
+                    {/foreach}
                 </ul>
-				
-			
+            </div>
+            
+            <div class="mylist">
+				<ul class="scrollNews1">
+				{foreach from=$my_list item=v}
+                    <li class="my_jiangpin">
+                        <div style="width:110px; color:#ffdf00;">{$v.prize_name}</div>
+                    </li> 
+                   {/foreach}  
+				</ul>
             </div>
         </div>
         
@@ -278,6 +290,46 @@ $(document).ready(function(e) {
 		  $self.css("marginTop",0).find("li:first").appendTo($self);
 	
 	})}
+	
+	//滚屏获奖名单
+	$(function(){
+
+	  var $this1=$(".scrollNews1");
+	
+	  $this1.hover(function(){
+	
+		   clearInterval(scrollTimer1);
+	
+	   },function(){
+	
+		  scrollTimer1=setInterval(function(){
+	
+			   scrollNews1($this1);
+	
+		  },5000);
+	
+	   });
+	
+	  var scrollTimer1=setInterval(function(){
+	
+		   scrollNews1($this1);
+	
+	  },5000);
+	
+	})
+	
+	function scrollNews1(obj){
+	
+	  var $self1=obj;
+	
+	  var height1=$self1.find("li").height();
+	
+	  $self1.animate({"marginTop":-height1+"px"},600,function(){
+	
+		  $self1.css("marginTop",0).find("li:first").appendTo($self1);
+	
+	})}
+
 </script>
 
 
@@ -406,18 +458,15 @@ function start_lottery2(){
             flag2=false;
         },
         success: function(res){//成功
-		if(res==2){
-		 alert('今天已经抽奖！明天更多丰富礼品等着你来拿');
-		}
             if(typeof(res.award_id)!='undefined'){
                 lucky2 = res.award_id;    //中奖号码
                 award2 = res.award_name;  //奖品名称
 				// show_lottery();
-				$('.award').html(award2+'元开运红包');
+				$('.award').html(award);
 				$('.black_bg').show();
             }else{
                 flag2=false;
-              
+                alert('今天已经抽奖！明天更多丰富礼品等着你来拿');
             }
         }
     });
