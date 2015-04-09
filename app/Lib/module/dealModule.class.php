@@ -473,6 +473,7 @@ class dealModule extends SiteBaseModule
 		   
 	    if($deal_voucher==1){  //判断是否是投资一个月的标
 		  
+		  //$deal_voucher_user_id=$GLOBALS['user_info']['id'];
 		  $tshiwu=intval($shiwu);
 		  $sql="select max(sort) from `fanwe_deal` where is_delete=0";
 		  $maxs=$GLOBALS['db']->getRow($sql);
