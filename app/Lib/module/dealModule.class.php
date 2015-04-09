@@ -35,7 +35,7 @@ class dealModule extends SiteBaseModule
 			app_redirect(url("index")); 
 		
 		//借款列表
-		$load_list = $GLOBALS['db']->getAll("SELECT deal_id,user_id,user_name,money,virtual_money,create_time FROM ".DB_PREFIX."deal_load WHERE deal_id = ".$id);
+		$load_list = $GLOBALS['db']->getAll("SELECT deal_id,user_id,user_name,money,virtual_money,unjh_pfcfb,create_time FROM ".DB_PREFIX."deal_load WHERE deal_id = ".$id);
 		
 		
 		$u_info = get_user("*",$deal['user_id']);
@@ -330,7 +330,9 @@ class dealModule extends SiteBaseModule
 		if(floatval($_REQUEST["bid_money"]) > $GLOBALS['user_info']['money']){
 			showErr($GLOBALS['lang']['MONEY_NOT_ENOUGHT'],$ajax);
 		}
-		
+		if(floatval($_REQUEST["unjh_pfcfb"]) > $GLOBALS['user_info']['unjh_pfcfb']){
+			showErr('浦发币不足，无法投标',$ajax);
+		}
 		//判断所投的钱是否超过了剩余投标额度
 		if(floatval($_REQUEST["bid_money"]) > ($deal['borrow_amount'] - $deal['load_money'])){
 			showErr(sprintf($GLOBALS['lang']['DEAL_LOAN_NOT_ENOUGHT'],format_price($deal['borrow_amount'] - $deal['load_money'])),$ajax);
@@ -420,7 +422,7 @@ class dealModule extends SiteBaseModule
 			$msg = sprintf('编号%s的投标,付款单号%s',$id,$load_id);
 			require_once APP_ROOT_PATH."system/libs/user.php";	
 			modify_account(array('money'=>-trim($_REQUEST["bid_money"]),'score'=>0),$GLOBALS['user_info']['id'],$msg);
-			modify_account(array('unjh_pfcfb'=>-trim($_REQUEST["unjh_pfcfb"])),$GLOBALS['user_info']['id'],$msg.'(浦发财富B:'.$_REQUEST["unjh_pfcfb"].')');
+			modify_account(array('unjh_pfcfb'=>-trim($_REQUEST["unjh_pfcfb"])),$GLOBALS['user_info']['id'],$msg.'(浦发币:'.$_REQUEST["unjh_pfcfb"].')');
 			$deal = get_deal($id);
 			sys_user_status($GLOBALS['user_info']['id']);
 			//超过一半的时候

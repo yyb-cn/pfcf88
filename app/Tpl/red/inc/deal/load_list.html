@@ -32,6 +32,9 @@
 				{if $load.virtual_money!=0}
 				+代金券{function name="format_price" v="$load.virtual_money"}
 				{/if}
+					{if $load.unjh_pfcfb!=0}
+				+浦发币{function name="format_price" v="$load.unjh_pfcfb"}
+				{/if}
 			</td>
 			
 			<td width="20%" class="wb tc">

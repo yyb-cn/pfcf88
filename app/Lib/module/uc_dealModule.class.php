@@ -151,7 +151,20 @@ class uc_dealModule extends SiteBaseModule
 		$GLOBALS['tmpl']->assign('deal',$deal);
 		
 	//	var_dump($deal);exit;
-		
+	/*******************还款测试***********************
+			$user_load_ids = $GLOBALS['db']->getAll("SELECT deal_id,user_id,money,virtual_money,unjh_pfcfb FROM ".DB_PREFIX."deal_load WHERE deal_id=".$id);
+			var_dump($user_load_ids);
+			foreach($user_load_ids as $k=>$v){
+				$v['repay_start_time'] = $deal['repay_start_time'];
+				$v['repay_time'] = $deal['repay_time'];
+				$v['rate'] = $deal['rate'];
+				$v['u_key'] = $k;
+				//var_dump($v);exit;
+				$user_loan_list= get_deal_user_load_list($v,$deal['loantype'],$deal['repay_time_type']);
+				var_dump($user_loan_list);
+			}
+			
+		****************还款测试**↑↑↑↑↑↑↑↑↑↑↑***********/
 		//还款列表
 		$loan_list = get_deal_load_list($deal);
 		//var_dump($loan_list);exit;
@@ -383,6 +396,7 @@ class uc_dealModule extends SiteBaseModule
 
 			foreach($user_loan_list as $kk=>$vv){
 				if($vv['has_repay']==0){//借入者已还款，但是没打款到借出用户中心
+					
 					$user_load_data['deal_id'] = $v['deal_id'];
 					$user_load_data['user_id'] = $v['user_id'];
 					$user_load_data['repay_time'] = $vv['repay_day'];
@@ -412,12 +426,13 @@ class uc_dealModule extends SiteBaseModule
 								$user_load_data['self_money'] = 0;
 							}
 						}
-						
-						
 						$user_load_data['virtual_money'] = $v['virtual_money'];////备注 代金券金额
 						$user_load_data['repay_money'] = $vv['month_repay_money'];////钱钱钱
 						$user_load_data['manage_money'] = $vv['month_manage_money'];
 						$user_load_data['impose_money'] = $vv['impose_money'];
+						/*浦发币浦发币浦发币浦发币浦发币浦发币*/
+						$user_load_data['pfcfb'] = $vv['month_repay_pfcfb'];
+						/*浦发币浦发币浦发币浦发币浦发币浦发币*/
 						if($vv['status']>0)
 						$user_load_data['status'] = $vv['status'] - 1;
 						$user_load_data['l_key'] = $kk;
@@ -472,10 +487,14 @@ class uc_dealModule extends SiteBaseModule
 								modify_account(array("money"=>$user_load_data['impose_money']),$v['user_id'],"标:".$deal['id'].",期:".($kk+1).",逾期罚息");
 								
 								modify_account(array("money"=>-$user_load_data['manage_money']),$v['user_id'],"标:".$deal['id'].",期:".($kk+1).",投标管理费");
-								
-								modify_account(array("money"=>$user_load_data['repay_money']),$v['user_id'],"标:".$deal['id'].",期:".($kk+1).",回报本息".",代金券金额".$user_load_data['virtual_money']);
+								$mmmmsg='回报本息';
+								if($user_load_data['virtual_money']){
+								$mmmmsg.=",代金券金额".$user_load_data['virtual_money'];
+								}
+								modify_account(array("money"=>$user_load_data['repay_money']),$v['user_id'],"标:".$deal['id'].",期:".($kk+1).",".$mmmmsg);
+								/*pfcfb*/
+								modify_account(array("pfcfb"=>$user_load_data['pfcfb']),$v['user_id'],"标:".$deal['id'].",期:".($kk+1).",浦发比激活+利息");
 								$msg_conf = get_user_msg_conf($v['user_id']);
-								
 								
 								//短信通知
 								if(app_conf("SMS_ON")==1&&app_conf('SMS_REPAY_TOUSER_ON')==1){

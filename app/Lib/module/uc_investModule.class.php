@@ -53,7 +53,7 @@ class uc_investModule extends SiteBaseModule
 		$page = 1;
 		$limit = (($page-1)*app_conf("PAGE_SIZE")).",".app_conf("PAGE_SIZE");
     	
-    	$sql = "select d.*,u.user_name,dl.money as u_load_money,dl.virtual_money,dl.id as deal_load_id,u.level_id,u.province_id,u.city_id from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=d.user_id where dl.user_id = ".$user_id." $condtion group by dl.id order by dl.create_time desc limit ".$limit;
+    	$sql = "select d.*,u.user_name,dl.money as u_load_money,dl.virtual_money,dl.unjh_pfcfb,dl.id as deal_load_id,u.level_id,u.province_id,u.city_id from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id LEFT JOIN ".DB_PREFIX."user u ON u.id=d.user_id where dl.user_id = ".$user_id." $condtion group by dl.id order by dl.create_time desc limit ".$limit;
 		$sql_count = "select count(DISTINCT dl.id) from ".DB_PREFIX."deal d left join ".DB_PREFIX."deal_load as dl on d.id = dl.deal_id where dl.user_id = ".$user_id." $condtion ";
 		$list = $GLOBALS['db']->getAll($sql);
 		
@@ -97,8 +97,6 @@ class uc_investModule extends SiteBaseModule
 			$list[$k]['point_level'] = $GLOBALS['db']->getOne("select name from ".DB_PREFIX."user_level where id = ".intval($v['level_id']));
 		}
 		$count = $GLOBALS['db']->getOne($sql_count);
-		
-		
 	
 		$GLOBALS['tmpl']->assign("list",$list);
 		$page = new Page($count,app_conf("PAGE_SIZE"));   //初始化分页对象 		

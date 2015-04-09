@@ -504,8 +504,9 @@ class UserAction extends CommonAction{
 		$user_id = intval($_REQUEST['id']);
 		$money = floatval($_REQUEST['money']);
 		$lottery_score = intval($_REQUEST['lottery_score']);
-		$pfcfb = intval($_REQUEST['pfcfb']);
-		$unjh_pfcfb = intval($_REQUEST['unjh_pfcfb']);
+		$pfcfb = floatval($_REQUEST['pfcfb']);
+		
+		$unjh_pfcfb = floatval($_REQUEST['unjh_pfcfb']);
 		
 		$point = intval($_REQUEST['point']);
 		$quota = floatval($_REQUEST['quota']);

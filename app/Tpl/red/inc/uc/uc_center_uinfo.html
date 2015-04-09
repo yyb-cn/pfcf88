@@ -2,7 +2,7 @@
 	<div class="cont homeBg">
 	    <div class="blank5"></div>
 	    <div class="clearfix lh22" style="height: 22px;vertical-align: middle">
-	        <div class="f_r">{url x="index" r="uc_account"}
+	        <div class="f_r">
 				<input type="button" value="修改我的个人信息" onclick="window.location.href=''" class="modify_ac_btn">
 			</div>
 	        <div class="f_blue f14 b tc">
@@ -48,6 +48,7 @@
 	                    {function name="to_date" v=$user_data.create_time f="Y-m-d"}
 	                </div>
 	            </div>
+				<!--
 	            <div style="height:24px; line-height:24px">
 	                <div class="f_l" style="width:70px;">
 					所在地：
@@ -63,12 +64,13 @@
 	                	{$user_data.group_name}{if $user_data.deal_count gt 0} 借入者{/if} {if $user_data.load_count gt 0} 借出者{/if}  
 					</div>
 	            </div>
+				-->
 	            <div style="height:24px; line-height:24px">
 	                <div class="f_l" style="width:70px;">
 					个人统计：
 	                </div>
 	                <div class="f_l">
-	                    {$user_statics.deal_count} 条借款记录， {$user_statics.load_count}条投标记录
+	                   {$user_statics.load_count}条投标记录
 	                </div>
 	            </div>
 	            <div style="height:24px; line-height:24px">

@@ -610,7 +610,7 @@ function get_deal_user_load_list($user_load_info,$loantype,$repay_time_type = 1,
 	$true_repay_time = $user_load_info['repay_time']; //15天
 	$repay_day = $user_load_info['repay_start_time']; //4月-11日
 	
-	/*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓新增内容↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
+	/*↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓送的标↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓*/
 	if($repay_time_type==0){
 	               //2015-03-24 02:36:48
 						$r_y = to_date($user_load_info['repay_start_time'],"Y"); //2015
@@ -626,7 +626,7 @@ function get_deal_user_load_list($user_load_info,$loantype,$repay_time_type = 1,
 						
 		return $loan_list;		
 	}
-	/*↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑新增的内容↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
+	/*↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑送的标↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑*/
 	
 	for($i=0;$i<$true_repay_time;$i++){
 		$loan_list[$i]['status'] = 0;
@@ -635,19 +635,42 @@ function get_deal_user_load_list($user_load_info,$loantype,$repay_time_type = 1,
 		//月还本息
 		if($loantype == 0)
 		{
+		/*
+			function pl_it_formula($money,$rate,$remoth){
+			return $money * ($rate*pow(1+$rate,$remoth)/(pow(1+$rate,$remoth)-1));
+			pow  ：计算幂次方
+		}
+		*/
 			$loan_list[$i]['month_repay_money'] = pl_it_formula($user_load_info['money'],$user_load_info['rate']/12/100,$true_repay_time);
-		
+			//如果有pfcfb
+			if($user_load_info['unjh_pfcfb']!=0){
+				$loan_list[$i]['month_repay_pfcfb'] = pl_it_formula($user_load_info['unjh_pfcfb'],$user_load_info['rate']/12/100,$true_repay_time);
+			}
+			
+			
 			//最后一个月还本息
 			if($i+1 == $true_repay_time){
 				$loan_list[$i]['month_repay_money'] = $loan_list[$i]['month_repay_money']*$true_repay_time - round($loan_list[$i]['month_repay_money'],2)*($true_repay_time-1);
+			//如果有pfcfb
+			if($user_load_info['unjh_pfcfb']!=0){
+				$loan_list[$i]['month_repay_pfcfb'] = $loan_list[$i]['month_repay_pfcfb']*$true_repay_time - round($loan_list[$i]['month_repay_pfcfb'],2)*($true_repay_time-1);
+			}	
+				
 			}
 		}
 		//付息还款
 		elseif($loantype == 1){
 			$lixi = $loan_list[$i]['month_repay_money'] = av_it_formula(($user_load_info['money']+$user_load_info['virtual_money']),$user_load_info['rate']/12/100);
+			//如果有pfcfb
+			if($user_load_info['unjh_pfcfb']!=0){
+				$loan_list[$i]['month_repay_pfcfb'] = av_it_formula(($user_load_info['unjh_pfcfb']),$user_load_info['rate']/12/100);
+			}
 			//最后一个月还本息
 			if($i+1 == $true_repay_time){
 				$loan_list[$i]['month_repay_money'] = ($user_load_info['money'] + $loan_list[$i]['month_repay_money']*$true_repay_time) - round($loan_list[$i]['month_repay_money'],2)*($true_repay_time-1);
+				if($user_load_info['unjh_pfcfb']!=0){
+				$loan_list[$i]['month_repay_pfcfb'] = ($user_load_info['unjh_pfcfb'] + $loan_list[$i]['month_repay_pfcfb']*$true_repay_time) - round($loan_list[$i]['month_repay_pfcfb'],2)*($true_repay_time-1);	
+			}
 			}
 		}
 		//到期本息
@@ -656,12 +679,16 @@ function get_deal_user_load_list($user_load_info,$loantype,$repay_time_type = 1,
 			//最后一个月还本息
 			if($i+1 == $true_repay_time){                                                 //加入虚拟金额
 				$lixi = $loan_list[$i]['month_repay_money'] = $user_load_info['money'] +($user_load_info['virtual_money']+ $user_load_info['money'])*$user_load_info['rate']/12/100*$true_repay_time;
+				if($user_load_info['unjh_pfcfb']!=0){
+				$loan_list[$i]['month_repay_pfcfb'] = $user_load_info['unjh_pfcfb'] +$user_load_info['unjh_pfcfb']*$user_load_info['rate']/12/100*$true_repay_time;
+				}
 			}
-			
-			
-			//进入此处
+			//进入此处,当为天时
 			if($repay_time_type==0){
 				$lixi = $loan_list[$i]['month_repay_money'] = $user_load_info['money'] +($user_load_info['virtual_money']+ $user_load_info['money'])*$user_load_info['rate']/365/100*$true_repay_time;
+				if($user_load_info['unjh_pfcfb']!=0){
+					$loan_list[$i]['month_repay_pfcfb'] = $user_load_info['unjh_pfcfb'] +($user_load_info['unjh_pfcfb'])*$user_load_info['rate']/365/100*$true_repay_time;
+				}
 			};
 			
 			

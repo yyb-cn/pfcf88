@@ -427,13 +427,14 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 		{
 			$GLOBALS['db']->query("update ".DB_PREFIX."user set lottery_score = lottery_score + ".intval($data['lottery_score'])." where id =".$user_id);
 		}
-		if(intval($data['pfcfb'])!=0)
+		
+		if(floatval($data['pfcfb'])!=0)
 		{
-			$GLOBALS['db']->query("update ".DB_PREFIX."user set pfcfb = pfcfb + ".intval($data['pfcfb'])." where id =".$user_id);
+			$GLOBALS['db']->query("update ".DB_PREFIX."user set pfcfb = pfcfb + ".floatval($data['pfcfb'])." where id =".$user_id);
 		}
-		if(intval($data['unjh_pfcfb'])!=0)
+		if(floatval($data['unjh_pfcfb'])!=0)
 		{
-			$GLOBALS['db']->query("update ".DB_PREFIX."user set unjh_pfcfb = unjh_pfcfb + ".intval($data['unjh_pfcfb'])." where id =".$user_id);
+			$GLOBALS['db']->query("update ".DB_PREFIX."user set unjh_pfcfb = unjh_pfcfb + ".floatval($data['unjh_pfcfb'])." where id =".$user_id);
 		}
 		if(floatval($data['lock_pfcfb'])!=0)
 		{
@@ -480,6 +481,8 @@ define("ACCOUNT_NO_VERIFY_ERROR",3); //帐户未激活
 				$log_info['log_user_id'] = intval($user_info['id']);
 			}
 			$log_info['money'] = floatval($data['money']);
+			$log_info['pfcfb'] = floatval($data['pfcfb']);
+			$log_info['unjh_pfcfb'] = floatval($data['unjh_pfcfb']);
 			$log_info['score'] = intval($data['score']);
 			$log_info['point'] = intval($data['point']);
 			$log_info['quota'] = floatval($data['quota']);
