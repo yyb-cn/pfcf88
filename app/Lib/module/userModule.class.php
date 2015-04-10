@@ -13,30 +13,19 @@ class userModule extends SiteBaseModule
 	public function register()
 	{		
 		 $user_id=intval($_GET['p']);
-		   if($_GET['p']){
+		   if($_GET['p']){	
 		$user_id=intval($_GET['p']);
 			$real_name=$GLOBALS['db']->
 			getOne("select `user_name` from ".DB_PREFIX."user where `id` = '".$user_id."' " );
 		//获取真实姓名
 		$GLOBALS['tmpl']->assign("real_name",$real_name);
-		//写入cookie
-		setcookie('real_name','$real_name',time()+24*60*60);
-		
+		setcookie('real_name',"$real_name",time()+(10*24*3600));
 		}else{
-		
-		if($_COOKTE['real_name']){
-			
-			$real_name=$_COOKTE['real_name'];
-			
+		if($_COOKIE['real_name']){
+			$real_name=$_COOKIE['real_name'];
 			$GLOBALS['tmpl']->assign("real_name",$real_name);
 			}
 		}
-
-		
-		
-		
-		
-		
 		$GLOBALS['tmpl']->caching = true;
 		$cache_id  = md5(MODULE_NAME.ACTION_NAME.$GLOBALS['deal_city']['id']);
 		if (!$GLOBALS['tmpl']->is_cached('user_register.html', $cache_id))	
