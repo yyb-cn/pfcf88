@@ -157,7 +157,7 @@ class lotteryModule extends SiteBaseModule
 		  $sql="select max(sort) from `fanwe_deal` where is_delete=0";
 		  $maxs=$GLOBALS['db']->getRow($sql);
 		  $max=$maxs['max(sort)']+1; 
-		  $name='投资了'.$tshiwu.'所送15天投资'.$tshiwu.'的利息';
+		  $name='投资了'.$tshiwu.'所送15天投资'.$tshiwu.'的利息'.$lottery_user_id;
 		   
 		    $deal_data['name']=$name;
             $deal_data['sub_name']=$name;	
@@ -191,7 +191,7 @@ class lotteryModule extends SiteBaseModule
             $deal_data['success_time']=get_gmtime();
             $deal_data['repay_start_time']=get_gmtime();
             $deal_data['next_repay_time']=get_gmtime()+86400;
-			$deal_data['rate']=8;
+			$deal_data['rate']=7;
 			$deal_data['virtual_id']=1;  //判断是否是公司所送的纯代金卷投资、 
 			$GLOBALS['db']->autoExecute(DB_PREFIX."deal",$deal_data);
 		//	now_insert('fanwe_deal',$deal_data);
@@ -200,7 +200,7 @@ class lotteryModule extends SiteBaseModule
 	
 		  if($deal_id){
 		      $deal=get_deal($deal_id);
-		      $data['user_id'] = $user_id=$deal_voucher_user_id;
+		      $data['user_id'] = $deal_voucher_user_id;
 		      $data['user_name'] = $GLOBALS['user_info']['user_name'];
 		      $data['deal_id'] = $deal_id;
 			  $data['money'] =0;
