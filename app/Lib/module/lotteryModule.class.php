@@ -161,7 +161,7 @@ class lotteryModule extends SiteBaseModule
 		   
 		    $deal_data['name']=$name;
             $deal_data['sub_name']=$name;	
-            $deal_data['cate_id'] =12;
+            $deal_data['cate_id'] =14;
             $deal_data['user_id']=6;
             $deal_data['is_effect']=1;
             $deal_data['is_delete']=0 ;
@@ -175,10 +175,10 @@ class lotteryModule extends SiteBaseModule
             $deal_data['create_time']=get_gmtime();
             $deal_data['update_time']=get_gmtime();
             $deal_data['name_match_row']=$name;
-            $deal_data['deal_cate_match_row']='我不想让你看到';
-			$deal_data['deal_cate_match']='ux25105ux19981ux24819ux35753ux20320ux30475ux21040';
-            $deal_data['type_match']='ux20854ux20182ux20511ux27454';
-            $deal_data['type_match_row']='其他借款';
+            // $deal_data['deal_cate_match_row']='我不想让你看到';
+			// $deal_data['deal_cate_match']='ux25105ux19981ux24819ux35753ux20320ux30475ux21040';
+            // $deal_data['type_match']='ux20854ux20182ux20511ux27454';
+            // $deal_data['type_match_row']='其他借款';
             $deal_data['buy_count']=1;
             $deal_data['loantype'] =0 ;
             $deal_data['warrant'] = 2 ;
