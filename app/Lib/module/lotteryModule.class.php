@@ -200,7 +200,7 @@ class lotteryModule extends SiteBaseModule
 	
 		  if($deal_id){
 		      $deal=get_deal($deal_id);
-		      $data['user_id'] = $deal_voucher_user_id;
+		      $data['user_id'] = $lottery_user_id;
 		      $data['user_name'] = $GLOBALS['user_info']['user_name'];
 		      $data['deal_id'] = $deal_id;
 			  $data['money'] =0;
