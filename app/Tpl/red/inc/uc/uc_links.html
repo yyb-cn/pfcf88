@@ -1,4 +1,5 @@
-
+<script src="{$TMPL}/js/jquery/jquery.min.js"></script>
+<script src="{$TMPL}/js/zeroclipboard/ZeroClipboard.min.js"></script>
 <div class="uc_r_bl_box clearfix">
 <style>
 	.field{ width:520px}
@@ -13,12 +14,13 @@
 					<td class="pt10" style="width:560px">
 									
 						<div class="blank"></div>
-						<div class="field real_name">
+						<div style=" width:600px;" class="field real_name">
 							<label for="settings-real_name">分享注册链接</label>
-							<input type="text" readonly="readonly"  value="http://www.pfcf88.com/index.php?ctl=user&act=register&p={$lpl}"  onclick="oCopy(this)" class="f-input " name="links"   style="width: 350px" id="links"  >
-
+				            <textarea class="ad_js_code code_area copy_btn" style="cursor:pointer;width:600px;height:60px;" id="links"> http://www.pfcf88.com/index.php?ctl=user&act=register&p={$lpl}</textarea>
+					
+                          
 						</div>
-       
+       	
 
 
 				</tr>
@@ -40,10 +42,92 @@
 </div>
 </form>
 </div>
+
+<div class="item_group" style="width: 716px">通过微博、社区推荐</div>
+
+<div class="inc wb">
+	<div class="inc_main">
+			<table width="738px" class="user_info_table">
+				<tr>
+					<td class="pt10" style="width:560px">
+									
+						<div class="blank"></div>
+					
+       
+
+
+				</tr>
+				<tr>
+					<td colspan="2">
+<div class="bdsharebuttonbox" data-tag="share_1">
+	<a class="bds_mshare" data-cmd="mshare"></a>
+	<a class="bds_qzone" data-cmd="qzone" href="#"></a>
+	<a class="bds_tsina" data-cmd="tsina"></a>
+	<a class="bds_baidu" data-cmd="baidu"></a>
+	<a class="bds_renren" data-cmd="renren"></a>
+	<a class="bds_tqq" data-cmd="tqq"></a>
+	<a class="bds_more" data-cmd="more">更多</a>
+	<a class="bds_count" data-cmd="count"></a>
+</div>
+<script>
+	window._bd_share_config = {
+		common : {
+			bdText : '我刚注册史上最靠“浦”的<浦发财富线上平台>获得了百元大红包！点击下面链接我们一起赚红包！',	
+			bdDesc : '自定义分享摘要',	
+			bdUrl : ' http://www.pfcf88.com/index.php?ctl=user&act=register&p={$lpl}', 	
+			bdPic : '自定义分享图片'
+		},
+		share : [{
+			"bdSize" : 32
+		}],
+		slide : [{	   
+			bdImg : 0,
+			bdPos : "right",
+			bdTop : 100
+		}],
+		image : [{
+			viewType : 'list',
+			viewPos : 'top',
+			viewColor : 'black',
+			viewSize : '16',
+			viewList : ['qzone','tsina','huaban','tqq','renren']
+		}],
+		selectShare : [{
+			"bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
+		}]
+	}
+	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+					</td>
+				</tr>
+				
+			</table>
+			
+						
+			<div class="blank"></div>
+			<div class="blank"></div>
+	</div>
+	<div class="inc_foot"></div>
+</div>
+
+</div>
 <script> 
 function oCopy(obj){ 
 obj.select(); 
 js=obj.createTextRange(); 
 js.execCommand("Copy") 
 } 
+</script>
+<script type="text/javascript">
+		//拷贝代码
+		var clip = new ZeroClipboard($(".copy_btn"), {
+			  moviePath: "{$TMPL}/js/zeroclipboard/ZeroClipboard.swf"
+		});
+		clip.on( 'mousedown', function(client) {
+		    clip.setText($(this).val());
+		});
+		clip.on( 'complete', function(client, args) {
+			alert('代码已经复制到您的剪贴板,使用ctrl+v粘贴或者右键粘贴。');
+		});
 </script>
