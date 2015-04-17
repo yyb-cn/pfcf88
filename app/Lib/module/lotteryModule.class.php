@@ -9,7 +9,7 @@ class lotteryModule extends SiteBaseModule
 	 $score=$GLOBALS['user_info']['lottery_score'];
 	 // $GLOBALS['user_info']['score']
 	 
-	 $huodong= $GLOBALS['db']->getRow("select * from ".DB_PREFIX."huodong where id=8"); //活动ID
+	 $huodong= $GLOBALS['db']->getRow("select * from ".DB_PREFIX."huodong where id=1"); //活动ID
 	  $mobilepassed=intval($GLOBALS['user_info']['mobilepassed']);
 	  $GLOBALS['tmpl']->assign("mobilepassed",$mobilepassed);
 	$idcardpassed= intval($GLOBALS['user_info']['idcardpassed']);
