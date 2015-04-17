@@ -5,6 +5,7 @@ class lotteryModule extends SiteBaseModule
 {  
 	public function zouma()
 	{
+	
 	  // print_r($GLOBALS['user_info']);exit;
 	 $score=$GLOBALS['user_info']['lottery_score'];
 	 // $GLOBALS['user_info']['score']
@@ -57,15 +58,17 @@ class lotteryModule extends SiteBaseModule
 	 if($statr_score<20000){
 		echo json_encode(1);exit;
 	  }
-	//2.查询最新一次投资,是否存在。
+	//2.查询是否在3月22号前买过产品。
 	$id=$GLOBALS['user_info']['id'];
-	$sql = "select dl.id,dl.money as u_load_money,d.name as deal_name,dl.id as deal_load_id from ".DB_PREFIX."deal_load dl left join ".DB_PREFIX."deal as d on d.id = dl.deal_id  where dl.user_id = ".$id." and (d.deal_status=1  or d.deal_status=2 or d.deal_status=4) and d.repay_time_type=1  order by dl.id desc";
+	$c_time=strtotime("2015-03-22");
+	$sql = "select dl.id,dl.create_time as cl_time,dl.money as u_load_money,d.name as deal_name,dl.id as deal_load_id from ".DB_PREFIX."deal_load dl left join ".DB_PREFIX."deal as d on d.id = dl.deal_id  where dl.create_time>".$c_time." and dl.user_id = ".$id." and (d.deal_status=1  or d.deal_status=2 or d.deal_status=4) and d.repay_time_type=1  order by dl.id desc";
 	$list = $GLOBALS['db']->getRow($sql);
 	if(empty($list)){
 		echo json_encode(2);exit;
 	}
-	  		///*@luo-抽奖、
-		    //3.开始抽奖奖品配置
+	
+	///*@luo-抽奖、
+	//3.开始抽奖奖品配置
 	 
 	 $b=0.001;
 	$abc= $GLOBALS['db']->getRow("select count(*) as c from ".DB_PREFIX."award_log where prize_id = 8 ");
@@ -75,14 +78,14 @@ class lotteryModule extends SiteBaseModule
 			  if($statr_score >=20000){
 			  $award = array(
 					   ///////////  // 奖品ID => array('奖品名称',概率,面额,奖品ID)
-					   1 => array('1000元代金券',0.45,1000),
-					   2 => array('IPhone6 PLUS',0.0,0),
-					   3 => array('2000元代金券',0.05-$b,2000),          
-					   4 => array('5000元代金券',$b,5000),  //0.001
-					   5 => array('1000元代金券',0.45,1000),          
+					   1 => array('1000元代金券',0.45,1000,7),
+					   2 => array('IPhone6 PLUS',0.0,0,5),
+					   3 => array('2000元代金券',0.05-$b,2000,8),          
+					   4 => array('5000元代金券',$b,5000,9),  //0.001
+					   5 => array('1000元代金券',0.45,1000,7),          
 					   6 => array('IPad MINI2',0.0,0),
-					   7 => array('2000元代金券',0.05-$b,2000),          
-					   8 => array('5000元代金券',$b,5000)   // 0.001 
+					   7 => array('2000元代金券',0.05-$b,2000,8),          
+					   8 => array('5000元代金券',$b,5000,9)   // 0.001 
 					  );
 			  }
 					  $r =rand(1,100);
@@ -115,6 +118,7 @@ class lotteryModule extends SiteBaseModule
 	  $deal_id=$list['id'];
 		$sql="update ".DB_PREFIX."deal_load set virtual_money=virtual_money+   ".  $money ."   where id=".$deal_id;
 		$GLOBALS['db']->query($sql);
+		
 		//7.插入用户记录
 		$log_info['log_info'] = '代金券'.$money.'元，用于'.'<a href="?deal_load_id='.$list['deal_load_id'].'&m=Deal_list&a=index">'.$list['deal_name'].'</a>';
 		$log_info['log_time'] = get_gmtime();
@@ -123,7 +127,7 @@ class lotteryModule extends SiteBaseModule
 		
 	  //6.抽奖记录
 	  $lottery_user_id=$id;//用户ID
-	  $lottery_prize_id=$award_id;//奖品ID
+	  $lottery_prize_id=$award[$award_id][3];//奖品ID
 	  $lottery_log_time=time();//抽奖时间
 	  $huodong_id=1;//活动ID
 	  $sql="insert into `fanwe_award_log`(`user_id`,`prize_id`,`log_time`,`huodong_id`) values('$lottery_user_id','$lottery_prize_id','$lottery_log_time','$huodong_id')";
