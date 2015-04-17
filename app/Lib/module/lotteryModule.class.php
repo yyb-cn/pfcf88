@@ -162,9 +162,9 @@ class lotteryModule extends SiteBaseModule
 	  	$lottery_rand_statr=mt_rand(18,49);
         $lottery_rand_now=$lottery_rand_statr/100;		
 	  $award = array(
-			   ////// 奖品ID => array('奖品名称',概率)
-			   1 => array(0.5,0.05),
-			   2 => array($lottery_rand_now,0.95)
+			   ////// 奖品ID => array('金额',概率，id)
+			   1 => array(0.5,0.05,10),
+			   2 => array($lottery_rand_now,0.95,10)
 			  );
 			  $r =rand(1,100);
 			  $num = 0;
@@ -178,10 +178,11 @@ class lotteryModule extends SiteBaseModule
 		      }
 	     }
 	  $lottery_user_id=$id;
-	  $lottery_prize_id=$award_id;
+	  $lottery_prize_id=$award[$award_id][2];
 	  $lottery_log_time=time();
+	  $prize_name=$award[$award_id][0]
 	  $log_info=$now_time.'每日抽奖';
-	  $sql="insert into `fanwe_award_log`(`user_id`,`prize_id`,`log_time`,`huodong_id`) values('$lottery_user_id','$lottery_prize_id','$lottery_log_time',2)";
+	  $sql="insert into `fanwe_award_log`(`user_id`,`prize_id`,`log_time`,`huodong_id`,`prize_name`) values('$lottery_user_id','$lottery_prize_id','$lottery_log_time',2,'')";
     	mysql_query($sql);
 	  $lottery_log_id= mysql_affected_rows();		
       $data=array('award_id'=>$award_id,'award_name'=>$award[$award_id][0]);
