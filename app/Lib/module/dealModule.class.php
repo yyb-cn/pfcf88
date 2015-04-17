@@ -7,12 +7,28 @@
 // | Author: 云淡风轻(88522820@qq.com)
 // +----------------------------------------------------------------------
 require APP_ROOT_PATH.'app/Lib/deal.php';
+   function now_insert($table,$data){
+    $clomne='';
+	$val='';
+	foreach ($data as $key =>$value){
+	  $clomne.='`'.$key.'`,';
+	  $val.="'".$value."',";
+	}
+	$clomne=substr($clomne,0,-1);
+	$val=substr($val,0,-1);
+    $sql="insert into `$table`($clomne)values($val)";
+	 // echo $sql;exit;
+    mysql_query($sql);
+    return mysql_affected_rows();
+	 }	
 class dealModule extends SiteBaseModule
 {
-	public function index(){
+	public function index(){  
+	 
 		$id = intval($_REQUEST['id']);
-		
+	
 		$deal = get_deal($id);
+		// var_dump($deal);exit;
 		send_deal_contract_email($id,$deal,$deal['user_id']);
 		
 		if(!$deal)
@@ -142,6 +158,7 @@ class dealModule extends SiteBaseModule
 		}
 		$deal['create_time']=to_date($deal['create_time'],"Y-m-d H:i");
 		$deal['repay_start_time']=date("Y-m-d",$deal['repay_start_time']);
+		// var_dump($deal);exit;
 		$GLOBALS['tmpl']->assign("deal",$deal);
 		
 		//print_r($deal);exit;
@@ -149,6 +166,7 @@ class dealModule extends SiteBaseModule
 	}
 	
 	function preview(){
+	
 		$deal['id'] = 'XXX';
 		$deal['name'] = trim($_REQUEST['borrowtitle']);
 		$deal_loan_type_list = load_auto_cache("deal_loan_type_list");
@@ -193,7 +211,8 @@ class dealModule extends SiteBaseModule
 		$GLOBALS['tmpl']->display("page/deal.html");
 	}
 	
-	function bid(){
+	function bid(){  
+	     
 		if(!$GLOBALS['user_info']){
 			set_gopreview();
 			app_redirect(url("index","user#login")); 
@@ -288,7 +307,6 @@ class dealModule extends SiteBaseModule
 		if(trim($_REQUEST["bid_money"])=="" || !is_numeric($_REQUEST["bid_money"]) || floatval($_REQUEST["bid_money"])<=0 || floatval($_REQUEST["bid_money"]) < $deal['min_loan_money']){
 			showErr($GLOBALS['lang']['BID_MONEY_NOT_TRUE'],$ajax);
 		}
-		
 		if((int)trim(app_conf('DEAL_BID_MULTIPLE')) > 0){
 			 if(intval($_REQUEST["bid_money"])%(int)trim(app_conf('DEAL_BID_MULTIPLE'))!=0){
 			 	showErr($GLOBALS['lang']['BID_MONEY_NOT_TRUE'],$ajax);
@@ -372,7 +390,7 @@ class dealModule extends SiteBaseModule
 		
 		if($load_id > 0){
 		//如果投资金额大于1000;增加一次抽奖机会
-		
+		/*
 		if($data['money']>=10000&&$deal['repay_time_type']==1){  //只有月份的才送
 			
 		$a=floor($data['money']/10000);
@@ -389,7 +407,7 @@ class dealModule extends SiteBaseModule
 			}
 
 		}
-		
+		*/
 			//更改资金记录
 			$msg = sprintf('编号%s的投标,付款单号%s',$id,$load_id);
 			require_once APP_ROOT_PATH."system/libs/user.php";	
@@ -441,10 +459,124 @@ class dealModule extends SiteBaseModule
 				//更新
 				$GLOBALS['db']->autoExecute(DB_PREFIX."deal",array("is_send_half_msg"=>1),"UPDATE","id=".$id);
 			}
-			//如果有抽奖机会
-			if($a>=1){
-			showSuccess($GLOBALS['lang']['DEAL_BID_SUCCESS'].'获得'.$a.'次抽奖机会',$ajax,url("index","index"));
+
+		//附送代金卷投资 
+		$shiwu=$_REQUEST["bid_money"];
+       if($shiwu>10000){  
+	       $deal_voucher=$GLOBALS['db']->getOne("SELECT `repay_time_type` FROM ".DB_PREFIX."deal where id=".$id); 
+		   $deal_voucher_user_id=$GLOBALS['user_info']['id'];
+		   
+	    if($deal_voucher==1){  //判断是否是投资一个月的标
+		  
+		  $tshiwu=intval($shiwu);
+		  $sql="select max(sort) from `fanwe_deal` where is_delete=0";
+		  $maxs=$GLOBALS['db']->getRow($sql);
+		  $max=$maxs['max(sort)']+1; 
+		  $name='用户id为'.$GLOBALS['user_info']['id'].'所投！所送15天投资'.$tshiwu.'的利息';
+		   
+		    $deal_data['name']=$name;
+            $deal_data['sub_name']=$name;	
+            $deal_data['cate_id'] =12;
+            $deal_data['user_id']=6;
+            $deal_data['is_effect']=1;
+            $deal_data['is_delete']=0 ;
+            $deal_data['sort']=$max;         
+            $deal_data['type_id']=10;
+            $deal_data['borrow_amount']=$tshiwu;
+            $deal_data['min_loan_money']=1000;
+            $deal_data['repay_time']=15;
+            $deal_data['deal_status']=4;
+            $deal_data['enddate']=1;
+            $deal_data['create_time']=get_gmtime();
+            $deal_data['update_time']=get_gmtime();
+            $deal_data['name_match_row']=$name;
+            $deal_data['deal_cate_match_row']='我不想让你看到';
+			$deal_data['deal_cate_match']='ux25105ux19981ux24819ux35753ux20320ux30475ux21040';
+            $deal_data['type_match']='ux20854ux20182ux20511ux27454';
+            $deal_data['type_match_row']='其他借款';
+            $deal_data['buy_count']=1;
+            $deal_data['loantype'] =0 ;
+            $deal_data['warrant'] = 2 ;
+            $deal_data['services_fee']=0;
+            $deal_data['repay_time_type']=0; 
+            $deal_data['load_money']=$tshiwu;
+            $deal_data['enddate']=1;
+            $deal_data['start_time']=get_gmtime();
+            $deal_data['success_time']=get_gmtime();
+            $deal_data['repay_start_time']=get_gmtime();
+            $deal_data['next_repay_time']=get_gmtime()+86400;
+			$deal_data['rate']=8;
+			now_insert('fanwe_deal',$deal_data);
+		   $deal_id= $GLOBALS['db']->insert_id();//获取插入的ID	
+          
+	
+		  if($deal_id){
+		      $deal=get_deal($deal_id);
+		      $data['user_id'] = $user_id=$deal_voucher_user_id;
+		      $data['user_name'] = $GLOBALS['user_info']['user_name'];
+		      $data['deal_id'] = $deal_id;
+			  $data['money'] =0;
+		      $data['virtual_money'] =$tshiwu;
+		      $data['create_time'] = get_gmtime();
+		  now_insert('fanwe_deal_load',$data);
+         $deal_load_id = $GLOBALS['db']->insert_id();//获取插入的ID
+		if($deal_load_id > 0){		
+			// 更改资金记录
+			$msg = sprintf('编号%s的投标,付款单号%s',$deal_id,$deal_load_id);
+			require_once APP_ROOT_PATH."system/libs/user.php";	
+			modify_account(array('money'=>-trim($_REQUEST["bid_money"]),'score'=>0),$GLOBALS['user_info']['id'],$msg);
+			$deal = get_deal($deal_id);
+			sys_user_status($GLOBALS['user_info']['id']);
+			// /超过一半的时候
+			if($deal['deal_status']==1 && $deal['progress_point'] >= 50 && $deal['progress_point']<=60 && $deal['is_send_half_msg'] == 0)
+			{
+				$msg_conf = get_user_msg_conf($deal['user_id']);
+		// /	邮件
+				if(app_conf("MAIL_ON")){
+					if(!$msg_conf || intval($msg_conf['mail_half'])==1){
+						$load_tmpl = $GLOBALS['db']->getRowCached("select * from ".DB_PREFIX."msg_template where name = 'TPL_DEAL_HALF_EMAIL'");
+						$user_info = $GLOBALS['db']->getRow("select email,user_name from ".DB_PREFIX."user where id = ".$deal['user_id']);
+						$tmpl_content = $load_tmpl['content'];
+						$notice['user_name'] = $user_info['user_name'];
+						$notice['deal_name'] = $deal['name'];
+						$notice['deal_url'] = get_domain().$deal['url'];
+						$notice['site_name'] = app_conf("SHOP_TITLE");
+						$notice['site_url'] = get_domain().APP_ROOT;
+						$notice['help_url'] = get_domain().url("index","helpcenter");
+						$notice['msg_cof_setting_url'] = get_domain().url("index","uc_msg#setting");		
+						$GLOBALS['tmpl']->assign("notice",$notice);					
+						$msg = $GLOBALS['tmpl']->fetch("str:".$tmpl_content);
+						$msg_data['dest'] = $user_info['email'];
+						$msg_data['send_type'] = 1;
+						$msg_data['title'] = "您的借款列表“".$deal['name']."”招标过半！";
+						$msg_data['content'] = addslashes($msg);
+						$msg_data['send_time'] = 0;
+						$msg_data['is_send'] = 0;
+						$msg_data['create_time'] = get_gmtime();
+						$msg_data['user_id'] =  $deal['user_id'];
+						$msg_data['is_html'] = $load_tmpl['is_html'];
+				
+						now_insert('fanwe_deal_msg_list',$msg_data); //插入
+					}
+				}	
+			// /	站内信
+				if(intval($msg_conf['sms_half'])==1){
+					$content = "<p>您在".app_conf("SHOP_TITLE")."的借款“<a href=\"".$deal['url']."\">".$deal['name']."</a>”完成度超过50%"; 
+					send_user_msg("",$content,0,$deal['user_id'],get_gmtime(),0,true,15);
+				}
+		// /	/	更新
+				$GLOBALS['db']->autoExecute(DB_PREFIX."deal",array("is_send_half_msg"=>1),"UPDATE","id=".$deal_id);
 			}
+		}
+		else{
+			showErr($GLOBALS['lang']['ERROR_TITLE'],3);
+		    }
+	    }
+     
+	}
+  }	 
+		//结束 			
+
 			showSuccess($GLOBALS['lang']['DEAL_BID_SUCCESS'],$ajax,url("index","deal",array("id"=>$id)));
 		}
 		else{

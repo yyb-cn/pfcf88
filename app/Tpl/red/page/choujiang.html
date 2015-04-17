@@ -146,15 +146,30 @@ var send_span = {function name="app_conf" v="SEND_SPAN"}000;
 	<div class="cj_wraper">
     	<div class="bg_h"></div>
         <div class="hongbao">
+		{if $idcardpassed eq 0 ||  $mobilepassed eq 0}
         	<ul>
-            	<li><a id="hb1" href="javascript:void(0);" onclick="start_lottery2()"><img src="{$TMPL}/images/hongbao.png" /></a></li>
-                <li><a id="hb2" href="javascript:void(0);" onclick="start_lottery2()"><img src="{$TMPL}/images/hongbao.png" /></a></li>
+			  <li><a href="{url x="index" r="deal#bid" }"  onclick="passed();"><img src="{$TMPL}/images/hongbao.png" /></a></li>
+			  <li><a href="{url x="index" r="deal#bid" }"  onclick="passed();"><img src="{$TMPL}/images/hongbao.png" /></a></li>
+			  <li><a href="{url x="index" r="deal#bid" }"  onclick="passed();"><img src="{$TMPL}/images/hongbao.png" /></a></li>
+			  <li><a href="{url x="index" r="deal#bid" }"  onclick="passed();"><img src="{$TMPL}/images/hongbao.png" /></a></li>
+			  <li><a href="{url x="index" r="deal#bid" }"  onclick="passed();"><img src="{$TMPL}/images/hongbao.png" /></a></li>
+			  <li><a href="{url x="index" r="deal#bid" }"  onclick="passed();"><img src="{$TMPL}/images/hongbao.png" /></a></li>
+			  <li><a href="{url x="index" r="deal#bid" }"  onclick="passed();"><img src="{$TMPL}/images/hongbao.png" /></a></li>
+            </ul>
+			{else}
+			   	<ul>
+       
+               <li><a id="hb2" href="javascript:void(0);" onclick="start_lottery2()"><img src="{$TMPL}/images/hongbao.png" /></a></li>
                 <li><a id="hb3" href="javascript:void(0);" onclick="start_lottery2()"><img src="{$TMPL}/images/hongbao.png" /></a></li>
                 <li><a id="hb4" href="javascript:void(0);" onclick="start_lottery2()"><img src="{$TMPL}/images/hongbao.png" /></a></li>
                 <li><a id="hb5" href="javascript:void(0);" onclick="start_lottery2()"><img src="{$TMPL}/images/hongbao.png" /></a></li>
                 <li><a id="hb6" href="javascript:void(0);" onclick="start_lottery2()"><img src="{$TMPL}/images/hongbao.png" /></a></li>
                 <li><a id="hb7" href="javascript:void(0);" onclick="start_lottery2()"><img src="{$TMPL}/images/hongbao.png" /></a></li>
+				 <li><a id="hb7" href="javascript:void(0);" onclick="start_lottery2()"><img src="{$TMPL}/images/hongbao.png" /></a></li>
             </ul>
+			{/if}
+			
+			
         </div>
         
         <!--剩余积分-->
@@ -384,7 +399,9 @@ function start_lottery2(){
         }
     });
 }
-
+function passed(){
+  alert('你还没成为理财人');
+}
 </script>
 
 

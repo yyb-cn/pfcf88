@@ -9,7 +9,7 @@ class lotteryModule extends SiteBaseModule
 	 $score=$GLOBALS['user_info']['lottery_score'];
 	 // $GLOBALS['user_info']['score']
 	 
-	 $huodong= $GLOBALS['db']->getRow("select * from ".DB_PREFIX."huodong where id=1"); //活动ID
+	 $huodong= $GLOBALS['db']->getRow("select * from ".DB_PREFIX."huodong where id=8"); //活动ID
 	  $mobilepassed=intval($GLOBALS['user_info']['mobilepassed']);
 	  $GLOBALS['tmpl']->assign("mobilepassed",$mobilepassed);
 	$idcardpassed= intval($GLOBALS['user_info']['idcardpassed']);
@@ -143,13 +143,17 @@ class lotteryModule extends SiteBaseModule
 	{  
 	
 	 $id=$GLOBALS['user_info']['id'];
-     $max_id=$GLOBALS['db']->getOne("SELECT max(id) FROM ".DB_PREFIX."award_log where user_id=".$id); 
+	
+	
+     $max_id=$GLOBALS['db']->getOne("SELECT max(id) FROM ".DB_PREFIX."award_log where user_id=".$id);
+       if($max_id){
 	 $log_time=$GLOBALS['db']->getOne("SELECT `log_time` FROM ".DB_PREFIX."award_log where id=".$max_id);
 	 $log_data=date('Y-m-d',$log_time);
 	 $now_time=date('Y-m-d',time());
 	 if($log_data==$now_time){
 	    echo 2;exit; 
 		
+	   }
 	   }
 	  	$lottery_rand_statr=mt_rand(18,49);
         $lottery_rand_now=$lottery_rand_statr/100;		
